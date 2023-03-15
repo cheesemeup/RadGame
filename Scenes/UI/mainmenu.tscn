@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://dauewxdanhfah"]
+
+[ext_resource type="Script" path="res://Scripts/UI/mainmenu.gd" id="1_dg2o0"]
+
+[node name="mainmenu" type="CanvasLayer"]
+script = ExtResource("1_dg2o0")
+
+[node name="host_button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -75.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Host"
+
+[node name="join_button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -75.0
+offset_right = 300.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Join"
+
+[node name="address_entry" type="TextEdit" parent="."]
+offset_left = 957.0
+offset_top = 660.0
+offset_right = 1257.0
+offset_bottom = 700.0
+text = "localhost"
+
+[node name="label_address_entry" type="Label" parent="."]
+offset_left = 957.0
+offset_top = 630.0
+offset_right = 1257.0
+offset_bottom = 658.0
+text = "Server Address:"
+
+[connection signal="pressed" from="host_button" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="join_button" to="." method="_on_join_button_pressed"]

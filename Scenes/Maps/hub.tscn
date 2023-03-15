@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://bjr7k3cxd6jyj"]
+
+[ext_resource type="Texture2D" uid="uid://lrcvum58en3o" path="res://Assets/Textures/Road20/road_20_diffuseOriginal.png" id="1_vd7gq"]
+[ext_resource type="Texture2D" uid="uid://bady82sjm01fh" path="res://Assets/Textures/Road20/road_20_height.png" id="2_gjrxn"]
+[ext_resource type="Texture2D" uid="uid://bi41n2al4tnp3" path="res://Assets/Textures/Road20/road_20_metallic.png" id="3_mtq8x"]
+[ext_resource type="Texture2D" uid="uid://htft1bfooc1b" path="res://Assets/Textures/Road20/road_20_normal.png" id="4_mbmjp"]
+[ext_resource type="Texture2D" uid="uid://bn6pymghgq1bk" path="res://Assets/Textures/Road20/road_20_smoothness.png" id="5_qa8ei"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ycfok"]
+size = Vector3(20, 2, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ndm8s"]
+albedo_texture = ExtResource("1_vd7gq")
+metallic = 1.0
+metallic_texture = ExtResource("3_mtq8x")
+roughness_texture = ExtResource("5_qa8ei")
+normal_enabled = true
+normal_texture = ExtResource("4_mbmjp")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_gjrxn")
+uv1_scale = Vector3(12, 12, 12)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qi80i"]
+material = SubResource("StandardMaterial3D_ndm8s")
+size = Vector2(20, 20)
+
+[node name="hub" type="Node3D"]
+
+[node name="floor1" type="StaticBody3D" parent="."]
+collision_mask = 0
+
+[node name="floor1_collision" type="CollisionShape3D" parent="floor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_ycfok")
+
+[node name="floor1_mesh" type="MeshInstance3D" parent="floor1"]
+mesh = SubResource("PlaneMesh_qi80i")
