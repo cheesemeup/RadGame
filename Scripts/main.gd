@@ -7,15 +7,12 @@ func _ready():
 	Autoload.main_reference = self
 	multiplayer.peer_connected.connect(spawn_player)
 	multiplayer.peer_disconnected.connect(remove_player)
+	multiplayer.connected_to_server.connect(load_map_on_spawn)
 	var mainmenu = preload("res://Scenes/UI/mainmenu.tscn")
 	mainmenu = mainmenu.instantiate()
 	add_child(mainmenu)
-#	spawner.spawn_function = func spawn_player_custom(id: int):
-#		var player_body = preload("res://scenes/units/Player.tscn").instantiate()
-#		player_body.name = str(id)
-#		return player_body
-#
-#
+	
+
 func start_hosting():
 	# delete any multiplayer peer that might exist:
 	multiplayer.multiplayer_peer = null
@@ -26,7 +23,11 @@ func start_hosting():
 	# get our multiplayer UID (as server this should always be "1" in Godot 4)
 	var player_uid = multiplayer.get_unique_id()
 	spawn_player(player_uid)
-	swap_map("res://Scenes/Maps/hub.tscn")
+	Autoload.current_map_path = "hub.tscn"
+	var new_map_load = load("res://Scenes/Maps/"+Autoload.current_map_path)
+	var map_instance = new_map_load.instantiate()
+	Autoload.current_map_reference = map_instance
+	add_child(map_instance)
 	
 
 func start_joining(server):
@@ -43,8 +44,7 @@ func spawn_player(peer_id: int):
 		return
 	var new_player = preload("res://Scenes/Units/player.tscn").instantiate()
 	new_player.name = str(peer_id)
-	print(new_player)
-	$players.add_child(new_player)
+	$players.add_child(new_player,true)
 	
 
 func remove_player(peer_id):
@@ -55,6 +55,21 @@ func remove_player(peer_id):
 
 ##############################################################################################################################
 # Map loading and unloading
+# when spawning, join map that host is on
+func load_map_on_spawn():
+	var server_map_path = rpc_id(1,"current_map_query",multiplayer.get_unique_id())
+@rpc("any_peer")
+func current_map_query(peer_id):
+	rpc_id(peer_id,"current_map_reply",Autoload.current_map_path)
+	return Autoload.current_map_path
+@rpc("authority")
+func current_map_reply(reply):
+	var new_map_load = load("res://Scenes/Maps/"+reply)
+	var map_instance = new_map_load.instantiate()
+	Autoload.current_map_reference = map_instance
+	add_child(map_instance)
+	Autoload.current_map_path = "hub.tscn"
+
 func swap_map_init(new_map):
 	# if only one player, load map
 	if get_tree().get_nodes_in_group("playergroup").size() == 1:
@@ -65,7 +80,10 @@ func swap_map_init(new_map):
 	swap_map(new_map)
 	
 
+@rpc("call_local")
 func swap_map(new_map):
+	#if not $MultiplayerSynchronizer.is_multiplayer_authority():
+	#	return
 	if Autoload.current_map_reference != null:
 		Autoload.current_map_reference.queue_free()
 	var new_map_load = load(new_map)
@@ -76,3 +94,16 @@ func swap_map(new_map):
 	var spawnlocation = Autoload.current_map_reference.get_node("spawnlocation").position
 	Autoload.player_reference.set_position(spawnlocation)
 	
+
+# hack fraud agrbage
+@rpc("any_peer")
+func a():
+	print("hackfraudshit")
+	for players in get_node("players").get_children():
+		for children in players.get_children():
+			print(children)
+func b():
+	print("fraudhackshit")
+	for player in get_node("players").get_children():
+		for children in player.get_node("pivot").get_children():
+			print(player,children)

@@ -22,13 +22,22 @@ func _enter_tree() -> void:
 		%MultiplayerSynchronizer.set_multiplayer_authority(id)
 
 func _ready():
-	print("player ready func")
-	if not is_multiplayer_authority():
+	if not synchronizer.is_multiplayer_authority():
 		return
 	Autoload.player_reference = self
 	player_cam.set_current(true)
-	set_model("res://Scenes/Units/knight_scene.tscn")
 	
+	
+
+func _input(event):
+	if not synchronizer.is_multiplayer_authority():
+		return
+	if event.is_action_pressed("leftclick"):
+		print("before rpc call")
+		if multiplayer.is_server():
+			set_model("res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
+		else:
+			rpc("set_model","res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
 
 func _physics_process(delta):
 	# targeting ray
@@ -58,23 +67,26 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, speed)
 	# turn character to match movement direction
 	if direction != Vector3.ZERO:
-		Autoload.playermodel_reference.look_at(position - direction, Vector3.UP)
+		$pivot.look_at(position + direction, Vector3.UP)
 	# animations
-	if velocity == Vector3.ZERO:
-		Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Idle")
-	else:
-		Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
+	if Autoload.playermodel_reference != null:
+		if velocity == Vector3.ZERO:
+			Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Idle")
+		else:
+			Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
 	
 	move_and_slide()
 
 # set player model
-func set_model(model_name):
-	if Autoload.playermodel_reference != null:
-		Autoload.playermodel_reference.queue_free()
-		Autoload.player_reference = null
-	print(model_name)
+@rpc("any_peer")
+func set_model(model_name,peer_id):
+	print(self,multiplayer.get_remote_sender_id(),"rpc call set_model")
+	var playernode = $/root/main/players.find_child(str(peer_id),true,false)
+	if playernode.get_child(0).get_child_count() > 0:
+		for node in playernode.get_child(0).get_children():
+			node.queue_free()
 	var model = load(model_name).instantiate()
-	print(model)
-	add_child(model)
-	Autoload.playermodel_reference = model
-	print(Autoload.playermodel_reference)
+	playernode.get_child(0).add_child(model,true)
+	if synchronizer.is_multiplayer_authority():
+		Autoload.playermodel_reference = model
+	

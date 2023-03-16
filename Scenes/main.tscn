@@ -6,8 +6,7 @@
 script = ExtResource("1_e04da")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/Units/player.tscn")
 spawn_path = NodePath("../players")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 
 [node name="players" type="Node" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c0rjsego85oo3"]
+[gd_scene load_steps=55 format=3 uid="uid://c0rjsego85oo3"]
 
 [ext_resource type="PackedScene" uid="uid://bxgmsg3cncaln" path="res://Assets/Attachments/shield_uncommon.fbx" id="2_5rpqx"]
 
@@ -4042,6 +4042,11 @@ _data = {
 "KayKit Animated Character|Wave": SubResource("Animation_7ohc4")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_821gy"]
+properties/0/path = NodePath("AnimationPlayer:current_animation")
+properties/0/spawn = false
+properties/0/sync = true
+
 [node name="knight_scene" type="Node3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
@@ -4162,3 +4167,6 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_btk2o")
 }
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_821gy")

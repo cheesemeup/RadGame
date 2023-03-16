@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dempeiar8tjic"]
+[gd_scene load_steps=5 format=3 uid="uid://dempeiar8tjic"]
 
 [ext_resource type="Script" path="res://Scripts/Units/player.gd" id="1_longq"]
 [ext_resource type="Script" path="res://Scripts/Units/player_camera.gd" id="2_43v2b"]
@@ -6,9 +6,19 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_16yd3"]
 radius = 0.6
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rfg56"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = false
+properties/0/sync = true
+properties/1/path = NodePath("pivot:rotation")
+properties/1/spawn = false
+properties/1/sync = true
+
 [node name="player" type="CharacterBody3D"]
 collision_layer = 0
 script = ExtResource("1_longq")
+
+[node name="pivot" type="Node3D" parent="."]
 
 [node name="player_collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -26,3 +36,8 @@ transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0,
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_rfg56")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/Units/knight_scene.tscn")
+spawn_path = NodePath("../pivot")
