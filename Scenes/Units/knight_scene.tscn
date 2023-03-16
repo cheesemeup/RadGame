@@ -1,5 +1,6 @@
-[gd_scene load_steps=55 format=3 uid="uid://c0rjsego85oo3"]
+[gd_scene load_steps=56 format=3 uid="uid://c0rjsego85oo3"]
 
+[ext_resource type="Script" path="res://Scripts/Units/knight_scene.gd" id="1_024lv"]
 [ext_resource type="PackedScene" uid="uid://bxgmsg3cncaln" path="res://Assets/Attachments/shield_uncommon.fbx" id="2_5rpqx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m5fn1"]
@@ -4049,6 +4050,7 @@ properties/0/sync = true
 
 [node name="knight_scene" type="Node3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("1_024lv")
 
 [node name="RootNode" type="Node3D" parent="."]
 

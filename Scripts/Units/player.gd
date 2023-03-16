@@ -4,6 +4,8 @@ extends CharacterBody3D
 @onready var player_cam = $camera_rotation/camera_arm/player_camera
 @onready var synchronizer = %MultiplayerSynchronizer
 
+var playermodel_reference = null
+
 const speed = 14.0
 const jump_velocity = 4.5
 
@@ -27,7 +29,6 @@ func _ready():
 	Autoload.player_reference = self
 	player_cam.set_current(true)
 	
-	
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
@@ -38,6 +39,7 @@ func _input(event):
 			set_model("res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
 		else:
 			rpc("set_model","res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
+	
 
 func _physics_process(delta):
 	# targeting ray
@@ -80,13 +82,13 @@ func _physics_process(delta):
 # set player model
 @rpc("any_peer")
 func set_model(model_name,peer_id):
-	print(self,multiplayer.get_remote_sender_id(),"rpc call set_model")
 	var playernode = $/root/main/players.find_child(str(peer_id),true,false)
 	if playernode.get_child(0).get_child_count() > 0:
 		for node in playernode.get_child(0).get_children():
 			node.queue_free()
 	var model = load(model_name).instantiate()
+	#model.name = str(peer_id)
+	#model.get_child(2).set_multiplayer_authority(peer_id)
+	print("add child knight scene")
 	playernode.get_child(0).add_child(model,true)
-	if synchronizer.is_multiplayer_authority():
-		Autoload.playermodel_reference = model
 	

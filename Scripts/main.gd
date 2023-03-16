@@ -57,7 +57,7 @@ func remove_player(peer_id):
 # Map loading and unloading
 # when spawning, join map that host is on
 func load_map_on_spawn():
-	var server_map_path = rpc_id(1,"current_map_query",multiplayer.get_unique_id())
+	rpc_id(1,"current_map_query",multiplayer.get_unique_id())
 @rpc("any_peer")
 func current_map_query(peer_id):
 	rpc_id(peer_id,"current_map_reply",Autoload.current_map_path)
