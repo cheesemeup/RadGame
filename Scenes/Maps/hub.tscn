@@ -35,3 +35,5 @@ shape = SubResource("BoxShape3D_ycfok")
 
 [node name="floor1_mesh" type="MeshInstance3D" parent="floor1"]
 mesh = SubResource("PlaneMesh_qi80i")
+
+[node name="spawnlocation" type="Marker3D" parent="."]
