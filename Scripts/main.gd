@@ -74,7 +74,6 @@ func swap_map_init(new_map):
 	# if only one player, load map
 	if get_tree().get_nodes_in_group("playergroup").size() == 1:
 		swap_map(new_map)
-		return
 	# show popup to all players to accept map change
 	# change map if all players agree
 	swap_map(new_map)

@@ -28,22 +28,10 @@ func _ready():
 		return
 	Autoload.player_reference = self
 	player_cam.set_current(true)
-	
-
-func _input(event):
-	if not synchronizer.is_multiplayer_authority():
-		return
-	if event.is_action_pressed("leftclick"):
-		print("before rpc call")
-		if multiplayer.is_server():
-			print("as server")
-			set_model("res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
-		else:
-			print("as client")
-			rpc_id(1,"set_model","res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
-#	if event.is_action_pressed("jump"):
-#		print("jump to pay respect and print synchronizer of knight scene of peer id ",multiplayer.get_unique_id())
-#		print($/root/main/players.get_node(str(multiplayer.get_unique_id())).get_child(0).get_child(0).get_child(0))
+	if multiplayer.is_server():
+		set_model("res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
+	else:
+		rpc_id(1,"set_model","res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
 	
 
 func _physics_process(delta):
@@ -93,9 +81,4 @@ func set_model(model_name,peer_id):
 			node.queue_free()
 	var model = load(model_name).instantiate()
 	playernode.get_child(0).add_child(model,true)
-	print("model node path for ",multiplayer.get_unique_id())
-	print($/root/main/players)
-	print(playernode)
-	print(playernode.get_child(0))
-	print(playernode.get_child(0).get_child(0))
-	print(playernode.get_child(0).get_child(0).get_child(0))
+	
