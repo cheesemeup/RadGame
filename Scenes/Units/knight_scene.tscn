@@ -3,6 +3,11 @@
 [ext_resource type="Script" path="res://Scripts/Units/knight_scene.gd" id="1_024lv"]
 [ext_resource type="PackedScene" uid="uid://bxgmsg3cncaln" path="res://Assets/Attachments/shield_uncommon.fbx" id="2_5rpqx"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_821gy"]
+properties/0/path = NodePath("AnimationPlayer:current_animation")
+properties/0/spawn = false
+properties/0/sync = true
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m5fn1"]
 resource_name = "Black"
 vertex_color_use_as_albedo = true
@@ -4043,14 +4048,12 @@ _data = {
 "KayKit Animated Character|Wave": SubResource("Animation_7ohc4")
 }
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_821gy"]
-properties/0/path = NodePath("AnimationPlayer:current_animation")
-properties/0/spawn = false
-properties/0/sync = true
-
 [node name="knight_scene" type="Node3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_024lv")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_821gy")
 
 [node name="RootNode" type="Node3D" parent="."]
 
@@ -4152,7 +4155,7 @@ mesh = SubResource("ArrayMesh_n8pwa")
 skeleton = NodePath("")
 
 [node name="handSlotLeft" type="BoneAttachment3D" parent="RootNode/KayKit Animated Character/Skeleton3D"]
-transform = Transform3D(-1, -8.66274e-31, -5.96046e-07, -5.66244e-07, 1.62921e-07, 1, 9.23706e-14, 1, -1.62921e-07, 0.004, 0.00205887, -2.06944e-10)
+transform = Transform3D(-1, -8.66274e-31, -5.96046e-07, -5.96046e-07, 1.62921e-07, 1, 9.23706e-14, 1, -1.62921e-07, 0.004, 0.00205887, -2.06944e-10)
 bone_name = "handSlotLeft"
 bone_idx = 3
 
@@ -4160,7 +4163,7 @@ bone_idx = 3
 transform = Transform3D(-5.24537e-10, 0, -0.012, 0, 0.012, 0, 0.012, 0, -5.24537e-10, -0.002, 0, 0.003)
 
 [node name="handSlotRight" type="BoneAttachment3D" parent="RootNode/KayKit Animated Character/Skeleton3D"]
-transform = Transform3D(-1, -8.66274e-31, 5.96046e-07, 5.66244e-07, 1.62921e-07, 1, -9.23706e-14, 1, -1.62921e-07, -0.004, 0.00205887, -4.65818e-10)
+transform = Transform3D(-1, -8.66274e-31, 5.96046e-07, 5.96046e-07, 1.62921e-07, 1, -9.23706e-14, 1, -1.62921e-07, -0.004, 0.00205887, -4.65818e-10)
 bone_name = "handSlotRight"
 bone_idx = 5
 
@@ -4169,6 +4172,3 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_btk2o")
 }
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_821gy")

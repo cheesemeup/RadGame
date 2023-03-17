@@ -82,8 +82,6 @@ func swap_map_init(new_map):
 
 @rpc("call_local")
 func swap_map(new_map):
-	#if not $MultiplayerSynchronizer.is_multiplayer_authority():
-	#	return
 	if Autoload.current_map_reference != null:
 		Autoload.current_map_reference.queue_free()
 	var new_map_load = load(new_map)
@@ -94,16 +92,3 @@ func swap_map(new_map):
 	var spawnlocation = Autoload.current_map_reference.get_node("spawnlocation").position
 	Autoload.player_reference.set_position(spawnlocation)
 	
-
-# hack fraud agrbage
-@rpc("any_peer")
-func a():
-	print("hackfraudshit")
-	for players in get_node("players").get_children():
-		for children in players.get_children():
-			print(children)
-func b():
-	print("fraudhackshit")
-	for player in get_node("players").get_children():
-		for children in player.get_node("pivot").get_children():
-			print(player,children)

@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 
 @onready var player_cam = $camera_rotation/camera_arm/player_camera
-@onready var synchronizer = %MultiplayerSynchronizer
+@onready var synchronizer = $MultiplayerSynchronizer
 
 var playermodel_reference = null
 
@@ -21,7 +21,7 @@ func _enter_tree() -> void:
 	if str(name).is_valid_int():
 		var id := str(name).to_int()
 		# Before ready, the variable `multiplayer_synchronizer` is not set yet
-		%MultiplayerSynchronizer.set_multiplayer_authority(id)
+		$MultiplayerSynchronizer.set_multiplayer_authority(id)
 
 func _ready():
 	if not synchronizer.is_multiplayer_authority():
@@ -36,9 +36,14 @@ func _input(event):
 	if event.is_action_pressed("leftclick"):
 		print("before rpc call")
 		if multiplayer.is_server():
+			print("as server")
 			set_model("res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
 		else:
-			rpc("set_model","res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
+			print("as client")
+			rpc_id(1,"set_model","res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
+#	if event.is_action_pressed("jump"):
+#		print("jump to pay respect and print synchronizer of knight scene of peer id ",multiplayer.get_unique_id())
+#		print($/root/main/players.get_node(str(multiplayer.get_unique_id())).get_child(0).get_child(0).get_child(0))
 	
 
 func _physics_process(delta):
@@ -87,8 +92,10 @@ func set_model(model_name,peer_id):
 		for node in playernode.get_child(0).get_children():
 			node.queue_free()
 	var model = load(model_name).instantiate()
-	#model.name = str(peer_id)
-	#model.get_child(2).set_multiplayer_authority(peer_id)
-	print("add child knight scene")
 	playernode.get_child(0).add_child(model,true)
-	
+	print("model node path for ",multiplayer.get_unique_id())
+	print($/root/main/players)
+	print(playernode)
+	print(playernode.get_child(0))
+	print(playernode.get_child(0).get_child(0))
+	print(playernode.get_child(0).get_child(0).get_child(0))
