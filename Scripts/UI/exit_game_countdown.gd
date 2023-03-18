@@ -6,7 +6,6 @@ var time_remaining = 10
 
 func _ready():
 	Autoload.player_ui_main_reference.get_node("escape_menu_root").queue_free()
-#	Autoload.player_ui_main_reference.remove_child(Autoload.player_ui_main_reference.get_node("escape_menu_root"))
 	exit_timer.one_shot = true
 	exit_timer.wait_time = float(time_remaining)
 	exit_timer.connect("timeout",Autoload.main_reference.exit_game)
