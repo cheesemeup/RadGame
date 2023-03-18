@@ -52,6 +52,7 @@ offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Exit in"
+horizontal_alignment = 1
 
 [node name="exit_countdown" type="Label" parent="."]
 z_index = 1
