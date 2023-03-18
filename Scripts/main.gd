@@ -91,3 +91,8 @@ func swap_map(new_map):
 	var spawnlocation = Autoload.current_map_reference.get_node("spawnlocation").position
 	Autoload.player_reference.set_position(spawnlocation)
 	
+
+##############################################################################################################################
+# exit game (in minecraft)
+func exit_game():
+	get_tree().quit()

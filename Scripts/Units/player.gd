@@ -34,6 +34,14 @@ func _ready():
 		rpc_id(1,"set_model","res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
 	
 
+func _input(event):
+	if event.is_action_pressed("escape"):
+		var esc_menu = load("res://Scenes/UI/escape_menu.tscn")
+		esc_menu = esc_menu.instantiate()
+		Autoload.esc_menu_reference = esc_menu 
+		add_child(esc_menu)
+	
+
 func _physics_process(delta):
 	# targeting ray
 	space_state = get_world_3d().direct_space_state
