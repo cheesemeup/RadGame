@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b55g2jbrys4ow"]
+[gd_scene load_steps=3 format=3 uid="uid://b55g2jbrys4ow"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_e04da"]
+[ext_resource type="Script" path="res://Scenes/handle_ui.gd" id="2_ktbvj"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_e04da")
@@ -10,3 +11,18 @@ _spawnable_scenes = PackedStringArray("res://Scenes/Units/player.tscn")
 spawn_path = NodePath("../players")
 
 [node name="players" type="Node" parent="."]
+
+[node name="ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ktbvj")

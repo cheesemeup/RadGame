@@ -6,33 +6,51 @@
 size = Vector2(300, 600)
 orientation = 2
 
-[sub_resource type="Gradient" id="Gradient_iv7ej"]
+[sub_resource type="Gradient" id="Gradient_is1f4"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0.055794, 1)
 colors = PackedColorArray(0.108721, 0.108721, 0.108721, 1, 0.407056, 0.407056, 0.407056, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_jqv6u"]
-gradient = SubResource("Gradient_iv7ej")
+gradient = SubResource("Gradient_is1f4")
 fill_to = Vector2(1, 1)
 
-[node name="escape_menu" type="Control"]
+[node name="escape_menu_root" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ar76q")
 
-[node name="escape_menu_backdrop" type="MeshInstance2D" parent="."]
+[node name="escape_menu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -300.0
+offset_right = 150.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="escape_menu_backdrop" type="MeshInstance2D" parent="escape_menu"]
 light_mask = 0
-z_index = 1
-position = Vector2(960, 540)
+position = Vector2(150, 300)
 mesh = SubResource("PlaneMesh_ryspd")
 texture = SubResource("GradientTexture2D_jqv6u")
 
-[node name="button_exit_game" type="Button" parent="."]
-z_index = 2
+[node name="button_exit_game" type="Button" parent="escape_menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -47,4 +65,4 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Exit Game"
 
-[connection signal="pressed" from="button_exit_game" to="." method="_on_button_exit_game_pressed"]
+[connection signal="pressed" from="escape_menu/button_exit_game" to="." method="_on_button_exit_game_pressed"]

@@ -8,3 +8,4 @@ var esc_menu_reference = null
 
 var player_reference = null
 var playermodel_reference = null
+var player_ui_main_reference = null

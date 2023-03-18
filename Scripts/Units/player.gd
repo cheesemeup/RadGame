@@ -12,6 +12,9 @@ const jump_velocity = 4.5
 # targeting vars
 var space_state
 
+# other
+var esc_level = 0
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -35,11 +38,8 @@ func _ready():
 	
 
 func _input(event):
-	if event.is_action_pressed("escape"):
-		var esc_menu = load("res://Scenes/UI/escape_menu.tscn")
-		esc_menu = esc_menu.instantiate()
-		Autoload.esc_menu_reference = esc_menu 
-		add_child(esc_menu)
+	if event.is_action_pressed("escape") and esc_level == 0:
+		Autoload.player_ui_main_reference.esc_menu()
 	
 
 func _physics_process(delta):
