@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://068y0w3glpsi"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kt06w"]
+size = Vector2(1200, 700)
+orientation = 2
+
+[sub_resource type="Gradient" id="Gradient_is1f4"]
+interpolation_mode = 2
+colors = PackedColorArray(0.0142752, 0.0142752, 0.0142752, 1, 0.407056, 0.407056, 0.407056, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tvxy7"]
+gradient = SubResource("Gradient_is1f4")
+fill_to = Vector2(1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ghayv"]
+size = Vector2(1000, 600)
+orientation = 2
+
+[sub_resource type="Gradient" id="Gradient_pdmrj"]
+colors = PackedColorArray(0, 0, 0, 1, 0.0475577, 0.0475576, 0.0475576, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5cws0"]
+gradient = SubResource("Gradient_pdmrj")
+fill_to = Vector2(1, 1)
+
+[node name="interface_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="interface_menu_backdrop" type="MeshInstance2D" parent="."]
+light_mask = 0
+mesh = SubResource("PlaneMesh_kt06w")
+texture = SubResource("GradientTexture2D_tvxy7")
+
+[node name="interface_menu_backdrop2" type="MeshInstance2D" parent="."]
+mesh = SubResource("PlaneMesh_ghayv")
+texture = SubResource("GradientTexture2D_5cws0")

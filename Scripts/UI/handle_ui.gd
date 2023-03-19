@@ -12,6 +12,10 @@ func esc_menu():
 		$escape_menu_root.queue_free()
 	elif get_node_or_null("exit_game_countdown"):
 		$exit_game_countdown._on_cancel_pressed()
+	elif get_node_or_null("progress_menu"):
+		$progress_menu.queue_free()
+	elif get_node_or_null("interface_menu"):
+		$interface_menu.queue_free()
 	else:
 		var escape_menu = esc_menu_preload.instantiate()
 		Autoload.esc_menu_reference = escape_menu

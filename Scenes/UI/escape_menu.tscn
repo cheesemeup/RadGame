@@ -6,13 +6,13 @@
 size = Vector2(250, 500)
 orientation = 2
 
-[sub_resource type="Gradient" id="Gradient_is1f4"]
+[sub_resource type="Gradient" id="Gradient_8di4e"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0.055794, 1)
 colors = PackedColorArray(0.108721, 0.108721, 0.108721, 1, 0.407056, 0.407056, 0.407056, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_jqv6u"]
-gradient = SubResource("Gradient_is1f4")
+gradient = SubResource("Gradient_8di4e")
 fill_to = Vector2(1, 1)
 
 [node name="escape_menu_root" type="Control"]
@@ -125,4 +125,6 @@ grow_vertical = 2
 text = "Exit Game"
 
 [connection signal="pressed" from="escape_menu/button_continue" to="." method="_on_button_continue_pressed"]
+[connection signal="pressed" from="escape_menu/button_progress" to="." method="_on_button_progress_pressed"]
+[connection signal="pressed" from="escape_menu/button_interface" to="." method="_on_button_interface_pressed"]
 [connection signal="pressed" from="escape_menu/button_exit_game" to="." method="_on_button_exit_game_pressed"]
