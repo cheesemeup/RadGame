@@ -38,6 +38,8 @@ func _ready():
 	
 
 func _input(event):
+	if not synchronizer.is_multiplayer_authority():
+		return
 	if event.is_action_pressed("escape") and esc_level == 0:
 		Autoload.player_ui_main_reference.esc_menu()
 	
