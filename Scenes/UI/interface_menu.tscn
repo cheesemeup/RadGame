@@ -83,126 +83,136 @@ grow_vertical = 2
 [node name="Single Frames" type="Control" parent="interface_menu_tabs"]
 layout_mode = 2
 
-[node name="playerframe_width" type="RichTextLabel" parent="interface_menu_tabs/Single Frames"]
+[node name="labels" type="Control" parent="interface_menu_tabs/Single Frames"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="playerframe_width" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -460.0
-offset_top = -205.0
-offset_right = -300.0
-offset_bottom = -175.0
+offset_left = 20.0
+offset_top = 30.0
+offset_right = 180.0
+offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Width in pixels at 1920x1080 resolution."
 text = "Frame Width"
 
-[node name="playerframe_width_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames"]
+[node name="playerframe_height" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -205.0
-offset_right = -220.0
-offset_bottom = -175.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 12
-
-[node name="playerframe_height" type="RichTextLabel" parent="interface_menu_tabs/Single Frames"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -460.0
-offset_top = -175.0
-offset_right = -300.0
-offset_bottom = -145.0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 180.0
+offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Height in pixels at 1920x1080 resolution."
 text = "Frame Height"
 
-[node name="playerframe_height_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames"]
+[node name="playerframe_h_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -175.0
-offset_right = -220.0
-offset_bottom = -145.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 12
-
-[node name="playerframe_h_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -460.0
-offset_top = -145.0
-offset_right = -300.0
-offset_bottom = -115.0
+offset_left = 20.0
+offset_top = 90.0
+offset_right = 180.0
+offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Height in pixels at 1920x1080 resolution."
 text = "Horizontal Position"
 
-[node name="playerframe_h_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames"]
+[node name="playerframe_v_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -145.0
-offset_right = -220.0
-offset_bottom = -115.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 12
-
-[node name="playerframe_v_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -460.0
-offset_top = -115.0
-offset_right = -300.0
-offset_bottom = -85.0
+offset_left = 20.0
+offset_top = 120.0
+offset_right = 180.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Height in pixels at 1920x1080 resolution."
 text = "Vertical Position"
 
-[node name="playerframe_v_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames"]
+[node name="values" type="Control" parent="interface_menu_tabs/Single Frames"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="playerframe_width_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -115.0
-offset_right = -220.0
-offset_bottom = -85.0
+offset_left = 180.0
+offset_top = 30.0
+offset_right = 260.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="playerframe_height_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 180.0
+offset_top = 60.0
+offset_right = 260.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="playerframe_h_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 180.0
+offset_top = 90.0
+offset_right = 260.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="playerframe_v_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 180.0
+offset_top = 120.0
+offset_right = 260.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 12
@@ -241,3 +251,5 @@ offset_bottom = -175.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 12
+
+[connection signal="pressed" from="interface_menu_apply" to="." method="_on_interface_menu_apply_pressed"]
