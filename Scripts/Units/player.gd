@@ -6,11 +6,17 @@ extends CharacterBody3D
 
 var playermodel_reference = null
 
-const speed = 14.0
+const speed = 10.0
 const jump_velocity = 4.5
+
+# stats
+var player_hp_max = 1200
+var player_hp_current = 650
 
 # targeting vars
 var space_state
+var player_targer = null
+var player_mouseover = null
 
 # other
 var esc_level = 0

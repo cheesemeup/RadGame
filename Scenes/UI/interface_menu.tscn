@@ -1,26 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://068y0w3glpsi"]
+[gd_scene load_steps=8 format=3 uid="uid://c6u5s0dcm0cvd"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_kt06w"]
+[ext_resource type="Script" path="res://Scripts/UI/interface_menu.gd" id="1_jq4ou"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n4rvf"]
 size = Vector2(1200, 700)
 orientation = 2
 
-[sub_resource type="Gradient" id="Gradient_is1f4"]
+[sub_resource type="Gradient" id="Gradient_vtg6s"]
 interpolation_mode = 2
 colors = PackedColorArray(0.0142752, 0.0142752, 0.0142752, 1, 0.407056, 0.407056, 0.407056, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tvxy7"]
-gradient = SubResource("Gradient_is1f4")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3dx5c"]
+gradient = SubResource("Gradient_vtg6s")
 fill_to = Vector2(1, 1)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ghayv"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_mqsla"]
 size = Vector2(1000, 600)
 orientation = 2
 
-[sub_resource type="Gradient" id="Gradient_pdmrj"]
+[sub_resource type="Gradient" id="Gradient_8351r"]
 colors = PackedColorArray(0, 0, 0, 1, 0.0475577, 0.0475576, 0.0475576, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5cws0"]
-gradient = SubResource("Gradient_pdmrj")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_olw65"]
+gradient = SubResource("Gradient_8351r")
 fill_to = Vector2(1, 1)
 
 [node name="interface_menu" type="Control"]
@@ -30,14 +32,212 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -1.0
+offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_jq4ou")
 
 [node name="interface_menu_backdrop" type="MeshInstance2D" parent="."]
 light_mask = 0
-mesh = SubResource("PlaneMesh_kt06w")
-texture = SubResource("GradientTexture2D_tvxy7")
+mesh = SubResource("PlaneMesh_n4rvf")
+texture = SubResource("GradientTexture2D_3dx5c")
 
 [node name="interface_menu_backdrop2" type="MeshInstance2D" parent="."]
-mesh = SubResource("PlaneMesh_ghayv")
-texture = SubResource("GradientTexture2D_5cws0")
+mesh = SubResource("PlaneMesh_mqsla")
+texture = SubResource("GradientTexture2D_olw65")
+
+[node name="interface_menu_default" type="Button" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 250.0
+offset_right = 380.0
+offset_bottom = 284.0
+theme_override_font_sizes/font_size = 18
+text = "Default"
+
+[node name="interface_menu_apply" type="Button" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 250.0
+offset_right = 480.0
+offset_bottom = 284.0
+theme_override_font_sizes/font_size = 18
+text = "Apply"
+
+[node name="interface_menu_tabs" type="TabContainer" parent="."]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -300.0
+offset_right = 500.0
+offset_bottom = 241.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Single Frames" type="Control" parent="interface_menu_tabs"]
+layout_mode = 2
+
+[node name="playerframe_width" type="RichTextLabel" parent="interface_menu_tabs/Single Frames"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -205.0
+offset_right = -300.0
+offset_bottom = -175.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Width in pixels at 1920x1080 resolution."
+text = "Frame Width"
+
+[node name="playerframe_width_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -205.0
+offset_right = -220.0
+offset_bottom = -175.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="playerframe_height" type="RichTextLabel" parent="interface_menu_tabs/Single Frames"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -175.0
+offset_right = -300.0
+offset_bottom = -145.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Frame Height"
+
+[node name="playerframe_height_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -175.0
+offset_right = -220.0
+offset_bottom = -145.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="playerframe_h_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -145.0
+offset_right = -300.0
+offset_bottom = -115.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Horizontal Position"
+
+[node name="playerframe_h_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -145.0
+offset_right = -220.0
+offset_bottom = -115.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="playerframe_v_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -115.0
+offset_right = -300.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Vertical Position"
+
+[node name="playerframe_v_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -115.0
+offset_right = -220.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="Party Frames" type="Control" parent="interface_menu_tabs"]
+visible = false
+layout_mode = 2
+
+[node name="playerframe_width" type="RichTextLabel" parent="interface_menu_tabs/Party Frames"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -205.0
+offset_right = -300.0
+offset_bottom = -175.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Width in pixels at 1920x1080 resolution."
+text = "Frame Width"
+
+[node name="playerframe_width_entry" type="TextEdit" parent="interface_menu_tabs/Party Frames"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -205.0
+offset_right = -220.0
+offset_bottom = -175.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12

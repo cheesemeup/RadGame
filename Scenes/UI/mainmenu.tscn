@@ -6,43 +6,59 @@
 script = ExtResource("1_dg2o0")
 
 [node name="host_button" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
+anchors_preset = -1
+anchor_left = 0.344
+anchor_top = 0.431
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -75.0
-offset_bottom = 75.0
+anchor_bottom = 0.569
+offset_left = -0.960083
+offset_top = -0.960022
+offset_bottom = 0.959961
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 48
 text = "Host"
 
 [node name="join_button" type="Button" parent="."]
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = -75.0
-offset_right = 300.0
-offset_bottom = 75.0
+anchor_top = 0.431
+anchor_right = 0.656
+anchor_bottom = 0.569
+offset_top = -0.960022
+offset_right = 0.959961
+offset_bottom = 0.959961
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 48
 text = "Join"
 
 [node name="address_entry" type="TextEdit" parent="."]
-offset_left = 957.0
-offset_top = 660.0
-offset_right = 1257.0
-offset_bottom = 700.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.611
+anchor_right = 0.656
+anchor_bottom = 0.648
+offset_top = 0.23999
+offset_right = 0.959961
+offset_bottom = 0.319946
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
 text = "localhost"
 
 [node name="label_address_entry" type="Label" parent="."]
-offset_left = 957.0
-offset_top = 630.0
-offset_right = 1257.0
-offset_bottom = 658.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.583
+anchor_right = 0.578
+anchor_bottom = 0.608
+offset_top = 0.719971
+offset_right = 0.47998
+offset_bottom = -0.280029
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 18
 text = "Server Address:"
 
 [connection signal="pressed" from="host_button" to="." method="_on_host_button_pressed"]
