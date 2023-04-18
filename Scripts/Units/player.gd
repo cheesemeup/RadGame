@@ -10,10 +10,11 @@ const speed = 10.0
 const jump_velocity = 4.5
 
 # stats
-var player_hp_max = 1200
-var player_hp_current = 650
+var player_hp_max = 12250
+var player_hp_current = 6580
 
 # targeting vars
+var playername = "testname"
 var space_state
 var player_targer = null
 var player_mouseover = null

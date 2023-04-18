@@ -26,8 +26,8 @@ func _ready():
 func _on_interface_menu_apply_pressed():
 	var player_hpbar = Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("playerframe").get_node("playerframe_hpbar")
 	var player_resbar = Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("playerframe").get_node("playerframe_resbar")
+	# validity of single frame values
 	var apply_validity = apply_int_check(get_node("interface_menu_tabs").get_node("Single Frames").get_node("values"))
-	# return if not all values are convertable to int
 	if not apply_validity:
 		return
 	player_hpbar.size.x = int($"interface_menu_tabs/Single Frames/values/playerframe_hp_width_entry".text)
@@ -42,6 +42,7 @@ func _on_interface_menu_apply_pressed():
 	player_resbar.position.y = int($"interface_menu_tabs/Single Frames/values/playerframe_res_v_position_entry".text)
 	player_resbar.fill_mode = $"interface_menu_tabs/Single Frames/dropdowns/playerframe_res_orientation_entry".selected
 	player_resbar.visible = $"interface_menu_tabs/Single Frames/dropdowns/playerframe_res_showtoggle".selected
+	Autoload.player_ui_main_reference.get_node("ui_persistent").playerframe_initialize()
 
 func apply_int_check(value_node):
 	for child in value_node.get_children():
