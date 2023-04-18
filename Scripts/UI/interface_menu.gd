@@ -36,6 +36,10 @@ func _on_interface_menu_apply_pressed():
 	player_hpbar.position.y = int($"interface_menu_tabs/Single Frames/values/playerframe_hp_v_position_entry".text)
 	player_hpbar.fill_mode = $"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_orientation_entry".selected
 	player_hpbar.visible = $"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_showtoggle".selected
+	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("playerframe").get_node("playerframe_playername").visible = \
+		$"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_showtoggle".selected
+	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("playerframe").get_node("playerframe_hpvalue").visible = \
+		$"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_showtoggle".selected
 	player_resbar.size.x = int($"interface_menu_tabs/Single Frames/values/playerframe_res_width_entry".text)
 	player_resbar.size.y = int($"interface_menu_tabs/Single Frames/values/playerframe_res_height_entry".text)
 	player_resbar.position.x = int($"interface_menu_tabs/Single Frames/values/playerframe_res_h_position_entry".text)

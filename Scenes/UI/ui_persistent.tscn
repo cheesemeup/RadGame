@@ -104,7 +104,6 @@ offset_left = 400.0
 offset_top = 730.0
 offset_right = 520.0
 offset_bottom = 760.0
-text = "playername"
 vertical_alignment = 1
 clip_text = true
 
@@ -114,7 +113,17 @@ offset_left = 530.0
 offset_top = 730.0
 offset_right = 650.0
 offset_bottom = 760.0
-text = "12856 / 25000
-98.8%"
 horizontal_alignment = 2
 vertical_alignment = 1
+clip_text = true
+
+[node name="playerframe_resvalue" type="Label" parent="playerframe"]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 780.0
+offset_right = 650.0
+offset_bottom = 800.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+vertical_alignment = 1
+clip_text = true

@@ -12,6 +12,8 @@ const jump_velocity = 4.5
 # stats
 var player_hp_max = 12250
 var player_hp_current = 6580
+var player_res_max = 1324
+var player_res_current = 758
 
 # targeting vars
 var playername = "testname"
