@@ -302,7 +302,7 @@ offset_right = 260.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 13
 
 [node name="playerframe_hp_height_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
 layout_mode = 1
@@ -317,7 +317,7 @@ offset_right = 260.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 13
 
 [node name="playerframe_hp_h_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
 layout_mode = 1
@@ -332,7 +332,7 @@ offset_right = 260.0
 offset_bottom = 70.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 13
 
 [node name="playerframe_hp_v_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
 layout_mode = 1
@@ -347,7 +347,7 @@ offset_right = 260.0
 offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 13
 
 [node name="dropdowns" type="Control" parent="interface_menu_tabs/Single Frames"]
 anchors_preset = 0

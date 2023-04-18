@@ -9,13 +9,10 @@ func _ready():
 	$"interface_menu_tabs/Single Frames/values/playerframe_hp_height_entry".text = str(playerframe.size.y)
 	$"interface_menu_tabs/Single Frames/values/playerframe_hp_h_position_entry".text = str(playerframe.position.x)
 	$"interface_menu_tabs/Single Frames/values/playerframe_hp_v_position_entry".text = str(playerframe.position.y)
-	$"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_showtoggle".add_item("Show")
-	$"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_showtoggle".add_item("Hide")
-	$"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_orientation_entry".add_item("L to R")
-	$"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_orientation_entry".add_item("R to L")
-	$"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_orientation_entry".add_item("T to B")
-	$"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_orientation_entry".add_item("B to T")
-
+	add_item_showhide($"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_showtoggle")
+	add_item_orientation($"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_orientation_entry")
+	$"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_showtoggle".selected = playerframe.visible
+	$"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_orientation_entry".selected = playerframe.fill_mode
 
 func _on_interface_menu_apply_pressed():
 	var playerframe = Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("playerframe").get_node("playerframe_hpbar")
@@ -28,6 +25,7 @@ func _on_interface_menu_apply_pressed():
 	playerframe.position.x = int($"interface_menu_tabs/Single Frames/values/playerframe_hp_h_position_entry".text)
 	playerframe.position.y = int($"interface_menu_tabs/Single Frames/values/playerframe_hp_v_position_entry".text)
 	playerframe.fill_mode = $"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_orientation_entry".selected
+	playerframe.visible = $"interface_menu_tabs/Single Frames/dropdowns/playerframe_hp_showtoggle".selected
 
 func apply_int_check(value_node):
 	for child in value_node.get_children():
@@ -35,4 +33,18 @@ func apply_int_check(value_node):
 		if ! text.is_valid_int():
 			print("ERROR: invalid integer!")
 			return false
+		# also check if int is positive, because interface elements can't have negative size
+		if int(text) < 0:
+			print("ERROR: integer cannot be negative!")
+			return false
 	return true
+
+func add_item_showhide(node):
+	node.add_item("Hide")
+	node.add_item("Show")
+
+func add_item_orientation(node):
+	node.add_item("L to R")
+	node.add_item("R to L")
+	node.add_item("T to B")
+	node.add_item("B to T")
