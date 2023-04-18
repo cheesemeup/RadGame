@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cq3h183hap1oa"]
+[gd_scene load_steps=6 format=3 uid="uid://cq3h183hap1oa"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ui_persistent.gd" id="1_6vwfj"]
 [ext_resource type="PackedScene" uid="uid://cmbcuptfuq5bs" path="res://Scenes/UI/party_frame.tscn" id="2_vqwiw"]
@@ -8,6 +8,9 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dwkem"]
 bg_color = Color(0, 0.372549, 0.0784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oefs7"]
+bg_color = Color(0, 0, 1, 1)
 
 [node name="ui_persistent" type="Control"]
 layout_mode = 3
@@ -82,4 +85,15 @@ offset_bottom = 780.0
 theme_override_styles/background = SubResource("StyleBoxFlat_fttgf")
 theme_override_styles/fill = SubResource("StyleBoxFlat_dwkem")
 value = 65.0
+show_percentage = false
+
+[node name="playerframe_resbar" type="ProgressBar" parent="playerframe"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 780.0
+offset_right = 650.0
+offset_bottom = 800.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fttgf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oefs7")
+value = 85.0
 show_percentage = false
