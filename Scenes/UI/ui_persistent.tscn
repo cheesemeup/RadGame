@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cq3h183hap1oa"]
+[gd_scene load_steps=5 format=3 uid="uid://cq3h183hap1oa"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ui_persistent.gd" id="1_6vwfj"]
+[ext_resource type="PackedScene" uid="uid://cmbcuptfuq5bs" path="res://Scenes/UI/party_frame.tscn" id="2_vqwiw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fttgf"]
 bg_color = Color(0, 0, 0, 1)
@@ -47,9 +48,25 @@ text = "T
 "
 
 [node name="raidframes" type="GridContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = 160.0
+offset_right = 300.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 120
+theme_override_constants/v_separation = 65
+columns = 5
+
+[node name="party_frame" parent="raidframes" instance=ExtResource("2_vqwiw")]
+layout_mode = 2
 
 [node name="playerframe" type="Control" parent="."]
 anchors_preset = 0
@@ -57,12 +74,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="playerframe_hpbar" type="ProgressBar" parent="playerframe"]
-custom_minimum_size = Vector2(250, 80)
 layout_mode = 0
-offset_left = 1300.0
+offset_left = 400.0
 offset_top = 700.0
-offset_right = 1550.0
+offset_right = 650.0
 offset_bottom = 780.0
 theme_override_styles/background = SubResource("StyleBoxFlat_fttgf")
 theme_override_styles/fill = SubResource("StyleBoxFlat_dwkem")
+value = 65.0
 show_percentage = false

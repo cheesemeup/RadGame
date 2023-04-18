@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmbcuptfuq5bs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnjkx"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egdgk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etjmt"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vda04"]
+bg_color = Color(0.0666667, 0.305882, 1, 1)
+
+[node name="party_frame" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 120.0
+offset_bottom = 65.0
+scale = Vector2(1.14845, 1)
+
+[node name="party_frame_hpbar" type="ProgressBar" parent="."]
+layout_mode = 1
+offset_right = 120.0
+offset_bottom = 50.0
+theme_override_styles/background = SubResource("StyleBoxFlat_mnjkx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_egdgk")
+value = 40.0
+show_percentage = false
+
+[node name="party_frame_resourcebar" type="ProgressBar" parent="."]
+layout_mode = 1
+offset_top = 50.0
+offset_right = 120.0
+offset_bottom = 65.0
+scale = Vector2(1.00222, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_etjmt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vda04")
+value = 78.0
+show_percentage = false
