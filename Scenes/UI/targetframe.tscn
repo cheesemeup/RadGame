@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://blqnc171caqg0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0e17"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0syf"]
+bg_color = Color(0, 0.372549, 0.0784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ils1m"]
+bg_color = Color(0, 0, 1, 1)
+
+[node name="targetframe" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="targetframe_hpbar" type="ProgressBar" parent="."]
+offset_left = 1355.0
+offset_top = 700.0
+offset_right = 1605.0
+offset_bottom = 780.0
+theme_override_styles/background = SubResource("StyleBoxFlat_t0e17")
+theme_override_styles/fill = SubResource("StyleBoxFlat_d0syf")
+value = 65.0
+show_percentage = false
+
+[node name="targetframe_resbar" type="ProgressBar" parent="."]
+offset_left = 1355.0
+offset_top = 780.0
+offset_right = 1605.0
+offset_bottom = 800.0
+theme_override_styles/background = SubResource("StyleBoxFlat_t0e17")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ils1m")
+value = 85.0
+show_percentage = false
+
+[node name="targetframe_targetname" type="Label" parent="."]
+offset_left = 1355.0
+offset_top = 730.0
+offset_right = 1475.0
+offset_bottom = 760.0
+vertical_alignment = 1
+clip_text = true
+
+[node name="targetframe_hpvalue" type="Label" parent="."]
+offset_left = 530.0
+offset_top = 730.0
+offset_right = 650.0
+offset_bottom = 760.0
+horizontal_alignment = 2
+vertical_alignment = 1
+clip_text = true
+
+[node name="targetframe_resvalue" type="Label" parent="."]
+offset_left = 600.0
+offset_top = 780.0
+offset_right = 650.0
+offset_bottom = 800.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+vertical_alignment = 1
+clip_text = true

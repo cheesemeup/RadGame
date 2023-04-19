@@ -25,3 +25,6 @@ func load_persistent():
 	var ui_persistent_load = load("res://Scenes/UI/ui_persistent.tscn")
 	var ui_persistent = ui_persistent_load.instantiate()
 	$/root/main/ui.add_child(ui_persistent)
+
+func targetframe_initialize():
+	print("targeted")

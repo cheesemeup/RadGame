@@ -16,10 +16,10 @@ var player_res_max = 1324
 var player_res_current = 758
 
 # targeting vars
-var playername = "testname"
+var unitname = "testname"
 var space_state
-var player_targer = null
-var player_mouseover = null
+var unit_target = null
+var unit_mouseover = null
 
 # other
 var esc_level = 0
@@ -51,7 +51,12 @@ func _input(event):
 		return
 	if event.is_action_pressed("escape") and esc_level == 0:
 		Autoload.player_ui_main_reference.esc_menu()
-	
+
+func _unhandled_input(event):
+	#targeting
+	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
+		# targeting ray
+		targetray(event.position)
 
 func _physics_process(delta):
 	# targeting ray
@@ -59,13 +64,12 @@ func _physics_process(delta):
 	if not synchronizer.is_multiplayer_authority(): 
 		return
 	# MOVEMENT
-	# apply gravity
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-	# jump, from default with added animation
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Jump")
 		velocity.y = jump_velocity
+	# apply gravity
+	if not is_on_floor():
+		velocity.y -= gravity * delta
 	# movement, based on default
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	# unrotated direction vector
@@ -73,6 +77,7 @@ func _physics_process(delta):
 	# rotate direction vector using camera angle
 	var direction = Vector3(cos(2*PI-$camera_rotation.rotation.y)*direction_ur.x - sin(2*PI-$camera_rotation.rotation.y)*direction_ur.z, 0, \
 							sin(2*PI-$camera_rotation.rotation.y)*direction_ur.x + cos(2*PI-$camera_rotation.rotation.y)*direction_ur.z)
+							
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
@@ -88,7 +93,7 @@ func _physics_process(delta):
 			Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Idle")
 		else:
 			Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
-	
+
 	move_and_slide()
 
 # set player model
@@ -101,3 +106,26 @@ func set_model(model_name,peer_id):
 	var model = load(model_name).instantiate()
 	playernode.get_child(0).add_child(model,true)
 	
+# target ray
+func targetray(eventposition):
+	var origin = player_cam
+	var from = origin.project_ray_origin(eventposition)
+	var to = from + origin.project_ray_normal(eventposition) * 1000
+	var query = PhysicsRayQueryParameters3D.create(from,to)
+	var result = space_state.intersect_ray(query)
+	# unset target and return if no collider is hit (like when clicking the sky)
+	if not result.has("collider"):
+		unit_target = null
+		Autoload.ui_reference.unset_targetframe()
+		return
+	# set target if player, npc or hostile is hit by ray
+	if result.collider.is_in_group("playergroup") or result.collider.is_in_group("npcgroup") or\
+	result.collider.is_in_group("hostilegroup"):
+		unit_target = result.collider
+		Autoload.player_ui_main_reference.get_node("ui_persistent").targetframe_initialize()
+		print(unit_target)
+	# unset target if no valid target is hit by ray
+	else:
+		unit_target = null
+		print(unit_target)
+#		Autoload.ui_reference.unset_targetframe()
