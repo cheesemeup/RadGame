@@ -10,10 +10,10 @@ const speed = 10.0
 const jump_velocity = 4.5
 
 # stats
-var player_hp_max = 12250
-var player_hp_current = 6580
-var player_res_max = 1324
-var player_res_current = 758
+var unit_hp_max = 12250
+var unit_hp_current = 6580
+var unit_res_max = 1324
+var unit_res_current = 758
 
 # targeting vars
 var unitname = "testname"

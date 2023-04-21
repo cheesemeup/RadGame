@@ -1,4 +1,6 @@
-[gd_scene load_steps=63 format=3 uid="uid://dwg5lusb6argd"]
+[gd_scene load_steps=64 format=3 uid="uid://dwg5lusb6argd"]
+
+[ext_resource type="Script" path="res://Scripts/Units/test_npc.gd" id="1_lgkg5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f5l8a"]
 resource_name = "Black"
@@ -4094,6 +4096,7 @@ radius = 0.6
 
 [node name="test_npc" type="CharacterBody3D" groups=["npcgroup"]]
 collision_layer = 2
+script = ExtResource("1_lgkg5")
 
 [node name="RootNode" type="Node3D" parent="."]
 
