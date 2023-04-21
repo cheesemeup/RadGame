@@ -15,7 +15,7 @@ properties/1/spawn = false
 properties/1/sync = true
 
 [node name="player" type="CharacterBody3D" groups=["playergroup"]]
-collision_layer = 0
+collision_layer = 2
 script = ExtResource("1_longq")
 
 [node name="pivot" type="Node3D" parent="."]

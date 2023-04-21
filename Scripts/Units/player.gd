@@ -116,16 +116,14 @@ func targetray(eventposition):
 	# unset target and return if no collider is hit (like when clicking the sky)
 	if not result.has("collider"):
 		unit_target = null
-		Autoload.ui_reference.unset_targetframe()
+		Autoload.player_ui_main_reference.targetframe_remove()
 		return
 	# set target if player, npc or hostile is hit by ray
 	if result.collider.is_in_group("playergroup") or result.collider.is_in_group("npcgroup") or\
 	result.collider.is_in_group("hostilegroup"):
 		unit_target = result.collider
-		Autoload.player_ui_main_reference.get_node("ui_persistent").targetframe_initialize()
-		print(unit_target)
+		Autoload.player_ui_main_reference.targetframe_initialize(unit_target)
 	# unset target if no valid target is hit by ray
 	else:
 		unit_target = null
-		print(unit_target)
-#		Autoload.ui_reference.unset_targetframe()
+		Autoload.player_ui_main_reference.targetframe_remove()

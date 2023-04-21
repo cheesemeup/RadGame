@@ -1,11 +1,5 @@
 extends Control
 
-# target frame vars
-var targetframe_hp_size_x = 250
-var targetframe_hp_size_y = 80
-var targetframe_hp_position_x = 0
-var targetframe_hp_position_y = 0
-
 func _ready():
 	playerframe_initialize()
 

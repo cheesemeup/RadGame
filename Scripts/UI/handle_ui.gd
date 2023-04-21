@@ -1,6 +1,14 @@
 extends Control
 
+# target frame vars
+var targetframe_hp_size_x = 250
+var targetframe_hp_size_y = 80
+var targetframe_hp_position_x = 0
+var targetframe_hp_position_y = 0
+var targetframe_updateflag = false
+
 var esc_menu_preload = preload("res://Scenes/UI/escape_menu.tscn")
+var targetframe_preload = preload("res://Scenes/UI/targetframe.tscn")
 
 ##############################################################################################################################
 
@@ -26,5 +34,21 @@ func load_persistent():
 	var ui_persistent = ui_persistent_load.instantiate()
 	$/root/main/ui.add_child(ui_persistent)
 
-func targetframe_initialize():
-	print("targeted")
+func targetframe_initialize(ID):
+	# create new targetframe if there is no targetframe
+	if not get_node_or_null("targetframe"):
+		var targetframe = targetframe_preload
+		targetframe = targetframe.instantiate()
+		add_child(targetframe)
+		targetframe_updateflag = true
+	# update targetframe if it already exists
+	else:
+		pass
+
+func targetframe_remove():
+	print("remove")
+	if not get_node_or_null("targetframe"):
+		print(get_children())
+		return
+	targetframe_updateflag = false
+	get_node("targetframe").queue_free()

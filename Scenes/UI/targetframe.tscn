@@ -14,10 +14,13 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1920.0
+offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="targetframe_hpbar" type="ProgressBar" parent="."]
+layout_mode = 0
 offset_left = 1355.0
 offset_top = 700.0
 offset_right = 1605.0
@@ -28,6 +31,7 @@ value = 65.0
 show_percentage = false
 
 [node name="targetframe_resbar" type="ProgressBar" parent="."]
+layout_mode = 0
 offset_left = 1355.0
 offset_top = 780.0
 offset_right = 1605.0
@@ -38,6 +42,7 @@ value = 85.0
 show_percentage = false
 
 [node name="targetframe_targetname" type="Label" parent="."]
+layout_mode = 0
 offset_left = 1355.0
 offset_top = 730.0
 offset_right = 1475.0
@@ -46,6 +51,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="targetframe_hpvalue" type="Label" parent="."]
+layout_mode = 0
 offset_left = 530.0
 offset_top = 730.0
 offset_right = 650.0
@@ -55,6 +61,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="targetframe_resvalue" type="Label" parent="."]
+layout_mode = 0
 offset_left = 600.0
 offset_top = 780.0
 offset_right = 650.0
