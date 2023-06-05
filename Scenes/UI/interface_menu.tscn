@@ -77,370 +77,1106 @@ grow_vertical = 2
 [node name="Single Frames" type="Control" parent="interface_menu_tabs"]
 layout_mode = 2
 
-[node name="labels" type="Control" parent="interface_menu_tabs/Single Frames"]
+[node name="player_labels" type="Control" parent="interface_menu_tabs/Single Frames"]
 anchors_preset = 0
-offset_top = 50.0
-offset_right = 40.0
-offset_bottom = 90.0
+offset_left = 55.0
+offset_right = 55.0
 
-[node name="playerframe_hp_label" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
+[node name="playerframe_player_label" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/player_labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = -50.0
-offset_right = 180.0
-offset_bottom = -20.0
+offset_right = 160.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Width in pixels at 1920x1080 resolution."
+theme_override_colors/default_color = Color(0, 0.533333, 0.0745098, 1)
+text = "Player"
+
+[node name="playerframe_hp_label" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/player_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 30.0
+offset_right = 160.0
+offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Width in pixels at 1920x1080 resolution."
 theme_override_colors/default_color = Color(0, 0.533333, 0.0745098, 1)
 text = "Health Bar"
 
-[node name="playerframe_hp_width" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
+[node name="playerframe_hp_width" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/player_labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = -20.0
-offset_right = 180.0
-offset_bottom = 10.0
+offset_top = 60.0
+offset_right = 160.0
+offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Width in pixels at 1920x1080 resolution."
 text = "Frame Width"
 
-[node name="playerframe_hp_height" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
+[node name="playerframe_hp_height" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/player_labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = 10.0
-offset_right = 180.0
-offset_bottom = 40.0
+offset_top = 90.0
+offset_right = 160.0
+offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Height in pixels at 1920x1080 resolution."
 text = "Frame Height"
 
-[node name="playerframe_hp_h_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
+[node name="playerframe_hp_h_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/player_labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = 40.0
-offset_right = 180.0
-offset_bottom = 70.0
+offset_top = 120.0
+offset_right = 160.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Height in pixels at 1920x1080 resolution."
 text = "Horizontal Position"
 
-[node name="playerframe_hp_v_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
+[node name="playerframe_hp_v_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/player_labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = 70.0
-offset_right = 180.0
-offset_bottom = 100.0
+offset_top = 150.0
+offset_right = 160.0
+offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Height in pixels at 1920x1080 resolution."
 text = "Vertical Position"
 
-[node name="playerframe_hp_orientation" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
+[node name="playerframe_hp_orientation" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/player_labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = 100.0
-offset_right = 180.0
-offset_bottom = 130.0
+offset_top = 180.0
+offset_right = 160.0
+offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Height in pixels at 1920x1080 resolution."
 text = "Orientation"
 
-[node name="playerframe_res_label" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
+[node name="playerframe_res_label" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/player_labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = 160.0
-offset_right = 180.0
-offset_bottom = 190.0
+offset_top = 225.0
+offset_right = 160.0
+offset_bottom = 255.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Width in pixels at 1920x1080 resolution."
 theme_override_colors/default_color = Color(0, 0.533333, 0.0745098, 1)
 text = "Resource Bar"
 
-[node name="playerframe_res_width" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
+[node name="playerframe_res_width" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/player_labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = 190.0
-offset_right = 180.0
-offset_bottom = 220.0
+offset_top = 255.0
+offset_right = 160.0
+offset_bottom = 285.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Width in pixels at 1920x1080 resolution."
 text = "Frame Width"
 
-[node name="playerframe_res_height" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
+[node name="playerframe_res_height" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/player_labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = 220.0
-offset_right = 180.0
-offset_bottom = 250.0
+offset_top = 285.0
+offset_right = 160.0
+offset_bottom = 315.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Height in pixels at 1920x1080 resolution."
 text = "Frame Height"
 
-[node name="playerframe_res_h_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
+[node name="playerframe_res_h_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/player_labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = 250.0
-offset_right = 180.0
-offset_bottom = 280.0
+offset_top = 315.0
+offset_right = 160.0
+offset_bottom = 345.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Height in pixels at 1920x1080 resolution."
 text = "Horizontal Position"
 
-[node name="playerframe_res_v_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
+[node name="playerframe_res_v_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/player_labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = 280.0
-offset_right = 180.0
-offset_bottom = 310.0
+offset_top = 345.0
+offset_right = 160.0
+offset_bottom = 375.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Height in pixels at 1920x1080 resolution."
 text = "Vertical Position"
 
-[node name="playerframe_res_orientation" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/labels"]
+[node name="playerframe_res_orientation" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/player_labels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = 310.0
-offset_right = 180.0
-offset_bottom = 340.0
+offset_top = 375.0
+offset_right = 160.0
+offset_bottom = 405.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Height in pixels at 1920x1080 resolution."
 text = "Orientation"
 
-[node name="values" type="Control" parent="interface_menu_tabs/Single Frames"]
+[node name="player_values" type="Control" parent="interface_menu_tabs/Single Frames"]
 anchors_preset = 0
-offset_top = 50.0
-offset_right = 40.0
-offset_bottom = 90.0
 
-[node name="playerframe_hp_width_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
+[node name="playerframe_hp_width_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/player_values"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 180.0
-offset_top = -20.0
-offset_right = 260.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 13
-
-[node name="playerframe_hp_height_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 180.0
-offset_top = 10.0
-offset_right = 260.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 13
-
-[node name="playerframe_hp_h_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 180.0
-offset_top = 40.0
-offset_right = 260.0
-offset_bottom = 70.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 13
-
-[node name="playerframe_hp_v_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 180.0
-offset_top = 70.0
-offset_right = 260.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 13
-
-[node name="playerframe_res_width_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 180.0
-offset_top = 190.0
-offset_right = 260.0
-offset_bottom = 220.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 13
-
-[node name="playerframe_res_height_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 180.0
-offset_top = 220.0
-offset_right = 260.0
-offset_bottom = 250.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 13
-
-[node name="playerframe_res_h_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 180.0
-offset_top = 250.0
-offset_right = 260.0
-offset_bottom = 280.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 13
-
-[node name="playerframe_res_v_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/values"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 180.0
-offset_top = 280.0
-offset_right = 260.0
-offset_bottom = 310.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 13
-
-[node name="dropdowns" type="Control" parent="interface_menu_tabs/Single Frames"]
-anchors_preset = 0
-offset_top = 50.0
-offset_right = 40.0
-offset_bottom = 90.0
-
-[node name="playerframe_hp_showtoggle" type="OptionButton" parent="interface_menu_tabs/Single Frames/dropdowns"]
-layout_mode = 2
-offset_left = 200.0
-offset_top = -30.0
+offset_left = 215.0
+offset_top = 60.0
 offset_right = 295.0
-clip_text = true
-fit_to_longest_item = false
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
 
-[node name="playerframe_hp_orientation_entry" type="OptionButton" parent="interface_menu_tabs/Single Frames/dropdowns"]
-layout_mode = 2
-offset_left = 200.0
+[node name="playerframe_hp_height_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/player_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 90.0
+offset_right = 295.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="playerframe_hp_h_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/player_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
 offset_top = 120.0
 offset_right = 295.0
 offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="playerframe_hp_v_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/player_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 150.0
+offset_right = 295.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="playerframe_res_width_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/player_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 255.0
+offset_right = 295.0
+offset_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="playerframe_res_height_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/player_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 285.0
+offset_right = 295.0
+offset_bottom = 315.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="playerframe_res_h_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/player_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 315.0
+offset_right = 295.0
+offset_bottom = 345.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="playerframe_res_v_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/player_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 345.0
+offset_right = 295.0
+offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="player_dropdowns" type="Control" parent="interface_menu_tabs/Single Frames"]
+anchors_preset = 0
+
+[node name="playerframe_hp_showtoggle" type="OptionButton" parent="interface_menu_tabs/Single Frames/player_dropdowns"]
+layout_mode = 2
+offset_left = 215.0
+offset_top = 30.0
+offset_right = 315.0
+offset_bottom = 60.0
 clip_text = true
 fit_to_longest_item = false
 
-[node name="playerframe_res_showtoggle" type="OptionButton" parent="interface_menu_tabs/Single Frames/dropdowns"]
+[node name="playerframe_hp_orientation_entry" type="OptionButton" parent="interface_menu_tabs/Single Frames/player_dropdowns"]
 layout_mode = 2
-offset_left = 200.0
+offset_left = 215.0
 offset_top = 180.0
-offset_right = 295.0
+offset_right = 315.0
 offset_bottom = 210.0
 clip_text = true
 fit_to_longest_item = false
 
-[node name="playerframe_res_orientation_entry" type="OptionButton" parent="interface_menu_tabs/Single Frames/dropdowns"]
+[node name="playerframe_res_showtoggle" type="OptionButton" parent="interface_menu_tabs/Single Frames/player_dropdowns"]
 layout_mode = 2
-offset_left = 200.0
-offset_top = 330.0
+offset_left = 215.0
+offset_top = 225.0
+offset_right = 315.0
+offset_bottom = 255.0
+clip_text = true
+fit_to_longest_item = false
+
+[node name="playerframe_res_orientation_entry" type="OptionButton" parent="interface_menu_tabs/Single Frames/player_dropdowns"]
+layout_mode = 2
+offset_left = 215.0
+offset_top = 375.0
+offset_right = 315.0
+offset_bottom = 405.0
+clip_text = true
+fit_to_longest_item = false
+
+[node name="target_labels" type="Control" parent="interface_menu_tabs/Single Frames"]
+anchors_preset = 0
+offset_left = 370.0
+offset_right = 370.0
+
+[node name="targetframe_target_label" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/target_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 160.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Width in pixels at 1920x1080 resolution."
+theme_override_colors/default_color = Color(0, 0.533333, 0.0745098, 1)
+text = "Target"
+
+[node name="targetframe_hp_label" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/target_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 30.0
+offset_right = 160.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Width in pixels at 1920x1080 resolution."
+theme_override_colors/default_color = Color(0, 0.533333, 0.0745098, 1)
+text = "Health Bar"
+
+[node name="targetframe_hp_width" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/target_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 60.0
+offset_right = 160.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Width in pixels at 1920x1080 resolution."
+text = "Frame Width"
+
+[node name="targetframe_hp_height" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/target_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 90.0
+offset_right = 160.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Frame Height"
+
+[node name="targetframe_hp_h_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/target_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 120.0
+offset_right = 160.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Horizontal Position"
+
+[node name="targetframe_hp_v_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/target_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 150.0
+offset_right = 160.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Vertical Position"
+
+[node name="targetframe_hp_orientation" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/target_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 180.0
+offset_right = 160.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Orientation"
+
+[node name="targetframe_res_label" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/target_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 225.0
+offset_right = 160.0
+offset_bottom = 255.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Width in pixels at 1920x1080 resolution."
+theme_override_colors/default_color = Color(0, 0.533333, 0.0745098, 1)
+text = "Resource Bar"
+
+[node name="targetframe_res_width" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/target_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 255.0
+offset_right = 160.0
+offset_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Width in pixels at 1920x1080 resolution."
+text = "Frame Width"
+
+[node name="targetframe_res_height" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/target_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 285.0
+offset_right = 160.0
+offset_bottom = 315.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Frame Height"
+
+[node name="targetframe_res_h_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/target_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 315.0
+offset_right = 160.0
+offset_bottom = 345.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Horizontal Position"
+
+[node name="targetframe_res_v_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/target_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 345.0
+offset_right = 160.0
+offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Vertical Position"
+
+[node name="targetframe_res_orientation" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/target_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 375.0
+offset_right = 160.0
+offset_bottom = 405.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Orientation"
+
+[node name="target_values" type="Control" parent="interface_menu_tabs/Single Frames"]
+anchors_preset = 0
+offset_left = 315.0
+offset_right = 315.0
+
+[node name="targetframe_hp_width_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/target_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 60.0
 offset_right = 295.0
-offset_bottom = 360.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="targetframe_hp_height_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/target_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 90.0
+offset_right = 295.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="targetframe_hp_h_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/target_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 120.0
+offset_right = 295.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="targetframe_hp_v_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/target_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 150.0
+offset_right = 295.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="targetframe_res_width_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/target_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 255.0
+offset_right = 295.0
+offset_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="targetframe_res_height_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/target_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 285.0
+offset_right = 295.0
+offset_bottom = 315.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="targetframe_res_h_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/target_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 315.0
+offset_right = 295.0
+offset_bottom = 345.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="targetframe_res_v_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/target_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 345.0
+offset_right = 295.0
+offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="target_dropdowns" type="Control" parent="interface_menu_tabs/Single Frames"]
+anchors_preset = 0
+offset_left = 315.0
+offset_right = 315.0
+
+[node name="targetframe_hp_showtoggle" type="OptionButton" parent="interface_menu_tabs/Single Frames/target_dropdowns"]
+layout_mode = 2
+offset_left = 215.0
+offset_top = 30.0
+offset_right = 315.0
+offset_bottom = 60.0
+clip_text = true
+fit_to_longest_item = false
+
+[node name="targetframe_hp_orientation_entry" type="OptionButton" parent="interface_menu_tabs/Single Frames/target_dropdowns"]
+layout_mode = 2
+offset_left = 215.0
+offset_top = 180.0
+offset_right = 315.0
+offset_bottom = 210.0
+clip_text = true
+fit_to_longest_item = false
+
+[node name="targetframe_res_showtoggle" type="OptionButton" parent="interface_menu_tabs/Single Frames/target_dropdowns"]
+layout_mode = 2
+offset_left = 215.0
+offset_top = 225.0
+offset_right = 315.0
+offset_bottom = 255.0
+clip_text = true
+fit_to_longest_item = false
+
+[node name="targetframe_res_orientation_entry" type="OptionButton" parent="interface_menu_tabs/Single Frames/target_dropdowns"]
+layout_mode = 2
+offset_left = 215.0
+offset_top = 375.0
+offset_right = 315.0
+offset_bottom = 405.0
+clip_text = true
+fit_to_longest_item = false
+
+[node name="tot_labels" type="Control" parent="interface_menu_tabs/Single Frames"]
+visible = false
+anchors_preset = 0
+offset_left = 675.0
+offset_right = 675.0
+
+[node name="playerframe_player_label" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/tot_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 160.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Width in pixels at 1920x1080 resolution."
+theme_override_colors/default_color = Color(0, 0.533333, 0.0745098, 1)
+text = "Player"
+
+[node name="playerframe_hp_label" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/tot_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 30.0
+offset_right = 160.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Width in pixels at 1920x1080 resolution."
+theme_override_colors/default_color = Color(0, 0.533333, 0.0745098, 1)
+text = "Health Bar"
+
+[node name="playerframe_hp_width" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/tot_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 60.0
+offset_right = 160.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Width in pixels at 1920x1080 resolution."
+text = "Frame Width"
+
+[node name="playerframe_hp_height" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/tot_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 90.0
+offset_right = 160.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Frame Height"
+
+[node name="playerframe_hp_h_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/tot_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 120.0
+offset_right = 160.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Horizontal Position"
+
+[node name="playerframe_hp_v_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/tot_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 150.0
+offset_right = 160.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Vertical Position"
+
+[node name="playerframe_hp_orientation" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/tot_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 180.0
+offset_right = 160.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Orientation"
+
+[node name="playerframe_res_label" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/tot_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 225.0
+offset_right = 160.0
+offset_bottom = 255.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Width in pixels at 1920x1080 resolution."
+theme_override_colors/default_color = Color(0, 0.533333, 0.0745098, 1)
+text = "Resource Bar"
+
+[node name="playerframe_res_width" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/tot_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 255.0
+offset_right = 160.0
+offset_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Width in pixels at 1920x1080 resolution."
+text = "Frame Width"
+
+[node name="playerframe_res_height" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/tot_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 285.0
+offset_right = 160.0
+offset_bottom = 315.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Frame Height"
+
+[node name="playerframe_res_h_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/tot_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 315.0
+offset_right = 160.0
+offset_bottom = 345.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Horizontal Position"
+
+[node name="playerframe_res_v_position" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/tot_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 345.0
+offset_right = 160.0
+offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Vertical Position"
+
+[node name="playerframe_res_orientation" type="RichTextLabel" parent="interface_menu_tabs/Single Frames/tot_labels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 375.0
+offset_right = 160.0
+offset_bottom = 405.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Height in pixels at 1920x1080 resolution."
+text = "Orientation"
+
+[node name="tot_values" type="Control" parent="interface_menu_tabs/Single Frames"]
+visible = false
+anchors_preset = 0
+offset_left = 620.0
+offset_right = 620.0
+
+[node name="playerframe_hp_width_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/tot_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 60.0
+offset_right = 295.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="playerframe_hp_height_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/tot_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 90.0
+offset_right = 295.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="playerframe_hp_h_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/tot_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 120.0
+offset_right = 295.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="playerframe_hp_v_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/tot_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 150.0
+offset_right = 295.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="playerframe_res_width_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/tot_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 255.0
+offset_right = 295.0
+offset_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="playerframe_res_height_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/tot_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 285.0
+offset_right = 295.0
+offset_bottom = 315.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="playerframe_res_h_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/tot_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 315.0
+offset_right = 295.0
+offset_bottom = 345.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="playerframe_res_v_position_entry" type="TextEdit" parent="interface_menu_tabs/Single Frames/tot_values"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 345.0
+offset_right = 295.0
+offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="tot_dropdowns" type="Control" parent="interface_menu_tabs/Single Frames"]
+visible = false
+anchors_preset = 0
+offset_left = 620.0
+offset_right = 620.0
+
+[node name="playerframe_hp_showtoggle" type="OptionButton" parent="interface_menu_tabs/Single Frames/tot_dropdowns"]
+layout_mode = 2
+offset_left = 215.0
+offset_top = 30.0
+offset_right = 315.0
+offset_bottom = 60.0
+clip_text = true
+fit_to_longest_item = false
+
+[node name="playerframe_hp_orientation_entry" type="OptionButton" parent="interface_menu_tabs/Single Frames/tot_dropdowns"]
+layout_mode = 2
+offset_left = 215.0
+offset_top = 180.0
+offset_right = 315.0
+offset_bottom = 210.0
+clip_text = true
+fit_to_longest_item = false
+
+[node name="playerframe_res_showtoggle" type="OptionButton" parent="interface_menu_tabs/Single Frames/tot_dropdowns"]
+layout_mode = 2
+offset_left = 215.0
+offset_top = 225.0
+offset_right = 315.0
+offset_bottom = 255.0
+clip_text = true
+fit_to_longest_item = false
+
+[node name="playerframe_res_orientation_entry" type="OptionButton" parent="interface_menu_tabs/Single Frames/tot_dropdowns"]
+layout_mode = 2
+offset_left = 215.0
+offset_top = 375.0
+offset_right = 315.0
+offset_bottom = 405.0
 clip_text = true
 fit_to_longest_item = false
 

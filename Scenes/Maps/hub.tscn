@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bjr7k3cxd6jyj"]
+[gd_scene load_steps=12 format=3 uid="uid://bjr7k3cxd6jyj"]
 
 [ext_resource type="Texture2D" uid="uid://lrcvum58en3o" path="res://Assets/Textures/Road20/road_20_diffuseOriginal.png" id="1_vd7gq"]
 [ext_resource type="Texture2D" uid="uid://bady82sjm01fh" path="res://Assets/Textures/Road20/road_20_height.png" id="2_gjrxn"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://htft1bfooc1b" path="res://Assets/Textures/Road20/road_20_normal.png" id="4_mbmjp"]
 [ext_resource type="Texture2D" uid="uid://bn6pymghgq1bk" path="res://Assets/Textures/Road20/road_20_smoothness.png" id="5_qa8ei"]
 [ext_resource type="PackedScene" uid="uid://dwg5lusb6argd" path="res://Scenes/Units/test_npc.tscn" id="6_50rac"]
+[ext_resource type="PackedScene" uid="uid://bswgqikmxejv3" path="res://Scenes/Testing/interact_damage.tscn" id="7_i8hkq"]
+[ext_resource type="PackedScene" uid="uid://dohktoymlhhka" path="res://Scenes/Testing/interact_heal.tscn" id="8_eqvn2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ycfok"]
 size = Vector3(20, 2, 20)
@@ -41,3 +43,12 @@ mesh = SubResource("PlaneMesh_qi80i")
 
 [node name="test_npc" parent="." instance=ExtResource("6_50rac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05266, 2.38419e-07, -3.85968)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 0)
+
+[node name="interact_damage" parent="." instance=ExtResource("7_i8hkq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8)
+
+[node name="interact_heal" parent="." instance=ExtResource("8_eqvn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)

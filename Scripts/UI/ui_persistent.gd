@@ -3,7 +3,7 @@ extends Control
 func _ready():
 	playerframe_initialize()
 
-func _process(delta):
+func _process(_delta):
 	if $playerframe/playerframe_hpbar.visible:
 		$playerframe/playerframe_hpbar.value = 100 * Autoload.player_reference.unit_hp_current / Autoload.player_reference.unit_hp_max
 	if $playerframe/playerframe_resbar.visible:

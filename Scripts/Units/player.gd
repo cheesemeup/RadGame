@@ -20,6 +20,8 @@ var unitname = "testname"
 var space_state
 var unit_target = null
 var unit_mouseover = null
+var interactables_in_range = []
+var current_interact_target = null
 
 # other
 var esc_level = 0
@@ -51,12 +53,34 @@ func _input(event):
 		return
 	if event.is_action_pressed("escape") and esc_level == 0:
 		Autoload.player_ui_main_reference.esc_menu()
+	if event.is_action_pressed("interact"):
+		if current_interact_target != null:
+			current_interact_target.interaction(self)
+
 
 func _unhandled_input(event):
 	#targeting
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
 		# targeting ray
 		targetray(event.position)
+
+func _process(_delta):
+	# interaction target sorting
+	if interactables_in_range.size() > 0:
+		var distance = 10000.
+		var distance_new = 0.
+		var old_interactable = null
+		if is_instance_valid(current_interact_target):
+			old_interactable = current_interact_target
+		for interactable_nearby in interactables_in_range:
+			distance_new = self.global_position.distance_to(interactable_nearby.global_position)
+			if distance_new < distance:
+				distance = distance_new
+				current_interact_target = interactable_nearby
+		if not old_interactable == current_interact_target:
+			if is_instance_valid(old_interactable):
+				old_interactable.hide_interact_popup()
+		current_interact_target.show_interact_popup()
 
 func _physics_process(delta):
 	# targeting ray
@@ -106,6 +130,7 @@ func set_model(model_name,peer_id):
 	var model = load(model_name).instantiate()
 	playernode.get_child(0).add_child(model,true)
 	
+##############################################################################################################################
 # target ray
 func targetray(eventposition):
 	var origin = player_cam
@@ -122,7 +147,7 @@ func targetray(eventposition):
 	if result.collider.is_in_group("playergroup") or result.collider.is_in_group("npcgroup") or\
 	result.collider.is_in_group("hostilegroup"):
 		unit_target = result.collider
-		Autoload.player_ui_main_reference.targetframe_initialize(unit_target)
+		Autoload.player_ui_main_reference.targetframe_initialize()
 	# unset target if no valid target is hit by ray
 	else:
 		unit_target = null

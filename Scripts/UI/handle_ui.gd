@@ -15,6 +15,10 @@ var targetframe_preload = preload("res://Scenes/UI/targetframe.tscn")
 func _ready():
 	Autoload.player_ui_main_reference = self
 
+func _process(_delta):
+	if targetframe_updateflag:
+		targetframe_update()
+
 func esc_menu():
 	if get_node_or_null("escape_menu_root"):
 		$escape_menu_root.queue_free()
@@ -34,7 +38,7 @@ func load_persistent():
 	var ui_persistent = ui_persistent_load.instantiate()
 	$/root/main/ui.add_child(ui_persistent)
 
-func targetframe_initialize(ID):
+func targetframe_initialize():
 	# create new targetframe if there is no targetframe
 	if not get_node_or_null("targetframe"):
 		var targetframe = targetframe_preload
@@ -45,9 +49,7 @@ func targetframe_initialize(ID):
 	targetframe_setup()
 
 func targetframe_remove():
-	print("remove")
 	if not get_node_or_null("targetframe"):
-		print(get_children())
 		return
 	targetframe_updateflag = false
 	get_node("targetframe").queue_free()
@@ -60,39 +62,46 @@ func targetframe_setup():
 			100.*Autoload.player_reference.unit_target.unit_hp_current/Autoload.player_reference.unit_target.unit_hp_max,"%"]
 	if $targetframe/targetframe_hpbar.size.x > $targetframe/targetframe_hpbar.size.y:
 		$targetframe/targetframe_targetname.size.x = $targetframe/targetframe_hpbar.size.x / 2
-		$playerframe/playerframe_playername.position.x = $playerframe/playerframe_hpbar.position.x
-		$playerframe/playerframe_playername.position.y = $playerframe/playerframe_hpbar.position.y + \
-			($playerframe/playerframe_hpbar.size.y - $playerframe/playerframe_playername.size.y) / 2
-		$playerframe/playerframe_playername.rotation = 0
-		$playerframe/playerframe_hpvalue.size.x = $playerframe/playerframe_hpbar.size.x / 2
-		$playerframe/playerframe_hpvalue.position.x = $playerframe/playerframe_hpbar.position.x + \
-			$playerframe/playerframe_hpbar.size.x / 2
-		$playerframe/playerframe_hpvalue.position.y = $playerframe/playerframe_hpbar.position.y + \
-			($playerframe/playerframe_hpbar.size.y - $playerframe/playerframe_playername.size.y) / 2
-		$playerframe/playerframe_hpvalue.rotation = 0
-#	else:
-#		$playerframe/playerframe_playername.size.x = $playerframe/playerframe_hpbar.size.y / 2
-#		$playerframe/playerframe_playername.position.y = $playerframe/playerframe_hpbar.position.y + \
-#			$playerframe/playerframe_hpbar.size.y
-#		$playerframe/playerframe_playername.position.x = $playerframe/playerframe_hpbar.position.x + \
-#			($playerframe/playerframe_hpbar.size.x - $playerframe/playerframe_playername.size.y) / 2
-#		$playerframe/playerframe_playername.rotation = - PI / 2
-#		$playerframe/playerframe_hpvalue.size.x = $playerframe/playerframe_hpbar.size.y / 2
-#		$playerframe/playerframe_hpvalue.position.y = $playerframe/playerframe_hpbar.position.y + \
-#			$playerframe/playerframe_hpbar.size.y / 2
-#		$playerframe/playerframe_hpvalue.position.x = $playerframe/playerframe_hpbar.position.x + \
-#			($playerframe/playerframe_hpbar.size.x - $playerframe/playerframe_playername.size.y) / 2
-#		$playerframe/playerframe_hpvalue.rotation = - PI / 2
+		$targetframe/targetframe_targetname.position.x = $targetframe/targetframe_hpbar.position.x
+		$targetframe/targetframe_targetname.position.y = $targetframe/targetframe_hpbar.position.y + \
+			($targetframe/targetframe_hpbar.size.y - $targetframe/targetframe_targetname.size.y) / 2
+		$targetframe/targetframe_targetname.rotation = 0
+		$targetframe/targetframe_hpvalue.size.x = $targetframe/targetframe_hpbar.size.x / 2
+		$targetframe/targetframe_hpvalue.position.x = $targetframe/targetframe_hpbar.position.x + \
+			$targetframe/targetframe_hpbar.size.x / 2
+		$targetframe/targetframe_hpvalue.position.y = $targetframe/targetframe_hpbar.position.y + \
+			($targetframe/targetframe_hpbar.size.y - $targetframe/targetframe_targetname.size.y) / 2
+		$targetframe/targetframe_hpvalue.rotation = 0
+	else:
+		$targetframe/targetframe_targetname.size.x = $targetframe/targetframe_hpbar.size.y / 2
+		$targetframe/targetframe_targetname.position.y = $targetframe/targetframe_hpbar.position.y + \
+			$targetframe/targetframe_hpbar.size.y
+		$targetframe/targetframe_targetname.position.x = $targetframe/targetframe_hpbar.position.x + \
+			($targetframe/targetframe_hpbar.size.x - $targetframe/targetframe_targetname.size.y) / 2
+		$targetframe/targetframe_targetname.rotation = - PI / 2
+		$targetframe/targetframe_hpvalue.size.x = $targetframe/targetframe_hpbar.size.y / 2
+		$targetframe/targetframe_hpvalue.position.y = $targetframe/targetframe_hpbar.position.y + \
+			$targetframe/targetframe_hpbar.size.y / 2
+		$targetframe/targetframe_hpvalue.position.x = $targetframe/targetframe_hpbar.position.x + \
+			($targetframe/targetframe_hpbar.size.x - $targetframe/targetframe_targetname.size.y) / 2
+		$targetframe/targetframe_hpvalue.rotation = - PI / 2
 #	# player resource bar
-#	$targetframe/targetframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.unit_res_current/Autoload.player_reference.unit_res_max,"%"]
-#	if $playerframe/playerframe_resbar.size.x > $playerframe/playerframe_resbar.size.y:
-#		$playerframe/playerframe_resvalue.position.x = $playerframe/playerframe_resbar.position.x + $playerframe/playerframe_resbar.size.x - \
-#			$playerframe/playerframe_resvalue.size.x
-#		$playerframe/playerframe_resvalue.position.y = $playerframe/playerframe_resbar.position.y - \
-#			($playerframe/playerframe_resbar.size.y - $playerframe/playerframe_resvalue.size.y) / 2
-#		$playerframe/playerframe_resvalue.rotation = 0
-#	else:
-#		$playerframe/playerframe_resvalue.position.y = $playerframe/playerframe_resbar.position.y + $playerframe/playerframe_resvalue.size.x
-#		$playerframe/playerframe_resvalue.position.x = $playerframe/playerframe_resbar.position.x + \
-#			($playerframe/playerframe_resbar.size.x - $playerframe/playerframe_resvalue.size.y) / 2
-#		$playerframe/playerframe_resvalue.rotation = - PI / 2
+	$targetframe/targetframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.unit_target.unit_res_current/Autoload.player_reference.unit_target.unit_res_max,"%"]
+	if $targetframe/targetframe_resbar.size.x > $targetframe/targetframe_resbar.size.y:
+		$targetframe/targetframe_resvalue.position.x = $targetframe/targetframe_resbar.position.x + $targetframe/targetframe_resbar.size.x - \
+			$targetframe/targetframe_resvalue.size.x
+		$targetframe/targetframe_resvalue.position.y = $targetframe/targetframe_resbar.position.y - \
+			($targetframe/targetframe_resbar.size.y - $targetframe/targetframe_resvalue.size.y) / 2
+		$targetframe/targetframe_resvalue.rotation = 0
+	else:
+		$targetframe/targetframe_resvalue.position.y = $targetframe/targetframe_resbar.position.y + $playerframe/playerframe_resvalue.size.x
+		$targetframe/targetframe_resvalue.position.x = $targetframe/targetframe_resbar.position.x + \
+			($targetframe/rargetframe_resbar.size.x - $targetframe/targetframe_resvalue.size.y) / 2
+		$targetframe/targetframe_resvalue.rotation = - PI / 2
+
+func targetframe_update():
+	$targetframe/targetframe_hpbar.value = 100.*Autoload.player_reference.unit_target.unit_hp_current/Autoload.player_reference.unit_target.unit_hp_max
+	$targetframe/targetframe_hpvalue.text = "%.f / %.f\n %.2f%s" % [Autoload.player_reference.unit_target.unit_hp_current,Autoload.player_reference.unit_target.unit_hp_max,\
+		100.*Autoload.player_reference.unit_target.unit_hp_current/Autoload.player_reference.unit_target.unit_hp_max,"%"]
+	$targetframe/targetframe_resbar.value = 100.*Autoload.player_reference.unit_target.unit_res_current/Autoload.player_reference.unit_target.unit_res_max
+	$targetframe/targetframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.unit_target.unit_res_current/Autoload.player_reference.unit_target.unit_res_max,"%"]
