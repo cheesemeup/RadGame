@@ -34,3 +34,7 @@ text = "Interact [E]"
 
 [node name="interactable" parent="." instance=ExtResource("1_lwm3x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="stats" type="Node" parent="."]
+
+[node name="spells" type="Node" parent="."]

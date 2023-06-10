@@ -1,0 +1,19 @@
+{
+  "0":{
+	"name":"Signpost Damage",
+	"health":100,
+	"resource":0,
+	"primary":100,
+	"damage modifier":{
+		"physical":1,
+		"magic":1,
+	},
+  },
+  "1":{
+	"name":"Signpost Heal",
+	"health":100,
+	"resource":0,
+	"primary":100,
+	"healing modifier":1
+  }
+}

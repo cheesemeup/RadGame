@@ -10,6 +10,8 @@ const speed = 10.0
 const jump_velocity = 4.5
 
 # stats
+@export var stats_base : Dictionary
+@export var stats_curr : Dictionary
 var unit_hp_max = 12250
 var unit_hp_current = 6580
 var unit_res_max = 1324
@@ -46,7 +48,11 @@ func _ready():
 		set_model("res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
 	else:
 		rpc_id(1,"set_model","res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
-	
+	# load stats and spells
+	var file = "res://Data/db_stats_player.json"
+	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
+	stats_base = json_dict["0"]
+	stats_curr = stats_base
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
@@ -87,14 +93,14 @@ func _physics_process(delta):
 	space_state = get_world_3d().direct_space_state
 	if not synchronizer.is_multiplayer_authority(): 
 		return
-	# MOVEMENT
+	# jumping
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Jump")
 		velocity.y = jump_velocity
-	# apply gravity
+	# apply gravity if in air
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	# movement, based on default
+	# movement
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	# unrotated direction vector
 	var direction_ur = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()

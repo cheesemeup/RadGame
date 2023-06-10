@@ -1,0 +1,14 @@
+{
+  "0":{
+	"name":"Signpost Damage",
+	"spelltype":"damage",
+	"damagetype":"physical",
+	"primary_modifier":1
+  },
+  "1":{
+	"name":"Signpost Heal",
+	"spelltype":"heal",
+	"healtype":"magic",
+	"primary_modifier":1
+  }
+}

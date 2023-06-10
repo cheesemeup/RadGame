@@ -6,8 +6,11 @@ func _ready():
 func _process(_delta):
 	if $playerframe/playerframe_hpbar.visible:
 		$playerframe/playerframe_hpbar.value = 100 * Autoload.player_reference.unit_hp_current / Autoload.player_reference.unit_hp_max
+		$playerframe/playerframe_hpvalue.text = "%.f / %.f\n %.2f%s" % [Autoload.player_reference.unit_hp_current,Autoload.player_reference.unit_hp_max,\
+			100.*Autoload.player_reference.unit_hp_current/Autoload.player_reference.unit_hp_max,"%"]
 	if $playerframe/playerframe_resbar.visible:
 		$playerframe/playerframe_resbar.value = 100 * Autoload.player_reference.unit_res_current / Autoload.player_reference.unit_res_max
+		$playerframe/playerframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.unit_res_current/Autoload.player_reference.unit_res_max,"%"]
 
 func partyframe_initialize():
 	pass
@@ -44,7 +47,7 @@ func playerframe_initialize():
 			($playerframe/playerframe_hpbar.size.x - $playerframe/playerframe_playername.size.y) / 2
 		$playerframe/playerframe_hpvalue.rotation = - PI / 2
 	# player resource bar
-	$playerframe/playerframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.unit_res_current/Autoload.player_reference.unit_res_max,"%"]	
+	$playerframe/playerframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.unit_res_current/Autoload.player_reference.unit_res_max,"%"]
 	if $playerframe/playerframe_resbar.size.x > $playerframe/playerframe_resbar.size.y:
 		$playerframe/playerframe_resvalue.position.x = $playerframe/playerframe_resbar.position.x + $playerframe/playerframe_resbar.size.x - \
 			$playerframe/playerframe_resvalue.size.x
