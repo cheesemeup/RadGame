@@ -10,13 +10,14 @@ func _ready():
 
 func combat_event(spell,source,target):
 	print("combat event using %s from %s to %s"%[spell["name"],source,target])
+	print(spell)
 	# error handling to be implemented
 	if spell["spelltype"] == "damage":
 		event_damage(spell,source,target)
 #	elif spelltype == "dot":
 #		event_dot()
-#	elif spelltype == "healing":
-#		event_healing()
+	elif spell["spelltype"] == "heal":
+		event_healing(spell,source,target)
 #	elif spelltype == "hot":
 #		event_hot()
 #	elif spelltype == "aura":
@@ -27,21 +28,32 @@ func combat_event(spell,source,target):
 	pass
 
 func event_damage(spell,source,target):
-	# get source info
-	var primary = source.stats_curr["primary"]
-	var sourcemod = source.stats_curr["damage modifier"][spell["damagetype"]]
-	# get target info
-	var targetmod = target.stats_curr["defense modifier"][spell["damagetype"]]
-	# get spell info
-	# calculate damage
+	# calculate and apply damage
+	var value = int(floor(source.stats_curr["primary"] * \
+		source.stats_curr["damage modifier"][spell["damagetype"]] * \
+		target.stats_curr["defense modifier"][spell["damagetype"]]))
+	target.stats_curr["health_current"] = max(target.stats_curr["health_current"]-value,0)
+	print(target.stats_curr["health_current"])
 	# write to log
-	pass
+	print("%s hits %s with %s for %.f damage."%\
+		[source.stats_curr["name"],target.stats_curr["name"],\
+		  spell["name"],value])
+	
 	
 func event_dot():
 	pass
 	
-func event_healing():
-	pass
+func event_healing(spell,source,target):
+	# calculate and apply healing
+	var value = int(floor(source.stats_curr["primary"] * \
+		source.stats_curr["heal modifier"][spell["healtype"]] * \
+		target.stats_curr["heal taken modifier"][spell["healtype"]]))
+	target.stats_curr["health_current"] = min(target.stats_curr["health_current"]+value,target.stats_curr["health_max"])
+	print(target.stats_curr["health_current"])
+	# write to log
+	print("%s heals %s with %s for %.f damage."%\
+		[source.stats_curr["name"],target.stats_curr["name"],\
+		  spell["name"],value])
 	
 func event_hot():
 	pass

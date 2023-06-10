@@ -12,13 +12,8 @@ const jump_velocity = 4.5
 # stats
 @export var stats_base : Dictionary
 @export var stats_curr : Dictionary
-var unit_hp_max = 12250
-var unit_hp_current = 6580
-var unit_res_max = 1324
-var unit_res_current = 758
 
 # targeting vars
-var unitname = "testname"
 var space_state
 var unit_target = null
 var unit_mouseover = null

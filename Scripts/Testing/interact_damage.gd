@@ -19,7 +19,6 @@ func _ready():
 func interaction(body):
 	print("interacted with interact_damage sign")
 	Combat.combat_event(spells_curr["0"],self,body)
-	body.unit_hp_current = max(body.unit_hp_current-100,0)
 
 func calculate_stats():
 	pass

@@ -1,19 +1,48 @@
 {
   "0":{
 	"name":"Signpost Damage",
-	"health":100,
+	"health_max":100,
+	"healht_current":100,
 	"resource":0,
 	"primary":100,
 	"damage modifier":{
 		"physical":1,
 		"magic":1,
 	},
+	"heal modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"defense modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal taken modifier":{
+		"physical":1,
+		"magic":1,
+	},
   },
   "1":{
 	"name":"Signpost Heal",
-	"health":100,
+	"health_max":100,
+	"healht_current":100,
 	"resource":0,
 	"primary":100,
-	"healing modifier":1
+	"damage modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"defense modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal taken modifier":{
+		"physical":1,
+		"magic":1,
+	},
   }
 }

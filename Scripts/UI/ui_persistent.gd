@@ -5,12 +5,15 @@ func _ready():
 
 func _process(_delta):
 	if $playerframe/playerframe_hpbar.visible:
-		$playerframe/playerframe_hpbar.value = 100 * Autoload.player_reference.unit_hp_current / Autoload.player_reference.unit_hp_max
-		$playerframe/playerframe_hpvalue.text = "%.f / %.f\n %.2f%s" % [Autoload.player_reference.unit_hp_current,Autoload.player_reference.unit_hp_max,\
-			100.*Autoload.player_reference.unit_hp_current/Autoload.player_reference.unit_hp_max,"%"]
+		$playerframe/playerframe_hpbar.value = 100 * Autoload.player_reference.stats_curr["health_current"] / Autoload.player_reference.stats_curr["health_max"]
+		$playerframe/playerframe_hpvalue.text = "%.f / %.f\n %.2f%s" % [Autoload.player_reference.stats_curr["health_current"],\
+			Autoload.player_reference.stats_curr["health_max"],100.*Autoload.player_reference.stats_curr["health_current"]/\
+			Autoload.player_reference.stats_curr["health_max"],"%"]
 	if $playerframe/playerframe_resbar.visible:
-		$playerframe/playerframe_resbar.value = 100 * Autoload.player_reference.unit_res_current / Autoload.player_reference.unit_res_max
-		$playerframe/playerframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.unit_res_current/Autoload.player_reference.unit_res_max,"%"]
+		$playerframe/playerframe_resbar.value = 100 * Autoload.player_reference.stats_curr["resource_current"] /\
+			 Autoload.player_reference.stats_curr["resource_max"]
+		$playerframe/playerframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.stats_curr["resource_current"]/\
+			Autoload.player_reference.stats_curr["resource_max"],"%"]
 
 func partyframe_initialize():
 	pass
@@ -18,9 +21,10 @@ func partyframe_initialize():
 func playerframe_initialize():
 	# select orientation based on frame aspect ratio and align/center text
 	# player hp bar
-	$playerframe/playerframe_playername.text = Autoload.player_reference.unitname
-	$playerframe/playerframe_hpvalue.text = "%.f / %.f\n %.2f%s" % [Autoload.player_reference.unit_hp_current,Autoload.player_reference.unit_hp_max,\
-			100.*Autoload.player_reference.unit_hp_current/Autoload.player_reference.unit_hp_max,"%"]
+	$playerframe/playerframe_playername.text = Autoload.player_reference.stats_curr["name"]
+	$playerframe/playerframe_hpvalue.text = "%.f / %.f\n %.2f%s" % [Autoload.player_reference.stats_curr["health_current"],\
+		Autoload.player_reference.stats_curr["health_max"],\
+		100.*Autoload.player_reference.stats_curr["health_current"]/Autoload.player_reference.stats_curr["health_max"],"%"]
 	if $playerframe/playerframe_hpbar.size.x > $playerframe/playerframe_hpbar.size.y:
 		$playerframe/playerframe_playername.size.x = $playerframe/playerframe_hpbar.size.x / 2
 		$playerframe/playerframe_playername.position.x = $playerframe/playerframe_hpbar.position.x
@@ -47,7 +51,8 @@ func playerframe_initialize():
 			($playerframe/playerframe_hpbar.size.x - $playerframe/playerframe_playername.size.y) / 2
 		$playerframe/playerframe_hpvalue.rotation = - PI / 2
 	# player resource bar
-	$playerframe/playerframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.unit_res_current/Autoload.player_reference.unit_res_max,"%"]
+	$playerframe/playerframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.stats_curr["resource_current"]/\
+		Autoload.player_reference.stats_curr["resource_max"],"%"]
 	if $playerframe/playerframe_resbar.size.x > $playerframe/playerframe_resbar.size.y:
 		$playerframe/playerframe_resvalue.position.x = $playerframe/playerframe_resbar.position.x + $playerframe/playerframe_resbar.size.x - \
 			$playerframe/playerframe_resvalue.size.x
