@@ -10,5 +10,17 @@
 	"spelltype":"heal",
 	"healtype":"magic",
 	"primary_modifier":1
-  }
+  },
+"2":{
+	"name":"Test NPC Heal Self",
+	"spelltype":"heal",
+	"healtype":"magic",
+	"primary_modifier":10
+  },
+"3":{
+	"name":"Player Test Damage",
+	"spelltype":"damage",
+	"damagetype":"physical",
+	"primary_modifier":1.2
+  },
 }

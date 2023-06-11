@@ -10,8 +10,10 @@ const speed = 10.0
 const jump_velocity = 4.5
 
 # stats
-@export var stats_base : Dictionary
+var stats_base : Dictionary
 @export var stats_curr : Dictionary
+var spells_base : Dictionary
+@export var spells_curr : Dictionary
 
 # targeting vars
 var space_state
@@ -48,6 +50,10 @@ func _ready():
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	stats_base = json_dict["0"]
 	stats_curr = stats_base
+	file = "res://Data/db_spells.json"
+	json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
+	spells_base["3"] = json_dict["3"]
+	spells_curr = spells_base
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
@@ -57,6 +63,9 @@ func _input(event):
 	if event.is_action_pressed("interact"):
 		if current_interact_target != null:
 			current_interact_target.interaction(self)
+	if event.is_action_pressed("actionbar1_1"):
+		Combat.combat_event(spells_curr["3"],self,unit_target)
+		
 
 
 func _unhandled_input(event):
@@ -131,7 +140,7 @@ func set_model(model_name,peer_id):
 	var model = load(model_name).instantiate()
 	playernode.get_child(0).add_child(model,true)
 	
-##############################################################################################################################
+###################################################################################################
 # target ray
 func targetray(eventposition):
 	var origin = player_cam
