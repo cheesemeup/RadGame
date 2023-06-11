@@ -17,8 +17,9 @@ var spells_base : Dictionary
 
 # targeting vars
 var space_state
-var unit_target = null
+var unit_selectedtarget = null
 var unit_mouseover = null
+var unit_target = null
 var interactables_in_range = []
 var current_interact_target = null
 
@@ -63,8 +64,6 @@ func _input(event):
 	if event.is_action_pressed("interact"):
 		if current_interact_target != null:
 			current_interact_target.interaction(self)
-	if event.is_action_pressed("actionbar1_1"):
-		Combat.combat_event(spells_curr["3"],self,unit_target)
 		
 
 
@@ -72,7 +71,8 @@ func _unhandled_input(event):
 	#targeting
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
 		# targeting ray
-		targetray(event.position)
+		var result = targetray(event.position)
+		targeting(result)
 
 func _process(_delta):
 	# interaction target sorting
@@ -148,17 +148,32 @@ func targetray(eventposition):
 	var to = from + origin.project_ray_normal(eventposition) * 1000
 	var query = PhysicsRayQueryParameters3D.create(from,to)
 	var result = space_state.intersect_ray(query)
+	return result
+	
+func targeting(result):
 	# unset target and return if no collider is hit (like when clicking the sky)
 	if not result.has("collider"):
-		unit_target = null
+		unit_selectedtarget = null
 		Autoload.player_ui_main_reference.targetframe_remove()
 		return
 	# set target if player, npc or hostile is hit by ray
 	if result.collider.is_in_group("playergroup") or result.collider.is_in_group("npcgroup") or\
 	result.collider.is_in_group("hostilegroup"):
-		unit_target = result.collider
+		unit_selectedtarget = result.collider
 		Autoload.player_ui_main_reference.targetframe_initialize()
 	# unset target if no valid target is hit by ray
 	else:
-		unit_target = null
+		unit_selectedtarget = null
 		Autoload.player_ui_main_reference.targetframe_remove()
+
+###################################################################################################
+# send combat event from action bar
+func send_combat_event(spellID):
+	# check if mouseover targeting a valid target
+	var result = targetray(get_viewport().get_mouse_position())
+	if result.collider.is_in_group("playergroup") or result.collider.is_in_group("npcgroup") or\
+	result.collider.is_in_group("hostilegroup"):
+		unit_mouseover = result.collider
+	print(unit_mouseover)
+	# check for legality of mouseover target, then selected target
+	Combat.combat_event(spells_curr[spellID],self,unit_target)

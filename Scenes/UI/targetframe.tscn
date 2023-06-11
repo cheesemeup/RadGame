@@ -15,9 +15,9 @@ anchors_preset = 0
 
 [node name="targetframe_hpbar" type="ProgressBar" parent="."]
 layout_mode = 0
-offset_left = 1355.0
+offset_left = 1270.0
 offset_top = 700.0
-offset_right = 1605.0
+offset_right = 1520.0
 offset_bottom = 780.0
 theme_override_styles/background = SubResource("StyleBoxFlat_t0e17")
 theme_override_styles/fill = SubResource("StyleBoxFlat_d0syf")
@@ -26,9 +26,9 @@ show_percentage = false
 
 [node name="targetframe_resbar" type="ProgressBar" parent="."]
 layout_mode = 0
-offset_left = 1355.0
+offset_left = 1270.0
 offset_top = 780.0
-offset_right = 1605.0
+offset_right = 1520.0
 offset_bottom = 800.0
 theme_override_styles/background = SubResource("StyleBoxFlat_t0e17")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ils1m")
@@ -37,9 +37,9 @@ show_percentage = false
 
 [node name="targetframe_targetname" type="Label" parent="."]
 layout_mode = 0
-offset_left = 1355.0
+offset_left = 1270.0
 offset_top = 730.0
-offset_right = 1475.0
+offset_right = 1390.0
 offset_bottom = 760.0
 vertical_alignment = 1
 clip_text = true

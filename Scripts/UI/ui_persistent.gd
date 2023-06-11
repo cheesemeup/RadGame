@@ -2,6 +2,7 @@ extends Control
 
 func _ready():
 	playerframe_initialize()
+	actionbars_initialize()
 
 func _process(_delta):
 	if $playerframe/playerframe_hpbar.visible:
@@ -64,3 +65,47 @@ func playerframe_initialize():
 		$playerframe/playerframe_resvalue.position.x = $playerframe/playerframe_resbar.position.x + \
 			($playerframe/playerframe_resbar.size.x - $playerframe/playerframe_resvalue.size.y) / 2
 		$playerframe/playerframe_resvalue.rotation = - PI / 2
+
+func actionbars_initialize():
+#	$actionbars.actionbars/actionbar1/actionbar1_1.shortcut = input_event()
+	pass
+
+
+# ACTION BARS
+func _on_actionbar_1_1_pressed():
+	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_1.editor_description)
+	#	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_1.editor_description],\
+#		Autoload.player_reference,Autoload.player_reference.unit_target)
+func _on_actionbar_1_2_pressed():
+	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_2.editor_description],\
+		Autoload.player_reference,Autoload.player_reference.unit_target)
+func _on_actionbar_1_3_pressed():
+	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_3.editor_description],\
+		Autoload.player_reference,Autoload.player_reference.unit_target)
+func _on_actionbar_1_4_pressed():
+	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_4.editor_description],\
+		Autoload.player_reference,Autoload.player_reference.unit_target)
+func _on_actionbar_1_5_pressed():
+	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_5.editor_description],\
+		Autoload.player_reference,Autoload.player_reference.unit_target)
+func _on_actionbar_1_6_pressed():
+	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_6.editor_description],\
+		Autoload.player_reference,Autoload.player_reference.unit_target)
+func _on_actionbar_1_7_pressed():
+	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_7.editor_description],\
+		Autoload.player_reference,Autoload.player_reference.unit_target)
+func _on_actionbar_1_8_pressed():
+	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_8.editor_description],\
+		Autoload.player_reference,Autoload.player_reference.unit_target)
+func _on_actionbar_1_9_pressed():
+	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_9.editor_description],\
+		Autoload.player_reference,Autoload.player_reference.unit_target)
+func _on_actionbar_1_10_pressed():
+	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_10.editor_description],\
+		Autoload.player_reference,Autoload.player_reference.unit_target)
+func _on_actionbar_1_11_pressed():
+	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_11.editor_description],\
+		Autoload.player_reference,Autoload.player_reference.unit_target)
+func _on_actionbar_1_12_pressed():
+	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_12.editor_description],\
+		Autoload.player_reference,Autoload.player_reference.unit_target)

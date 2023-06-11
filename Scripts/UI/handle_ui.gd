@@ -57,10 +57,10 @@ func targetframe_remove():
 func targetframe_setup():
 	# select orientation based on frame aspect ratio and align/center text
 	# player hp bar
-	$targetframe/targetframe_targetname.text = Autoload.player_reference.unit_target.stats_curr["name"]
-	$targetframe/targetframe_hpvalue.text = "%.f / %.f\n %.2f%s" % [Autoload.player_reference.unit_target.stats_curr["health_current"],\
-		Autoload.player_reference.unit_target.stats_curr["health_max"],100.*Autoload.player_reference.unit_target.stats_curr["health_current"]/\
-		Autoload.player_reference.unit_target.stats_curr["health_max"],"%"]
+	$targetframe/targetframe_targetname.text = Autoload.player_reference.unit_selectedtarget.stats_curr["name"]
+	$targetframe/targetframe_hpvalue.text = "%.f / %.f\n %.2f%s" % [Autoload.player_reference.unit_selectedtarget.stats_curr["health_current"],\
+		Autoload.player_reference.unit_selectedtarget.stats_curr["health_max"],100.*Autoload.player_reference.unit_selectedtarget.stats_curr["health_current"]/\
+		Autoload.player_reference.unit_selectedtarget.stats_curr["health_max"],"%"]
 	if $targetframe/targetframe_hpbar.size.x > $targetframe/targetframe_hpbar.size.y:
 		$targetframe/targetframe_targetname.size.x = $targetframe/targetframe_hpbar.size.x / 2
 		$targetframe/targetframe_targetname.position.x = $targetframe/targetframe_hpbar.position.x
@@ -87,8 +87,8 @@ func targetframe_setup():
 			($targetframe/targetframe_hpbar.size.x - $targetframe/targetframe_targetname.size.y) / 2
 		$targetframe/targetframe_hpvalue.rotation = - PI / 2
 #	# player resource bar
-	$targetframe/targetframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.unit_target.stats_curr["resource_current"]/\
-		Autoload.player_reference.unit_target.stats_curr["resource_max"],"%"]
+	$targetframe/targetframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.unit_selectedtarget.stats_curr["resource_current"]/\
+		Autoload.player_reference.unit_selectedtarget.stats_curr["resource_max"],"%"]
 	if $targetframe/targetframe_resbar.size.x > $targetframe/targetframe_resbar.size.y:
 		$targetframe/targetframe_resvalue.position.x = $targetframe/targetframe_resbar.position.x + $targetframe/targetframe_resbar.size.x - \
 			$targetframe/targetframe_resvalue.size.x
@@ -102,11 +102,13 @@ func targetframe_setup():
 		$targetframe/targetframe_resvalue.rotation = - PI / 2
 
 func targetframe_update():
-	$targetframe/targetframe_hpbar.value = 100.*Autoload.player_reference.unit_target.stats_curr["health_current"]/Autoload.player_reference.unit_target.stats_curr["health_max"]
-	$targetframe/targetframe_hpvalue.text = "%.f / %.f\n %.2f%s" % [Autoload.player_reference.unit_target.stats_curr["health_current"],\
-		Autoload.player_reference.unit_target.stats_curr["health_max"],100.*Autoload.player_reference.unit_target.stats_curr["health_current"]/\
-		Autoload.player_reference.unit_target.stats_curr["health_max"],"%"]
-	$targetframe/targetframe_resbar.value = 100.*Autoload.player_reference.unit_target.stats_curr["resource_current"]/\
-		Autoload.player_reference.unit_target.stats_curr["resource_max"]
-	$targetframe/targetframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.unit_target.stats_curr["resource_current"]/\
-		Autoload.player_reference.unit_target.stats_curr["resource_max"],"%"]
+	$targetframe/targetframe_hpbar.value = 100.*Autoload.player_reference.unit_selectedtarget.stats_curr["health_current"]/\
+		Autoload.player_reference.unit_selectedtarget.stats_curr["health_max"]
+	$targetframe/targetframe_hpvalue.text = "%.f / %.f\n %.2f%s" % [Autoload.player_reference.unit_selectedtarget.stats_curr["health_current"],\
+		Autoload.player_reference.unit_selectedtarget.stats_curr["health_max"],100.*\
+		Autoload.player_reference.unit_selectedtarget.stats_curr["health_current"]/\
+		Autoload.player_reference.unit_selectedtarget.stats_curr["health_max"],"%"]
+	$targetframe/targetframe_resbar.value = 100.*Autoload.player_reference.unit_selectedtarget.stats_curr["resource_current"]/\
+		Autoload.player_reference.unit_selectedtarget.stats_curr["resource_max"]
+	$targetframe/targetframe_resvalue.text = "%.2f%s" % [100.*Autoload.player_reference.unit_selectedtarget.stats_curr["resource_current"]/\
+		Autoload.player_reference.unit_selectedtarget.stats_curr["resource_max"],"%"]

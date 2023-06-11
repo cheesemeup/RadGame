@@ -31,7 +31,6 @@ func start_hosting():
 	$ui.load_persistent()
 
 func start_joining(server):
-	print("start_joining called")
 	multiplayer.multiplayer_peer = null
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(server, PORT)
@@ -39,7 +38,6 @@ func start_joining(server):
 	$ui.load_persistent()
 
 func spawn_player(peer_id: int):
-	print("spawn_player called")
 	if not multiplayer.is_server():
 		return
 	var new_player = preload("res://Scenes/Units/player.tscn").instantiate()

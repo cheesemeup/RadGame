@@ -9,6 +9,8 @@ extends Node
 #	spell_db = JSON.parse_string(spell_db_string)
 
 func combat_event(spell,source,target):
+	if target == null:
+		return
 	# error handling to be implemented
 	if spell["spelltype"] == "damage":
 		event_damage(spell,source,target)
@@ -18,6 +20,7 @@ func combat_event(spell,source,target):
 #		event_aura()
 	
 func event_damage(spell,source,target):
+	# check if avoided, hit, or crit
 	# calculate and apply damage
 	var value = int(floor(source.stats_curr["primary"] * spell["primary_modifier"] * \
 		source.stats_curr["damage modifier"][spell["damagetype"]] * \
