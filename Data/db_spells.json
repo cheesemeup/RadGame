@@ -40,8 +40,8 @@
 "5":{
 	"name":"Player Test Heal",
 	"targetgroup":"friendly",
-	"spelltype":"damage",
-	"damagetype":"physical",
+	"spelltype":"heal",
+	"healtype":"magic",
 	"valuetype":"absolute",
 	"primary_modifier":1.2
   },

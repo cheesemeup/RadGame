@@ -5,6 +5,7 @@ func _ready():
 	actionbars_initialize()
 
 func _process(_delta):
+	# update player frame
 	if $playerframe/playerframe_hpbar.visible:
 		$playerframe/playerframe_hpbar.value = 100 * Autoload.player_reference.stats_curr["health_current"] / Autoload.player_reference.stats_curr["health_max"]
 		$playerframe/playerframe_hpvalue.text = "%.f / %.f\n %.2f%s" % [Autoload.player_reference.stats_curr["health_current"],\
@@ -71,44 +72,55 @@ func actionbars_initialize():
 	pass
 
 
-# ACTION BARS
+# action bars
 func _on_actionbar_1_1_pressed():
+	if $actionbars/actionbar1/actionbar1_1.editor_description == "none":
+		return
 	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_1.editor_description)
-	#	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_1.editor_description],\
-#		Autoload.player_reference,Autoload.player_reference.unit_target)
 func _on_actionbar_1_2_pressed():
-	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_2.editor_description],\
-		Autoload.player_reference,Autoload.player_reference.unit_target)
+	if $actionbars/actionbar1/actionbar1_2.editor_description == "none":
+		return
+	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_2.editor_description)
 func _on_actionbar_1_3_pressed():
-	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_3.editor_description],\
-		Autoload.player_reference,Autoload.player_reference.unit_target)
+	if $actionbars/actionbar1/actionbar1_3.editor_description == "none":
+		return
+	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_3.editor_description)
 func _on_actionbar_1_4_pressed():
-	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_4.editor_description],\
-		Autoload.player_reference,Autoload.player_reference.unit_target)
+	if $actionbars/actionbar1/actionbar1_4.editor_description == "none":
+		return
+	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_4.editor_description)
 func _on_actionbar_1_5_pressed():
-	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_5.editor_description],\
-		Autoload.player_reference,Autoload.player_reference.unit_target)
+	if $actionbars/actionbar1/actionbar1_5.editor_description == "none":
+		return
+	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_5.editor_description)
 func _on_actionbar_1_6_pressed():
-	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_6.editor_description],\
-		Autoload.player_reference,Autoload.player_reference.unit_target)
+	if $actionbars/actionbar1/actionbar1_6.editor_description == "none":
+		return
+	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_6.editor_description)
 func _on_actionbar_1_7_pressed():
-	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_7.editor_description],\
-		Autoload.player_reference,Autoload.player_reference.unit_target)
+	if $actionbars/actionbar1/actionbar1_7.editor_description == "none":
+		return
+	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_7.editor_description)
 func _on_actionbar_1_8_pressed():
-	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_8.editor_description],\
-		Autoload.player_reference,Autoload.player_reference.unit_target)
+	if $actionbars/actionbar1/actionbar1_8.editor_description == "none":
+		return
+	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_8.editor_description)
 func _on_actionbar_1_9_pressed():
-	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_9.editor_description],\
-		Autoload.player_reference,Autoload.player_reference.unit_target)
+	if $actionbars/actionbar1/actionbar1_9.editor_description == "none":
+		return
+	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar_9.editor_description)
 func _on_actionbar_1_10_pressed():
-	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_10.editor_description],\
-		Autoload.player_reference,Autoload.player_reference.unit_target)
+	if $actionbars/actionbar1/actionbar1_10.editor_description == "none":
+		return
+	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_10.editor_description)
 func _on_actionbar_1_11_pressed():
-	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_11.editor_description],\
-		Autoload.player_reference,Autoload.player_reference.unit_target)
+	if $actionbars/actionbar1/actionbar1_11.editor_description == "none":
+		return
+	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_11.editor_description)
 func _on_actionbar_1_12_pressed():
-	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_12.editor_description],\
-		Autoload.player_reference,Autoload.player_reference.unit_target)
+	if $actionbars/actionbar1/actionbar1_12.editor_description == "none":
+		return
+	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_12.editor_description)
 
 # mouseover targeting of frame
 func _on_playerframe_hpbar_mouse_entered():
