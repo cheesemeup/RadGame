@@ -7,19 +7,19 @@
 	"resource_max":0,
 	"resource_current":0,
 	"primary":100,
-	"damage modifier":{
+	"damage_modifier":{
 		"physical":1,
 		"magic":1,
 	},
-	"heal modifier":{
+	"heal_modifier":{
 		"physical":1,
 		"magic":1,
 	},
-	"defense modifier":{
+	"defense_modifier":{
 		"physical":1,
 		"magic":1,
 	},
-	"heal taken modifier":{
+	"heal_taken_modifier":{
 		"physical":1,
 		"magic":1,
 	},
@@ -32,19 +32,19 @@
 	"resource_max":0,
 	"resource_current":0,
 	"primary":100,
-	"damage modifier":{
+	"damage_modifier":{
 		"physical":1,
 		"magic":1,
 	},
-	"heal modifier":{
+	"heal_modifier":{
 		"physical":1,
 		"magic":1,
 	},
-	"defense modifier":{
+	"defense_modifier":{
 		"physical":1,
 		"magic":1,
 	},
-	"heal taken modifier":{
+	"heal_taken_modifier":{
 		"physical":1,
 		"magic":1,
 	},
@@ -57,19 +57,19 @@
 	"resource_max":0,
 	"resource_current":0,
 	"primary":100,
-	"damage modifier":{
+	"damage_modifier":{
 		"physical":1,
 		"magic":1,
 	},
-	"heal modifier":{
+	"heal_modifier":{
 		"physical":1,
 		"magic":1,
 	},
-	"defense modifier":{
+	"defense_modifier":{
 		"physical":1,
 		"magic":1,
 	},
-	"heal taken modifier":{
+	"heal_taken_modifier":{
 		"physical":1,
 		"magic":1,
 	},
@@ -82,19 +82,19 @@
 	"resource_max":0,
 	"resource_current":0,
 	"primary":100,
-	"damage modifier":{
+	"damage_modifier":{
 		"physical":1,
 		"magic":1,
 	},
-	"heal modifier":{
+	"heal_modifier":{
 		"physical":1,
 		"magic":1,
 	},
-	"defense modifier":{
+	"defense_modifier":{
 		"physical":1,
 		"magic":1,
 	},
-	"heal taken modifier":{
+	"heal_taken_modifier":{
 		"physical":1,
 		"magic":1,
 	},

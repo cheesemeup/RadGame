@@ -295,14 +295,14 @@ shortcut = SubResource("Shortcut_l2u6r")
 alignment = 0
 
 [node name="actionbar1_3" type="Button" parent="actionbars/actionbar1"]
-editor_description = "none"
+editor_description = "6"
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_okpyk")
 alignment = 0
 
 [node name="actionbar1_4" type="Button" parent="actionbars/actionbar1"]
-editor_description = "none"
+editor_description = "7"
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_4k1y8")

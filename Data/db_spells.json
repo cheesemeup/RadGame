@@ -45,4 +45,46 @@
 	"valuetype":"absolute",
 	"primary_modifier":1.2
   },
+"6":{
+	"name":"Player Test DoT",
+	"targetgroup":"hostile",
+	"spelltype":"aura",
+	"auratype":"damage",
+	"damagetype":"magic",
+	"valuetype":"absolute",
+	"primary_modifier":0.2,
+	"duration":5,
+	"tick":1
+  },
+"7":{
+	"name":"Player Test HoT",
+	"targetgroup":"friendly",
+	"spelltype":"aura",
+	"auratype":"heal",
+	"healtype":"magic",
+	"valuetype":"absolute",
+	"primary_modifier":0.2,
+	"duration":5,
+	"tick":1
+  },
+"8":{
+	"name":"Player Test Buff",
+	"targetgroup":"friendly",
+	"spelltype":"aura",
+	"auratype":"buff",
+	"bufftype":"magic",
+	"valuetype":"relative",
+	"primary_modifier":0.1,
+	"duration":0
+  },
+"9":{
+	"name":"Player Test Debuff",
+	"targetgroup":"friendly",
+	"spelltype":"aura",
+	"auratype":"debuff",
+	"debufftype":"magic",
+	"valuetype":"relative",
+	"primary_modifier":0.1,
+	"duration":0
+  },
 }

@@ -54,6 +54,8 @@ func _ready():
 	json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	spells_base["3"] = json_dict["3"]
 	spells_base["5"] = json_dict["5"]
+	spells_base["6"] = json_dict["6"]
+	spells_base["7"] = json_dict["7"]
 	spells_curr = spells_base
 
 func _input(event):

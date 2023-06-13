@@ -34,6 +34,8 @@ spring_length = 10.0
 [node name="player_camera" type="Camera3D" parent="camera_rotation/camera_arm"]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3, 5)
 
+[node name="auras" type="Node" parent="."]
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Scenes/Units/knight_scene.tscn")
 spawn_path = NodePath("../pivot")
