@@ -37,11 +37,15 @@ func event_damage(spell,source,target):
 	
 func event_healing(spell,source,target):
 	# calculate and apply healing
-	var value = int(floor(source.stats_curr["primary"] * spell["primary_modifier"] * \
-		source.stats_curr["heal modifier"][spell["healtype"]] * \
-		target.stats_curr["heal taken modifier"][spell["healtype"]]))
+	var value : int
+	if spell["valuetype"] == "absolute":
+		value = int(floor(source.stats_curr["primary"] * spell["primary_modifier"] * \
+			source.stats_curr["heal modifier"][spell["healtype"]] * \
+			target.stats_curr["heal taken modifier"][spell["healtype"]]))
+	elif spell["valuetype"] == "relative":
+		value = int(floor(spell["primary_modifier"]*source.stats_curr[spell["valuebase"]]))
 	target.stats_curr["health_current"] = min(target.stats_curr["health_current"]+value,target.stats_curr["health_max"])
-	# write to log
+	# write to log (or console for now)
 	print("%s heals %s with %s for %.f damage."%\
 		[source.stats_curr["name"],target.stats_curr["name"],\
 		  spell["name"],value])
