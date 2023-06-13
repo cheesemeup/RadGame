@@ -22,9 +22,13 @@ func combat_event(spell,source,target):
 func event_damage(spell,source,target):
 	# check if avoided, hit, or crit
 	# calculate and apply damage
-	var value = int(floor(source.stats_curr["primary"] * spell["primary_modifier"] * \
-		source.stats_curr["damage modifier"][spell["damagetype"]] * \
-		target.stats_curr["defense modifier"][spell["damagetype"]]))
+	var value : int
+	if spell["valuetype"] == "absolute":
+		value = int(floor(source.stats_curr["primary"] * spell["primary_modifier"] * \
+			source.stats_curr["damage modifier"][spell["damagetype"]] * \
+			target.stats_curr["defense modifier"][spell["damagetype"]]))
+	elif spell["valuetype"] == "relative":
+		value = int(floor(spell["primary_modifier"]*source.stats_curr[spell["valuebase"]]))
 	target.stats_curr["health_current"] = max(target.stats_curr["health_current"]-value,0)
 	# write to log
 	print("%s hits %s with %s for %.f damage."%\

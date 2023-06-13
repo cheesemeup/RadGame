@@ -18,8 +18,7 @@ var spells_base : Dictionary
 # targeting vars
 var space_state
 var unit_selectedtarget = null
-var unit_mouseover = null
-var unit_target = null
+#var unit_target = null
 var interactables_in_range = []
 var current_interact_target = null
 
@@ -54,6 +53,7 @@ func _ready():
 	file = "res://Data/db_spells.json"
 	json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	spells_base["3"] = json_dict["3"]
+	spells_base["5"] = json_dict["5"]
 	spells_curr = spells_base
 
 func _input(event):
@@ -157,8 +157,8 @@ func targeting(result):
 		Autoload.player_ui_main_reference.targetframe_remove()
 		return
 	# set target if player, npc or hostile is hit by ray
-	if result.collider.is_in_group("playergroup") or result.collider.is_in_group("npcgroup") or\
-	result.collider.is_in_group("hostilegroup"):
+	if result.collider.is_in_group("playergroup") or result.collider.is_in_group("npcgroup_targetable") or\
+	result.collider.is_in_group("hostilegroup_targetable"):
 		unit_selectedtarget = result.collider
 		Autoload.player_ui_main_reference.targetframe_initialize()
 	# unset target if no valid target is hit by ray
@@ -169,11 +169,22 @@ func targeting(result):
 ###################################################################################################
 # send combat event from action bar
 func send_combat_event(spellID):
+	var spell_target
 	# check if mouseover targeting a valid target
 	var result = targetray(get_viewport().get_mouse_position())
-	if result.collider.is_in_group("playergroup") or result.collider.is_in_group("npcgroup") or\
-	result.collider.is_in_group("hostilegroup"):
-		unit_mouseover = result.collider
-	print(unit_mouseover)
-	# check for legality of mouseover target, then selected target
-	Combat.combat_event(spells_curr[spellID],self,unit_target)
+	# check if target ray result has a collider, and check if collider is a valid result
+	if result.has("collider") and (result.collider.is_in_group("playergroup") or \
+		result.collider.is_in_group("npcgroup_targetable") or\
+		result.collider.is_in_group("hostilegroup_targetable")):
+			# set target to mouseover
+			spell_target = result.collider
+	# check legality of mouseover target
+	if spell_target == null or not spell_target.is_in_group(spells_curr[spellID]["targetgroup"]):
+		# illegal mouseover target, set target to selected target
+		spell_target = unit_selectedtarget
+		# check legality of selected target
+		if spell_target == null or not spell_target.is_in_group(spells_curr[spellID]["targetgroup"]):
+			# illegal selected target as well, cannot use spell, so return
+			return
+	# legal target found, either from mouseover or selected, so send combat event
+	Combat.combat_event(spells_curr[spellID],self,spell_target)

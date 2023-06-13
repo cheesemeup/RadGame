@@ -3,24 +3,46 @@
 	"name":"Signpost Damage",
 	"spelltype":"damage",
 	"damagetype":"physical",
+	"valuetype":"absolute",
 	"primary_modifier":1
   },
   "1":{
 	"name":"Signpost Heal",
 	"spelltype":"heal",
 	"healtype":"magic",
+	"valuetype":"absolute",
 	"primary_modifier":1
   },
 "2":{
 	"name":"Test NPC Heal Self",
 	"spelltype":"heal",
 	"healtype":"magic",
-	"primary_modifier":10
+	"valuetype":"relative",
+	"valuebase":"health_max",
+	"primary_modifier":1
   },
 "3":{
 	"name":"Player Test Damage",
+	"targetgroup":"hostile",
 	"spelltype":"damage",
 	"damagetype":"physical",
+	"valuetype":"absolute",
+	"primary_modifier":1.2
+  },
+"4":{
+	"name":"Test NPC Damage Self",
+	"spelltype":"damage",
+	"damagetype":"magic",
+	"valuetype":"relative",
+	"valuebase":"health_max",
+	"primary_modifier":0.5
+  },
+"5":{
+	"name":"Player Test Heal",
+	"targetgroup":"friendly",
+	"spelltype":"damage",
+	"damagetype":"physical",
+	"valuetype":"absolute",
 	"primary_modifier":1.2
   },
 }

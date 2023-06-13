@@ -1,6 +1,6 @@
-[gd_scene load_steps=64 format=3 uid="uid://dwg5lusb6argd"]
+[gd_scene load_steps=64 format=3 uid="uid://i6ufg7x2f1pt"]
 
-[ext_resource type="Script" path="res://Scripts/Units/test_npc.gd" id="1_lgkg5"]
+[ext_resource type="Script" path="res://Scripts/Units/test_npc_hostile.gd" id="1_qhdg4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f5l8a"]
 resource_name = "Black"
@@ -4094,9 +4094,9 @@ _data = {
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ccd1k"]
 radius = 0.6
 
-[node name="test_npc" type="CharacterBody3D" groups=["npcgroup"]]
+[node name="test_npc_hostile" type="CharacterBody3D" groups=["hostile", "npcgroup_targetable"]]
 collision_layer = 2
-script = ExtResource("1_lgkg5")
+script = ExtResource("1_qhdg4")
 
 [node name="RootNode" type="Node3D" parent="."]
 
