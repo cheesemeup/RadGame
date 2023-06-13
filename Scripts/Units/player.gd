@@ -18,7 +18,7 @@ var spells_base : Dictionary
 # targeting vars
 var space_state
 var unit_selectedtarget = null
-#var unit_target = null
+var unit_mouseover_target = null
 var interactables_in_range = []
 var current_interact_target = null
 
@@ -169,15 +169,18 @@ func targeting(result):
 ###################################################################################################
 # send combat event from action bar
 func send_combat_event(spellID):
-	var spell_target
-	# check if mouseover targeting a valid target
-	var result = targetray(get_viewport().get_mouse_position())
-	# check if target ray result has a collider, and check if collider is a valid result
-	if result.has("collider") and (result.collider.is_in_group("playergroup") or \
-		result.collider.is_in_group("npcgroup_targetable") or\
-		result.collider.is_in_group("hostilegroup_targetable")):
-			# set target to mouseover
-			spell_target = result.collider
+	var spell_target = null
+	var ray_result = null
+	# set target to either mouseovered unit frame or ray collider
+	if unit_mouseover_target != null:
+		spell_target = unit_mouseover_target
+	else:
+		ray_result = targetray(get_viewport().get_mouse_position())
+		# check if target ray result has a collider, and check if collider is a valid result
+		if ray_result.has("collider") and (ray_result.collider.is_in_group("playergroup") or \
+			ray_result.collider.is_in_group("npcgroup_targetable") or\
+			ray_result.collider.is_in_group("hostilegroup_targetable")):
+				spell_target = ray_result.collider
 	# check legality of mouseover target
 	if spell_target == null or not spell_target.is_in_group(spells_curr[spellID]["targetgroup"]):
 		# illegal mouseover target, set target to selected target

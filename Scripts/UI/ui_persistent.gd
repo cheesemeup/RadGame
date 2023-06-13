@@ -109,3 +109,13 @@ func _on_actionbar_1_11_pressed():
 func _on_actionbar_1_12_pressed():
 	Combat.combat_event(Autoload.player_reference.spells_curr[$actionbars/actionbar1/actionbar1_12.editor_description],\
 		Autoload.player_reference,Autoload.player_reference.unit_target)
+
+# mouseover targeting of frame
+func _on_playerframe_hpbar_mouse_entered():
+	Autoload.player_reference.unit_mouseover_target = Autoload.player_reference
+func _on_playerframe_hpbar_mouse_exited():
+	Autoload.player_reference.unit_mouseover_target = null
+func _on_playerframe_resbar_mouse_entered():
+	Autoload.player_reference.unit_mouseover_target = Autoload.player_reference
+func _on_playerframe_resbar_mouse_exited():
+	Autoload.player_reference.unit_mouseover_target = null

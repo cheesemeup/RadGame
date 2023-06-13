@@ -433,6 +433,12 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_2pl06")
 alignment = 0
 
+[connection signal="mouse_entered" from="playerframe" to="." method="_on_playerframe_mouse_entered"]
+[connection signal="mouse_exited" from="playerframe" to="." method="_on_playerframe_mouse_exited"]
+[connection signal="mouse_entered" from="playerframe/playerframe_hpbar" to="." method="_on_playerframe_hpbar_mouse_entered"]
+[connection signal="mouse_exited" from="playerframe/playerframe_hpbar" to="." method="_on_playerframe_hpbar_mouse_exited"]
+[connection signal="mouse_entered" from="playerframe/playerframe_resbar" to="." method="_on_playerframe_resbar_mouse_entered"]
+[connection signal="mouse_exited" from="playerframe/playerframe_resbar" to="." method="_on_playerframe_resbar_mouse_exited"]
 [connection signal="pressed" from="actionbars/actionbar1/actionbar1_1" to="." method="_on_actionbar_1_1_pressed"]
 [connection signal="pressed" from="actionbars/actionbar1/actionbar1_2" to="." method="_on_actionbar_1_2_pressed"]
 [connection signal="pressed" from="actionbars/actionbar1/actionbar1_3" to="." method="_on_actionbar_1_3_pressed"]
