@@ -1,26 +1,43 @@
 extends Node
 
-# preload auras
-var aura_tick = preload("res://Scenes/Auras/aura_tick.tscn")
-
-# test dict
-#var spell_db
-
-#func _ready():
-#	var file = "res://Data/db_spells.json"
-#	var spell_db_string = FileAccess.get_file_as_string(file)
-#	spell_db = JSON.parse_string(spell_db_string)
+# preload common auras
+var aura_general = preload("res://Scenes/Auras/aura_general.tscn")
 
 func combat_event(spell,source,target):
 	if target == null:
 		return
-	# error handling to be implemented
+	# check for avoidance if spell is avoidable
+	if spell["avoidable"]:
+		var avoid = check_avoidance(spell,target)
+		if avoid:
+			print("%s has avoided %s from %s."%[target.stats_curr["name"],spell["name"],source.stats_curr["name"]])
+			return
+	# check if crit, if crittable
+	var is_crit = false
+	if spell["can_crit"]:
+		is_crit = check_crit()
 	if spell["spelltype"] == "damage":
 		event_damage(spell,source,target)
 	elif spell["spelltype"] == "heal":
 		event_heal(spell,source,target)
 	elif spell["spelltype"] == "aura":
 		event_aura(spell,source,target)
+	
+func check_avoidance(spell,target):
+	var avoid = false
+	# get random number
+	var random = RandomNumberGenerator.new()
+	random.randomize()
+	var p = randf()
+	# check if below avoidance probability, set avoid to true if true
+	if p <= target.stats_curr["avoidance"]+spell["avoidance_modifier"]:
+		avoid = true
+	print(p,target.stats_curr["avoidance"])
+	return avoid
+	
+func check_crit():
+	var crit = false
+	return crit
 	
 func aura_tick_event(spell,source,target):
 	# this function handles aura ticks, as the structure differs from regular combat events
@@ -30,7 +47,6 @@ func aura_tick_event(spell,source,target):
 		event_heal(spell,source,target)
 	
 func event_damage(spell,source,target):
-	# check if avoided, hit, or crit
 	# calculate and apply damage
 	var value : int
 	if spell["valuetype"] == "absolute":
@@ -65,8 +81,13 @@ func event_heal(spell,source,target):
 		  spell["name"],value])
 	
 func event_aura(spell,source,target):
-	# this function applies aura scenes
-	var aura = aura_tick.instantiate()
-	target.add_child(aura)
+	# check if target already has same aura from same source active
+	var key_name = "%s %s"%[source.stats_curr["name"],spell["name"]]
+	if target.aura_dict.has(key_name):
+		# remove before reapplication
+		target.aura_dict[key_name]["node"].queue_free()
+		target.aura_dict.erase(key_name)
+	var aura = aura_general.instantiate()
+	target.get_node("auras").add_child(aura)
 	aura.initialize(spell,source,target)
 	print("%s applies %s to %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])

@@ -34,3 +34,5 @@ text = "Interact [E]"
 
 [node name="interactable" parent="." instance=ExtResource("2_gcbjf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="auras" type="Node" parent="."]

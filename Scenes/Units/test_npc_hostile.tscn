@@ -4240,3 +4240,5 @@ libraries = {
 [node name="test_npc_collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_ccd1k")
+
+[node name="auras" type="Node" parent="."]

@@ -24,6 +24,8 @@
 		"physical":1,
 		"magic":1,
 	},
+	"avoidance":0.1,
+	"crit_chance":0.1,
   },
   "1":{
 	"name":"default",
@@ -50,5 +52,7 @@
 		"physical":1,
 		"magic":1,
 	},
+	"avoidance":0.1,
+	"crit_chance":0.1,
   }
 }

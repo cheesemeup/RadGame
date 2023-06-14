@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwd7ol8erfsq7"]
-
-[ext_resource type="Script" path="res://Scripts/Auras/aura_tick.gd" id="1_trrty"]
-
-[node name="aura_general" type="Node"]
-script = ExtResource("1_trrty")

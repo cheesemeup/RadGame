@@ -5,10 +5,13 @@ var tick_timer = Timer.new()
 
 # Player Test DoT
 func initialize(spell,source,target):
-	# start timer with duration
-	duration(spell,source,target)
+	# set node name in parentparent script
+	target.aura_dict["%s %s"%[source.stats_curr["name"],spell["name"]]] = {"node":self}
 	# start tick timer
 	tick(spell,source,target)
+	# start timer with duration, if duration is finite
+	if spell["duration"] > 0:
+		duration(spell,source,target)
 
 func tick(spell,source,target):
 	# set up tick timer
@@ -31,5 +34,6 @@ func duration(spell,source,target):
 	exp_timer.start()
 
 func remove_aura(spell,source,target):
+	target.aura_dict.erase("%s %s"%[source.stats_curr["name"],spell["name"]])
 	print("%s's %s faded from %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
 	queue_free()

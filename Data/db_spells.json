@@ -4,14 +4,19 @@
 	"spelltype":"damage",
 	"damagetype":"physical",
 	"valuetype":"absolute",
-	"primary_modifier":1
+	"primary_modifier":1,
+	"avoidable":1,
+	"avoidance_modifier":0,
+	"can_crit":0,
   },
   "1":{
 	"name":"Signpost Heal",
 	"spelltype":"heal",
 	"healtype":"magic",
 	"valuetype":"absolute",
-	"primary_modifier":1
+	"primary_modifier":1,
+	"avoidable":0,
+	"can_crit":0,
   },
 "2":{
 	"name":"Test NPC Heal Self",
@@ -19,7 +24,9 @@
 	"healtype":"magic",
 	"valuetype":"relative",
 	"valuebase":"health_max",
-	"primary_modifier":1
+	"primary_modifier":1,
+	"avoidable":0,
+	"can_crit":0,
   },
 "3":{
 	"name":"Player Test Damage",
@@ -27,7 +34,11 @@
 	"spelltype":"damage",
 	"damagetype":"physical",
 	"valuetype":"absolute",
-	"primary_modifier":1.2
+	"primary_modifier":1.2,
+	"avoidable":0,
+	"can_crit":1,
+	"crit_chance_modifier":0,
+	"crit_damage_modifier":2,
   },
 "4":{
 	"name":"Test NPC Damage Self",
@@ -35,7 +46,9 @@
 	"damagetype":"magic",
 	"valuetype":"relative",
 	"valuebase":"health_max",
-	"primary_modifier":0.5
+	"primary_modifier":0.5,
+	"avoidable":0,
+	"can_crit":0,
   },
 "5":{
 	"name":"Player Test Heal",
@@ -43,7 +56,9 @@
 	"spelltype":"heal",
 	"healtype":"magic",
 	"valuetype":"absolute",
-	"primary_modifier":1.2
+	"primary_modifier":1.2,
+	"avoidable":0,
+	"can_crit":0,
   },
 "6":{
 	"name":"Player Test DoT",
@@ -54,7 +69,9 @@
 	"valuetype":"absolute",
 	"primary_modifier":0.2,
 	"duration":5,
-	"tick":1
+	"tick":1,
+	"avoidable":0,
+	"can_crit":0,
   },
 "7":{
 	"name":"Player Test HoT",
@@ -65,7 +82,9 @@
 	"valuetype":"absolute",
 	"primary_modifier":0.2,
 	"duration":5,
-	"tick":1
+	"tick":1,
+	"avoidable":0,
+	"can_crit":0,
   },
 "8":{
 	"name":"Player Test Buff",
@@ -75,7 +94,9 @@
 	"bufftype":"magic",
 	"valuetype":"relative",
 	"primary_modifier":0.1,
-	"duration":0
+	"duration":0,
+	"avoidable":0,
+	"can_crit":0,
   },
 "9":{
 	"name":"Player Test Debuff",
@@ -85,6 +106,8 @@
 	"debufftype":"magic",
 	"valuetype":"relative",
 	"primary_modifier":0.1,
-	"duration":0
+	"duration":0,
+	"avoidable":0,
+	"can_crit":0,
   },
 }

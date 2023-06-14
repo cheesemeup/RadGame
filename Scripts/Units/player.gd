@@ -14,6 +14,7 @@ var stats_base : Dictionary
 @export var stats_curr : Dictionary
 var spells_base : Dictionary
 @export var spells_curr : Dictionary
+var aura_dict : Dictionary
 
 # targeting vars
 var space_state

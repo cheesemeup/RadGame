@@ -23,6 +23,8 @@
 		"physical":1,
 		"magic":1,
 	},
+	"avoidance":0,
+	"crit_chance":0,
   },
   "1":{
 	"name":"Signpost Heal",
@@ -48,6 +50,8 @@
 		"physical":1,
 		"magic":1,
 	},
+	"avoidance":0,
+	"crit_chance":0,
   },
 "2":{
 	"name":"Test NPC hostile",
@@ -73,6 +77,8 @@
 		"physical":1,
 		"magic":1,
 	},
+	"avoidance":0,
+	"crit_chance":0,
   },
 "3":{
 	"name":"Test NPC friendly",
@@ -98,5 +104,7 @@
 		"physical":1,
 		"magic":1,
 	},
+	"avoidance":0,
+	"crit_chance":0,
   }
 }
