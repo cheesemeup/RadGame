@@ -66,7 +66,7 @@ func event_heal(spell,source,target):
 	
 func event_aura(spell,source,target):
 	# this function applies aura scenes
-	print("aura time",spell)
 	var aura = aura_tick.instantiate()
 	target.add_child(aura)
 	aura.initialize(spell,source,target)
+	print("%s applies %s to %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])

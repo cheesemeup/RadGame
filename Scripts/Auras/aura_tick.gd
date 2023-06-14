@@ -6,7 +6,7 @@ var tick_timer = Timer.new()
 # Player Test DoT
 func initialize(spell,source,target):
 	# start timer with duration
-	duration(spell)
+	duration(spell,source,target)
 	# start tick timer
 	tick(spell,source,target)
 
@@ -22,13 +22,14 @@ func tick_expires(spell,source,target):
 	# send combat event on tick
 	Combat.aura_tick_event(spell,source,target)
 
-func duration(spell):
+func duration(spell,source,target):
 	# start timer
 	exp_timer.one_shot = true
 	exp_timer.wait_time = float(spell["duration"])
-	exp_timer.connect("timeout",remove_aura)
+	exp_timer.connect("timeout",remove_aura.bind(spell,source,target))
 	add_child(exp_timer)
 	exp_timer.start()
 
-func remove_aura():
+func remove_aura(spell,source,target):
+	print("%s's %s faded from %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
 	queue_free()
