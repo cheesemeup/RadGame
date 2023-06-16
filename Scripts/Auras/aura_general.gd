@@ -21,9 +21,9 @@ func initialize_tick(spell,source,target):
 func initialize_buff(spell,source,target):
 	# set node name in parentparent script aura_dict
 	target.aura_dict[spell["name"]] = self
+	print(target.aura_dict)
 	# modify parentparent stat modifiers
 	for s in range(spell["modifies"].size()):
-		print(s)
 		var mod_stat = spell["modifies"][s] # the modified stat
 		if spell["modify_type"][s] == "mult":
 			target.stats_base["stat_mult"][mod_stat][spell["name"]] = \
@@ -31,8 +31,11 @@ func initialize_buff(spell,source,target):
 		if spell["modify_type"][s] == "add":
 			target.stats_base["stat_add"][mod_stat][spell["name"]] = \
 				spell["modify_values"][s]
-		# force stat calculation
-		Combat.stat_calculation(target)
+	# force stat calculation
+	Combat.stat_calculation(target)
+	# start timer with duration, if duration is finite
+	if spell["duration"] > 0:
+		duration(spell,source,target)
 
 func tick(spell,source,target):
 	# set up tick timer
@@ -67,12 +70,14 @@ func remove_aura(spell,source,target):
 		# remove from aura dict
 		target.aura_dict.erase(spell["name"])
 		# remove from stat_mult and stat_add
-		for stat in range(spell["modifies"].size()):
-			var mod_stat = spell["modifies"][stat] # the modified stat
-			if spell["modify_type"] == "mult":
-				target.stat_base["stat_mult"][mod_stat].erase([spell["name"]])
-			if spell["modify_type"] == "add":
-				target.stat_base["stat_add"][mod_stat].erase(spell["name"])
+		for s in range(spell["modifies"].size()):
+			var mod_stat = spell["modifies"][s] # the modified stat
+			if spell["modify_type"][s] == "mult":
+				target.stats_base["stat_mult"][mod_stat].erase([spell["name"]])
+			if spell["modify_type"][s] == "add":
+				target.stats_base["stat_add"][mod_stat].erase(spell["name"])
 		# force stat caclulation
 		Combat.stat_calculation(target)
-		pass
+		print("%s's %s faded from %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
+		print(target.aura_dict)
+		queue_free()
