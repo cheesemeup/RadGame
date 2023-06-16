@@ -81,13 +81,26 @@ func event_heal(spell,source,target):
 		  spell["name"],value])
 	
 func event_aura(spell,source,target):
-	# check if target already has same aura from same source active
-	var key_name = "%s %s"%[source.stats_curr["name"],spell["name"]]
-	if target.aura_dict.has(key_name):
-		# remove before reapplication
-		target.aura_dict[key_name]["node"].queue_free()
-		target.aura_dict.erase(key_name)
+	# check if target already has same aura from same source active for hot/dot
+	if spell["auratype"] == "damage" or spell["auratype"] == "heal":
+		var key_name = "%s %s"%[source.stats_curr["name"],spell["name"]]
+		if target.aura_dict.has(key_name):
+			# remove before reapplication
+			target.aura_dict[key_name].queue_free()
+			target.aura_dict.erase(key_name)
+	# source-agnostic for buff/debuff
+	if spell["auratype"] == "buff" or spell["auratype"] == "debuff":
+		var key_name = "%s"%[spell["name"]]
+		if target.aura_dict.has(key_name):
+			# remove before reapplication
+			target.aura_dict[key_name].queue_free()
+			target.aura_dict.erase(key_name)
 	var aura = aura_general.instantiate()
 	target.get_node("auras").add_child(aura)
 	aura.initialize(spell,source,target)
 	print("%s applies %s to %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
+	
+# calculating stats needs to go somewhere, but having it's own script seems excessive
+# so it goes here, because it is related to the application and removal of auras
+func stat_calculation(body):
+	pass

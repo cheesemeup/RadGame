@@ -11,9 +11,9 @@ const jump_velocity = 4.5
 
 # stats
 var stats_base : Dictionary
-@export var stats_curr : Dictionary
+var stats_curr : Dictionary
 var spells_base : Dictionary
-@export var spells_curr : Dictionary
+var spells_curr : Dictionary
 var aura_dict : Dictionary
 
 # targeting vars
@@ -57,6 +57,8 @@ func _ready():
 	spells_base["5"] = json_dict["5"]
 	spells_base["6"] = json_dict["6"]
 	spells_base["7"] = json_dict["7"]
+	spells_base["8"] = json_dict["8"]
+	spells_base["9"] = json_dict["9"]
 	spells_curr = spells_base
 
 func _input(event):

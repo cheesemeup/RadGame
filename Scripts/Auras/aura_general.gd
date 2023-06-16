@@ -1,20 +1,42 @@
 extends Node
 
 var exp_timer = Timer.new()
-var tick_timer = Timer.new()
 
 # Player Test DoT
 func initialize(spell,source,target):
-	# set node name in parentparent script
-	target.aura_dict["%s %s"%[source.stats_curr["name"],spell["name"]]] = {"node":self}
+	if spell["auratype"] == "damage" or spell["auratype"] == "heal":
+		initialize_tick(spell,source,target)
+	elif spell["auratype"] == "buff" or spell["auratype"] == "debuff":
+		initialize_buff(spell,source,target)
+
+func initialize_tick(spell,source,target):
+	# set node name in parentparent script aura_dict
+	target.aura_dict["%s %s"%[source.stats_curr["name"],spell["name"]]] = self
 	# start tick timer
 	tick(spell,source,target)
 	# start timer with duration, if duration is finite
 	if spell["duration"] > 0:
 		duration(spell,source,target)
 
+func initialize_buff(spell,source,target):
+	# set node name in parentparent script aura_dict
+	target.aura_dict[spell["name"]] = self
+	# modify parentparent stat modifiers
+	for s in range(spell["modifies"].size()):
+		print(s)
+		var mod_stat = spell["modifies"][s] # the modified stat
+		if spell["modify_type"][s] == "mult":
+			target.stats_base["stat_mult"][mod_stat][spell["name"]] = \
+				spell["modify_values"][s]
+		if spell["modify_type"][s] == "add":
+			target.stats_base["stat_add"][mod_stat][spell["name"]] = \
+				spell["modify_values"][s]
+		# force stat calculation
+		Combat.stat_calculation(target)
+
 func tick(spell,source,target):
 	# set up tick timer
+	var tick_timer = Timer.new()
 	tick_timer.one_shot = false
 	tick_timer.wait_time = float(spell["tick"])
 	tick_timer.connect("timeout",tick_expires.bind(spell,source,target))
@@ -34,6 +56,23 @@ func duration(spell,source,target):
 	exp_timer.start()
 
 func remove_aura(spell,source,target):
-	target.aura_dict.erase("%s %s"%[source.stats_curr["name"],spell["name"]])
-	print("%s's %s faded from %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
-	queue_free()
+	# if dot or hot
+	if spell["auratype"] == "damage" or spell["auratype"] == "heal":
+		# remove from aura dict and remove scene
+		target.aura_dict.erase("%s %s"%[source.stats_curr["name"],spell["name"]])
+		print("%s's %s faded from %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
+		queue_free()
+	# if buff or debuff
+	elif spell["auratype"] == "buff" or spell["auratype"] == "debuff":
+		# remove from aura dict
+		target.aura_dict.erase(spell["name"])
+		# remove from stat_mult and stat_add
+		for stat in range(spell["modifies"].size()):
+			var mod_stat = spell["modifies"][stat] # the modified stat
+			if spell["modify_type"] == "mult":
+				target.stat_base["stat_mult"][mod_stat].erase([spell["name"]])
+			if spell["modify_type"] == "add":
+				target.stat_base["stat_add"][mod_stat].erase(spell["name"])
+		# force stat caclulation
+		Combat.stat_calculation(target)
+		pass
