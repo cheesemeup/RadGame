@@ -1,7 +1,5 @@
 extends Node
 
-var exp_timer = Timer.new()
-
 # Player Test DoT
 func initialize(spell,source,target):
 	if spell["auratype"] == "damage" or spell["auratype"] == "heal":
@@ -21,18 +19,17 @@ func initialize_tick(spell,source,target):
 func initialize_buff(spell,source,target):
 	# set node name in parentparent script aura_dict
 	target.aura_dict[spell["name"]] = self
-	print(target.aura_dict)
 	# modify parentparent stat modifiers
 	for s in range(spell["modifies"].size()):
-		var mod_stat = spell["modifies"][s] # the modified stat
+		var statkey = spell["modifies"][s] # the modified stat
 		if spell["modify_type"][s] == "mult":
-			target.stats_base["stat_mult"][mod_stat][spell["name"]] = \
+			target.stats_base["stat_mult"][statkey][spell["name"]] = \
 				spell["modify_values"][s]
 		if spell["modify_type"][s] == "add":
-			target.stats_base["stat_add"][mod_stat][spell["name"]] = \
+			target.stats_base["stat_add"][statkey][spell["name"]] = \
 				spell["modify_values"][s]
-	# force stat calculation
-	Combat.stat_calculation(target)
+		# single stat calculation
+		Combat.single_stat_calculation(target,statkey)
 	# start timer with duration, if duration is finite
 	if spell["duration"] > 0:
 		duration(spell,source,target)
@@ -51,6 +48,7 @@ func tick_expires(spell,source,target):
 	Combat.aura_tick_event(spell,source,target)
 
 func duration(spell,source,target):
+	var exp_timer = Timer.new()
 	# start timer
 	exp_timer.one_shot = true
 	exp_timer.wait_time = float(spell["duration"])
@@ -71,13 +69,12 @@ func remove_aura(spell,source,target):
 		target.aura_dict.erase(spell["name"])
 		# remove from stat_mult and stat_add
 		for s in range(spell["modifies"].size()):
-			var mod_stat = spell["modifies"][s] # the modified stat
+			var statkey = spell["modifies"][s] # the modified stat
 			if spell["modify_type"][s] == "mult":
-				target.stats_base["stat_mult"][mod_stat].erase([spell["name"]])
+				target.stats_base["stat_mult"][statkey].erase(spell["name"])
 			if spell["modify_type"][s] == "add":
-				target.stats_base["stat_add"][mod_stat].erase(spell["name"])
-		# force stat caclulation
-		Combat.stat_calculation(target)
+				target.stats_base["stat_add"][statkey].erase(spell["name"])
+		# 	force stat caclulatio
+			Combat.single_stat_calculation(target,statkey)
 		print("%s's %s faded from %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
-		print(target.aura_dict)
 		queue_free()

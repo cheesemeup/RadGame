@@ -8,6 +8,8 @@
 	"resource_max":100,
 	"resource_current":100,
 	"primary":100,
+	"avoidance":0.1,
+	"crit_chance":0.1,
 	"damage_modifier":{
 		"physical":1,
 		"magic":1,
@@ -24,8 +26,6 @@
 		"physical":1,
 		"magic":1,
 	},
-	"avoidance":0.1,
-	"crit_chance":0.1,
 	"stat_mult":{
 		"health_max":{},
 		"resource_max":{},
@@ -41,8 +41,10 @@
 	},
 	"stat_add":{
 		"health_max":{},
-		"resource":{},
+		"resource_max":{},
 		"primary":{},
+		"avoidance":{},
+		"crit_chance":{},
 	},
 }
 }

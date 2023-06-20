@@ -50,7 +50,9 @@ func _ready():
 	var file = "res://Data/db_stats_player.json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	stats_base = json_dict["0"]
-	stats_curr = stats_base
+	stats_curr = stats_base.duplicate(true) # can't just assign regularly, since that only creates a new pointer to same dict
+	stats_curr.erase("stats_add") # remove modifiers, as they are only needed in base
+	stats_curr.erase("stats_mult")
 	file = "res://Data/db_spells.json"
 	json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	spells_base["3"] = json_dict["3"]
@@ -132,7 +134,6 @@ func _physics_process(delta):
 			Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Idle")
 		else:
 			Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
-
 	move_and_slide()
 
 # set player model
