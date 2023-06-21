@@ -15,11 +15,11 @@ func combat_event(spell,source,target):
 	# check if crit, if crittable
 	var is_crit = false
 	if spell["can_crit"]:
-		is_crit = check_crit()
+		is_crit = check_crit(spell,source)
 	if spell["spelltype"] == "damage":
-		event_damage(spell,source,target)
+		event_damage(spell,source,target,is_crit)
 	elif spell["spelltype"] == "heal":
-		event_heal(spell,source,target)
+		event_heal(spell,source,target,is_crit)
 	elif spell["spelltype"] == "aura":
 		event_aura(spell,source,target)
 	
@@ -34,48 +34,84 @@ func check_avoidance(spell,target):
 		avoid = true
 	return avoid
 	
-func check_crit():
-	var crit = false
-	return crit
+func check_crit(spell,source):
+	var is_crit = false
+	# get random number
+	var random = RandomNumberGenerator.new()
+	random.randomize()
+	var p = randf()
+	# check if below avoidance probability, set avoid to true if true
+	if p <= source.stats_curr["crit_chance"]+spell["crit_chance_modifier"]:
+		is_crit = true
+	return is_crit
 	
 func aura_tick_event(spell,source,target):
 	# this function handles aura ticks, as the structure differs from regular combat events
+	var is_crit = false
+	if spell["can_crit"]:
+		is_crit = check_crit(spell,source)
 	if spell["auratype"] == "damage":
-		event_damage(spell,source,target)
+		event_damage(spell,source,target,is_crit)
 	elif spell["auratype"] == "heal":
-		event_heal(spell,source,target)
+		event_heal(spell,source,target,is_crit)
 	
-func event_damage(spell,source,target):
+func event_damage(spell,source,target,is_crit):
 	# calculate and apply damage
 	var value : int
+	var crit_modifier : float =  1. 
+	if is_crit:
+		crit_modifier = crit_modifier + 1. + spell["crit_damage_modifier"]
 	if spell["valuetype"] == "absolute":
-		value = int(floor(source.stats_curr["primary"] * spell["primary_modifier"] * \
+		value = int(floor(\
+			source.stats_curr["primary"] * \
+			spell["primary_modifier"] * \
 			source.stats_curr["damage_modifier"][spell["damagetype"]] * \
-			target.stats_curr["defense_modifier"][spell["damagetype"]]))
+			target.stats_curr["defense_modifier"][spell["damagetype"]] * \
+			crit_modifier))
 	elif spell["valuetype"] == "relative":
-		value = int(floor(spell["primary_modifier"]*source.stats_curr[spell["valuebase"]] * \
+		value = int(floor(\
+			spell["primary_modifier"] * \
+			source.stats_curr[spell["valuebase"]] * \
 			source.stats_curr["damage_modifier"][spell["damagetype"]] * \
-			target.stats_curr["defense_modifier"][spell["damagetype"]]))
+			target.stats_curr["defense_modifier"][spell["damagetype"]] * \
+			crit_modifier))
 	target.stats_curr["health_current"] = max(target.stats_curr["health_current"]-value,0)
 	# write to log
-	print("%s hits %s with %s for %.f damage."%\
+	if is_crit:
+		print("%s hits %s with %s for %.f damage (critical)."%\
+		[source.stats_curr["name"],target.stats_curr["name"],\
+		  spell["name"],value])
+	else:
+		print("%s hits %s with %s for %.f damage."%\
 		[source.stats_curr["name"],target.stats_curr["name"],\
 		  spell["name"],value])
 	
-func event_heal(spell,source,target):
+func event_heal(spell,source,target,is_crit):
 	# calculate and apply healing
 	var value : int
+	var crit_modifier : float =  1. 
+	if is_crit:
+		crit_modifier = crit_modifier + 1. + spell["crit_heal_modifier"]
 	if spell["valuetype"] == "absolute":
-		value = int(floor(source.stats_curr["primary"] * spell["primary_modifier"] * \
+		value = int(floor(source.stats_curr["primary"] * \
+			spell["primary_modifier"] * \
 			source.stats_curr["heal_modifier"][spell["healtype"]] * \
-			target.stats_curr["heal_taken_modifier"][spell["healtype"]]))
+			target.stats_curr["heal_taken_modifier"][spell["healtype"]] * \
+			crit_modifier))
 	elif spell["valuetype"] == "relative":
-		value = int(floor(spell["primary_modifier"]*source.stats_curr[spell["valuebase"]] * \
+		value = int(floor(spell["primary_modifier"] * \
+			source.stats_curr[spell["valuebase"]] * \
 			source.stats_curr["heal_modifier"][spell["healtype"]] * \
-			target.stats_curr["heal_taken_modifier"][spell["healtype"]]))
+			target.stats_curr["heal_taken_modifier"][spell["healtype"]] * \
+			crit_modifier))
 	target.stats_curr["health_current"] = min(target.stats_curr["health_current"]+value,target.stats_curr["health_max"])
 	# write to log (or console for now)
-	print("%s heals %s with %s for %.f damage."%\
+	if is_crit:
+		print("%s heals %s with %s for %.f damage (critical)."%\
+		[source.stats_curr["name"],target.stats_curr["name"],\
+		  spell["name"],value])
+	else:
+		print("%s heals %s with %s for %.f damage."%\
 		[source.stats_curr["name"],target.stats_curr["name"],\
 		  spell["name"],value])
 	
@@ -109,8 +145,8 @@ func stat_calculation_full(body):
 
 # change single stat when buff or debuff is applied
 func single_stat_calculation(body,statkey):
-	var stat_add = 0
-	var stat_mult = 1
+	var stat_add : int = 0
+	var stat_mult : float = 1.
 	# get additive and multiplicative modifiers
 	if body.stats_base["stat_add"].has(statkey):
 		for value in body.stats_base["stat_add"][statkey].keys():

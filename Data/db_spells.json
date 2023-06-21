@@ -38,7 +38,7 @@
 	"avoidable":0,
 	"can_crit":1,
 	"crit_chance_modifier":0,
-	"crit_damage_modifier":2,
+	"crit_damage_modifier":0,
   },
 "4":{
 	"name":"Test NPC Damage Self",
@@ -58,7 +58,9 @@
 	"valuetype":"absolute",
 	"primary_modifier":1.2,
 	"avoidable":0,
-	"can_crit":0,
+	"can_crit":1,
+	"crit_chance_modifier":0,
+	"crit_heal_modifier":0,
   },
 "6":{
 	"name":"Player Test DoT",
