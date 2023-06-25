@@ -28,14 +28,12 @@ func start_hosting():
 	var map_instance = new_map_load.instantiate()
 	Autoload.current_map_reference = map_instance
 	add_child(map_instance)
-	$ui.load_persistent()
 
 func start_joining(server):
 	multiplayer.multiplayer_peer = null
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(server, PORT)
 	multiplayer.multiplayer_peer = peer
-	$ui.load_persistent()
 
 func spawn_player(peer_id: int):
 	if not multiplayer.is_server():

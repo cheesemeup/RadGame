@@ -1,8 +1,9 @@
 extends Control
 
 func _ready():
-	playerframe_initialize()
-	actionbars_initialize()
+#	playerframe_initialize()
+#	actionbars_initialize()
+	pass
 
 func _process(_delta):
 	# update player frame

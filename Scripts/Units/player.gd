@@ -62,6 +62,10 @@ func _ready():
 	spells_base["8"] = json_dict["8"]
 	spells_base["9"] = json_dict["9"]
 	spells_curr = spells_base
+	# load persistent ui features
+	Autoload.player_ui_main_reference.load_persistent()
+	Autoload.player_ui_main_reference.get_node("ui_persistent").playerframe_initialize()
+	Autoload.player_ui_main_reference.get_node("ui_persistent").actionbars_initialize()
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
@@ -71,8 +75,6 @@ func _input(event):
 	if event.is_action_pressed("interact"):
 		if current_interact_target != null:
 			current_interact_target.interaction(self)
-		
-
 
 func _unhandled_input(event):
 	#targeting
