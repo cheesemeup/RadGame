@@ -173,6 +173,13 @@ func targeting(result):
 		Autoload.player_ui_main_reference.targetframe_remove()
 
 ###################################################################################################
+# start spell use from action bar
+func start_spell_use(spellID):
+	# check if spell can be sent directly to combat script, or if it needs to load a scene
+	if spells_curr[spellID]["complexity"] == 0:
+		send_combat_event(spellID)
+	pass
+
 # send combat event from action bar
 func send_combat_event(spellID):
 	var spell_target = null

@@ -73,54 +73,56 @@ func actionbars_initialize():
 
 
 # action bars
+# using the editor descriptor to assign spells is a really fucking stupid workaround
+# but it works, so I won't immediately look for a better solution
 func _on_actionbar_1_1_pressed():
 	if $actionbars/actionbar1/actionbar1_1.editor_description == "none":
 		return
-	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_1.editor_description)
+	Autoload.player_reference.start_spell_use($actionbars/actionbar1/actionbar1_1.editor_description)
 func _on_actionbar_1_2_pressed():
 	if $actionbars/actionbar1/actionbar1_2.editor_description == "none":
 		return
-	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_2.editor_description)
+	Autoload.player_reference.start_spell_use($actionbars/actionbar1/actionbar1_2.editor_description)
 func _on_actionbar_1_3_pressed():
 	if $actionbars/actionbar1/actionbar1_3.editor_description == "none":
 		return
-	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_3.editor_description)
+	Autoload.player_reference.start_spell_use($actionbars/actionbar1/actionbar1_3.editor_description)
 func _on_actionbar_1_4_pressed():
 	if $actionbars/actionbar1/actionbar1_4.editor_description == "none":
 		return
-	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_4.editor_description)
+	Autoload.player_reference.start_spell_use($actionbars/actionbar1/actionbar1_4.editor_description)
 func _on_actionbar_1_5_pressed():
 	if $actionbars/actionbar1/actionbar1_5.editor_description == "none":
 		return
-	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_5.editor_description)
+	Autoload.player_reference.start_spell_use($actionbars/actionbar1/actionbar1_5.editor_description)
 func _on_actionbar_1_6_pressed():
 	if $actionbars/actionbar1/actionbar1_6.editor_description == "none":
 		return
-	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_6.editor_description)
+	Autoload.player_reference.start_spell_use($actionbars/actionbar1/actionbar1_6.editor_description)
 func _on_actionbar_1_7_pressed():
 	if $actionbars/actionbar1/actionbar1_7.editor_description == "none":
 		return
-	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_7.editor_description)
+	Autoload.player_reference.start_spell_use($actionbars/actionbar1/actionbar1_7.editor_description)
 func _on_actionbar_1_8_pressed():
 	if $actionbars/actionbar1/actionbar1_8.editor_description == "none":
 		return
-	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_8.editor_description)
+	Autoload.player_reference.start_spell_use($actionbars/actionbar1/actionbar1_8.editor_description)
 func _on_actionbar_1_9_pressed():
 	if $actionbars/actionbar1/actionbar1_9.editor_description == "none":
 		return
-	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar_9.editor_description)
+	Autoload.player_reference.start_spell_use($actionbars/actionbar1/actionbar_9.editor_description)
 func _on_actionbar_1_10_pressed():
 	if $actionbars/actionbar1/actionbar1_10.editor_description == "none":
 		return
-	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_10.editor_description)
+	Autoload.player_reference.start_spell_use($actionbars/actionbar1/actionbar1_10.editor_description)
 func _on_actionbar_1_11_pressed():
 	if $actionbars/actionbar1/actionbar1_11.editor_description == "none":
 		return
-	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_11.editor_description)
+	Autoload.player_reference.start_spell_use($actionbars/actionbar1/actionbar1_11.editor_description)
 func _on_actionbar_1_12_pressed():
 	if $actionbars/actionbar1/actionbar1_12.editor_description == "none":
 		return
-	Autoload.player_reference.send_combat_event($actionbars/actionbar1/actionbar1_12.editor_description)
+	Autoload.player_reference.start_spell_use($actionbars/actionbar1/actionbar1_12.editor_description)
 
 # mouseover targeting of frame
 func _on_playerframe_hpbar_mouse_entered():
