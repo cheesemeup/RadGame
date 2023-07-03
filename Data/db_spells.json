@@ -1,6 +1,7 @@
 {
   "0":{
 	"name":"Signpost Damage",
+	"complexity":0,
 	"spelltype":"damage",
 	"damagetype":"physical",
 	"valuetype":"absolute",
@@ -11,6 +12,7 @@
   },
   "1":{
 	"name":"Signpost Heal",
+	"complexity":0,
 	"spelltype":"heal",
 	"healtype":"magic",
 	"valuetype":"absolute",
@@ -20,6 +22,7 @@
   },
 "2":{
 	"name":"Test NPC Heal Self",
+	"complexity":0,
 	"spelltype":"heal",
 	"healtype":"magic",
 	"valuetype":"relative",
@@ -30,6 +33,7 @@
   },
 "3":{
 	"name":"Player Test Damage",
+	"complexity":0,
 	"targetgroup":"hostile",
 	"spelltype":"damage",
 	"damagetype":"physical",
@@ -42,6 +46,7 @@
   },
 "4":{
 	"name":"Test NPC Damage Self",
+	"complexity":0,
 	"spelltype":"damage",
 	"damagetype":"magic",
 	"valuetype":"relative",
@@ -52,6 +57,7 @@
   },
 "5":{
 	"name":"Player Test Heal",
+	"complexity":0,
 	"targetgroup":"friendly",
 	"spelltype":"heal",
 	"healtype":"magic",
@@ -64,6 +70,7 @@
   },
 "6":{
 	"name":"Player Test DoT",
+	"complexity":0,
 	"targetgroup":"hostile",
 	"spelltype":"aura",
 	"auratype":"damage",
@@ -77,6 +84,7 @@
   },
 "7":{
 	"name":"Player Test HoT",
+	"complexity":0,
 	"targetgroup":"friendly",
 	"spelltype":"aura",
 	"auratype":"heal",
@@ -90,6 +98,7 @@
   },
 "8":{
 	"name":"Player Test Buff",
+	"complexity":0,
 	"targetgroup":"friendly",
 	"spelltype":"aura",
 	"auratype":"buff",
@@ -104,6 +113,7 @@
   },
 "9":{
 	"name":"Player Test Debuff",
+	"complexity":0,
 	"targetgroup":"friendly",
 	"spelltype":"aura",
 	"auratype":"debuff",
