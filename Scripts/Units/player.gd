@@ -66,6 +66,10 @@ func _ready():
 	Autoload.player_ui_main_reference.load_persistent()
 	Autoload.player_ui_main_reference.get_node("ui_persistent").playerframe_initialize()
 	Autoload.player_ui_main_reference.get_node("ui_persistent").actionbars_initialize()
+	# load spell scenes
+	for spellid in stats_base["spell list"]:
+		print("res://Scenes/Spells/spell_"+spellid+".tscn")
+		$spells.add_child(load("res://Scenes/Spells/spell_"+spellid+".tscn").instantiate())
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
