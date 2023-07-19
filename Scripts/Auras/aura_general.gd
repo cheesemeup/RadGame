@@ -1,6 +1,6 @@
 extends Node
 
-# Player Test DoT
+# general aura scene for dots, hots, buffs and debuffs
 func initialize(spell,source,target):
 	if spell["auratype"] == "damage" or spell["auratype"] == "heal":
 		initialize_tick(spell,source,target)
@@ -74,7 +74,7 @@ func remove_aura(spell,source,target):
 				target.stats_base["stat_mult"][statkey].erase(spell["name"])
 			if spell["modify_type"][s] == "add":
 				target.stats_base["stat_add"][statkey].erase(spell["name"])
-		# 	force stat caclulatio
+		# 	force stat caclulation
 			Combat.single_stat_calculation(target,statkey)
 		print("%s's %s faded from %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
 		queue_free()

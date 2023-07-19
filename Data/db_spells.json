@@ -114,7 +114,7 @@
 "9":{
 	"name":"Player Test Debuff",
 	"complexity":0,
-	"targetgroup":"friendly",
+	"targetgroup":"hostile",
 	"spelltype":"aura",
 	"auratype":"debuff",
 	"debufftype":"magic",

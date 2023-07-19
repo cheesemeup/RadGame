@@ -12,8 +12,6 @@ const jump_velocity = 4.5
 # stats
 var stats_base : Dictionary
 var stats_curr : Dictionary
-var spells_base : Dictionary
-var spells_curr : Dictionary
 var aura_dict : Dictionary
 
 # targeting vars
@@ -53,22 +51,12 @@ func _ready():
 	stats_curr = stats_base.duplicate(true) # can't just assign regularly, since that only creates a new pointer to same dict
 	stats_curr.erase("stats_add") # remove modifiers, as they are only needed in base
 	stats_curr.erase("stats_mult")
-	file = "res://Data/db_spells.json"
-	json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
-	spells_base["3"] = json_dict["3"]
-	spells_base["5"] = json_dict["5"]
-	spells_base["6"] = json_dict["6"]
-	spells_base["7"] = json_dict["7"]
-	spells_base["8"] = json_dict["8"]
-	spells_base["9"] = json_dict["9"]
-	spells_curr = spells_base
 	# load persistent ui features
 	Autoload.player_ui_main_reference.load_persistent()
 	Autoload.player_ui_main_reference.get_node("ui_persistent").playerframe_initialize()
 	Autoload.player_ui_main_reference.get_node("ui_persistent").actionbars_initialize()
 	# load spell scenes
-	for spellid in stats_base["spell list"]:
-		$spells.add_child(load("res://Scenes/Spells/spell_"+spellid+".tscn").instantiate())
+	load_spell_scenes()
 	# a bit of hackyhack to test spells, assignment will implemented later
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_1 = $spells.get_node("spell_3")
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_2 = $spells.get_node("spell_5")
@@ -185,14 +173,12 @@ func targeting(result):
 		Autoload.player_ui_main_reference.targetframe_remove()
 
 ###################################################################################################
-# start spell use from action bar
-func start_spell_use(spellID):
-	# check if spell can be sent directly to combat script, or if it needs to load a scene
-	if spells_curr[spellID]["complexity"] == 0:
-		send_combat_event(spellID)
-	pass
-
-# send combat event from action bar
+# set up spells
+func load_spell_scenes():
+	for spellid in stats_base["spell list"]:
+		$spells.add_child(load("res://Scenes/Spells/spell_"+spellid+".tscn").instantiate())
+###################################################################################################
+# check target and send combat event from action bar
 func send_combat_event(spell):
 	var spell_target = null
 	var ray_result = null
