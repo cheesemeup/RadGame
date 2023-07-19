@@ -68,8 +68,9 @@ func _ready():
 	Autoload.player_ui_main_reference.get_node("ui_persistent").actionbars_initialize()
 	# load spell scenes
 	for spellid in stats_base["spell list"]:
-		print("res://Scenes/Spells/spell_"+spellid+".tscn")
 		$spells.add_child(load("res://Scenes/Spells/spell_"+spellid+".tscn").instantiate())
+	# a bit of hackyhack to test spells, assignment will implemented later
+	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_1 = $spells.get_node("spell_3")
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
@@ -187,7 +188,7 @@ func start_spell_use(spellID):
 	pass
 
 # send combat event from action bar
-func send_combat_event(spellID):
+func send_combat_event(spell):
 	var spell_target = null
 	var ray_result = null
 	# set target to either mouseovered unit frame or ray collider
@@ -201,12 +202,12 @@ func send_combat_event(spellID):
 			ray_result.collider.is_in_group("hostilegroup_targetable")):
 				spell_target = ray_result.collider
 	# check legality of mouseover target
-	if spell_target == null or not spell_target.is_in_group(spells_curr[spellID]["targetgroup"]):
+	if spell_target == null or not spell_target.is_in_group(spell["targetgroup"]):
 		# illegal mouseover target, set target to selected target
 		spell_target = unit_selectedtarget
 		# check legality of selected target
-		if spell_target == null or not spell_target.is_in_group(spells_curr[spellID]["targetgroup"]):
+		if spell_target == null or not spell_target.is_in_group(spell["targetgroup"]):
 			# illegal selected target as well, cannot use spell, so return
 			return
 	# legal target found, either from mouseover or selected, so send combat event
-	Combat.combat_event(spells_curr[spellID],self,spell_target)
+	Combat.combat_event(spell,self,spell_target)

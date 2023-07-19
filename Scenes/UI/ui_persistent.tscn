@@ -1,7 +1,8 @@
-[gd_scene load_steps=54 format=3 uid="uid://cq3h183hap1oa"]
+[gd_scene load_steps=55 format=3 uid="uid://cq3h183hap1oa"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ui_persistent.gd" id="1_6vwfj"]
 [ext_resource type="PackedScene" uid="uid://cmbcuptfuq5bs" path="res://Scenes/UI/party_frame.tscn" id="2_vqwiw"]
+[ext_resource type="Script" path="res://Scenes/UI/actionbar1.gd" id="3_jc1yw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fttgf"]
 bg_color = Color(0, 0, 0, 1)
@@ -279,6 +280,7 @@ offset_top = 770.0
 offset_right = 710.0
 offset_bottom = 820.0
 theme_override_constants/separation = 0
+script = ExtResource("3_jc1yw")
 
 [node name="actionbar1_1" type="Button" parent="actionbars/actionbar1"]
 editor_description = "3"
@@ -450,7 +452,7 @@ alignment = 0
 [connection signal="mouse_exited" from="playerframe/playerframe_hpbar" to="." method="_on_playerframe_hpbar_mouse_exited"]
 [connection signal="mouse_entered" from="playerframe/playerframe_resbar" to="." method="_on_playerframe_resbar_mouse_entered"]
 [connection signal="mouse_exited" from="playerframe/playerframe_resbar" to="." method="_on_playerframe_resbar_mouse_exited"]
-[connection signal="pressed" from="actionbars/actionbar1/actionbar1_1" to="." method="_on_actionbar_1_1_pressed"]
+[connection signal="pressed" from="actionbars/actionbar1/actionbar1_1" to="actionbars/actionbar1" method="_on_actionbar_1_1_pressed"]
 [connection signal="pressed" from="actionbars/actionbar1/actionbar1_2" to="." method="_on_actionbar_1_2_pressed"]
 [connection signal="pressed" from="actionbars/actionbar1/actionbar1_3" to="." method="_on_actionbar_1_3_pressed"]
 [connection signal="pressed" from="actionbars/actionbar1/actionbar1_4" to="." method="_on_actionbar_1_4_pressed"]

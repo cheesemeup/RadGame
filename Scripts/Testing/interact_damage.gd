@@ -18,7 +18,6 @@ func _ready():
 	spells_curr = spells_base
 
 func interaction(body):
-	print("interacted with interact_damage sign")
 	Combat.combat_event(spells_curr["0"],self,body)
 
 func calculate_stats():

@@ -18,5 +18,4 @@ func _ready():
 	spells_curr = spells_base
 
 func interaction(body):
-	print("interacted with interact_heal sign")
 	Combat.combat_event(spells_curr["0"],self,body)
