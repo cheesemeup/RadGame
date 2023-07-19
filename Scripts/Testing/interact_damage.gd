@@ -11,11 +11,11 @@ func _ready():
 	var file = "res://Data/db_stats.json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	stats_base = json_dict["0"]
-	stats_curr = stats_base
+	stats_curr = json_dict["0"]
 	file = "res://Data/db_spells.json"
 	json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	spells_base["0"] = json_dict["0"]
-	spells_curr = spells_base
+	spells_curr["0"] = json_dict["0"]
 
 func interaction(body):
 	Combat.combat_event(spells_curr["0"],self,body)

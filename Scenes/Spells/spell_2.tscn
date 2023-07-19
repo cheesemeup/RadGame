@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://dv7p068nkrsux"]
+[gd_scene load_steps=2 format=3 uid="uid://dv7p068nkrsux"]
+
+[ext_resource type="Script" path="res://Scripts/Spells/spell_2.gd" id="1_iv3ku"]
 
 [node name="spell_2" type="Node"]
+script = ExtResource("1_iv3ku")
