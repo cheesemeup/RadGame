@@ -75,6 +75,7 @@ func event_damage(spell,source,target,is_crit):
 			source.stats_curr["damage_modifier"][spell["damagetype"]] * \
 			target.stats_curr["defense_modifier"][spell["damagetype"]] * \
 			crit_modifier))
+	# check for absorb
 	target.stats_curr["health_current"] = max(target.stats_curr["health_current"]-value,0)
 	# write to log
 	if is_crit:
@@ -132,7 +133,14 @@ func event_aura(spell,source,target):
 	target.get_node("auras").add_child(aura)
 	aura.initialize(spell,source,target)
 	print("%s applies %s to %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
-	
+
+func apply_damage(value,source,target,is_crit):
+	# check for absorbs
+	# deal damage to absorbs with shortest remaining duration
+	pass
+
+### stat calculations
+###################################################################################################
 # calculate all stats when changing class or talents, should only be done outside of combat
 func stat_calculation_full(body):
 	# loop through all stats
