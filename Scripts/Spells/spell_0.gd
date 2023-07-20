@@ -1,5 +1,7 @@
 extends Node
 
+# NOT FUNCTIONAL
+
 # Signpost Damage
 var spell_base : Dictionary
 var spell_curr : Dictionary

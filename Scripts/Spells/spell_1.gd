@@ -1,5 +1,7 @@
 extends Node
 
+# NOT FUNCTIONAL
+
 # Signpost Heal
 var spell_base : Dictionary
 var spell_curr : Dictionary

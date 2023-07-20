@@ -57,7 +57,7 @@ func _ready():
 	Autoload.player_ui_main_reference.get_node("ui_persistent").actionbars_initialize()
 	# load spell scenes
 	load_spell_scenes()
-	# a bit of hackyhack to test spells, assignment will implemented later
+	# a bit of hackyhackfraudyfraud to test spells, assignment will implemented later
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_1 = $spells.get_node("spell_3")
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_2 = $spells.get_node("spell_5")
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_3 = $spells.get_node("spell_6")
@@ -156,7 +156,7 @@ func targetray(eventposition):
 	var result = space_state.intersect_ray(query)
 	return result
 	
-func targeting(result):
+func targeting(result) -> void:
 	# unset target and return if no collider is hit (like when clicking the sky)
 	if not result.has("collider"):
 		unit_selectedtarget = null
@@ -171,15 +171,39 @@ func targeting(result):
 	else:
 		unit_selectedtarget = null
 		Autoload.player_ui_main_reference.targetframe_remove()
-
 ###################################################################################################
 # set up spells
-func load_spell_scenes():
+func load_spell_scenes() -> void:
 	for spellid in stats_base["spell list"]:
 		$spells.add_child(load("res://Scenes/Spells/spell_"+spellid+".tscn").instantiate())
 ###################################################################################################
+# get spell target
+func get_spell_target(spell):
+	var spell_target = null
+	var ray_result = null
+	# set target to either mouseovered unit frame or ray collider
+	if unit_mouseover_target != null:
+		spell_target = unit_mouseover_target
+	else:
+		ray_result = targetray(get_viewport().get_mouse_position())
+		# check if target ray result has a collider, and check if collider is a valid result
+		if ray_result.has("collider") and (ray_result.collider.is_in_group("playergroup") or \
+			ray_result.collider.is_in_group("npcgroup_targetable") or\
+			ray_result.collider.is_in_group("hostilegroup_targetable")):
+				spell_target = ray_result.collider
+	# check legality of mouseover target
+	if spell_target == null or not spell_target.is_in_group(spell["targetgroup"]):
+		# illegal mouseover target, set target to selected target
+		spell_target = unit_selectedtarget
+		# check legality of selected target
+		if spell_target == null or not spell_target.is_in_group(spell["targetgroup"]):
+			# illegal selected target as well, cannot use spell, so return
+			return "no_legal_target"
+	# return legal target
+	return spell_target
+
 # check target and send combat event from action bar
-func send_combat_event(spell):
+func send_combat_event(spell) -> void:
 	var spell_target = null
 	var ray_result = null
 	# set target to either mouseovered unit frame or ray collider

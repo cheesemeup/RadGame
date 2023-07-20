@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dempeiar8tjic"]
+[gd_scene load_steps=6 format=3 uid="uid://dempeiar8tjic"]
 
 [ext_resource type="Script" path="res://Scripts/Units/player.gd" id="1_longq"]
 [ext_resource type="Script" path="res://Scripts/Units/player_camera.gd" id="2_43v2b"]
+[ext_resource type="Script" path="res://Scripts/Units/spell_container.gd" id="3_fg0ci"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_16yd3"]
 radius = 0.6
@@ -35,6 +36,7 @@ spring_length = 10.0
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3, 5)
 
 [node name="spells" type="Node" parent="."]
+script = ExtResource("3_fg0ci")
 
 [node name="auras" type="Node" parent="."]
 

@@ -1,5 +1,7 @@
 extends Node
 
+# NOT FUNCTIONAL
+
 #Test NPC Heal Self
 var spell_base : Dictionary
 var spell_curr : Dictionary
