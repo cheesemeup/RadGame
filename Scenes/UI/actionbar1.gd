@@ -19,9 +19,11 @@ func assign_actionbar1_1():
 	var image = Image.load_from_file(imagepath)
 	var texture = ImageTexture.create_from_image(image)
 	$actionbar1_1.icon = texture
-#	$actionbar1_1.icon.resource_path = "res://Assets/Spell_Icons/fingersoffrost.png"
-#	print($actionbar1_1.icon.resource_path)
-	print("path set")
+func assign_actionbar1_2():
+	var imagepath = str("res://Assets/Spell_Icons/abyssalshell.png")
+	var image = Image.load_from_file(imagepath)
+	var texture = ImageTexture.create_from_image(image)
+	$actionbar1_2.icon = texture
 
 # triggering spells with action bar presses
 func _on_actionbar_1_1_pressed():

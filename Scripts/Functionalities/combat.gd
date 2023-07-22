@@ -76,17 +76,8 @@ func event_damage(spell,source,target,is_crit):
 			source.stats_curr["damage_modifier"][spell["damagetype"]] * \
 			target.stats_curr["defense_modifier"][spell["damagetype"]] * \
 			crit_modifier))
-	# check for absorb
-	target.stats_curr["health_current"] = max(target.stats_curr["health_current"]-value,0)
-	# write to log
-	if is_crit:
-		print("%s hits %s with %s for %.f damage (critical)."%\
-		[source.stats_curr["name"],target.stats_curr["name"],\
-		  spell["name"],value])
-	else:
-		print("%s hits %s with %s for %.f damage."%\
-		[source.stats_curr["name"],target.stats_curr["name"],\
-		  spell["name"],value])
+	# deal damage through absorbs
+	apply_damage(spell,value,source,target,is_crit)
 	return value
 	
 func event_heal(spell,source,target,is_crit):
@@ -136,10 +127,55 @@ func event_aura(spell,source,target):
 	aura.initialize(spell,source,target)
 	print("%s applies %s to %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
 
-func apply_damage(value,source,target,is_crit):
+func apply_damage(spell,value,source,target,is_crit):
 	# check for absorbs
-	# deal damage to absorbs with shortest remaining duration
-	pass
+	for absorb in target.get_node("absorbs").get_children():
+		# if shield fully absorbs hit without being depleted
+		if value < absorb.absorb_value:
+			absorb.absorb_value -= value
+			if is_crit:
+				print("%s absorbs %s of %s with %s for %.f damage (critical)."%\
+				[target.stats_curr["name"],spell["name"],\
+				source.stats_curr["name"],absorb.name,value])
+			else:
+				print("%s absorbs %s of %s with %s for %.f damage."%\
+				[target.stats_curr["name"],spell["name"],\
+				source.stats_curr["name"],absorb.name,value])
+			return
+		# if shield fully absorbs hit and is depleted
+		elif value == absorb.absorb_value:
+			absorb.queue_free()
+			if is_crit:
+				print("%s absorbs %s of %s with %s for %.f damage (critical)."%\
+				[target.stats_curr["name"],spell["name"],\
+				source.stats_curr["name"],absorb.name,value])
+			else:
+				print("%s absorbs %s of %s with %s for %.f damage."%\
+				[target.stats_curr["name"],spell["name"],\
+				source.stats_curr["name"],absorb.name,value])
+			return
+		# if hit value is larger than absorb value, reduce remaining value and remove absorb node
+		elif value > absorb.absorb_value:
+			value -= absorb.absorb_value
+			absorb.queue_free()
+			if is_crit:
+				print("%s absorbs %s of %s with %s for %.f damage (critical)."%\
+				[target.stats_curr["name"],spell["name"],\
+				source.stats_curr["name"],absorb.name,value])
+			else:
+				print("%s absorbs %s of %s with %s for %.f damage."%\
+				[target.stats_curr["name"],spell["name"],\
+				source.stats_curr["name"],absorb.name,value])
+	# deal unabsorbed damage
+	target.stats_curr["health_current"] = max(target.stats_curr["health_current"]-value,0)
+	if is_crit:
+		print("%s hits %s with %s for %.f damage (critical)."%\
+		[source.stats_curr["name"],target.stats_curr["name"],\
+		  spell["name"],value])
+	else:
+		print("%s hits %s with %s for %.f damage."%\
+		[source.stats_curr["name"],target.stats_curr["name"],\
+		  spell["name"],value])
 
 ### stat calculations
 ###################################################################################################

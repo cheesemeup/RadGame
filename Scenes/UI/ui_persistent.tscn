@@ -297,6 +297,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_l2u6r")
 alignment = 0
+expand_icon = true
 
 [node name="actionbar1_3" type="Button" parent="actionbars/actionbar1"]
 editor_description = "6"

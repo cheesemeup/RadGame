@@ -40,6 +40,8 @@ script = ExtResource("3_fg0ci")
 
 [node name="auras" type="Node" parent="."]
 
+[node name="absorbs" type="Node" parent="."]
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Scenes/Units/knight_scene.tscn")
 spawn_path = NodePath("../pivot")

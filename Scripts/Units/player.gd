@@ -60,6 +60,8 @@ func _ready():
 	# a bit of hackyhackfraudyfraud to test spells, assignment will implemented later
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_1 = $spells.get_node("spell_10")
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").assign_actionbar1_1()
+	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_2 = $spells.get_node("spell_11")
+	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").assign_actionbar1_2()
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
