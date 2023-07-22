@@ -17,7 +17,8 @@ func combat_event(spell,source,target):
 	if spell["can_crit"]:
 		is_crit = check_crit(spell,source)
 	if spell["spelltype"] == "damage":
-		event_damage(spell,source,target,is_crit)
+		var value = event_damage(spell,source,target,is_crit)
+		return value
 	elif spell["spelltype"] == "heal":
 		event_heal(spell,source,target,is_crit)
 	elif spell["spelltype"] == "aura":
@@ -86,6 +87,7 @@ func event_damage(spell,source,target,is_crit):
 		print("%s hits %s with %s for %.f damage."%\
 		[source.stats_curr["name"],target.stats_curr["name"],\
 		  spell["name"],value])
+	return value
 	
 func event_heal(spell,source,target,is_crit):
 	# calculate and apply healing

@@ -148,9 +148,11 @@
   },
 "10":{
 	"name":"Fingers of Frost",
-	"resource_cost":20,
+	"icon":"fingersoffrost",
+	"resource_cost":-2,
 	"cooldown":0,
 	"on_gcd":1,
+	"range":4,
 	"targetgroup":"hostile",
 	"spelltype":"damage",
 	"damagetype":"magic",

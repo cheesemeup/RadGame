@@ -58,12 +58,8 @@ func _ready():
 	# load spell scenes
 	load_spell_scenes()
 	# a bit of hackyhackfraudyfraud to test spells, assignment will implemented later
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_1 = $spells.get_node("spell_3")
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_2 = $spells.get_node("spell_5")
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_3 = $spells.get_node("spell_6")
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_4 = $spells.get_node("spell_7")
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_5 = $spells.get_node("spell_8")
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_6 = $spells.get_node("spell_9")
+	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_1 = $spells.get_node("spell_10")
+	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").assign_actionbar1_1()
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
@@ -81,7 +77,10 @@ func _unhandled_input(event):
 		var result = targetray(event.position)
 		targeting(result)
 
-func _process(_delta):
+func _process(delta):
+	# resource regen
+	if stats_curr["resource_regen"] != 0:
+		stats_curr["resource_current"] = max(min(stats_curr["resource_current"]+stats_curr["resource_regen"]*delta,stats_curr["resource_max"]),0)
 	# interaction target sorting
 	if interactables_in_range.size() > 0:
 		var distance = 10000.

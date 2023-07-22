@@ -288,6 +288,8 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_wghh6")
 alignment = 0
+icon_alignment = 1
+expand_icon = true
 
 [node name="actionbar1_2" type="Button" parent="actionbars/actionbar1"]
 editor_description = "5"
