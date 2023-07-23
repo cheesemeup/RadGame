@@ -6,6 +6,8 @@ var spell_curr : Dictionary
 var cd_timer = Timer.new()
 var on_cd = false
 
+var aura_absorb = preload("res://Scenes/Auras/aura_absorb.tscn")
+
 func _ready():
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://Data/db_spells.json"))
 	spell_base = json_dict["11"]
@@ -30,6 +32,7 @@ func trigger():
 	get_parent().send_gcd()
 	# fire spell
 	Combat.combat_event(spell_curr,sourcenode,sourcenode)
+	# cooldown
 	cd_timer.wait_time = spell_curr["cooldown"]
 	cd_timer.start()
 	on_cd = true

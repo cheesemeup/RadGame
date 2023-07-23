@@ -305,6 +305,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_okpyk")
 alignment = 0
+expand_icon = true
 
 [node name="actionbar1_4" type="Button" parent="actionbars/actionbar1"]
 editor_description = "7"
@@ -312,6 +313,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_4k1y8")
 alignment = 0
+expand_icon = true
 
 [node name="actionbar1_5" type="Button" parent="actionbars/actionbar1"]
 editor_description = "8"
@@ -319,6 +321,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_vprou")
 alignment = 0
+expand_icon = true
 
 [node name="actionbar1_6" type="Button" parent="actionbars/actionbar1"]
 editor_description = "9"
@@ -326,6 +329,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_4d2nu")
 alignment = 0
+expand_icon = true
 
 [node name="actionbar1_7" type="Button" parent="actionbars/actionbar1"]
 editor_description = "none"
@@ -333,6 +337,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_38qg5")
 alignment = 0
+expand_icon = true
 
 [node name="actionbar1_8" type="Button" parent="actionbars/actionbar1"]
 editor_description = "none"
@@ -340,6 +345,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_spofm")
 alignment = 0
+expand_icon = true
 
 [node name="actionbar1_9" type="Button" parent="actionbars/actionbar1"]
 editor_description = "none"
@@ -347,6 +353,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_rkfui")
 alignment = 0
+expand_icon = true
 
 [node name="actionbar1_10" type="Button" parent="actionbars/actionbar1"]
 editor_description = "none"
@@ -354,6 +361,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_1fbsd")
 alignment = 0
+expand_icon = true
 
 [node name="actionbar1_11" type="Button" parent="actionbars/actionbar1"]
 editor_description = "none"
@@ -361,6 +369,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_fthb5")
 alignment = 0
+expand_icon = true
 
 [node name="actionbar1_12" type="Button" parent="actionbars/actionbar1"]
 editor_description = "none"
@@ -368,6 +377,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_1mx7g")
 alignment = 0
+expand_icon = true
 
 [node name="actionbar2" type="HBoxContainer" parent="actionbars"]
 layout_mode = 0

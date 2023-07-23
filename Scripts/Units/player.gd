@@ -13,6 +13,7 @@ const jump_velocity = 4.5
 var stats_base : Dictionary
 var stats_curr : Dictionary
 var aura_dict : Dictionary
+var absorb_dict : Dictionary
 
 # targeting vars
 var space_state
@@ -62,6 +63,8 @@ func _ready():
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").assign_actionbar1_1()
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_2 = $spells.get_node("spell_11")
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").assign_actionbar1_2()
+	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_3 = $spells.get_node("spell_7")
+	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").assign_actionbar1_3()
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():

@@ -24,7 +24,12 @@ func assign_actionbar1_2():
 	var image = Image.load_from_file(imagepath)
 	var texture = ImageTexture.create_from_image(image)
 	$actionbar1_2.icon = texture
-
+func assign_actionbar1_3():
+	var imagepath = str("res://Assets/Spell_Icons/abyssalshell.png")
+	var image = Image.load_from_file(imagepath)
+	var texture = ImageTexture.create_from_image(image)
+	$actionbar1_3.icon = texture
+	
 # triggering spells with action bar presses
 func _on_actionbar_1_1_pressed():
 	# return if no spell bound

@@ -2,6 +2,7 @@ extends Node
 
 # preload common auras
 var aura_general = preload("res://Scenes/Auras/aura_general.tscn")
+var aura_absorb = preload("res://Scenes/Auras/aura_absorb.tscn")
 
 func combat_event(spell,source,target):
 	if target == null:
@@ -22,25 +23,27 @@ func combat_event(spell,source,target):
 	elif spell["spelltype"] == "heal":
 		event_heal(spell,source,target,is_crit)
 	elif spell["spelltype"] == "aura":
-		event_aura(spell,source,target)
+		event_aura_general(spell,source,target)
+	elif spell["spelltype"] == "absorb":
+		event_absorb(spell,source,target)
 	
 func check_avoidance(spell,target):
-	var avoid = false
+	var avoid : bool = false
 	# get random number
 	var random = RandomNumberGenerator.new()
 	random.randomize()
-	var p = randf()
+	var p : float = randf()
 	# check if below avoidance probability, set avoid to true if true
 	if p <= target.stats_curr["avoidance"]+spell["avoidance_modifier"]:
 		avoid = true
 	return avoid
 	
 func check_crit(spell,source):
-	var is_crit = false
+	var is_crit : bool = false
 	# get random number
 	var random = RandomNumberGenerator.new()
 	random.randomize()
-	var p = randf()
+	var p : float = randf()
 	# check if below avoidance probability, set avoid to true if true
 	if p <= source.stats_curr["crit_chance"]+spell["crit_chance_modifier"]:
 		is_crit = true
@@ -99,33 +102,40 @@ func event_heal(spell,source,target,is_crit):
 			target.stats_curr["heal_taken_modifier"][spell["healtype"]] * \
 			crit_modifier))
 	target.stats_curr["health_current"] = min(target.stats_curr["health_current"]+value,target.stats_curr["health_max"])
-	# write to log (or console for now)
-	if is_crit:
-		print("%s heals %s with %s for %.f damage (critical)."%\
-		[source.stats_curr["name"],target.stats_curr["name"],\
-		  spell["name"],value])
-	else:
-		print("%s heals %s with %s for %.f damage."%\
-		[source.stats_curr["name"],target.stats_curr["name"],\
-		  spell["name"],value])
+	write_to_log_heal(spell,source,target,is_crit,value)
 	
-func event_aura(spell,source,target):
+func event_aura_general(spell,source,target):
 	# check if target already has same aura from same source active for hot/dot
 	if spell["auratype"] == "damage" or spell["auratype"] == "heal":
-		var key_name = "%s %s"%[source.stats_curr["name"],spell["name"]]
+		var key_name : String = "%s %s"%[source.stats_curr["name"],spell["name"]]
 		if target.aura_dict.has(key_name):
 			# remove before reapplication
-			target.aura_dict[key_name].remove_aura(spell,source,target)
+			target.aura_dict[key_name].reinitialize(spell)
+			return
 	# source-agnostic for buff/debuff
 	if spell["auratype"] == "buff" or spell["auratype"] == "debuff":
-		var key_name = "%s"%[spell["name"]]
+		var key_name : String = "%s"%[spell["name"]]
 		if target.aura_dict.has(key_name):
 			# remove before reapplication
-			target.aura_dict[key_name].remove_aura(spell,source,target)
+#			target.aura_dict[key_name].remove_aura(spell,source,target)
+			target.aura_dict[key_name].reinitialize(spell)
+			return
 	var aura = aura_general.instantiate()
 	target.get_node("auras").add_child(aura)
 	aura.initialize(spell,source,target)
-	print("%s applies %s to %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
+	write_to_log_aura(spell,source,target)
+
+func event_absorb(spell,source,target):
+	# check if target already has same aura from same source active
+	var key_name : String = "%s %s"%[source.stats_curr["name"],spell["name"]]
+	if target.absorb_dict.has(key_name):
+		# reset if already present
+		target.absorb_dict[key_name].reinitialize(spell,source,target)
+		return
+	var aura = aura_absorb.instantiate()
+	target.get_node("auras").add_child(aura)
+	aura.initialize(spell,source,target)
+	write_to_log_aura(spell,source,target)
 
 func apply_damage(spell,value,source,target,is_crit):
 	# check for absorbs
@@ -133,49 +143,21 @@ func apply_damage(spell,value,source,target,is_crit):
 		# if shield fully absorbs hit without being depleted
 		if value < absorb.absorb_value:
 			absorb.absorb_value -= value
-			if is_crit:
-				print("%s absorbs %s of %s with %s for %.f damage (critical)."%\
-				[target.stats_curr["name"],spell["name"],\
-				source.stats_curr["name"],absorb.name,value])
-			else:
-				print("%s absorbs %s of %s with %s for %.f damage."%\
-				[target.stats_curr["name"],spell["name"],\
-				source.stats_curr["name"],absorb.name,value])
+			write_to_log_damage(spell,source,target,is_crit,value)
 			return
 		# if shield fully absorbs hit and is depleted
 		elif value == absorb.absorb_value:
 			absorb.queue_free()
-			if is_crit:
-				print("%s absorbs %s of %s with %s for %.f damage (critical)."%\
-				[target.stats_curr["name"],spell["name"],\
-				source.stats_curr["name"],absorb.name,value])
-			else:
-				print("%s absorbs %s of %s with %s for %.f damage."%\
-				[target.stats_curr["name"],spell["name"],\
-				source.stats_curr["name"],absorb.name,value])
+			write_to_log_damage(spell,source,target,is_crit,value)
 			return
 		# if hit value is larger than absorb value, reduce remaining value and remove absorb node
 		elif value > absorb.absorb_value:
 			value -= absorb.absorb_value
 			absorb.queue_free()
-			if is_crit:
-				print("%s absorbs %s of %s with %s for %.f damage (critical)."%\
-				[target.stats_curr["name"],spell["name"],\
-				source.stats_curr["name"],absorb.name,value])
-			else:
-				print("%s absorbs %s of %s with %s for %.f damage."%\
-				[target.stats_curr["name"],spell["name"],\
-				source.stats_curr["name"],absorb.name,value])
+			write_to_log_damage(spell,source,target,is_crit,value)
 	# deal unabsorbed damage
 	target.stats_curr["health_current"] = max(target.stats_curr["health_current"]-value,0)
-	if is_crit:
-		print("%s hits %s with %s for %.f damage (critical)."%\
-		[source.stats_curr["name"],target.stats_curr["name"],\
-		  spell["name"],value])
-	else:
-		print("%s hits %s with %s for %.f damage."%\
-		[source.stats_curr["name"],target.stats_curr["name"],\
-		  spell["name"],value])
+	write_to_log_damage(spell,source,target,is_crit,value,)
 
 ### stat calculations
 ###################################################################################################
@@ -207,3 +189,24 @@ func single_stat_calculation(body,statkey):
 		body.stats_curr["health_current"] = body.stats_curr["health_max"]
 	if statkey == "resource_max" and body.stats_curr["resource_current"] > body.stats_curr["resource_max"]:
 		body.stats_curr["resource_current"] = body.stats_curr["resource_max"]
+
+### write to log
+###################################################################################################
+func write_to_log_damage(spell,source,target,is_crit,value):
+	var ending : String = "."
+	if is_crit:
+		ending = " (critical)."
+	print("%s hits %s with %s for %.f damage%s"%\
+		[source.stats_curr["name"],target.stats_curr["name"],\
+		 spell["name"],value,ending])
+func write_to_log_heal(spell,source,target,is_crit,value):
+	var ending : String = "."
+	if is_crit:
+		ending = "(critical)."
+	print("%s heals %s with %s for %.f damage%s"%\
+		[source.stats_curr["name"],target.stats_curr["name"],\
+		 spell["name"],value,ending])
+func write_to_log_aura(spell,source,target):
+	print("%s applies %s to %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
+func write_to_log_aura_fade(spell,source,target):
+	print("%s's %s faded from %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])

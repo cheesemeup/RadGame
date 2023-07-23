@@ -1,11 +1,24 @@
 extends Node
 
+var exp_timer = Timer.new()
+var tick_timer = Timer.new()
+
 # general aura scene for dots, hots, buffs and debuffs
 func initialize(spell,source,target):
 	if spell["auratype"] == "damage" or spell["auratype"] == "heal":
 		initialize_tick(spell,source,target)
 	elif spell["auratype"] == "buff" or spell["auratype"] == "debuff":
 		initialize_buff(spell,source,target)
+		
+func reinitialize(spell):
+	# restart timers
+	exp_timer.stop()
+	exp_timer.wait_time = float(spell["duration"])
+	exp_timer.start()
+	if spell["auratype"] == "damage" or spell["auratype"] == "heal":
+		tick_timer.stop()
+		tick_timer.wait_time = float(spell["tick"])
+		tick_timer.start()
 
 func initialize_tick(spell,source,target):
 	# set node name in parentparent script aura_dict
@@ -36,7 +49,6 @@ func initialize_buff(spell,source,target):
 
 func tick(spell,source,target):
 	# set up tick timer
-	var tick_timer = Timer.new()
 	tick_timer.one_shot = false
 	tick_timer.wait_time = float(spell["tick"])
 	tick_timer.connect("timeout",tick_expires.bind(spell,source,target))
@@ -48,7 +60,6 @@ func tick_expires(spell,source,target):
 	Combat.aura_tick_event(spell,source,target)
 
 func duration(spell,source,target):
-	var exp_timer = Timer.new()
 	# start timer
 	exp_timer.one_shot = true
 	exp_timer.wait_time = float(spell["duration"])
@@ -61,7 +72,7 @@ func remove_aura(spell,source,target):
 	if spell["auratype"] == "damage" or spell["auratype"] == "heal":
 		# remove from aura dict and remove scene
 		target.aura_dict.erase("%s %s"%[source.stats_curr["name"],spell["name"]])
-		print("%s's %s faded from %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
+		Combat.write_to_log_aura_fade(spell,source,target)
 		queue_free()
 	# if buff or debuff
 	elif spell["auratype"] == "buff" or spell["auratype"] == "debuff":
@@ -76,5 +87,5 @@ func remove_aura(spell,source,target):
 				target.stats_base["stat_add"][statkey].erase(spell["name"])
 		# 	force stat caclulation
 			Combat.single_stat_calculation(target,statkey)
-		print("%s's %s faded from %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
+		Combat.write_to_log_aura_fade(spell,source,target)
 		queue_free()
