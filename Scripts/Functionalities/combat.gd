@@ -128,8 +128,8 @@ func apply_damage(spell,value,source,target,is_crit):
 		# if hit value is larger than absorb value, reduce remaining value and remove absorb node
 		elif value > absorb.absorb_value:
 			value -= absorb.absorb_value
+			write_to_log_absorb(spell,source,target,absorb,is_crit,absorb.absorb_value)
 			absorb.queue_free()
-			write_to_log_absorb(spell,source,target,absorb,is_crit,value)
 	# deal unabsorbed damage
 	target.stats_curr["health_current"] = max(target.stats_curr["health_current"]-value,0)
 	write_to_log_damage(spell,source,target,is_crit,value,)
