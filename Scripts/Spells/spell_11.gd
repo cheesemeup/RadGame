@@ -5,8 +5,7 @@ var spell_base : Dictionary
 var spell_curr : Dictionary
 var cd_timer = Timer.new()
 var on_cd = false
-
-var aura_absorb = preload("res://Scenes/Auras/aura_absorb.tscn")
+var actionbar = []
 
 func _ready():
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://Data/db_spells.json"))
@@ -28,8 +27,6 @@ func trigger():
 		return
 	# apply resource cost
 	sourcenode.stats_curr["resource_current"] = min(sourcenode.stats_curr["resource_current"]-spell_curr["resource_cost"],sourcenode.stats_curr["resource_max"])
-	# send gcd
-	get_parent().send_gcd()
 	# fire spell
 	Combat.combat_event(spell_curr,sourcenode,sourcenode)
 	# cooldown
@@ -38,7 +35,6 @@ func trigger():
 	on_cd = true
 
 func set_ready():
-	print("set ready")
 	on_cd = false
 
 # role swap effects

@@ -5,6 +5,7 @@ var spell_base : Dictionary
 var spell_curr : Dictionary
 var cd_timer = Timer.new()
 var on_cd = false
+var actionbar = []
 
 func _ready():
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://Data/db_spells.json"))
@@ -37,9 +38,11 @@ func trigger():
 	Combat.combat_event(spell_curr,sourcenode,spell_target)
 
 func start_cd(duration):
+	# start timer
 	cd_timer.wait_time = duration
 	cd_timer.start()
 	on_cd = true
+	# instantiate cd swipe scene
 
 func set_ready():
 	on_cd = false

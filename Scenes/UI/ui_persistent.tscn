@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/UI/ui_persistent.gd" id="1_6vwfj"]
 [ext_resource type="PackedScene" uid="uid://cmbcuptfuq5bs" path="res://Scenes/UI/party_frame.tscn" id="2_vqwiw"]
-[ext_resource type="Script" path="res://Scenes/UI/actionbar1.gd" id="3_jc1yw"]
+[ext_resource type="Script" path="res://Scripts/UI/actionbar1.gd" id="3_vp2p3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fttgf"]
 bg_color = Color(0, 0, 0, 1)
@@ -280,7 +280,7 @@ offset_top = 770.0
 offset_right = 710.0
 offset_bottom = 820.0
 theme_override_constants/separation = 0
-script = ExtResource("3_jc1yw")
+script = ExtResource("3_vp2p3")
 
 [node name="actionbar1_1" type="Button" parent="actionbars/actionbar1"]
 editor_description = "3"
@@ -290,6 +290,14 @@ shortcut = SubResource("Shortcut_wghh6")
 alignment = 0
 icon_alignment = 1
 expand_icon = true
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_1"]
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+tint_progress = Color(0, 0, 0, 0.392157)
 
 [node name="actionbar1_2" type="Button" parent="actionbars/actionbar1"]
 editor_description = "5"

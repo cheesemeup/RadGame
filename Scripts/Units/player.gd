@@ -60,11 +60,11 @@ func _ready():
 	load_spell_scenes()
 	# a bit of hackyhackfraudyfraud to test spells, assignment will implemented later
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_1 = $spells.get_node("spell_10")
+	$spells/spell_10.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_1"))
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").assign_actionbar1_1()
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_2 = $spells.get_node("spell_11")
+	$spells/spell_11.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_2"))
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").assign_actionbar1_2()
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_3 = $spells.get_node("spell_7")
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").assign_actionbar1_3()
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
@@ -176,10 +176,12 @@ func targeting(result) -> void:
 		unit_selectedtarget = null
 		Autoload.player_ui_main_reference.targetframe_remove()
 ###################################################################################################
-# set up spells
+# set up spells, auras, absorbs
 func load_spell_scenes() -> void:
 	for spellid in stats_base["spell list"]:
 		$spells.add_child(load("res://Scenes/Spells/spell_"+spellid+".tscn").instantiate())
+func sort_absorbs():
+	pass
 ###################################################################################################
 # get spell target
 func get_spell_target(spell):

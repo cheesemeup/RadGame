@@ -5,11 +5,14 @@ var exp_timer = Timer.new()
 
 # general aura scene for dots, hots, buffs and debuffs
 func initialize(spell,source,target):
+	# add to absorb dict on target
+	target.absorb_dict["%s %s"%[source.stats_curr["name"],spell["name"]]] = self
 	# determine absorb amount
 	calc_absorb_value(spell,source,target)
+	# set duration and start timer
 	duration(spell,source,target)
 
-func renitialize(spell,source,target):
+func reinitialize(spell,source,target):
 	calc_absorb_value(spell,source,target)
 	exp_timer.stop()
 	exp_timer.wait_time = float(spell["duration"])

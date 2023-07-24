@@ -14,7 +14,7 @@ func combat_event(spell,source,target):
 			print("%s has avoided %s from %s."%[target.stats_curr["name"],spell["name"],source.stats_curr["name"]])
 			return
 	# check if crit, if crittable
-	var is_crit = false
+	var is_crit : int = 0
 	if spell["can_crit"]:
 		is_crit = check_crit(spell,source)
 	if spell["spelltype"] == "damage":
@@ -39,14 +39,14 @@ func check_avoidance(spell,target):
 	return avoid
 	
 func check_crit(spell,source):
-	var is_crit : bool = false
+	var is_crit : int = 0
 	# get random number
 	var random = RandomNumberGenerator.new()
 	random.randomize()
 	var p : float = randf()
 	# check if below avoidance probability, set avoid to true if true
 	if p <= source.stats_curr["crit_chance"]+spell["crit_chance_modifier"]:
-		is_crit = true
+		is_crit = 1
 	return is_crit
 	
 func aura_tick_event(spell,source,target):
@@ -61,46 +61,24 @@ func aura_tick_event(spell,source,target):
 	
 func event_damage(spell,source,target,is_crit):
 	# calculate and apply damage
-	var value : int
-	var crit_modifier : float =  1. 
-	if is_crit:
-		crit_modifier = crit_modifier + 1. + spell["crit_damage_modifier"]
-	if spell["valuetype"] == "absolute":
-		value = int(floor(\
-			source.stats_curr["primary"] * \
-			spell["primary_modifier"] * \
-			source.stats_curr["damage_modifier"][spell["damagetype"]] * \
-			target.stats_curr["defense_modifier"][spell["damagetype"]] * \
-			crit_modifier))
-	elif spell["valuetype"] == "relative":
-		value = int(floor(\
-			spell["primary_modifier"] * \
-			source.stats_curr[spell["valuebase"]] * \
-			source.stats_curr["damage_modifier"][spell["damagetype"]] * \
-			target.stats_curr["defense_modifier"][spell["damagetype"]] * \
-			crit_modifier))
+	var crit_modifier = 1. + is_crit * (1. + spell["crit_damage_modifier"])
+	var value : int = int(floor(source.stats_curr[spell["valuebase"]] *\
+				spell["primary_modifier"] *\
+				source.stats_curr["damage_modifier"][spell["damagetype"]] * \
+				target.stats_curr["defense_modifier"][spell["damagetype"]] * \
+				crit_modifier))
 	# deal damage through absorbs
 	apply_damage(spell,value,source,target,is_crit)
 	return value
 	
 func event_heal(spell,source,target,is_crit):
 	# calculate and apply healing
-	var value : int
-	var crit_modifier : float =  1. 
-	if is_crit:
-		crit_modifier = crit_modifier + 1. + spell["crit_heal_modifier"]
-	if spell["valuetype"] == "absolute":
-		value = int(floor(source.stats_curr["primary"] * \
-			spell["primary_modifier"] * \
-			source.stats_curr["heal_modifier"][spell["healtype"]] * \
-			target.stats_curr["heal_taken_modifier"][spell["healtype"]] * \
-			crit_modifier))
-	elif spell["valuetype"] == "relative":
-		value = int(floor(spell["primary_modifier"] * \
-			source.stats_curr[spell["valuebase"]] * \
-			source.stats_curr["heal_modifier"][spell["healtype"]] * \
-			target.stats_curr["heal_taken_modifier"][spell["healtype"]] * \
-			crit_modifier))
+	var crit_modifier : float =  1. + is_crit * (1. + spell["crit_heal_modifier"])
+	var value : int = int(floor(source.stats_curr[spell["valuebase"]] *\
+				spell["primary_modifier"] * \
+				source.stats_curr["heal_modifier"][spell["healtype"]] * \
+				target.stats_curr["heal_taken_modifier"][spell["healtype"]] * \
+				crit_modifier))
 	target.stats_curr["health_current"] = min(target.stats_curr["health_current"]+value,target.stats_curr["health_max"])
 	write_to_log_heal(spell,source,target,is_crit,value)
 	
@@ -111,6 +89,7 @@ func event_aura_general(spell,source,target):
 		if target.aura_dict.has(key_name):
 			# remove before reapplication
 			target.aura_dict[key_name].reinitialize(spell)
+			write_to_log_aura_reapply(spell,source,target)
 			return
 	# source-agnostic for buff/debuff
 	if spell["auratype"] == "buff" or spell["auratype"] == "debuff":
@@ -119,6 +98,7 @@ func event_aura_general(spell,source,target):
 			# remove before reapplication
 #			target.aura_dict[key_name].remove_aura(spell,source,target)
 			target.aura_dict[key_name].reinitialize(spell)
+			write_to_log_aura_reapply(spell,source,target)
 			return
 	var aura = aura_general.instantiate()
 	target.get_node("auras").add_child(aura)
@@ -131,6 +111,7 @@ func event_absorb(spell,source,target):
 	if target.absorb_dict.has(key_name):
 		# reset if already present
 		target.absorb_dict[key_name].reinitialize(spell,source,target)
+		write_to_log_aura_reapply(spell,source,target)
 		return
 	var aura = aura_absorb.instantiate()
 	target.get_node("auras").add_child(aura)
@@ -196,17 +177,19 @@ func write_to_log_damage(spell,source,target,is_crit,value):
 	var ending : String = "."
 	if is_crit:
 		ending = " (critical)."
-	print("%s hits %s with %s for %.f damage%s"%\
+	print("%s hits %s with %s for %.f %s damage%s"%\
 		[source.stats_curr["name"],target.stats_curr["name"],\
-		 spell["name"],value,ending])
+		 spell["name"],value,spell["damagetype"],ending])
 func write_to_log_heal(spell,source,target,is_crit,value):
 	var ending : String = "."
 	if is_crit:
-		ending = "(critical)."
-	print("%s heals %s with %s for %.f damage%s"%\
+		ending = " (critical)."
+	print("%s heals %s with %s for %.f %s healing%s"%\
 		[source.stats_curr["name"],target.stats_curr["name"],\
-		 spell["name"],value,ending])
+		 spell["name"],value,spell["healtype"],ending])
 func write_to_log_aura(spell,source,target):
 	print("%s applies %s to %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
+func write_to_log_aura_reapply(spell,source,target):
+	print("%s reapplies %s to %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
 func write_to_log_aura_fade(spell,source,target):
 	print("%s's %s faded from %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
