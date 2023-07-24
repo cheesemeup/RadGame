@@ -108,7 +108,7 @@ func event_absorb(spell,source,target):
 		write_to_log_aura_reapply(spell,source,target)
 		return
 	var aura = aura_absorb.instantiate()
-	target.get_node("auras").add_child(aura)
+	target.get_node("absorbs").add_child(aura)
 	aura.initialize(spell,source,target)
 	write_to_log_aura(spell,source,target)
 
@@ -118,18 +118,18 @@ func apply_damage(spell,value,source,target,is_crit):
 		# if shield fully absorbs hit without being depleted
 		if value < absorb.absorb_value:
 			absorb.absorb_value -= value
-			write_to_log_damage(spell,source,target,is_crit,value)
+			write_to_log_absorb(spell,source,target,absorb,is_crit,value)
 			return
 		# if shield fully absorbs hit and is depleted
 		elif value == absorb.absorb_value:
 			absorb.queue_free()
-			write_to_log_damage(spell,source,target,is_crit,value)
+			write_to_log_absorb(spell,source,target,absorb,is_crit,value)
 			return
 		# if hit value is larger than absorb value, reduce remaining value and remove absorb node
 		elif value > absorb.absorb_value:
 			value -= absorb.absorb_value
 			absorb.queue_free()
-			write_to_log_damage(spell,source,target,is_crit,value)
+			write_to_log_absorb(spell,source,target,absorb,is_crit,value)
 	# deal unabsorbed damage
 	target.stats_curr["health_current"] = max(target.stats_curr["health_current"]-value,0)
 	write_to_log_damage(spell,source,target,is_crit,value,)
@@ -174,6 +174,13 @@ func write_to_log_damage(spell,source,target,is_crit,value):
 	print("%s hits %s with %s for %.f %s damage%s"%\
 		[source.stats_curr["name"],target.stats_curr["name"],\
 		 spell["name"],value,spell["damagetype"],ending])
+func write_to_log_absorb(spell,source,target,absorb,is_crit,value):
+	var ending : String = "."
+	if is_crit:
+		ending = " (critical)."
+	print("%s of %s absorbs %.f damage of %s used on %s by %s%s"%\
+		[absorb.spellname,absorb.absorb_source,value,spell["name"],\
+		target.stats_curr["name"],source.stats_curr["name"],ending])
 func write_to_log_heal(spell,source,target,is_crit,value):
 	var ending : String = "."
 	if is_crit:

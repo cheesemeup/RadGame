@@ -2,11 +2,16 @@ extends Node
 
 var exp_timer = Timer.new()
 @export var absorb_value : int
+var absorb_source : String
+var spellname : String
 
 # general aura scene for dots, hots, buffs and debuffs
 func initialize(spell,source,target):
 	# add to absorb dict on target
 	target.absorb_dict["%s %s"%[source.stats_curr["name"],spell["name"]]] = self
+	# declare source and spellname
+	absorb_source = source.stats_curr["name"]
+	spellname = spell["name"]
 	# determine absorb amount
 	absorb_value = int(floor(source.stats_curr[spell["valuebase"]] *\
 				spell["primary_modifier"] * \

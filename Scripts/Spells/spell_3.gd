@@ -5,14 +5,22 @@ var spell_base : Dictionary
 var spell_curr : Dictionary
 var cd_timer = Timer.new()
 var on_cd = false
+var actionbar = []
 
 func _ready():
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://Data/db_spells.json"))
 	spell_base = json_dict["3"]
 	spell_curr = spell_base.duplicate(true)
+	cd_timer.one_shot = true
+	cd_timer.connect("timeout",set_ready.bind())
+	add_child(cd_timer)
 
 func trigger():
 	var sourcenode = get_parent().get_parent()
+	# check cooldown
+	if on_cd:
+		print("on cooldown")
+		return
 	# check resource cost
 	if sourcenode.stats_curr["resource_current"] < spell_curr["resource_cost"]:
 		print("insufficient resources")
