@@ -8,7 +8,10 @@ func initialize(spell,source,target):
 	# add to absorb dict on target
 	target.absorb_dict["%s %s"%[source.stats_curr["name"],spell["name"]]] = self
 	# determine absorb amount
-	calc_absorb_value(spell,source,target)
+	absorb_value = int(floor(source.stats_curr[spell["valuebase"]] *\
+				spell["primary_modifier"] * \
+				source.stats_curr["heal_modifier"][spell["healtype"]] * \
+				target.stats_curr["heal_taken_modifier"][spell["healtype"]]))
 	# set duration and start timer
 	duration(spell,source,target)
 

@@ -8,15 +8,12 @@ func combat_event(spell,source,target):
 	if target == null:
 		return
 	# check for avoidance if spell is avoidable
-	if spell["avoidable"]:
-		var avoid = check_avoidance(spell,target)
-		if avoid:
-			print("%s has avoided %s from %s."%[target.stats_curr["name"],spell["name"],source.stats_curr["name"]])
-			return
+	var avoid = spell["avoidable"] * check_avoidance(target)
+	if avoid == 1:
+		write_to_log_avoid(spell,source,target)
+		return
 	# check if crit, if crittable
-	var is_crit : int = 0
-	if spell["can_crit"]:
-		is_crit = check_crit(spell,source)
+	var is_crit : int = spell["can_crit"] * check_crit(spell,source)
 	if spell["spelltype"] == "damage":
 		var value = event_damage(spell,source,target,is_crit)
 		return value
@@ -27,15 +24,15 @@ func combat_event(spell,source,target):
 	elif spell["spelltype"] == "absorb":
 		event_absorb(spell,source,target)
 	
-func check_avoidance(spell,target):
-	var avoid : bool = false
+func check_avoidance(target):
+	var avoid : int = 0
 	# get random number
 	var random = RandomNumberGenerator.new()
 	random.randomize()
 	var p : float = randf()
 	# check if below avoidance probability, set avoid to true if true
-	if p <= target.stats_curr["avoidance"]+spell["avoidance_modifier"]:
-		avoid = true
+	if p <= target.stats_curr["avoidance"]:
+		avoid = 1
 	return avoid
 	
 func check_crit(spell,source):
@@ -51,9 +48,7 @@ func check_crit(spell,source):
 	
 func aura_tick_event(spell,source,target):
 	# this function handles aura ticks, as the structure differs from regular combat events
-	var is_crit = false
-	if spell["can_crit"]:
-		is_crit = check_crit(spell,source)
+	var is_crit : int = spell["can_crit"] * check_crit(spell,source)
 	if spell["auratype"] == "damage":
 		event_damage(spell,source,target,is_crit)
 	elif spell["auratype"] == "heal":
@@ -96,7 +91,6 @@ func event_aura_general(spell,source,target):
 		var key_name : String = "%s"%[spell["name"]]
 		if target.aura_dict.has(key_name):
 			# remove before reapplication
-#			target.aura_dict[key_name].remove_aura(spell,source,target)
 			target.aura_dict[key_name].reinitialize(spell)
 			write_to_log_aura_reapply(spell,source,target)
 			return
@@ -163,7 +157,7 @@ func single_stat_calculation(body,statkey):
 	if body.stats_base["stat_mult"].has(statkey):
 		for value in body.stats_base["stat_mult"][statkey].keys():
 			stat_mult = stat_mult * body.stats_base["stat_mult"][statkey][value]
-	# apply to base stat
+	# apply to current stats
 	body.stats_curr[statkey] = (body.stats_base[statkey] + stat_add) * stat_mult
 	# adjust current health and resource if above maximum
 	if statkey == "health_max" and body.stats_curr["health_current"] > body.stats_curr["health_max"]:
@@ -187,6 +181,8 @@ func write_to_log_heal(spell,source,target,is_crit,value):
 	print("%s heals %s with %s for %.f %s healing%s"%\
 		[source.stats_curr["name"],target.stats_curr["name"],\
 		 spell["name"],value,spell["healtype"],ending])
+func write_to_log_avoid(spell,source,target):
+	print("%s has avoided %s from %s."%[target.stats_curr["name"],spell["name"],source.stats_curr["name"]])
 func write_to_log_aura(spell,source,target):
 	print("%s applies %s to %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
 func write_to_log_aura_reapply(spell,source,target):

@@ -12,7 +12,7 @@
 	"resource_regen":0,
 	"primary":100,
 	"avoidance":0.1,
-	"crit_chance":0.1,
+	"crit_chance":0.7,
 	"damage_modifier":{
 		"physical":1,
 		"magic":1,
