@@ -24,7 +24,7 @@
 	"avoidable":0,
 	"can_crit":0,
 	"crit_chance_modifier":0,
-	"crit_damage_modifier":0,
+	"crit_heal_modifier":0,
   },
 "2":{
 	"name":"Test NPC Heal Self",
@@ -38,7 +38,7 @@
 	"avoidable":0,
 	"can_crit":0,
 	"crit_chance_modifier":0,
-	"crit_damage_modifier":0,
+	"crit_heal_modifier":0,
   },
 "3":{
 	"name":"Player Test Damage",
@@ -117,7 +117,7 @@
 	"avoidable":0,
 	"can_crit":0,
 	"crit_chance_modifier":0,
-	"crit_damage_modifier":0,
+	"crit_heal_modifier":0,
   },
 "8":{
 	"name":"Player Test Buff",
@@ -186,6 +186,6 @@
 	"avoidable":0,
 	"can_crit":0,
 	"crit_chance_modifier":0,
-	"crit_damage_modifier":0,
+	"crit_heal_modifier":0,
 	},
 }

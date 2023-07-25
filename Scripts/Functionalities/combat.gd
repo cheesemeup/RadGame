@@ -30,7 +30,7 @@ func check_avoidance(target):
 	var random = RandomNumberGenerator.new()
 	random.randomize()
 	var p : float = randf()
-	# check if below avoidance probability, set avoid to true if true
+	# check if below avoidance probability, set avoid to 1 if true
 	if p <= target.stats_curr["avoidance"]:
 		avoid = 1
 	return avoid
@@ -41,7 +41,7 @@ func check_crit(spell,source):
 	var random = RandomNumberGenerator.new()
 	random.randomize()
 	var p : float = randf()
-	# check if below avoidance probability, set avoid to true if true
+	# check if below crit probability, set crit to 1 if true
 	if p <= source.stats_curr["crit_chance"]+spell["crit_chance_modifier"]:
 		is_crit = 1
 	return is_crit
