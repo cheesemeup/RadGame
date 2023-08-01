@@ -6,7 +6,7 @@ extends CharacterBody3D
 
 var playermodel_reference = null
 
-const speed = 10.0
+#const speed = 10.0
 const jump_velocity = 4.5
 
 # stats
@@ -66,8 +66,11 @@ func _ready():
 	$spells/spell_10.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_1"))
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_1").\
 						assign_actionbar($spells.get_node("spell_10"))
-	$spells/spell_11.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_2"))
+	$spells/spell_12.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_2"))
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_2").\
+						assign_actionbar($spells.get_node("spell_12"))
+	$spells/spell_11.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_3"))
+	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_3").\
 						assign_actionbar($spells.get_node("spell_11"))
 
 func _input(event):
@@ -126,7 +129,7 @@ func _physics_process(delta):
 	# rotate direction vector using camera angle
 	var direction = Vector3(cos(2*PI-$camera_rotation.rotation.y)*direction_ur.x - sin(2*PI-$camera_rotation.rotation.y)*direction_ur.z, 0, \
 							sin(2*PI-$camera_rotation.rotation.y)*direction_ur.x + cos(2*PI-$camera_rotation.rotation.y)*direction_ur.z)
-							
+	var speed = stats_curr["speed"]
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed

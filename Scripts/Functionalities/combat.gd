@@ -52,19 +52,23 @@ func aura_tick_event(spell,source,target):
 	elif spell["auratype"] == "heal":
 		event_heal(spell,source,target)
 	
-func event_damage(spell,source,target):
-	# check for crit
-	var is_crit : int = 0
-	if spell["can_crit"] == 1:
-		is_crit = check_crit(spell,source)
+func event_damage(spell,source,target,value:=-1):
 	# check avoidance
 	var avoid = spell["avoidable"] * check_avoidance(target)
 	if avoid == 1:
 		write_to_log_avoid(spell,source,target)
 		return
+	# use value as noncrit if prescribed
+	if value != -1:
+		apply_damage(spell,value,source,target,0)
+		return value
+	# check for crit
+	var is_crit : int = 0
+	if spell["can_crit"] == 1:
+		is_crit = check_crit(spell,source)
 	# calculate and apply damage
 	var crit_modifier = 1. + is_crit * (1. + spell["crit_damage_modifier"])
-	var value : int = int(floor(source.stats_curr[spell["valuebase"]] *\
+	value = int(floor(source.stats_curr[spell["valuebase"]] *\
 				spell["primary_modifier"] *\
 				source.stats_curr["damage_modifier"][spell["damagetype"]] * \
 				target.stats_curr["defense_modifier"][spell["damagetype"]] * \
@@ -73,20 +77,26 @@ func event_damage(spell,source,target):
 	apply_damage(spell,value,source,target,is_crit)
 	return value
 	
-func event_heal(spell,source,target):
+func event_heal(spell,source,target,value:=-1):
+	# use value as noncrit if prescribed
+	if value != -1:
+		target.stats_curr["health_current"] = min(target.stats_curr["health_current"]+value,target.stats_curr["health_max"])
+		write_to_log_heal(spell,source,target,0,value)
+		return value
 	# check for crit
 	var is_crit : int = 0
 	if spell["can_crit"] == 1:
 		is_crit = check_crit(spell,source)
 	# calculate and apply healing
 	var crit_modifier : float =  1. + is_crit * (1. + spell["crit_heal_modifier"])
-	var value : int = int(floor(source.stats_curr[spell["valuebase"]] *\
+	value = int(floor(source.stats_curr[spell["valuebase"]] *\
 				spell["primary_modifier"] * \
 				source.stats_curr["heal_modifier"][spell["healtype"]] * \
 				target.stats_curr["heal_taken_modifier"][spell["healtype"]] * \
 				crit_modifier))
 	target.stats_curr["health_current"] = min(target.stats_curr["health_current"]+value,target.stats_curr["health_max"])
 	write_to_log_heal(spell,source,target,is_crit,value)
+	return value
 	
 func event_aura_general(spell,source,target):
 	# check if target already has same aura from same source active for hot/dot
