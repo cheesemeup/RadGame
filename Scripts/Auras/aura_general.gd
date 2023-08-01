@@ -57,7 +57,11 @@ func tick(spell,source,target):
 
 func tick_expires(spell,source,target):
 	# send combat event on tick
-	Combat.aura_tick_event(spell,source,target)
+#	Combat.aura_tick_event(spell,source,target)
+	if spell["auratype"] == "damage":
+		Combat.event_damage(spell,source,target)
+	elif spell["auratype"] == "heal":
+		Combat.event_heal(spell,source,target)
 
 func duration(spell,source,target):
 	# start timer

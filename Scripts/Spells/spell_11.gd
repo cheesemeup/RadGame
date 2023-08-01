@@ -28,7 +28,7 @@ func trigger():
 	# apply resource cost
 	sourcenode.stats_curr["resource_current"] = min(sourcenode.stats_curr["resource_current"]-spell_curr["resource_cost"],sourcenode.stats_curr["resource_max"])
 	# fire spell
-	Combat.combat_event(spell_curr,sourcenode,sourcenode)
+	Combat.event_absorb(spell_curr,sourcenode,sourcenode)
 	# cooldown
 	cd_timer.wait_time = spell_curr["cooldown"]
 	cd_timer.start()

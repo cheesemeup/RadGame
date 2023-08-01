@@ -39,7 +39,7 @@ func trigger():
 	# send gcd
 	get_parent().send_gcd()
 	# fire spell
-	Combat.combat_event(spell_curr,sourcenode,spell_target)
+	Combat.event_damage(spell_curr,sourcenode,spell_target)
 
 func start_cd(duration):
 	cd_timer.wait_time = duration

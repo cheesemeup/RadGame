@@ -19,4 +19,4 @@ func _ready():
 
 func _process(_delta):
 	if stats_curr["health_current"] < stats_curr["health_max"]/2:
-		Combat.combat_event(spells_curr["2"],self,self)
+		Combat.event_heal(spells_curr["2"],self,self)

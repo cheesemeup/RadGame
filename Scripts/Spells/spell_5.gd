@@ -25,4 +25,4 @@ func trigger():
 	# send gcd
 	get_parent().send_gcd()
 	# fire spell
-	Combat.combat_event(spell_curr,get_parent().get_parent(),spell_target)
+	Combat.event_heal(spell_curr,get_parent().get_parent(),spell_target)

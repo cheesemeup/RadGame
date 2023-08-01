@@ -1,6 +1,7 @@
 extends Node
 
 var gcd_timer = 1.5
+signal signal_gcd(duration)
 
 # apply role swap changes
 
@@ -8,7 +9,5 @@ var gcd_timer = 1.5
 
 # send gcd
 func send_gcd():
-	for spell in get_children():
-		if spell.spell_curr["on_gcd"] == 0:
-			continue
-		spell.start_cd(gcd_timer)
+	# emit signal
+	signal_gcd.emit(gcd_timer)

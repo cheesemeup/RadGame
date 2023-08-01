@@ -14,6 +14,8 @@ func _ready():
 	cd_timer.one_shot = true
 	cd_timer.connect("timeout",set_ready.bind())
 	add_child(cd_timer)
+	# connect to gcd signal of spell container
+	get_parent().signal_gcd.connect(trigger_cd)
 
 func trigger():
 	var sourcenode = get_parent().get_parent()
@@ -35,9 +37,9 @@ func trigger():
 	# send gcd
 	get_parent().send_gcd()
 	# fire spell
-	Combat.combat_event(spell_curr,sourcenode,spell_target)
+	Combat.event_damage(spell_curr,sourcenode,spell_target)
 
-func start_cd(duration):
+func trigger_cd(duration):
 	# start timer
 	cd_timer.wait_time = duration
 	cd_timer.start()

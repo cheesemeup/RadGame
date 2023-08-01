@@ -4,23 +4,20 @@ extends Node
 var aura_general = preload("res://Scenes/Auras/aura_general.tscn")
 var aura_absorb = preload("res://Scenes/Auras/aura_absorb.tscn")
 
-func combat_event(spell,source,target):
-	# check for avoidance if spell is avoidable
-	var avoid = spell["avoidable"] * check_avoidance(target)
-	if avoid == 1:
-		write_to_log_avoid(spell,source,target)
-		return
-	# check if crit, if crittable
-	var is_crit : int = spell["can_crit"] * check_crit(spell,source)
-	if spell["spelltype"] == "damage":
-		var value = event_damage(spell,source,target,is_crit)
-		return value
-	elif spell["spelltype"] == "heal":
-		event_heal(spell,source,target,is_crit)
-	elif spell["spelltype"] == "aura":
-		event_aura_general(spell,source,target)
-	elif spell["spelltype"] == "absorb":
-		event_absorb(spell,source,target)
+#func combat_event(spell,source,target):
+#	# check for avoidance if spell is avoidable
+#
+#	# check if crit, if crittable
+#	var is_crit : int = spell["can_crit"] * check_crit(spell,source)
+#	if spell["spelltype"] == "damage":
+#		var value = event_damage(spell,source,target)
+#		return value
+#	if spell["spelltype"] == "heal":
+#		event_heal(spell,source,target)
+#	elif spell["spelltype"] == "aura":
+#		event_aura_general(spell,source,target)
+#	elif spell["spelltype"] == "absorb":
+#		event_absorb(spell,source,target)
 	
 func check_avoidance(target):
 	var avoid : int = 0
@@ -44,15 +41,27 @@ func check_crit(spell,source):
 		is_crit = 1
 	return is_crit
 	
+# PROBABLY REPLACE THIS WITH DIRECT CALLS
 func aura_tick_event(spell,source,target):
 	# this function handles aura ticks, as the structure differs from regular combat events
-	var is_crit : int = spell["can_crit"] * check_crit(spell,source)
+	var is_crit : int = 0
+	if spell["can_crit"] == 1:
+		is_crit = check_crit(spell,source)
 	if spell["auratype"] == "damage":
-		event_damage(spell,source,target,is_crit)
+		event_damage(spell,source,target)
 	elif spell["auratype"] == "heal":
-		event_heal(spell,source,target,is_crit)
+		event_heal(spell,source,target)
 	
-func event_damage(spell,source,target,is_crit):
+func event_damage(spell,source,target):
+	# check for crit
+	var is_crit : int = 0
+	if spell["can_crit"] == 1:
+		is_crit = check_crit(spell,source)
+	# check avoidance
+	var avoid = spell["avoidable"] * check_avoidance(target)
+	if avoid == 1:
+		write_to_log_avoid(spell,source,target)
+		return
 	# calculate and apply damage
 	var crit_modifier = 1. + is_crit * (1. + spell["crit_damage_modifier"])
 	var value : int = int(floor(source.stats_curr[spell["valuebase"]] *\
@@ -64,7 +73,11 @@ func event_damage(spell,source,target,is_crit):
 	apply_damage(spell,value,source,target,is_crit)
 	return value
 	
-func event_heal(spell,source,target,is_crit):
+func event_heal(spell,source,target):
+	# check for crit
+	var is_crit : int = 0
+	if spell["can_crit"] == 1:
+		is_crit = check_crit(spell,source)
 	# calculate and apply healing
 	var crit_modifier : float =  1. + is_crit * (1. + spell["crit_heal_modifier"])
 	var value : int = int(floor(source.stats_curr[spell["valuebase"]] *\

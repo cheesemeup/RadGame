@@ -25,6 +25,10 @@ var current_interact_target = null
 # other
 var esc_level = 0
 
+# states
+var is_moving : bool = false
+var is_dead : bool = false
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -132,12 +136,16 @@ func _physics_process(delta):
 	# turn character to match movement direction
 	if direction != Vector3.ZERO:
 		$pivot.look_at(position + direction, Vector3.UP)
-	# animations
-	if Autoload.playermodel_reference != null:
-		if velocity == Vector3.ZERO:
+	if velocity == Vector3.ZERO:
+		is_moving = false
+		# animation
+		if Autoload.playermodel_reference != null:
 			Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Idle")
-		else:
-			Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
+	else:
+		is_moving = true
+		# animation
+		if Autoload.playermodel_reference != null:
+				Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
 	move_and_slide()
 
 # set player model
