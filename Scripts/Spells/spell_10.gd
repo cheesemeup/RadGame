@@ -42,7 +42,7 @@ func start_cd(duration):
 	cd_timer.wait_time = duration
 	cd_timer.start()
 	on_cd = true
-	# instantiate cd swipe scene
+	# start cd swipe
 	for ab in actionbar:
 		ab.start_cd(duration)
 

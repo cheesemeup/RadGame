@@ -8,13 +8,12 @@ func _ready():
 
 func assign_actionbar(spell_scene):
 	linkedspell = spell_scene
-	var imagepath = str("res://Assets/Spell_Icons/fingersoffrost.png")
+	var imagepath = str("res://Assets/Spell_Icons/"+linkedspell.spell_curr["icon"]+".png")
 	var image = Image.load_from_file(imagepath)
 	var texture = ImageTexture.create_from_image(image)
 	icon = texture
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if on_cd:
 		$cooldownswipe.value = linkedspell.cd_timer.time_left
 
@@ -24,7 +23,7 @@ func _on_pressed():
 		print("no spell bound")
 		return
 	# trigger spell scene
-	linkedspell.trigger() 
+	linkedspell.trigger()
 
 func start_cd(duration):
 	$cooldownswipe.visible = true

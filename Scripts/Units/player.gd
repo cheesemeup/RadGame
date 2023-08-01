@@ -62,12 +62,9 @@ func _ready():
 	$spells/spell_10.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_1"))
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_1").\
 						assign_actionbar($spells.get_node("spell_10"))
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_2 = $spells.get_node("spell_11")
 	$spells/spell_11.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_2"))
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").assign_actionbar1_2()
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").slot_3 = $spells.get_node("spell_3")
-	$spells/spell_3.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_3"))
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").assign_actionbar1_3()
+	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_2").\
+						assign_actionbar($spells.get_node("spell_11"))
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():

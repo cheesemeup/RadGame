@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cq3h183hap1oa"]
+[gd_scene load_steps=58 format=3 uid="uid://cq3h183hap1oa"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ui_persistent.gd" id="1_6vwfj"]
 [ext_resource type="PackedScene" uid="uid://cmbcuptfuq5bs" path="res://Scenes/UI/party_frame.tscn" id="2_vqwiw"]
@@ -20,7 +20,7 @@ action = &"actionbar1_1"
 [sub_resource type="Shortcut" id="Shortcut_wghh6"]
 events = [SubResource("InputEventAction_c4esi")]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1n75j"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vi86b"]
 size = Vector2(50, 50)
 
 [sub_resource type="InputEventAction" id="InputEventAction_aby75"]
@@ -28,6 +28,9 @@ action = &"actionbar1_2"
 
 [sub_resource type="Shortcut" id="Shortcut_l2u6r"]
 events = [SubResource("InputEventAction_aby75")]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1n75j"]
+size = Vector2(50, 50)
 
 [sub_resource type="InputEventAction" id="InputEventAction_ytbvx"]
 action = &"actionbar1_3"
@@ -297,12 +300,13 @@ expand_icon = true
 script = ExtResource("4_vbomy")
 
 [node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_1"]
+visible = false
 layout_mode = 0
 offset_right = 50.0
 offset_bottom = 50.0
 step = 0.01
 fill_mode = 5
-texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+texture_progress = SubResource("PlaceholderTexture2D_vi86b")
 tint_progress = Color(0, 0, 0, 0.752941)
 
 [node name="actionbar1_2" type="Button" parent="actionbars/actionbar1"]
@@ -314,6 +318,16 @@ alignment = 0
 expand_icon = true
 script = ExtResource("4_vbomy")
 
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_2"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
+
 [node name="actionbar1_3" type="Button" parent="actionbars/actionbar1"]
 editor_description = "6"
 custom_minimum_size = Vector2(50, 50)
@@ -321,6 +335,17 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_okpyk")
 alignment = 0
 expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_3"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
 
 [node name="actionbar1_4" type="Button" parent="actionbars/actionbar1"]
 editor_description = "7"
@@ -329,6 +354,17 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_4k1y8")
 alignment = 0
 expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_4"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
 
 [node name="actionbar1_5" type="Button" parent="actionbars/actionbar1"]
 editor_description = "8"
@@ -337,6 +373,17 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_vprou")
 alignment = 0
 expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_5"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
 
 [node name="actionbar1_6" type="Button" parent="actionbars/actionbar1"]
 editor_description = "9"
@@ -345,6 +392,17 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_4d2nu")
 alignment = 0
 expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_6"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
 
 [node name="actionbar1_7" type="Button" parent="actionbars/actionbar1"]
 editor_description = "none"
@@ -353,6 +411,17 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_38qg5")
 alignment = 0
 expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_7"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
 
 [node name="actionbar1_8" type="Button" parent="actionbars/actionbar1"]
 editor_description = "none"
@@ -361,6 +430,17 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_spofm")
 alignment = 0
 expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_8"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
 
 [node name="actionbar1_9" type="Button" parent="actionbars/actionbar1"]
 editor_description = "none"
@@ -369,6 +449,17 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_rkfui")
 alignment = 0
 expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_9"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
 
 [node name="actionbar1_10" type="Button" parent="actionbars/actionbar1"]
 editor_description = "none"
@@ -377,6 +468,17 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_1fbsd")
 alignment = 0
 expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_10"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
 
 [node name="actionbar1_11" type="Button" parent="actionbars/actionbar1"]
 editor_description = "none"
@@ -385,6 +487,17 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_fthb5")
 alignment = 0
 expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_11"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
 
 [node name="actionbar1_12" type="Button" parent="actionbars/actionbar1"]
 editor_description = "none"
@@ -393,6 +506,17 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_1mx7g")
 alignment = 0
 expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_12"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
 
 [node name="actionbar2" type="HBoxContainer" parent="actionbars"]
 layout_mode = 0
@@ -480,14 +604,3 @@ alignment = 0
 [connection signal="mouse_exited" from="playerframe/playerframe_hpbar" to="." method="_on_playerframe_hpbar_mouse_exited"]
 [connection signal="mouse_entered" from="playerframe/playerframe_resbar" to="." method="_on_playerframe_resbar_mouse_entered"]
 [connection signal="mouse_exited" from="playerframe/playerframe_resbar" to="." method="_on_playerframe_resbar_mouse_exited"]
-[connection signal="pressed" from="actionbars/actionbar1/actionbar1_2" to="actionbars/actionbar1" method="_on_actionbar_1_2_pressed"]
-[connection signal="pressed" from="actionbars/actionbar1/actionbar1_3" to="actionbars/actionbar1" method="_on_actionbar_1_3_pressed"]
-[connection signal="pressed" from="actionbars/actionbar1/actionbar1_4" to="actionbars/actionbar1" method="_on_actionbar_1_4_pressed"]
-[connection signal="pressed" from="actionbars/actionbar1/actionbar1_5" to="actionbars/actionbar1" method="_on_actionbar_1_5_pressed"]
-[connection signal="pressed" from="actionbars/actionbar1/actionbar1_6" to="actionbars/actionbar1" method="_on_actionbar_1_6_pressed"]
-[connection signal="pressed" from="actionbars/actionbar1/actionbar1_7" to="actionbars/actionbar1" method="_on_actionbar_1_7_pressed"]
-[connection signal="pressed" from="actionbars/actionbar1/actionbar1_8" to="actionbars/actionbar1" method="_on_actionbar_1_8_pressed"]
-[connection signal="pressed" from="actionbars/actionbar1/actionbar1_9" to="actionbars/actionbar1" method="_on_actionbar_1_9_pressed"]
-[connection signal="pressed" from="actionbars/actionbar1/actionbar1_10" to="actionbars/actionbar1" method="_on_actionbar_1_10_pressed"]
-[connection signal="pressed" from="actionbars/actionbar1/actionbar1_11" to="actionbars/actionbar1" method="_on_actionbar_1_11_pressed"]
-[connection signal="pressed" from="actionbars/actionbar1/actionbar1_12" to="actionbars/actionbar1" method="_on_actionbar_1_12_pressed"]

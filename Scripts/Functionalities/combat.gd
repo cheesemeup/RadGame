@@ -5,8 +5,6 @@ var aura_general = preload("res://Scenes/Auras/aura_general.tscn")
 var aura_absorb = preload("res://Scenes/Auras/aura_absorb.tscn")
 
 func combat_event(spell,source,target):
-	if target == null:
-		return
 	# check for avoidance if spell is avoidable
 	var avoid = spell["avoidable"] * check_avoidance(target)
 	if avoid == 1:

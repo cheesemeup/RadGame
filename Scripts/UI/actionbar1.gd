@@ -13,11 +13,6 @@ extends HBoxContainer
 @export var slot_12 = self
 
 # spell assignment
-func assign_actionbar1_2():
-	var imagepath = str("res://Assets/Spell_Icons/abyssalshell.png")
-	var image = Image.load_from_file(imagepath)
-	var texture = ImageTexture.create_from_image(image)
-	$actionbar1_2.icon = texture
 func assign_actionbar1_3():
 	var imagepath = str("res://Assets/Spell_Icons/abyssalshell.png")
 	var image = Image.load_from_file(imagepath)
@@ -25,13 +20,6 @@ func assign_actionbar1_3():
 	$actionbar1_3.icon = texture
 	
 # triggering spells with action bar presses
-func _on_actionbar_1_2_pressed():
-	# return if no spell bound
-	if slot_2 == self:
-		print("no spell bound")
-		return
-	# trigger spell scene
-	slot_2.trigger()
 func _on_actionbar_1_3_pressed():
 	# return if no spell bound
 	if slot_3 == self:

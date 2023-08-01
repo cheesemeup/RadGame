@@ -11,9 +11,11 @@ radius = 0.6
 properties/0/path = NodePath(".:position")
 properties/0/spawn = false
 properties/0/sync = true
+properties/0/watch = false
 properties/1/path = NodePath("pivot:rotation")
 properties/1/spawn = false
 properties/1/sync = true
+properties/1/watch = false
 
 [node name="player" type="CharacterBody3D" groups=["friendly", "playergroup"]]
 collision_layer = 2

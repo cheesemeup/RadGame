@@ -33,9 +33,14 @@ func trigger():
 	cd_timer.wait_time = spell_curr["cooldown"]
 	cd_timer.start()
 	on_cd = true
+	# start cd swipe
+	for ab in actionbar:
+		ab.start_cd(spell_curr["cooldown"])
 
 func set_ready():
 	on_cd = false
+	for ab in actionbar:
+		ab.end_cd()
 
 # role swap effects
 func swap_tank():
