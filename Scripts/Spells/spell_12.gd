@@ -39,7 +39,7 @@ func trigger():
 	# apply resource cost
 	sourcenode.stats_curr["resource_current"] = min(sourcenode.stats_curr["resource_current"]-spell_curr["resource_cost"],sourcenode.stats_curr["resource_max"])
 	# send gcd
-	get_parent().send_gcd()
+	get_parent().send_gcd
 	# fire spell
 	Combat.event_heal(spell_curr,sourcenode,spell_target)
 
