@@ -72,6 +72,12 @@ func _ready():
 	$spells/spell_11.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_3"))
 	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_3").\
 						assign_actionbar($spells.get_node("spell_11"))
+	$spells/spell_13.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_4"))
+	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_4").\
+						assign_actionbar($spells.get_node("spell_13"))
+	$spells/spell_14.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_5"))
+	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_5").\
+						assign_actionbar($spells.get_node("spell_14"))
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
@@ -129,13 +135,13 @@ func _physics_process(delta):
 	# rotate direction vector using camera angle
 	var direction = Vector3(cos(2*PI-$camera_rotation.rotation.y)*direction_ur.x - sin(2*PI-$camera_rotation.rotation.y)*direction_ur.z, 0, \
 							sin(2*PI-$camera_rotation.rotation.y)*direction_ur.x + cos(2*PI-$camera_rotation.rotation.y)*direction_ur.z)
-	var speed = stats_curr["speed"]
+#	var speed = stats_curr["speed"]
 	if direction:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+		velocity.x = direction.x * stats_curr["speed"]
+		velocity.z = direction.z * stats_curr["speed"]
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
+		velocity.x = move_toward(velocity.x, 0, stats_curr["speed"])
+		velocity.z = move_toward(velocity.z, 0, stats_curr["speed"])
 	# turn character to match movement direction
 	if direction != Vector3.ZERO:
 		$pivot.look_at(position + direction, Vector3.UP)

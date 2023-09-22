@@ -1,6 +1,6 @@
 extends Node
 
-# Abyssal Shell
+# Deep Current
 var spell_base : Dictionary
 var spell_curr : Dictionary
 var cd_timer = Timer.new()
@@ -9,7 +9,7 @@ var actionbar = []
 
 func _ready():
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://Data/db_spells.json"))
-	spell_base = json_dict["11"]
+	spell_base = json_dict["13"]
 	spell_curr = spell_base.duplicate(true)
 	cd_timer.one_shot = true
 	cd_timer.connect("timeout",set_ready.bind())
@@ -21,14 +21,11 @@ func trigger():
 	if on_cd:
 		print("on cooldown")
 		return
-	# check resource cost
-	if sourcenode.stats_curr["resource_current"] < spell_curr["resource_cost"]:
-		print("insufficient resources")
-		return
-	# apply resource cost
-	sourcenode.stats_curr["resource_current"] = min(sourcenode.stats_curr["resource_current"]-spell_curr["resource_cost"],sourcenode.stats_curr["resource_max"])
-	# fire spell
-	Combat.event_absorb(spell_curr,sourcenode,sourcenode)
+	# send gcd
+	if spell_base["on_gcd"] == 1:
+		get_parent().send_gcd
+	# apply aura
+	Combat.event_aura_general(spell_curr,sourcenode,sourcenode)
 	# cooldown
 	trigger_cd(spell_curr["cooldown"])
 
@@ -48,12 +45,12 @@ func set_ready():
 
 # role swap effects
 func swap_tank():
-	spell_curr["cooldown"] = 60
+	pass
 func swap_heal():
-	spell_curr["cooldown"] = 120
+	pass
 func swap_meleedps():
-	spell_curr["cooldown"] = 120
+	pass
 func swap_rangedps():
-	spell_curr["cooldown"] = 120
-
+	pass
+	
 # talent effects  

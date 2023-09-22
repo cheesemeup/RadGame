@@ -44,9 +44,9 @@ func check_crit(spell,source):
 # PROBABLY REPLACE THIS WITH DIRECT CALLS
 func aura_tick_event(spell,source,target):
 	# this function handles aura ticks, as the structure differs from regular combat events
-	var is_crit : int = 0
-	if spell["can_crit"] == 1:
-		is_crit = check_crit(spell,source)
+#	var is_crit : int = 0
+#	if spell["can_crit"] == 1:
+#		is_crit = check_crit(spell,source)
 	if spell["auratype"] == "damage":
 		event_damage(spell,source,target)
 	elif spell["auratype"] == "heal":
