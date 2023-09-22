@@ -18,4 +18,4 @@ func _ready():
 	spells_curr = spells_base
 
 func interaction(body):
-	Combat.combat_event(spells_curr["0"],self,body)
+	Combat.event_heal(spells_curr["0"],self,body)

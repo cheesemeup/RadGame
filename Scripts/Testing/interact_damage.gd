@@ -18,7 +18,7 @@ func _ready():
 	spells_curr["0"] = json_dict["0"]
 
 func interaction(body):
-	Combat.combat_event(spells_curr["0"],self,body)
+	Combat.event_damage(spells_curr["0"],self,body)
 
 func calculate_stats():
 	pass
