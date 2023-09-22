@@ -44,6 +44,7 @@ func _ready():
 	if not synchronizer.is_multiplayer_authority():
 		return
 	Autoload.player_reference = self
+	print(Autoload.player_reference)
 	player_cam.set_current(true)
 	if multiplayer.is_server():
 		set_model("res://scenes/units/knight_scene.tscn",multiplayer.get_unique_id())
@@ -56,6 +57,9 @@ func _ready():
 	stats_curr = stats_base.duplicate(true) # can't just assign regularly, since that only creates a new pointer to same dict
 	stats_curr.erase("stats_add") # remove modifiers, as they are only needed in base
 	stats_curr.erase("stats_mult")
+	# load spell scenes
+	load_spell_scenes()
+	# a bit of hackyhack
 	# load persistent ui features
 #	Autoload.player_ui_main_reference.load_persistent()
 #	Autoload.player_ui_main_reference.get_node("ui_persistent").playerframe_initialize()
@@ -198,9 +202,9 @@ func targetray(eventposition):
 #		Autoload.player_ui_main_reference.targetframe_remove()
 ###################################################################################################
 # set up spells, auras, absorbs
-#func load_spell_scenes() -> void:
-#	for spellid in stats_base["spell list"]:
-#		$spells.add_child(load("res://Scenes/Spells/spell_"+spellid+".tscn").instantiate())
+func load_spell_scenes() -> void:
+	for spellid in stats_base["spell list"]:
+		$spells.add_child(load("res://scenes/spells/spell_"+spellid+".tscn").instantiate())
 #func sort_absorbs():
 #	pass
 ###################################################################################################
