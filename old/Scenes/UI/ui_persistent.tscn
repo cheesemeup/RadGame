@@ -1,0 +1,606 @@
+[gd_scene load_steps=58 format=3 uid="uid://cq3h183hap1oa"]
+
+[ext_resource type="Script" path="res://old/Scripts/UI/ui_persistent.gd" id="1_6vwfj"]
+[ext_resource type="PackedScene" uid="uid://cmbcuptfuq5bs" path="res://old/Scenes/UI/party_frame.tscn" id="2_vqwiw"]
+[ext_resource type="Script" path="res://old/Scripts/UI/actionbar1.gd" id="3_vp2p3"]
+[ext_resource type="Script" path="res://old/Scripts/UI/actionbar_slot.gd" id="4_vbomy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fttgf"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dwkem"]
+bg_color = Color(0, 0.372549, 0.0784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oefs7"]
+bg_color = Color(0, 0, 1, 1)
+
+[sub_resource type="InputEventAction" id="InputEventAction_c4esi"]
+action = &"actionbar1_1"
+
+[sub_resource type="Shortcut" id="Shortcut_wghh6"]
+events = [SubResource("InputEventAction_c4esi")]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vi86b"]
+size = Vector2(50, 50)
+
+[sub_resource type="InputEventAction" id="InputEventAction_aby75"]
+action = &"actionbar1_2"
+
+[sub_resource type="Shortcut" id="Shortcut_l2u6r"]
+events = [SubResource("InputEventAction_aby75")]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1n75j"]
+size = Vector2(50, 50)
+
+[sub_resource type="InputEventAction" id="InputEventAction_ytbvx"]
+action = &"actionbar1_3"
+
+[sub_resource type="Shortcut" id="Shortcut_okpyk"]
+events = [SubResource("InputEventAction_ytbvx")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_52gkc"]
+action = &"actionbar1_4"
+
+[sub_resource type="Shortcut" id="Shortcut_4k1y8"]
+events = [SubResource("InputEventAction_52gkc")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_1640x"]
+action = &"actionbar1_5"
+
+[sub_resource type="Shortcut" id="Shortcut_vprou"]
+events = [SubResource("InputEventAction_1640x")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_i232q"]
+action = &"actionbar1_6"
+
+[sub_resource type="Shortcut" id="Shortcut_4d2nu"]
+events = [SubResource("InputEventAction_i232q")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_mduip"]
+action = &"actionbar1_7"
+
+[sub_resource type="Shortcut" id="Shortcut_38qg5"]
+events = [SubResource("InputEventAction_mduip")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_jq6jp"]
+action = &"actionbar1_8"
+
+[sub_resource type="Shortcut" id="Shortcut_spofm"]
+events = [SubResource("InputEventAction_jq6jp")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_gho31"]
+action = &"actionbar1_9"
+
+[sub_resource type="Shortcut" id="Shortcut_rkfui"]
+events = [SubResource("InputEventAction_gho31")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_oeeoy"]
+action = &"actionbar1_10"
+
+[sub_resource type="Shortcut" id="Shortcut_1fbsd"]
+events = [SubResource("InputEventAction_oeeoy")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_5gfpq"]
+action = &"actionbar1_11"
+
+[sub_resource type="Shortcut" id="Shortcut_fthb5"]
+events = [SubResource("InputEventAction_5gfpq")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_j8yen"]
+action = &"actionbar1_12"
+
+[sub_resource type="Shortcut" id="Shortcut_1mx7g"]
+events = [SubResource("InputEventAction_j8yen")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_ma0o7"]
+action = &"actionbar2_1"
+
+[sub_resource type="Shortcut" id="Shortcut_qu5nx"]
+events = [SubResource("InputEventAction_ma0o7")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_1mydq"]
+action = &"actionbar2_2"
+
+[sub_resource type="Shortcut" id="Shortcut_lmmjo"]
+events = [SubResource("InputEventAction_1mydq")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_ll8yk"]
+action = &"actionbar2_3"
+
+[sub_resource type="Shortcut" id="Shortcut_yta7b"]
+events = [SubResource("InputEventAction_ll8yk")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_2bvn5"]
+action = &"actionbar2_4"
+
+[sub_resource type="Shortcut" id="Shortcut_5kiid"]
+events = [SubResource("InputEventAction_2bvn5")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_t11m3"]
+action = &"actionbar2_5"
+
+[sub_resource type="Shortcut" id="Shortcut_pcufi"]
+events = [SubResource("InputEventAction_t11m3")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_j3xtq"]
+action = &"actionbar2_6"
+
+[sub_resource type="Shortcut" id="Shortcut_mvd5r"]
+events = [SubResource("InputEventAction_j3xtq")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_0ayin"]
+action = &"actionbar2_7"
+
+[sub_resource type="Shortcut" id="Shortcut_6c7k6"]
+events = [SubResource("InputEventAction_0ayin")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_32i2s"]
+action = &"actionbar2_8"
+
+[sub_resource type="Shortcut" id="Shortcut_haqcw"]
+events = [SubResource("InputEventAction_32i2s")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_6w3x8"]
+action = &"actionbar2_9"
+
+[sub_resource type="Shortcut" id="Shortcut_uh16q"]
+events = [SubResource("InputEventAction_6w3x8")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_qg84s"]
+action = &"actionbar2_10"
+
+[sub_resource type="Shortcut" id="Shortcut_ld2im"]
+events = [SubResource("InputEventAction_qg84s")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_r8a41"]
+action = &"actionbar2_11"
+
+[sub_resource type="Shortcut" id="Shortcut_7823r"]
+events = [SubResource("InputEventAction_r8a41")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_t5lgf"]
+action = &"actionbar2_12"
+
+[sub_resource type="Shortcut" id="Shortcut_2pl06"]
+events = [SubResource("InputEventAction_t5lgf")]
+
+[node name="ui_persistent" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_6vwfj")
+
+[node name="micromenu" type="GridContainer" parent="."]
+layout_direction = 3
+layout_mode = 0
+offset_left = -1920.0
+offset_top = 1027.0
+offset_right = -1760.0
+offset_bottom = 1080.0
+theme_override_constants/h_separation = 5
+columns = 3
+
+[node name="escape_menu_toggle" type="Button" parent="micromenu"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "M
+"
+
+[node name="character_sheet_toggle" type="Button" parent="micromenu"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "C"
+
+[node name="talent_sheet_toggle" type="Button" parent="micromenu"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "T
+"
+
+[node name="raidframes" type="GridContainer" parent="."]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 660.0
+offset_top = 700.0
+offset_right = 660.0
+offset_bottom = 700.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 120
+theme_override_constants/v_separation = 65
+columns = 5
+
+[node name="party_frame" parent="raidframes" instance=ExtResource("2_vqwiw")]
+layout_mode = 2
+
+[node name="playerframe" type="Control" parent="."]
+anchors_preset = 0
+
+[node name="playerframe_hpbar" type="ProgressBar" parent="playerframe"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 700.0
+offset_right = 650.0
+offset_bottom = 780.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fttgf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dwkem")
+value = 65.0
+show_percentage = false
+
+[node name="playerframe_resbar" type="ProgressBar" parent="playerframe"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 780.0
+offset_right = 650.0
+offset_bottom = 800.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fttgf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oefs7")
+value = 85.0
+show_percentage = false
+
+[node name="playerframe_playername" type="Label" parent="playerframe"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 730.0
+offset_right = 520.0
+offset_bottom = 760.0
+vertical_alignment = 1
+clip_text = true
+
+[node name="playerframe_hpvalue" type="Label" parent="playerframe"]
+layout_mode = 0
+offset_left = 530.0
+offset_top = 730.0
+offset_right = 650.0
+offset_bottom = 760.0
+horizontal_alignment = 2
+vertical_alignment = 1
+clip_text = true
+
+[node name="playerframe_resvalue" type="Label" parent="playerframe"]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 780.0
+offset_right = 650.0
+offset_bottom = 800.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+vertical_alignment = 1
+clip_text = true
+
+[node name="actionbars" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="actionbar1" type="HBoxContainer" parent="actionbars"]
+layout_mode = 0
+offset_left = 660.0
+offset_top = 770.0
+offset_right = 710.0
+offset_bottom = 820.0
+theme_override_constants/separation = 0
+script = ExtResource("3_vp2p3")
+
+[node name="actionbar1_1" type="Button" parent="actionbars/actionbar1"]
+editor_description = "3"
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_wghh6")
+alignment = 0
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_1"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_vi86b")
+tint_progress = Color(0, 0, 0, 0.752941)
+
+[node name="actionbar1_2" type="Button" parent="actionbars/actionbar1"]
+editor_description = "5"
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_l2u6r")
+alignment = 0
+expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_2"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
+
+[node name="actionbar1_3" type="Button" parent="actionbars/actionbar1"]
+editor_description = "6"
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_okpyk")
+alignment = 0
+expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_3"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
+
+[node name="actionbar1_4" type="Button" parent="actionbars/actionbar1"]
+editor_description = "7"
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_4k1y8")
+alignment = 0
+expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_4"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
+
+[node name="actionbar1_5" type="Button" parent="actionbars/actionbar1"]
+editor_description = "8"
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_vprou")
+alignment = 0
+expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_5"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
+
+[node name="actionbar1_6" type="Button" parent="actionbars/actionbar1"]
+editor_description = "9"
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_4d2nu")
+alignment = 0
+expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_6"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
+
+[node name="actionbar1_7" type="Button" parent="actionbars/actionbar1"]
+editor_description = "none"
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_38qg5")
+alignment = 0
+expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_7"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
+
+[node name="actionbar1_8" type="Button" parent="actionbars/actionbar1"]
+editor_description = "none"
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_spofm")
+alignment = 0
+expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_8"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
+
+[node name="actionbar1_9" type="Button" parent="actionbars/actionbar1"]
+editor_description = "none"
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_rkfui")
+alignment = 0
+expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_9"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
+
+[node name="actionbar1_10" type="Button" parent="actionbars/actionbar1"]
+editor_description = "none"
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_1fbsd")
+alignment = 0
+expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_10"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
+
+[node name="actionbar1_11" type="Button" parent="actionbars/actionbar1"]
+editor_description = "none"
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_fthb5")
+alignment = 0
+expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_11"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
+
+[node name="actionbar1_12" type="Button" parent="actionbars/actionbar1"]
+editor_description = "none"
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_1mx7g")
+alignment = 0
+expand_icon = true
+script = ExtResource("4_vbomy")
+
+[node name="cooldownswipe" type="TextureProgressBar" parent="actionbars/actionbar1/actionbar1_12"]
+visible = false
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_1n75j")
+tint_progress = Color(0, 0, 0, 0.752941)
+
+[node name="actionbar2" type="HBoxContainer" parent="actionbars"]
+layout_mode = 0
+offset_left = 660.0
+offset_top = 820.0
+offset_right = 1260.0
+offset_bottom = 870.0
+theme_override_constants/separation = 0
+
+[node name="actionbar2_1" type="Button" parent="actionbars/actionbar2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_qu5nx")
+alignment = 0
+
+[node name="actionbar2_2" type="Button" parent="actionbars/actionbar2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_lmmjo")
+alignment = 0
+
+[node name="actionbar2_3" type="Button" parent="actionbars/actionbar2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_yta7b")
+alignment = 0
+
+[node name="actionbar2_4" type="Button" parent="actionbars/actionbar2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_5kiid")
+alignment = 0
+
+[node name="actionbar2_5" type="Button" parent="actionbars/actionbar2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_pcufi")
+alignment = 0
+
+[node name="actionbar2_6" type="Button" parent="actionbars/actionbar2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_mvd5r")
+alignment = 0
+
+[node name="actionbar2_7" type="Button" parent="actionbars/actionbar2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_6c7k6")
+alignment = 0
+
+[node name="actionbar2_8" type="Button" parent="actionbars/actionbar2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_haqcw")
+alignment = 0
+
+[node name="actionbar2_9" type="Button" parent="actionbars/actionbar2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_uh16q")
+alignment = 0
+
+[node name="actionbar2_10" type="Button" parent="actionbars/actionbar2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_ld2im")
+alignment = 0
+
+[node name="actionbar2_11" type="Button" parent="actionbars/actionbar2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_7823r")
+alignment = 0
+
+[node name="actionbar2_12" type="Button" parent="actionbars/actionbar2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+shortcut = SubResource("Shortcut_2pl06")
+alignment = 0
+
+[connection signal="mouse_entered" from="playerframe" to="." method="_on_playerframe_mouse_entered"]
+[connection signal="mouse_exited" from="playerframe" to="." method="_on_playerframe_mouse_exited"]
+[connection signal="mouse_entered" from="playerframe/playerframe_hpbar" to="." method="_on_playerframe_hpbar_mouse_entered"]
+[connection signal="mouse_exited" from="playerframe/playerframe_hpbar" to="." method="_on_playerframe_hpbar_mouse_exited"]
+[connection signal="mouse_entered" from="playerframe/playerframe_resbar" to="." method="_on_playerframe_resbar_mouse_entered"]
+[connection signal="mouse_exited" from="playerframe/playerframe_resbar" to="." method="_on_playerframe_resbar_mouse_exited"]

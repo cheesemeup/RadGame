@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://fscwy7q7op5k"]
-
-[ext_resource type="Script" path="res://Scripts/Spells/spell_10.gd" id="1_4ooux"]
-
-[node name="spell_10" type="Node"]
-script = ExtResource("1_4ooux")

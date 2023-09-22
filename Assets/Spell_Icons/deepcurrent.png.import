@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c607a3yvpu1fn"
-path="res://.godot/imported/deepcurrent.png-9756264dc541b8209f9f65d23565f39a.ctex"
+path="res://.godot/imported/deepcurrent.png-170fd2838581ba1cc99be0b6fb112f1f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Spell_Icons/deepcurrent.png"
-dest_files=["res://.godot/imported/deepcurrent.png-9756264dc541b8209f9f65d23565f39a.ctex"]
+source_file="res://assets/spell_icons/deepcurrent.png"
+dest_files=["res://.godot/imported/deepcurrent.png-170fd2838581ba1cc99be0b6fb112f1f.ctex"]
 
 [params]
 

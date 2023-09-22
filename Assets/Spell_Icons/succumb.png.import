@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0rw2wluqy1hv"
-path="res://.godot/imported/succumb.png-1da94c01e84d1ec33be058956b5f6722.ctex"
+path="res://.godot/imported/succumb.png-dd8221d468b5e91f6b3118b3fb3c848a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Spell_Icons/succumb.png"
-dest_files=["res://.godot/imported/succumb.png-1da94c01e84d1ec33be058956b5f6722.ctex"]
+source_file="res://assets/spell_icons/succumb.png"
+dest_files=["res://.godot/imported/succumb.png-dd8221d468b5e91f6b3118b3fb3c848a.ctex"]
 
 [params]
 

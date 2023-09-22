@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://oqfu77ry4jv0"]
 
-[ext_resource type="Script" path="res://Scripts/main.gd" id="1_e04da"]
-[ext_resource type="Script" path="res://Scripts/UI/handle_ui.gd" id="2_etvht"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_pi1ts"]
+[ext_resource type="Script" path="res://old/Scripts/UI/handle_ui.gd" id="2_2so51"]
 
 [node name="main" type="Node"]
-script = ExtResource("1_e04da")
+script = ExtResource("1_pi1ts")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Scenes/Units/player.tscn")
@@ -21,4 +21,4 @@ offset_right = -1920.0
 offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_etvht")
+script = ExtResource("2_2so51")

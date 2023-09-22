@@ -46,9 +46,9 @@ func _ready():
 	Autoload.player_reference = self
 	player_cam.set_current(true)
 	if multiplayer.is_server():
-		set_model("res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
+		set_model("res://scenes/units/knight_scene.tscn",multiplayer.get_unique_id())
 	else:
-		rpc_id(1,"set_model","res://Scenes/Units/knight_scene.tscn",multiplayer.get_unique_id())
+		rpc_id(1,"set_model","res://scenes/units/knight_scene.tscn",multiplayer.get_unique_id())
 	# load stats and spells
 	var file = "res://Data/db_stats_player.json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
@@ -57,27 +57,27 @@ func _ready():
 	stats_curr.erase("stats_add") # remove modifiers, as they are only needed in base
 	stats_curr.erase("stats_mult")
 	# load persistent ui features
-	Autoload.player_ui_main_reference.load_persistent()
-	Autoload.player_ui_main_reference.get_node("ui_persistent").playerframe_initialize()
-	Autoload.player_ui_main_reference.get_node("ui_persistent").actionbars_initialize()
+#	Autoload.player_ui_main_reference.load_persistent()
+#	Autoload.player_ui_main_reference.get_node("ui_persistent").playerframe_initialize()
+#	Autoload.player_ui_main_reference.get_node("ui_persistent").actionbars_initialize()
 	# load spell scenes
-	load_spell_scenes()
-	# a bit of hackyhackfraudyfraud to test spells, assignment will implemented later
-	$spells/spell_10.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_1"))
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_1").\
-						assign_actionbar($spells.get_node("spell_10"))
-	$spells/spell_12.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_2"))
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_2").\
-						assign_actionbar($spells.get_node("spell_12"))
-	$spells/spell_11.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_3"))
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_3").\
-						assign_actionbar($spells.get_node("spell_11"))
-	$spells/spell_13.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_4"))
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_4").\
-						assign_actionbar($spells.get_node("spell_13"))
-	$spells/spell_14.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_5"))
-	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_5").\
-						assign_actionbar($spells.get_node("spell_14"))
+#	load_spell_scenes()
+#	# a bit of hackyhackfraudyfraud to test spells, assignment will implemented later
+#	$spells/spell_10.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_1"))
+#	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_1").\
+#						assign_actionbar($spells.get_node("spell_10"))
+#	$spells/spell_12.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_2"))
+#	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_2").\
+#						assign_actionbar($spells.get_node("spell_12"))
+#	$spells/spell_11.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_3"))
+#	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_3").\
+#						assign_actionbar($spells.get_node("spell_11"))
+#	$spells/spell_13.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_4"))
+#	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_4").\
+#						assign_actionbar($spells.get_node("spell_13"))
+#	$spells/spell_14.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_5"))
+#	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_5").\
+#						assign_actionbar($spells.get_node("spell_14"))
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():

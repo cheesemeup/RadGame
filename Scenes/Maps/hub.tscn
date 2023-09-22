@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=3 uid="uid://bjr7k3cxd6jyj"]
 
-[ext_resource type="Texture2D" uid="uid://lrcvum58en3o" path="res://Assets/Textures/Road20/road_20_diffuseOriginal.png" id="1_vd7gq"]
-[ext_resource type="Texture2D" uid="uid://bady82sjm01fh" path="res://Assets/Textures/Road20/road_20_height.png" id="2_gjrxn"]
-[ext_resource type="Texture2D" uid="uid://bi41n2al4tnp3" path="res://Assets/Textures/Road20/road_20_metallic.png" id="3_mtq8x"]
-[ext_resource type="Texture2D" uid="uid://htft1bfooc1b" path="res://Assets/Textures/Road20/road_20_normal.png" id="4_mbmjp"]
-[ext_resource type="Texture2D" uid="uid://bn6pymghgq1bk" path="res://Assets/Textures/Road20/road_20_smoothness.png" id="5_qa8ei"]
-[ext_resource type="PackedScene" uid="uid://dwg5lusb6argd" path="res://Scenes/Units/test_npc_friendly.tscn" id="6_50rac"]
-[ext_resource type="PackedScene" uid="uid://i6ufg7x2f1pt" path="res://Scenes/Units/test_npc_hostile.tscn" id="7_fnynw"]
-[ext_resource type="PackedScene" uid="uid://bswgqikmxejv3" path="res://Scenes/Testing/interact_damage.tscn" id="7_i8hkq"]
-[ext_resource type="PackedScene" uid="uid://dohktoymlhhka" path="res://Scenes/Testing/interact_heal.tscn" id="8_eqvn2"]
+[ext_resource type="Texture2D" uid="uid://lrcvum58en3o" path="res://assets/textures/road20/road_20_diffuseOriginal.png" id="1_vd7gq"]
+[ext_resource type="Texture2D" uid="uid://bady82sjm01fh" path="res://assets/textures/road20/road_20_height.png" id="2_gjrxn"]
+[ext_resource type="Texture2D" uid="uid://bi41n2al4tnp3" path="res://assets/textures/road20/road_20_metallic.png" id="3_mtq8x"]
+[ext_resource type="Texture2D" uid="uid://htft1bfooc1b" path="res://assets/textures/road20/road_20_normal.png" id="4_mbmjp"]
+[ext_resource type="Texture2D" uid="uid://bn6pymghgq1bk" path="res://assets/textures/road20/road_20_smoothness.png" id="5_qa8ei"]
+[ext_resource type="PackedScene" uid="uid://dwg5lusb6argd" path="res://old/Scenes/Units/test_npc_friendly.tscn" id="6_50rac"]
+[ext_resource type="PackedScene" uid="uid://i6ufg7x2f1pt" path="res://old/Scenes/Units/test_npc_hostile.tscn" id="7_fnynw"]
+[ext_resource type="PackedScene" uid="uid://bswgqikmxejv3" path="res://old/Scenes/Testing/interact_damage.tscn" id="7_i8hkq"]
+[ext_resource type="PackedScene" uid="uid://dohktoymlhhka" path="res://old/Scenes/Testing/interact_heal.tscn" id="8_eqvn2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ycfok"]
 size = Vector3(20, 2, 20)

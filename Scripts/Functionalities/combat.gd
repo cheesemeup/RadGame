@@ -1,24 +1,9 @@
 extends Node
 
 # preload common auras
-var aura_general = preload("res://Scenes/Auras/aura_general.tscn")
-var aura_absorb = preload("res://Scenes/Auras/aura_absorb.tscn")
+var aura_general = preload("res://scenes/auras/aura_general.tscn")
+var aura_absorb = preload("res://scenes/auras/aura_absorb.tscn")
 
-#func combat_event(spell,source,target):
-#	# check for avoidance if spell is avoidable
-#
-#	# check if crit, if crittable
-#	var is_crit : int = spell["can_crit"] * check_crit(spell,source)
-#	if spell["spelltype"] == "damage":
-#		var value = event_damage(spell,source,target)
-#		return value
-#	if spell["spelltype"] == "heal":
-#		event_heal(spell,source,target)
-#	elif spell["spelltype"] == "aura":
-#		event_aura_general(spell,source,target)
-#	elif spell["spelltype"] == "absorb":
-#		event_absorb(spell,source,target)
-	
 func check_avoidance(target):
 	var avoid : int = 0
 	# get random number
@@ -29,7 +14,7 @@ func check_avoidance(target):
 	if p <= target.stats_curr["avoidance"]:
 		avoid = 1
 	return avoid
-	
+
 func check_crit(spell,source):
 	var is_crit : int = 0
 	# get random number
@@ -40,18 +25,18 @@ func check_crit(spell,source):
 	if p <= source.stats_curr["crit_chance"]+spell["crit_chance_modifier"]:
 		is_crit = 1
 	return is_crit
-	
-# PROBABLY REPLACE THIS WITH DIRECT CALLS
-func aura_tick_event(spell,source,target):
-	# this function handles aura ticks, as the structure differs from regular combat events
-#	var is_crit : int = 0
-#	if spell["can_crit"] == 1:
-#		is_crit = check_crit(spell,source)
-	if spell["auratype"] == "damage":
-		event_damage(spell,source,target)
-	elif spell["auratype"] == "heal":
-		event_heal(spell,source,target)
-	
+
+## PROBABLY REPLACE THIS WITH DIRECT CALLS
+#func aura_tick_event(spell,source,target):
+#	# this function handles aura ticks, as the structure differs from regular combat events
+##	var is_crit : int = 0
+##	if spell["can_crit"] == 1:
+##		is_crit = check_crit(spell,source)
+#	if spell["auratype"] == "damage":
+#		event_damage(spell,source,target)
+#	elif spell["auratype"] == "heal":
+#		event_heal(spell,source,target)
+#
 func event_damage(spell,source,target,value:=-1):
 	# check avoidance
 	var avoid = spell["avoidable"] * check_avoidance(target)
@@ -76,7 +61,7 @@ func event_damage(spell,source,target,value:=-1):
 	# deal damage through absorbs
 	apply_damage(spell,value,source,target,is_crit)
 	return value
-	
+
 func event_heal(spell,source,target,value:=-1):
 	# use value as noncrit if prescribed
 	if value != -1:
@@ -97,7 +82,7 @@ func event_heal(spell,source,target,value:=-1):
 	target.stats_curr["health_current"] = min(target.stats_curr["health_current"]+value,target.stats_curr["health_max"])
 	write_to_log_heal(spell,source,target,is_crit,value)
 	return value
-	
+
 func event_aura_general(spell,source,target):
 	# check if target already has same aura from same source active for hot/dot
 	if spell["auratype"] == "damage" or spell["auratype"] == "heal":

@@ -8,7 +8,7 @@ func _ready():
 	multiplayer.peer_connected.connect(spawn_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 	multiplayer.connected_to_server.connect(load_map_on_spawn)
-	var mainmenu = preload("res://Scenes/UI/mainmenu.tscn")
+	var mainmenu = preload("res://scenes/ui/mainmenu.tscn")
 	mainmenu = mainmenu.instantiate()
 	add_child(mainmenu)
 	
@@ -38,7 +38,7 @@ func start_joining(server):
 func spawn_player(peer_id: int):
 	if not multiplayer.is_server():
 		return
-	var new_player = preload("res://Scenes/Units/player.tscn").instantiate()
+	var new_player = preload("res://scenes/units/player.tscn").instantiate()
 	new_player.name = str(peer_id)
 	$players.add_child(new_player,true)
 	

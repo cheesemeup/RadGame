@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cwd7ol8erfsq7"]
 
-[ext_resource type="Script" path="res://Scripts/Auras/aura_general.gd" id="1_0m2wf"]
+[ext_resource type="Script" path="res://scripts/auras/aura_general.gd" id="1_0m2wf"]
 
 [node name="aura_general" type="Node"]
 script = ExtResource("1_0m2wf")

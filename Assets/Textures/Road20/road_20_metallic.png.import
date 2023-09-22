@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bi41n2al4tnp3"
-path.s3tc="res://.godot/imported/road_20_metallic.png-627045187e1c767d31cbc24025a5e173.s3tc.ctex"
+path.s3tc="res://.godot/imported/road_20_metallic.png-e91957574b150a7e5be202c322a58f6d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Textures/Road20/road_20_metallic.png"
-dest_files=["res://.godot/imported/road_20_metallic.png-627045187e1c767d31cbc24025a5e173.s3tc.ctex"]
+source_file="res://assets/textures/road20/road_20_metallic.png"
+dest_files=["res://.godot/imported/road_20_metallic.png-e91957574b150a7e5be202c322a58f6d.s3tc.ctex"]
 
 [params]
 

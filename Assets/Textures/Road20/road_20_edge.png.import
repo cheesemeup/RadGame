@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0c3fi11mfl2l"
-path="res://.godot/imported/road_20_edge.png-94274b56d66cf8f4bdefcaf3a75cb457.ctex"
+path="res://.godot/imported/road_20_edge.png-d50e5866dbd58c21b39808ef71353f6f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/Road20/road_20_edge.png"
-dest_files=["res://.godot/imported/road_20_edge.png-94274b56d66cf8f4bdefcaf3a75cb457.ctex"]
+source_file="res://assets/textures/road20/road_20_edge.png"
+dest_files=["res://.godot/imported/road_20_edge.png-d50e5866dbd58c21b39808ef71353f6f.ctex"]
 
 [params]
 

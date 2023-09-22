@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dd03p5ivr2mdq"
-path="res://.godot/imported/KayKit Animated Character_v1.2.fbx-bb054ac109846897d75abbe642504799.scn"
+path="res://.godot/imported/KayKit Animated Character_v1.2.fbx-d8ff49bcaf76b18933aa059cbcb60483.scn"
 
 [deps]
 
-source_file="res://Assets/Units/Players/Animations/KayKit Animated Character_v1.2.fbx"
-dest_files=["res://.godot/imported/KayKit Animated Character_v1.2.fbx-bb054ac109846897d75abbe642504799.scn"]
+source_file="res://assets/units/players/animations/KayKit Animated Character_v1.2.fbx"
+dest_files=["res://.godot/imported/KayKit Animated Character_v1.2.fbx-d8ff49bcaf76b18933aa059cbcb60483.scn"]
 
 [params]
 
