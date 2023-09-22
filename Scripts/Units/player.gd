@@ -91,14 +91,15 @@ func _input(event):
 func _unhandled_input(event):
 	#targeting
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-		# targeting ray
-		var result = targetray(event.position)
-		targeting(result)
+		print("re-implement targeting ray in player script")
+#		# targeting ray
+#		var result = targetray(event.position)
+#		targeting(result)
 
-func _process(delta):
+func _process(_delta):
 	# resource regen
-	if stats_curr["resource_regen"] != 0:
-		stats_curr["resource_current"] = max(min(stats_curr["resource_current"]+stats_curr["resource_regen"]*delta,stats_curr["resource_max"]),0)
+#	if stats_curr["resource_regen"] != 0:
+#		stats_curr["resource_current"] = max(min(stats_curr["resource_current"]+stats_curr["resource_regen"]*delta,stats_curr["resource_max"]),0)
 	# interaction target sorting
 	if interactables_in_range.size() > 0:
 		var distance = 10000.
@@ -121,11 +122,14 @@ func _physics_process(delta):
 	space_state = get_world_3d().direct_space_state
 	if not synchronizer.is_multiplayer_authority(): 
 		return
+	handle_movement(delta)
+
+
+func handle_movement(delta):
 	# jumping
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Jump")
 		velocity.y = jump_velocity
-	# apply gravity if in air
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	# movement
@@ -135,7 +139,6 @@ func _physics_process(delta):
 	# rotate direction vector using camera angle
 	var direction = Vector3(cos(2*PI-$camera_rotation.rotation.y)*direction_ur.x - sin(2*PI-$camera_rotation.rotation.y)*direction_ur.z, 0, \
 							sin(2*PI-$camera_rotation.rotation.y)*direction_ur.x + cos(2*PI-$camera_rotation.rotation.y)*direction_ur.z)
-#	var speed = stats_curr["speed"]
 	if direction:
 		velocity.x = direction.x * stats_curr["speed"]
 		velocity.z = direction.z * stats_curr["speed"]
@@ -157,6 +160,7 @@ func _physics_process(delta):
 				Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
 	move_and_slide()
 
+
 # set player model
 @rpc("any_peer")
 func set_model(model_name,peer_id):
@@ -177,75 +181,75 @@ func targetray(eventposition):
 	var result = space_state.intersect_ray(query)
 	return result
 	
-func targeting(result) -> void:
-	# unset target and return if no collider is hit (like when clicking the sky)
-	if not result.has("collider"):
-		unit_selectedtarget = null
-		Autoload.player_ui_main_reference.targetframe_remove()
-		return
-	# set target if player, npc or hostile is hit by ray
-	if result.collider.is_in_group("playergroup") or result.collider.is_in_group("npcgroup_targetable") or\
-	result.collider.is_in_group("hostilegroup_targetable"):
-		unit_selectedtarget = result.collider
-		Autoload.player_ui_main_reference.targetframe_initialize()
-	# unset target if no valid target is hit by ray
-	else:
-		unit_selectedtarget = null
-		Autoload.player_ui_main_reference.targetframe_remove()
+#func targeting(result) -> void:
+#	# unset target and return if no collider is hit (like when clicking the sky)
+#	if not result.has("collider"):
+#		unit_selectedtarget = null
+#		Autoload.player_ui_main_reference.targetframe_remove()
+#		return
+#	# set target if player, npc or hostile is hit by ray
+#	if result.collider.is_in_group("playergroup") or result.collider.is_in_group("npcgroup_targetable") or\
+#	result.collider.is_in_group("hostilegroup_targetable"):
+#		unit_selectedtarget = result.collider
+#		Autoload.player_ui_main_reference.targetframe_initialize()
+#	# unset target if no valid target is hit by ray
+#	else:
+#		unit_selectedtarget = null
+#		Autoload.player_ui_main_reference.targetframe_remove()
 ###################################################################################################
 # set up spells, auras, absorbs
-func load_spell_scenes() -> void:
-	for spellid in stats_base["spell list"]:
-		$spells.add_child(load("res://Scenes/Spells/spell_"+spellid+".tscn").instantiate())
-func sort_absorbs():
-	pass
+#func load_spell_scenes() -> void:
+#	for spellid in stats_base["spell list"]:
+#		$spells.add_child(load("res://Scenes/Spells/spell_"+spellid+".tscn").instantiate())
+#func sort_absorbs():
+#	pass
 ###################################################################################################
 # get spell target
-func get_spell_target(spell):
-	var spell_target = null
-	var ray_result = null
-	# set target to either mouseovered unit frame or ray collider
-	if unit_mouseover_target != null:
-		spell_target = unit_mouseover_target
-	else:
-		ray_result = targetray(get_viewport().get_mouse_position())
-		# check if target ray result has a collider, and check if collider is a valid result
-		if ray_result.has("collider") and (ray_result.collider.is_in_group("playergroup") or \
-			ray_result.collider.is_in_group("npcgroup_targetable") or\
-			ray_result.collider.is_in_group("hostilegroup_targetable")):
-				spell_target = ray_result.collider
-	# check legality of mouseover target
-	if spell_target == null or not spell_target.is_in_group(spell["targetgroup"]):
-		# illegal mouseover target, set target to selected target
-		spell_target = unit_selectedtarget
-		# check legality of selected target
-		if spell_target == null or not spell_target.is_in_group(spell["targetgroup"]):
-			# illegal selected target as well, cannot use spell, so return
-			return "no_legal_target"
-	# return legal target
-	return spell_target
-
-# check target and send combat event from action bar
-func send_combat_event(spell) -> void:
-	var spell_target = null
-	var ray_result = null
-	# set target to either mouseovered unit frame or ray collider
-	if unit_mouseover_target != null:
-		spell_target = unit_mouseover_target
-	else:
-		ray_result = targetray(get_viewport().get_mouse_position())
-		# check if target ray result has a collider, and check if collider is a valid result
-		if ray_result.has("collider") and (ray_result.collider.is_in_group("playergroup") or \
-			ray_result.collider.is_in_group("npcgroup_targetable") or\
-			ray_result.collider.is_in_group("hostilegroup_targetable")):
-				spell_target = ray_result.collider
-	# check legality of mouseover target
-	if spell_target == null or not spell_target.is_in_group(spell["targetgroup"]):
-		# illegal mouseover target, set target to selected target
-		spell_target = unit_selectedtarget
-		# check legality of selected target
-		if spell_target == null or not spell_target.is_in_group(spell["targetgroup"]):
-			# illegal selected target as well, cannot use spell, so return
-			return
-	# legal target found, either from mouseover or selected, so send combat event
-	Combat.combat_event(spell,self,spell_target)
+#func get_spell_target(spell):
+#	var spell_target = null
+#	var ray_result = null
+#	# set target to either mouseovered unit frame or ray collider
+#	if unit_mouseover_target != null:
+#		spell_target = unit_mouseover_target
+#	else:
+#		ray_result = targetray(get_viewport().get_mouse_position())
+#		# check if target ray result has a collider, and check if collider is a valid result
+#		if ray_result.has("collider") and (ray_result.collider.is_in_group("playergroup") or \
+#			ray_result.collider.is_in_group("npcgroup_targetable") or\
+#			ray_result.collider.is_in_group("hostilegroup_targetable")):
+#				spell_target = ray_result.collider
+#	# check legality of mouseover target
+#	if spell_target == null or not spell_target.is_in_group(spell["targetgroup"]):
+#		# illegal mouseover target, set target to selected target
+#		spell_target = unit_selectedtarget
+#		# check legality of selected target
+#		if spell_target == null or not spell_target.is_in_group(spell["targetgroup"]):
+#			# illegal selected target as well, cannot use spell, so return
+#			return "no_legal_target"
+#	# return legal target
+#	return spell_target
+#
+## check target and send combat event from action bar
+#func send_combat_event(spell) -> void:
+#	var spell_target = null
+#	var ray_result = null
+#	# set target to either mouseovered unit frame or ray collider
+#	if unit_mouseover_target != null:
+#		spell_target = unit_mouseover_target
+#	else:
+#		ray_result = targetray(get_viewport().get_mouse_position())
+#		# check if target ray result has a collider, and check if collider is a valid result
+#		if ray_result.has("collider") and (ray_result.collider.is_in_group("playergroup") or \
+#			ray_result.collider.is_in_group("npcgroup_targetable") or\
+#			ray_result.collider.is_in_group("hostilegroup_targetable")):
+#				spell_target = ray_result.collider
+#	# check legality of mouseover target
+#	if spell_target == null or not spell_target.is_in_group(spell["targetgroup"]):
+#		# illegal mouseover target, set target to selected target
+#		spell_target = unit_selectedtarget
+#		# check legality of selected target
+#		if spell_target == null or not spell_target.is_in_group(spell["targetgroup"]):
+#			# illegal selected target as well, cannot use spell, so return
+#			return
+#	# legal target found, either from mouseover or selected, so send combat event
+#	Combat.combat_event(spell,self,spell_target)

@@ -44,10 +44,10 @@ script = ExtResource("3_8hejm")
 
 [node name="absorbs" type="Node" parent="."]
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Scenes/Units/knight_scene.tscn")
-spawn_path = NodePath("../pivot")
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_rfg56")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/units/knight_scene.tscn")
+spawn_path = NodePath("../pivot")
