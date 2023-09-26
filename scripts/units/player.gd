@@ -15,7 +15,7 @@ var stats_curr : Dictionary
 var aura_dict : Dictionary
 var absorb_dict : Dictionary
 
-# targeting vars
+# targeting vars - NEEDS REWORK FOR MULTIPLAYER
 var space_state
 var unit_selectedtarget = null
 var unit_mouseover_target = null
