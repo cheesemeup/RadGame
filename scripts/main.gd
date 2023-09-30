@@ -12,7 +12,6 @@ func _ready():
 	mainmenu = mainmenu.instantiate()
 	add_child(mainmenu)
 
-
 func start_hosting():
 	# delete any multiplayer peer that might exist:
 	multiplayer.multiplayer_peer = null
@@ -41,14 +40,12 @@ func spawn_player(peer_id: int):
 	var new_player = preload("res://scenes/units/player.tscn").instantiate()
 	new_player.name = str(peer_id)
 	$players.add_child(new_player,true)
-	
 
 func remove_player(peer_id):
 	print("remove_player triggered")
 	var player = get_node_or_null("players/"+str(peer_id))
 	if multiplayer.is_server() and player:
 		player.queue_free()
-	
 
 ##############################################################################################################################
 # Map loading and unloading

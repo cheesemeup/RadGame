@@ -2,14 +2,18 @@ extends CharacterBody3D
 
 class_name BaseUnit
 
+# combat
 var stats
 var aura_dict: Dictionary
 var absorb_dict: Dictionary
 
-func initialize(unittype,UnitID):
+# state
+var is_dead: bool = false
+var is_moving: bool = false
+
+func initialize_base_unit(unittype,UnitID):
 	# stats
 	stat_init(unittype,UnitID)
-	pass
 
 func stat_init(unit_type: String,UnitID: String) -> void:
 	# read stats dict from file
@@ -17,14 +21,26 @@ func stat_init(unit_type: String,UnitID: String) -> void:
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	var stats_dict = json_dict[UnitID]
 	# instance stat object
-	stats = StatsBase.new(stats_dict)
+	stats = Stats.new(stats_dict)
 	pass
+
+class Stats:
+	var stats_base: StatsBase
+	var stats_current: StatsBase
+	var stats_mult: StatMult
+	var stats_add: StatAdd
+	
+	func _init(stat_dict):
+		stats_base = StatsBase.new(stat_dict)
+		stats_current = stats_base
+		stats_mult = StatMult.new()
+		stats_add = StatAdd.new()
 
 class StatsBase:
 	var name: String
 	var unit_class: String
 	var size: float
-	var spell_list: Array[String]
+	var spell_list: Array
 	var speed: float
 	var health_max: int
 	var health_current: int
@@ -35,23 +51,34 @@ class StatsBase:
 	var primary: int
 	var avoidance: float
 	var crit_chance: float
-	var damage_modifier_physical: float
-	var damage_modifier_magic: float
-	var heal_modifier_physical: float
-	var heal_modifier_magic: float
-	var defense_modifier_physical: float
-	var defense_modifier_magic: float
-	var heal_taken_modifier_physical: float
-	var heal_taken_modifier_magic: float
-	var stat_mult: StatMult
-	var stat_add: StatAdd
+	var damage_modifier: Array = [0,0]
+	var heal_modifier: Array = [0,0]
+	var defense_modifier: Array = [0,0]
+	var heal_taken_modifier: Array = [0,0]
 	
-	func _init(stat_dict,stat_mods):
+	func _init(stat_dict):
 		self.name = stat_dict["name"]
-		
-		if stat_mods:
-			stat_mult = StatMult.new()
-			stat_add = StatAdd.new()
+		self.unit_class = stat_dict["unit_class"]
+		self.size = stat_dict["size"]
+		self.spell_list = stat_dict["spell_list"]
+		self.speed = stat_dict["speed"]
+		self.health_max = stat_dict["health_max"]
+		self.health_current = stat_dict["health_max"]
+		self.resource_type = stat_dict["resource_type"]
+		self.resource_max = stat_dict["resource_max"]
+		self.resource_current = stat_dict["resource_current"]
+		self.resource_regen = stat_dict["resource_regen"]
+		self.primary = stat_dict["primary"]
+		self.avoidance = stat_dict["avoidance"]
+		self.crit_chance = stat_dict["crit_chance"]
+		self.damage_modifier[0] = stat_dict["damage_modifier"]["physical"]
+		self.damage_modifier[1] = stat_dict["damage_modifier"]["magic"]
+		self.heal_modifier[0] = stat_dict["heal_modifier"]["physical"]
+		self.heal_modifier[1] = stat_dict["heal_modifier"]["magic"]
+		self.defense_modifier[0] = stat_dict["defense_modifier"]["physical"]
+		self.defense_modifier[1] = stat_dict["defense_modifier"]["magic"]
+		self.heal_taken_modifier[0] = stat_dict["heal_taken_modifier"]["physical"]
+		self.heal_taken_modifier[1] = stat_dict["heal_taken_modifier"]["magic"]
 	
 class StatMult:
 	var speed: Dictionary = {}

@@ -1,10 +1,9 @@
-extends CharacterBody3D
+extends BaseUnit
 
 var stats_base: Dictionary
 @export var stats_curr: Dictionary
 var spells_base: Dictionary
 @export var spells_curr: Dictionary
-var aura_dict : Dictionary
 
 func _ready():
 	# load stats and spells

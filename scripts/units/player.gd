@@ -23,10 +23,6 @@ var current_interact_target = null
 # other
 var esc_level = 0
 
-# states
-var is_moving : bool = false
-var is_dead : bool = false
-
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -39,11 +35,14 @@ func _enter_tree() -> void:
 		$MultiplayerSynchronizer.set_multiplayer_authority(id)
 
 func _ready():
+	# TODO: read save file
+	
+	if multiplayer.is_server():
+		ready_server()
+	if synchronizer.is_multiplayer_authority():
+		ready_authority()
 	if not synchronizer.is_multiplayer_authority():
 		return
-	Autoload.player_reference = self
-	print(Autoload.player_reference)
-	player_cam.set_current(true)
 	if multiplayer.is_server():
 		set_model("res://scenes/units/knight_scene.tscn",multiplayer.get_unique_id())
 	else:
@@ -80,6 +79,15 @@ func _ready():
 #	$spells/spell_14.actionbar.append(Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_5"))
 #	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_5").\
 #						assign_actionbar($spells.get_node("spell_14"))
+
+func ready_server():
+	# ready function for the server
+	initialize_base_unit("player","0")
+
+func ready_authority():
+	# ready function for the multiplayer authority
+	Autoload.player_reference = self
+	player_cam.set_current(true)
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
