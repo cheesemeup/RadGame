@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends BaseUnit
 
 
 @onready var player_cam = $camera_rotation/camera_arm/player_camera
@@ -12,8 +12,6 @@ const jump_velocity = 4.5
 # stats
 var stats_base : Dictionary
 var stats_curr : Dictionary
-var aura_dict : Dictionary
-var absorb_dict : Dictionary
 
 # targeting vars - NEEDS REWORK FOR MULTIPLAYER
 var space_state
@@ -58,7 +56,7 @@ func _ready():
 	stats_curr.erase("stats_add") # remove modifiers, as they are only needed in base
 	stats_curr.erase("stats_mult")
 	# load spell scenes
-	load_spell_scenes()
+	# load_spell_scenes()
 	# a bit of hackyhack
 	# load persistent ui features
 #	Autoload.player_ui_main_reference.load_persistent()

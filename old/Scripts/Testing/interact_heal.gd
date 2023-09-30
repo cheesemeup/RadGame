@@ -8,7 +8,7 @@ var aura_dict : Dictionary
 
 func _ready():
 	# load stats and spells
-	var file = "res://Data/db_stats.json"
+	var file = "res://Data/db_stats_npc.json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	stats_base = json_dict["1"]
 	stats_curr = stats_base
