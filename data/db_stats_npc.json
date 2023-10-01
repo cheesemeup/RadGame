@@ -1,6 +1,6 @@
 {
   "0":{
-	"name":"Signpost Damage",
+	"unit_name":"Signpost Damage",
 	"size":0,
 	"health_max":100,
 	"health_current":100,
@@ -46,7 +46,7 @@
 	},
   },
   "1":{
-	"name":"Signpost Heal",
+	"unit_name":"Signpost Heal",
 	"size":0,
 	"health_max":100,
 	"healht_current":100,
@@ -92,7 +92,7 @@
 	},
   },
 "2":{
-	"name":"Test NPC hostile",
+	"unit_name":"Test NPC hostile",
 	"size":0.6,
 	"health_max":1000,
 	"health_current":1000,
@@ -138,7 +138,7 @@
 	},
   },
 "3":{
-	"name":"Test NPC friendly",
+	"unit_name":"Test NPC friendly",
 	"size":0.6,
 	"health_max":1000,
 	"health_current":1000,

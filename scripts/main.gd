@@ -47,7 +47,10 @@ func remove_player(peer_id):
 		
 func initialize_persistent_ui():
 	# add persistent ui child node
-	pass
+	var ui_scene = load("res://scenes/ui/ui_main.tscn")
+	ui_scene = ui_scene.instantiate()
+	add_child(ui_scene)
+	Autoload.player_ui_main_reference = ui_scene
 
 ##############################################################################################################################
 # Map loading and unloading

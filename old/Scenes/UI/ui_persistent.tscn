@@ -1,6 +1,6 @@
 [gd_scene load_steps=58 format=3 uid="uid://cq3h183hap1oa"]
 
-[ext_resource type="Script" path="res://old/Scripts/UI/ui_persistent.gd" id="1_6vwfj"]
+[ext_resource type="Script" path="res://old/Scripts/UI/ui_persistent.gd" id="1_65sse"]
 [ext_resource type="PackedScene" uid="uid://cmbcuptfuq5bs" path="res://old/Scenes/UI/party_frame.tscn" id="2_vqwiw"]
 [ext_resource type="Script" path="res://old/Scripts/UI/actionbar1.gd" id="3_vp2p3"]
 [ext_resource type="Script" path="res://old/Scripts/UI/actionbar_slot.gd" id="4_vbomy"]
@@ -167,7 +167,7 @@ events = [SubResource("InputEventAction_t5lgf")]
 [node name="ui_persistent" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_6vwfj")
+script = ExtResource("1_65sse")
 
 [node name="micromenu" type="GridContainer" parent="."]
 layout_direction = 3

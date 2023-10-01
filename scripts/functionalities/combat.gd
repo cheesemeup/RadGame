@@ -178,7 +178,7 @@ func write_to_log_damage(spell,source,target,is_crit,value):
 	if is_crit:
 		ending = " (critical)."
 	print("%s hits %s with %s for %.f %s damage%s"%\
-		[source.stats_curr["name"],target.stats_curr["name"],\
+		[source.stats_curr["unit_name"],target.stats_curr["unit_name"],\
 		 spell["name"],value,spell["damagetype"],ending])
 func write_to_log_absorb(spell,source,target,absorb,is_crit,value):
 	var ending : String = "."
@@ -192,13 +192,13 @@ func write_to_log_heal(spell,source,target,is_crit,value):
 	if is_crit:
 		ending = " (critical)."
 	print("%s heals %s with %s for %.f %s healing%s"%\
-		[source.stats_curr["name"],target.stats_curr["name"],\
+		[source.stats_curr["unit_name"],target.stats_curr["unit_name"],\
 		 spell["name"],value,spell["healtype"],ending])
 func write_to_log_avoid(spell,source,target):
-	print("%s has avoided %s from %s."%[target.stats_curr["name"],spell["name"],source.stats_curr["name"]])
+	print("%s has avoided %s from %s."%[target.stats_curr["unit_name"],spell["name"],source.stats_curr["unit_name"]])
 func write_to_log_aura(spell,source,target):
-	print("%s applies %s to %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
+	print("%s applies %s to %s"%[source.stats_curr["unit_name"],spell["name"],target.stats_curr["unit_name"]])
 func write_to_log_aura_reapply(spell,source,target):
-	print("%s reapplies %s to %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
+	print("%s reapplies %s to %s"%[source.stats_curr["unit_name"],spell["name"],target.stats_curr["unit_name"]])
 func write_to_log_aura_fade(spell,source,target):
-	print("%s's %s faded from %s"%[source.stats_curr["name"],spell["name"],target.stats_curr["name"]])
+	print("%s's %s faded from %s"%[source.stats_curr["unit_name"],spell["name"],target.stats_curr["unit_name"]])

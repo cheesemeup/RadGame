@@ -88,6 +88,8 @@ func ready_authority():
 	# ready function for the multiplayer authority
 	Autoload.player_reference = self
 	player_cam.set_current(true)
+	if self.name == "1":
+		stats.stats_current.health_current = 500
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
