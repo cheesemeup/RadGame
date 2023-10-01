@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cr1nkejevuvku"]
-
-[ext_resource type="PackedScene" uid="uid://dd03p5ivr2mdq" path="res://Assets/Units/Players/Animations/KayKit Animated Character_v1.2.fbx" id="1_u2uch"]
-
-[node name="KayKit Animated Character_v12" instance=ExtResource("1_u2uch")]

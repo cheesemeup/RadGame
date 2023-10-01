@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://csvtde4yhaahr"]
+
+[ext_resource type="Script" path="res://scripts/auras/aura_absorb.gd" id="1_rtb0w"]
+
+[node name="aura_absorb" type="Node"]
+script = ExtResource("1_rtb0w")

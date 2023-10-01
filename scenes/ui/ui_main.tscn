@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpsb33hrxfd0i"]
+
+[ext_resource type="Script" path="res://scripts/ui/ui_main.gd" id="1_svqc8"]
+[ext_resource type="Script" path="res://scripts/ui/playerframe.gd" id="2_yh7li"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ubrq"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p24td"]
+bg_color = Color(0, 0.372549, 0.0784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1w82l"]
+bg_color = Color(0, 0, 1, 1)
+
+[node name="ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_svqc8")
+
+[node name="ui_persistent" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="playerframe" type="Control" parent="ui_persistent"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_yh7li")
+
+[node name="playerframe_hpbar" type="ProgressBar" parent="ui_persistent/playerframe"]
+offset_left = 400.0
+offset_top = 700.0
+offset_right = 650.0
+offset_bottom = 780.0
+theme_override_styles/background = SubResource("StyleBoxFlat_6ubrq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_p24td")
+value = 65.0
+show_percentage = false
+
+[node name="playerframe_resbar" type="ProgressBar" parent="ui_persistent/playerframe"]
+offset_left = 400.0
+offset_top = 780.0
+offset_right = 650.0
+offset_bottom = 800.0
+theme_override_styles/background = SubResource("StyleBoxFlat_6ubrq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1w82l")
+value = 85.0
+show_percentage = false
+
+[node name="playerframe_playername" type="Label" parent="ui_persistent/playerframe"]
+offset_left = 400.0
+offset_top = 730.0
+offset_right = 520.0
+offset_bottom = 760.0
+vertical_alignment = 1
+clip_text = true
+
+[node name="playerframe_hpvalue" type="Label" parent="ui_persistent/playerframe"]
+offset_left = 530.0
+offset_top = 730.0
+offset_right = 650.0
+offset_bottom = 760.0
+horizontal_alignment = 2
+vertical_alignment = 1
+clip_text = true
+
+[node name="playerframe_resvalue" type="Label" parent="ui_persistent/playerframe"]
+offset_left = 600.0
+offset_top = 780.0
+offset_right = 650.0
+offset_bottom = 800.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+vertical_alignment = 1
+clip_text = true

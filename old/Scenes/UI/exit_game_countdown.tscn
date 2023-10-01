@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=3 uid="uid://c68okokrucx45"]
+
+[ext_resource type="Script" path="res://old/Scripts/UI/exit_game_countdown.gd" id="1_t86x3"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u7ang"]
+size = Vector2(200, 100)
+orientation = 2
+
+[sub_resource type="Gradient" id="Gradient_iv7ej"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.055794, 1)
+colors = PackedColorArray(0.108721, 0.108721, 0.108721, 1, 0.407056, 0.407056, 0.407056, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qt0s8"]
+gradient = SubResource("Gradient_iv7ej")
+fill_to = Vector2(1, 1)
+
+[node name="exit_game_countdown" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 860.0
+offset_top = 200.0
+offset_right = 1060.0
+offset_bottom = 300.0
+script = ExtResource("1_t86x3")
+
+[node name="escape_menu_backdrop" type="MeshInstance2D" parent="."]
+light_mask = 0
+z_index = 1
+position = Vector2(100, 50)
+mesh = SubResource("PlaneMesh_u7ang")
+texture = SubResource("GradientTexture2D_qt0s8")
+
+[node name="exit_text" type="Label" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -45.0
+offset_right = 24.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit in"
+horizontal_alignment = 1
+
+[node name="exit_countdown" type="Label" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -20.0
+offset_right = 24.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10"
+horizontal_alignment = 1
+
+[node name="exit_now" type="Button" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = 10.0
+offset_right = -5.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit Now"
+
+[node name="cancel" type="Button" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 85.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Cancel"
+
+[connection signal="pressed" from="exit_now" to="." method="_on_exit_now_pressed"]
+[connection signal="pressed" from="cancel" to="." method="_on_cancel_pressed"]

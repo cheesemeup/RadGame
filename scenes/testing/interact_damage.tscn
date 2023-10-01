@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://bswgqikmxejv3"]
+
+[ext_resource type="Script" path="res://scripts/testing/interact_damage.gd" id="1_7tgrq"]
+[ext_resource type="PackedScene" uid="uid://c6gu4pl7to5fs" path="res://scenes/functionalities/interactable.tscn" id="1_lwm3x"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_goaoj"]
+top_radius = 0.15
+bottom_radius = 0.15
+
+[sub_resource type="BoxMesh" id="BoxMesh_a6dhk"]
+size = Vector3(1.4, 0.7, 0.3)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hq05e"]
+radius = 0.2
+
+[node name="interact_damage" type="CharacterBody3D"]
+script = ExtResource("1_7tgrq")
+
+[node name="pole" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_goaoj")
+skeleton = NodePath("")
+
+[node name="sign" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+mesh = SubResource("BoxMesh_a6dhk")
+skeleton = NodePath("")
+
+[node name="sign_text" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0.16)
+pixel_size = 0.01
+text = "Damage"
+
+[node name="interact_prompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+visible = false
+pixel_size = 0.01
+text = "Interact [E]"
+
+[node name="interactable" parent="." instance=ExtResource("1_lwm3x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="auras" type="Node" parent="."]
+
+[node name="collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_hq05e")
