@@ -47,7 +47,7 @@ func _ready():
 	else:
 		rpc_id(1,"set_model","res://scenes/units/knight_scene.tscn",multiplayer.get_unique_id())
 	# load stats and spells
-	var file = "res://Data/db_stats_player.json"
+	var file = "res://data/db_stats_player.json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	stats_base = json_dict["0"]
 	stats_curr = stats_base.duplicate(true) # can't just assign regularly, since that only creates a new pointer to same dict
