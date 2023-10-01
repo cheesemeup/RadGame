@@ -36,7 +36,6 @@ func _enter_tree() -> void:
 
 func _ready():
 	# TODO: read save file
-	
 	if multiplayer.is_server():
 		ready_server()
 	if synchronizer.is_multiplayer_authority():
@@ -151,11 +150,11 @@ func handle_movement(delta):
 	var direction = Vector3(cos(2*PI-$camera_rotation.rotation.y)*direction_ur.x - sin(2*PI-$camera_rotation.rotation.y)*direction_ur.z, 0, \
 							sin(2*PI-$camera_rotation.rotation.y)*direction_ur.x + cos(2*PI-$camera_rotation.rotation.y)*direction_ur.z)
 	if direction:
-		velocity.x = direction.x * stats_curr["speed"]
-		velocity.z = direction.z * stats_curr["speed"]
+		velocity.x = direction.x * stats.stats_current.speed
+		velocity.z = direction.z * stats.stats_current.speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, stats_curr["speed"])
-		velocity.z = move_toward(velocity.z, 0, stats_curr["speed"])
+		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
+		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
 	# turn character to match movement direction
 	if direction != Vector3.ZERO:
 		$pivot.look_at(position + direction, Vector3.UP)
