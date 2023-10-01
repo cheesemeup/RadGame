@@ -37,7 +37,7 @@ class Stats:
 		stats_add = StatAdd.new()
 
 class StatsBase:
-	var name: String
+	var unit_name: String
 	var unit_class: String
 	var size: float
 	var spell_list: Array
@@ -57,7 +57,7 @@ class StatsBase:
 	var heal_taken_modifier: Array = [0,0]
 	
 	func _init(stat_dict):
-		self.name = stat_dict["name"]
+		self.unit_name = stat_dict["unit_name"]
 		self.unit_class = stat_dict["unit_class"]
 		self.size = stat_dict["size"]
 		self.spell_list = stat_dict["spell_list"]

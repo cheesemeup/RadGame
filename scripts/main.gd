@@ -22,17 +22,15 @@ func start_hosting():
 	# get our multiplayer UID (as server this should always be "1" in Godot 4)
 	var player_uid = multiplayer.get_unique_id()
 	spawn_player(player_uid)
-	Autoload.current_map_path = "hub.tscn"
-	var new_map_load = load("res://scenes/maps/"+Autoload.current_map_path)
-	var map_instance = new_map_load.instantiate()
-	Autoload.current_map_reference = map_instance
-	$maps.add_child(map_instance)
+	current_map_reply("hub.tscn")
+	initialize_persistent_ui()
 
 func start_joining(server):
 	multiplayer.multiplayer_peer = null
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(server, PORT)
 	multiplayer.multiplayer_peer = peer
+	initialize_persistent_ui()
 
 func spawn_player(peer_id: int):
 	if not multiplayer.is_server():
@@ -46,6 +44,10 @@ func remove_player(peer_id):
 	var player = get_node_or_null("players/"+str(peer_id))
 	if multiplayer.is_server() and player:
 		player.queue_free()
+		
+func initialize_persistent_ui():
+	# add persistent ui child node
+	pass
 
 ##############################################################################################################################
 # Map loading and unloading
@@ -61,7 +63,7 @@ func current_map_reply(reply):
 	var map_instance = new_map_load.instantiate()
 	Autoload.current_map_reference = map_instance
 	add_child(map_instance)
-	Autoload.current_map_path = "hub.tscn"
+	Autoload.current_map_path = reply
 
 #func swap_map_init(new_map):
 #	# if only one player, load map
