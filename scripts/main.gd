@@ -3,6 +3,8 @@ extends Node
 
 var PORT = 4242
 
+# add dedicated server option
+
 func _ready():
 	Autoload.main_reference = self
 	multiplayer.peer_connected.connect(spawn_player)

@@ -136,7 +136,6 @@ func _physics_process(delta):
 		return
 	handle_movement(delta)
 
-
 func handle_movement(delta):
 	# jumping
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -171,7 +170,6 @@ func handle_movement(delta):
 		if Autoload.playermodel_reference != null:
 				Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
 	move_and_slide()
-
 
 # set player model
 @rpc("any_peer")
