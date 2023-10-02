@@ -29,12 +29,30 @@ func map_swap():
 ### COMBAT
 ###############################################################
 @rpc("any_peer")
-func request_combat_event():
+func request_combat_event_targeted():
+	# get spell info
+	
+	# check resource
+	
 	# check target legality
 	
 	# check range
 	
+	# on success, trigger cd on source
+	
+	# fire spell
+	pass
+
+func request_combat_event_aoe():
 	# check resource
+	
+	# create target area
+	
+	# check target legality
+	
+	# on success, trigger cd on source
+	
+	# fire spell on all targets
 	pass
 
 func request_combat_tick_event():

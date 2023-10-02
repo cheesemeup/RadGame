@@ -16,6 +16,10 @@ properties/1/path = NodePath("pivot:rotation")
 properties/1/spawn = false
 properties/1/sync = true
 properties/1/watch = false
+properties/2/path = NodePath(".:stats.stats_current")
+properties/2/spawn = false
+properties/2/sync = true
+properties/2/watch = false
 
 [node name="player" type="CharacterBody3D" groups=["friendly", "playergroup"]]
 collision_layer = 2
