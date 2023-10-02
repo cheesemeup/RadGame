@@ -28,3 +28,14 @@ func map_swap():
 ###############################################################
 ### COMBAT
 ###############################################################
+@rpc("any_peer")
+func request_combat_event():
+	# check target legality
+	
+	# check range
+	
+	# check resource
+	pass
+
+func request_combat_tick_event():
+	pass
