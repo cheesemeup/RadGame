@@ -34,7 +34,7 @@ func start_joining(server):
 	peer.create_client(server, PORT)
 	multiplayer.multiplayer_peer = peer
 	initialize_persistent_ui()
-
+ 
 func spawn_player(peer_id: int):
 	if not multiplayer.is_server():
 		return
