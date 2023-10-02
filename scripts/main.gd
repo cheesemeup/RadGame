@@ -4,6 +4,9 @@ extends Node
 var PORT = 4242
 
 func _ready():
+	# return if dedicated server
+	if "--server" in OS.get_cmdline_args():
+		return
 	Autoload.main_reference = self
 	multiplayer.peer_connected.connect(spawn_player)
 	multiplayer.peer_disconnected.connect(remove_player)
@@ -25,13 +28,13 @@ func start_hosting():
 	current_map_reply("hub.tscn")
 	initialize_persistent_ui()
 
-func start_joining(server):
+func start_joining(server): 
 	multiplayer.multiplayer_peer = null
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(server, PORT)
 	multiplayer.multiplayer_peer = peer
 	initialize_persistent_ui()
-
+ 
 func spawn_player(peer_id: int):
 	if not multiplayer.is_server():
 		return
@@ -62,7 +65,7 @@ func current_map_query(peer_id):
 	rpc_id(peer_id,"current_map_reply",Autoload.current_map_path)
 @rpc("authority")
 func current_map_reply(reply):
-	var new_map_load = load("res://Scenes/Maps/"+reply)
+	var new_map_load = load("res://scenes/maps/"+reply)
 	var map_instance = new_map_load.instantiate()
 	Autoload.current_map_reference = map_instance
 	add_child(map_instance)

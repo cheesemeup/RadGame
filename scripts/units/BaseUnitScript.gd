@@ -17,7 +17,7 @@ func initialize_base_unit(unittype,UnitID):
 
 func stat_init(unit_type: String,UnitID: String) -> void:
 	# read stats dict from file
-	var file = "res://Data/db_stats_"+unit_type+".json"
+	var file = "res://data/db_stats_"+unit_type+".json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	var stats_dict = json_dict[UnitID]
 	# instance stat object

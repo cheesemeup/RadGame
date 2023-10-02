@@ -36,7 +36,6 @@ func _enter_tree() -> void:
 
 func _ready():
 	# TODO: read save file
-	
 	if multiplayer.is_server():
 		ready_server()
 	if synchronizer.is_multiplayer_authority():
@@ -48,7 +47,7 @@ func _ready():
 	else:
 		rpc_id(1,"set_model","res://scenes/units/knight_scene.tscn",multiplayer.get_unique_id())
 	# load stats and spells
-	var file = "res://Data/db_stats_player.json"
+	var file = "res://data/db_stats_player.json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	stats_base = json_dict["0"]
 	stats_curr = stats_base.duplicate(true) # can't just assign regularly, since that only creates a new pointer to same dict
@@ -136,7 +135,6 @@ func _physics_process(delta):
 		return
 	handle_movement(delta)
 
-
 func handle_movement(delta):
 	# jumping
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -152,11 +150,11 @@ func handle_movement(delta):
 	var direction = Vector3(cos(2*PI-$camera_rotation.rotation.y)*direction_ur.x - sin(2*PI-$camera_rotation.rotation.y)*direction_ur.z, 0, \
 							sin(2*PI-$camera_rotation.rotation.y)*direction_ur.x + cos(2*PI-$camera_rotation.rotation.y)*direction_ur.z)
 	if direction:
-		velocity.x = direction.x * stats_curr["speed"]
-		velocity.z = direction.z * stats_curr["speed"]
+		velocity.x = direction.x * stats.stats_current.speed
+		velocity.z = direction.z * stats.stats_current.speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, stats_curr["speed"])
-		velocity.z = move_toward(velocity.z, 0, stats_curr["speed"])
+		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
+		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
 	# turn character to match movement direction
 	if direction != Vector3.ZERO:
 		$pivot.look_at(position + direction, Vector3.UP)
@@ -171,7 +169,6 @@ func handle_movement(delta):
 		if Autoload.playermodel_reference != null:
 				Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
 	move_and_slide()
-
 
 # set player model
 @rpc("any_peer")
