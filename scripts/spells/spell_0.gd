@@ -11,5 +11,6 @@ func _ready():
 	spell_base = json_dict["0"]
 	spell_curr = spell_base.duplicate(true)
 
-func trigger():
-	get_parent().get_parent().send_combat_event(spell_curr)
+func trigger(target):
+	# 
+	pass

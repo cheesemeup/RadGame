@@ -97,6 +97,7 @@ func _input(event):
 		Autoload.player_ui_main_reference.esc_menu()
 	if event.is_action_pressed("interact"):
 		if current_interact_target != null:
+			#rpc_id(1,"Serverscript.request_interaction",())
 			current_interact_target.interaction(self)
 
 func _unhandled_input(event):

@@ -26,12 +26,24 @@ func map_swap():
 	pass
 
 ###############################################################
+### INTERACTION
+###############################################################
+@rpc("any_peer","call_remote")
+func request_interaction(source,target):
+	# player requests an interaction with an interactable
+	# check distance
+	if source.global_transform.origin.distance_to(target.global_transform.origin) > \
+		target.CollisionShape3D.shape.radius:
+		return
+	# interact
+	target.interaction(source)
+	pass
+
+###############################################################
 ### COMBAT
 ###############################################################
 @rpc("any_peer")
-func request_combat_event_targeted():
-	# get spell info
-	
+func request_combat_event_targeted(source,target,spell):
 	# check resource
 	
 	# check target legality
