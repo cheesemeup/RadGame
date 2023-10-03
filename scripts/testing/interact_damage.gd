@@ -18,6 +18,3 @@ func _ready():
 
 func interaction(body):
 	Combat.event_damage(spells_curr["0"],self,body)
-
-func calculate_stats():
-	pass

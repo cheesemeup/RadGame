@@ -4,6 +4,50 @@ extends Node
 var aura_general = preload("res://scenes/auras/aura_general.tscn")
 var aura_absorb = preload("res://scenes/auras/aura_absorb.tscn")
 
+###############################################################
+### COMBAT EVENTS
+###############################################################
+func combat_event_damage(spell,source,target):
+	var is_avoid = spell["avoidable"] * check_avoidance(target)
+	var is_crit = spell["can_crit"] * check_crit(spell,source)
+	var value = damage_value(spell,source,target,is_crit)
+	apply_damage(spell,value,source,target,is_crit)
+func combat_event_damage_prescribed(spell,source,target,value):
+	var is_avoid = spell["avoidable"] * check_avoidance(target)
+	var is_crit = spell["can_crit"] * check_crit(spell,source)
+	apply_damage(spell,value,source,target,is_crit)
+
+func combat_event_heal(spell,source,target):
+	var avoid = spell["avoidable"] * check_avoidance(target)
+	pass
+func combat_event_heal_prescribed(spell,source,target):
+	pass
+
+#func apply_damage(spell,value,source,target,is_crit):
+#	pass
+#func apply_heal(spell,value,source,target,is_crit):
+#	pass
+
+###############################################################
+### RNG CHECKS
+###############################################################
+
+###############################################################
+### UTILITY
+###############################################################
+func damage_value(spell,source,target,is_crit):
+	var crit_modifier = 1. + is_crit * (1. + spell["crit_damage_modifier"])
+	var value = int(floor(source.stats_curr[spell["valuebase"]] *\
+				spell["primary_modifier"] *\
+				source.stats.stats_current.damage_modifier[spell["damagetype"]] * \
+				target.stats.stats_current.defense_modifier[spell["damagetype"]] * \
+				crit_modifier))
+	return value
+
+###############################################################
+### LOG
+###############################################################
+
 func check_avoidance(target):
 	var avoid : int = 0
 	# get random number
@@ -26,17 +70,6 @@ func check_crit(spell,source):
 		is_crit = 1
 	return is_crit
 
-## PROBABLY REPLACE THIS WITH DIRECT CALLS
-#func aura_tick_event(spell,source,target):
-#	# this function handles aura ticks, as the structure differs from regular combat events
-##	var is_crit : int = 0
-##	if spell["can_crit"] == 1:
-##		is_crit = check_crit(spell,source)
-#	if spell["auratype"] == "damage":
-#		event_damage(spell,source,target)
-#	elif spell["auratype"] == "heal":
-#		event_heal(spell,source,target)
-#
 func event_damage(spell,source,target,value:=-1):
 	# check avoidance
 	var avoid = spell["avoidable"] * check_avoidance(target)
@@ -65,7 +98,7 @@ func event_damage(spell,source,target,value:=-1):
 func event_heal(spell,source,target,value:=-1):
 	# use value as noncrit if prescribed
 	if value != -1:
-		target.stats_curr["health_current"] = min(target.stats_curr["health_current"]+value,target.stats_curr["health_max"])
+		target.stats.stats_current.health_current = min(target.stats.stats_current.health_current+value,target.stats.stats_current.health_max)
 		write_to_log_heal(spell,source,target,0,value)
 		return value
 	# check for crit
@@ -79,7 +112,7 @@ func event_heal(spell,source,target,value:=-1):
 				source.stats_curr["heal_modifier"][spell["healtype"]] * \
 				target.stats_curr["heal_taken_modifier"][spell["healtype"]] * \
 				crit_modifier))
-	target.stats_curr["health_current"] = min(target.stats_curr["health_current"]+value,target.stats_curr["health_max"])
+	target.stats.stats_current.health_current = min(target.stats.stats_current.health_current+value,target.stats.stats_current.health_max)
 	write_to_log_heal(spell,source,target,is_crit,value)
 	return value
 
@@ -137,7 +170,7 @@ func apply_damage(spell,value,source,target,is_crit):
 			write_to_log_absorb(spell,source,target,absorb,is_crit,absorb.absorb_value)
 			absorb.queue_free()
 	# deal unabsorbed damage
-	target.stats_curr["health_current"] = max(target.stats_curr["health_current"]-value,0)
+	target.stats.stats_current.health_current = max(target.stats.stats_current.health_current-value,0)
 	write_to_log_damage(spell,source,target,is_crit,value,)
 
 ### stat calculations

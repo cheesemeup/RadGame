@@ -16,6 +16,6 @@ func _ready():
 	spells_base["2"] = json_dict["2"]
 	spells_curr = spells_base.duplicate(true)
 
-func _process(_delta):
-	if stats_curr["health_current"] < stats_curr["health_max"]/2:
-		Combat.event_heal(spells_curr["2"],self,self)
+#func _process(_delta):
+#	if stats_curr["health_current"] < stats_curr["health_max"]/2:
+#		Combat.event_heal(spells_curr["2"],self,self)
