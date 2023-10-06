@@ -2,16 +2,12 @@ extends BaseUnit
 
 
 @onready var player_cam = $camera_rotation/camera_arm/player_camera
-@onready var synchronizer = $MultiplayerSynchronizer
+@onready var synchronizer = $mpsynchronizer
 
 var playermodel_reference = null
 
 #const speed = 10.0
 const jump_velocity = 4.5
-
-# stats
-var stats_base : Dictionary
-var stats_curr : Dictionary
 
 # targeting vars - NEEDS REWORK FOR MULTIPLAYER
 var space_state
@@ -32,27 +28,19 @@ func _enter_tree() -> void:
 	if str(name).is_valid_int():
 		var id := str(name).to_int()
 		# Before ready, the variable `multiplayer_synchronizer` is not set yet
-		$MultiplayerSynchronizer.set_multiplayer_authority(id)
+		$mpsynchronizer.set_multiplayer_authority(id)
 
 func _ready():
 	# TODO: read save file
 	if multiplayer.is_server():
 		ready_server()
-	if synchronizer.is_multiplayer_authority():
-		ready_authority()
 	if not synchronizer.is_multiplayer_authority():
 		return
+	ready_authority()
 	if multiplayer.is_server():
 		set_model("res://scenes/units/knight_scene.tscn",multiplayer.get_unique_id())
 	else:
 		rpc_id(1,"set_model","res://scenes/units/knight_scene.tscn",multiplayer.get_unique_id())
-	# load stats and spells
-	var file = "res://data/db_stats_player.json"
-	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
-	stats_base = json_dict["0"]
-	stats_curr = stats_base.duplicate(true) # can't just assign regularly, since that only creates a new pointer to same dict
-	stats_curr.erase("stats_add") # remove modifiers, as they are only needed in base
-	stats_curr.erase("stats_mult")
 	# load spell scenes
 	# load_spell_scenes()
 	# a bit of hackyhack
@@ -87,8 +75,6 @@ func ready_authority():
 	# ready function for the multiplayer authority
 	Autoload.player_reference = self
 	player_cam.set_current(true)
-	if self.name == "1":
-		stats.stats_current.health_current = 500
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
@@ -97,8 +83,7 @@ func _input(event):
 		Autoload.player_ui_main_reference.esc_menu()
 	if event.is_action_pressed("interact"):
 		if current_interact_target != null:
-			#rpc_id(1,"Serverscript.request_interaction",())
-			current_interact_target.interaction(self)
+			current_interact_target.interaction_start(self.name)
 
 func _unhandled_input(event):
 	#targeting
@@ -208,9 +193,6 @@ func targetray(eventposition):
 #		Autoload.player_ui_main_reference.targetframe_remove()
 ###################################################################################################
 # set up spells, auras, absorbs
-func load_spell_scenes() -> void:
-	for spellid in stats_base["spell list"]:
-		$spells.add_child(load("res://scenes/spells/spell_"+spellid+".tscn").instantiate())
 #func sort_absorbs():
 #	pass
 ###################################################################################################

@@ -1,16 +1,9 @@
-extends Node
-
-# NOT FUNCTIONAL
-
 # Signpost Damage
-var spell_base : Dictionary
-var spell_curr : Dictionary
+extends BaseSpell
 
 func _ready():
-	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://Data/db_spells.json"))
-	spell_base = json_dict["0"]
-	spell_curr = spell_base.duplicate(true)
+	initialize_base_spell("0")
 
-func trigger(target):
-	# 
-	pass
+func trigger(source,target):
+	# request combat event from server
+	Serverscript.request_combat_event_targeted(source,target,spell_current)

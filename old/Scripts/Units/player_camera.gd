@@ -10,9 +10,8 @@ var h_acceleration = 10
 var v_acceleration = 10
 var mouse_position
 
-
 func _input(event):
-	if not %MultiplayerSynchronizer.is_multiplayer_authority(): return
+	if not %mpsynchronizer.is_multiplayer_authority(): return
 	# move camera if rightlick pressed and mouse moves
 	if event is InputEventMouseMotion and Input.is_action_pressed("rightclick"):
 		camrot_h += -event.relative.x * h_sensitivity

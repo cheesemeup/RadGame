@@ -3,7 +3,7 @@ extends CharacterBody3D
 class_name BaseUnit
 
 # combat
-var stats
+var stats: Stats
 var aura_dict: Dictionary
 var absorb_dict: Dictionary
 
@@ -14,14 +14,24 @@ var is_moving: bool = false
 func initialize_base_unit(unittype,UnitID):
 	# stats
 	stat_init(unittype,UnitID)
+	# spells
+	spell_init(self.stats.stats_current.spell_list)
 
-func stat_init(unit_type: String,UnitID: String) -> void:
+func stat_init(unit_type: String,unit_id: String) -> void:
 	# read stats dict from file
 	var file = "res://data/db_stats_"+unit_type+".json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
-	var stats_dict = json_dict[UnitID]
-	# instance stat object
+	var stats_dict = json_dict[unit_id]
+	# instantiate stat object
 	stats = Stats.new(stats_dict)
+
+func spell_init(spell_list):
+	# add spells to spell container
+	for spell in spell_list:
+		var spell_scene = load("res://scenes/spells/spell_%s.tscn" % spell)
+		spell_scene = spell_scene.instantiate()
+		$spells.add_child(spell_scene)
+	
 	pass
 
 class Stats:

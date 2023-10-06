@@ -7,7 +7,6 @@ func _on_body_entered(body):
 	body.interactables_in_range.append(self)
 	print("in range: ",body.interactables_in_range)
 
-
 func _on_body_exited(body):
 	if not body.is_in_group("playergroup"):
 		return
@@ -19,12 +18,16 @@ func _on_body_exited(body):
 
 func show_interact_popup():
 	$"../interact_prompt".visible = true
-	return
 	
 func hide_interact_popup():
 	$"../interact_prompt".visible = false
-	return
 
-func interaction(body):
-	print("starting interaction")
-	$"../".interaction(body)
+func interaction_start(bodyname):
+	# request interaction on server
+	rpc_id(1,"request_interaction",bodyname)
+
+@rpc("any_peer","call_remote")
+func request_interaction(bodyname):
+	if not multiplayer.is_server():
+		return
+	Serverscript.request_interaction(bodyname,self.get_parent().name)

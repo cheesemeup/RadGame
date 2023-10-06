@@ -29,27 +29,6 @@
 	"heal_taken_modifier":{
 		"physical":1,
 		"magic":1,
-	},
-	"stat_mult":{
-		"speed":{},
-		"health_max":{},
-		"resource_max":{},
-		"primary":{},
-		"damage_modifier_physical":{},
-		"damage_modifier_magic":{},
-		"heal_modifier_physical":{},
-		"heal_modifier_magic":{},
-		"defense_modifier_physical":{},
-		"defense_modifier_magic":{},
-		"healing_taken_modifier_physical":{},
-		"healing_taken_modifier_magic":{},
-	},
-	"stat_add":{
-		"health_max":{},
-		"resource_max":{},
-		"primary":{},
-		"avoidance":{},
-		"crit_chance":{},
-	},
+	}
 }
 }
