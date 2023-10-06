@@ -12,10 +12,8 @@ func _ready():
 func initialize_base_spell(spell_id: String):
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
 	var spell_dict = json_dict[spell_id]
-	match spell_dict["type"]:
-		"damage":
-			spell_base = Spell.new(spell_dict)
-			spell_current = spell_base
+	spell_base = Spell.new(spell_dict)
+	spell_current = spell_base
 
 class Spell:
 	var spell_name

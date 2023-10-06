@@ -28,19 +28,20 @@ func start_hosting():
 	current_map_reply("hub.tscn")
 	initialize_persistent_ui()
 
-func start_joining(server): 
-	multiplayer.multiplayer_peer = null
-	var peer = ENetMultiplayerPeer.new()
-	peer.create_client(server, PORT)
-	multiplayer.multiplayer_peer = peer
-	initialize_persistent_ui()
+#func start_joining(server): 
+#	multiplayer.multiplayer_peer = null
+#	var peer = ENetMultiplayerPeer.new()
+#	peer.create_client(server, PORT)
+#	multiplayer.multiplayer_peer = peer
  
 func spawn_player(peer_id: int):
 	if not multiplayer.is_server():
 		return
 	var new_player = preload("res://scenes/units/player.tscn").instantiate()
 	new_player.name = str(peer_id)
+	new_player.player = peer_id
 	$players.add_child(new_player,true)
+	initialize_persistent_ui()
 
 func remove_player(peer_id):
 	print("remove_player triggered")

@@ -3,6 +3,10 @@ extends BaseUnit
 
 @onready var player_cam = $camera_rotation/camera_arm/player_camera
 @onready var synchronizer = $mpsynchronizer
+@export var player := 1 :
+		set(id):
+			player = id
+			$player_input.set_multiplayer_authority(id)
 
 var playermodel_reference = null
 
@@ -21,16 +25,18 @@ var esc_level = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+@onready var input = $player_input
 
-func _enter_tree() -> void:
-	# We need to set the authority before entering the tree, because by then,
-	# we already have started sending data.
-	if str(name).is_valid_int():
-		var id := str(name).to_int()
-		# Before ready, the variable `multiplayer_synchronizer` is not set yet
-		$mpsynchronizer.set_multiplayer_authority(id)
+#func _enter_tree() -> void:
+#	# We need to set the authority before entering the tree, because by then,
+#	# we already have started sending data.
+#	if str(name).is_valid_int():
+#		var id := str(name).to_int()
+#		# Before ready, the variable `multiplayer_synchronizer` is not set yet
+#		$mpsynchronizer.set_multiplayer_authority(id)
 
 func _ready():
+	# REWORK ALL
 	# TODO: read save file
 	if multiplayer.is_server():
 		ready_server()
@@ -131,10 +137,10 @@ func handle_movement(delta):
 	# movement
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	# unrotated direction vector
-	var direction_ur = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction_ur = (Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	# rotate direction vector using camera angle
-	var direction = Vector3(cos(2*PI-$camera_rotation.rotation.y)*direction_ur.x - sin(2*PI-$camera_rotation.rotation.y)*direction_ur.z, 0, \
-							sin(2*PI-$camera_rotation.rotation.y)*direction_ur.x + cos(2*PI-$camera_rotation.rotation.y)*direction_ur.z)
+	var direction = Vector3(cos(-$camera_rotation.rotation.y)*direction_ur.x - sin(-$camera_rotation.rotation.y)*direction_ur.z, 0, \
+							sin(-$camera_rotation.rotation.y)*direction_ur.x + cos(-$camera_rotation.rotation.y)*direction_ur.z)
 	if direction:
 		velocity.x = direction.x * stats.stats_current.speed
 		velocity.z = direction.z * stats.stats_current.speed
@@ -155,6 +161,24 @@ func handle_movement(delta):
 		if Autoload.playermodel_reference != null:
 				Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
 	move_and_slide()
+	###################
+	### NEW
+#	# falling
+#	if not is_on_floor():
+#		velocity.y -= gravity * delta
+#	# jumping
+#	if input.jumping and is_on_floor():
+#		velocity.y = jump_velocity
+#	input.jumping = false
+#	# movement
+#	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
+#	move_and_slide()
+#	if direction:
+#		velocity.x = direction.x * stats.stats_current.speed
+#		velocity.z = direction.z * stats.stats_current.speed
+#	else:
+#		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
+#		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
 
 # set player model
 @rpc("any_peer")
