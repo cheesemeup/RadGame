@@ -5,10 +5,14 @@ class_name BaseSpell
 var spell_base: Spell
 var spell_current: Spell
 var result_strings
+var cd_timer = Timer.new()
+var on_cd = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	cd_timer.one_shot = true
+	cd_timer.connect("timeout",set_ready.bind())
+	add_child(cd_timer)
 
 func initialize_base_spell(spell_id: String):
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
@@ -20,6 +24,18 @@ func initialize_base_spell(spell_id: String):
 		"invalid target",
 		"out of range"
 	]
+
+func trigger_cd(duration):
+	# check if current cooldown exceeds requested cooldown
+	if cd_timer.time_left > duration:
+		return
+	# start timer
+	cd_timer.wait_time = duration
+	cd_timer.start()
+	on_cd = true
+
+func set_ready():
+	on_cd = false
 
 class Spell:
 	var spell_name

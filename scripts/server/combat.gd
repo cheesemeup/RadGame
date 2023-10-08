@@ -8,7 +8,6 @@ var aura_absorb = preload("res://scenes/auras/aura_absorb.tscn")
 ### COMBAT EVENTS
 ###############################################################
 func combat_event_unprescribed(spell,source,target):
-	# avoidance
 	if combat_event_rng_check(spell.is_avoidable,target.stats.stats_current.avoidance,spell.avoidance_modifier):
 		write_log_avoid(source.unit_name,target.unit_name,spell.spell_name)
 		return 1
@@ -19,22 +18,13 @@ func combat_event_unprescribed(spell,source,target):
 	apply_health_change(target,value)
 	write_log_health_change(source.unit_name,target.unit_name,spell,value,is_crit)
 	return 0
-func combat_event_damage_prescribed(spell,source,target,value):
-	var is_avoid = spell["avoidable"] * check_avoidance(target)
-	var is_crit = spell["can_crit"] * check_crit(spell,source)
-	apply_damage(spell,value,source,target,is_crit)
-
-func combat_event_heal(spell,source,target):
-	var avoid = spell["avoidable"] * check_avoidance(target)
-	pass
-func combat_event_heal_prescribed(spell,source,target):
-	pass
-
-#func apply_damage(spell,value,source,target,is_crit):
-#	pass
-#func apply_heal(spell,value,source,target,is_crit):
-#	pass
-
+func combat_event_prescribed(spell,source,target,value,is_crit):
+	if combat_event_rng_check(spell.is_avoidable,target.stats.stats_current.avoidance,spell.avoidance_modifier):
+		write_log_avoid(source.unit_name,target.unit_name,spell.spell_name)
+		return 1
+	apply_health_change(target,value)
+	write_log_health_change(source.unit_name,target.unit_name,spell,value,is_crit)
+	return 0
 ###############################################################
 ### RNG CHECKS
 ###############################################################
