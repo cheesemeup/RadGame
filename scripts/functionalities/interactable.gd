@@ -30,4 +30,6 @@ func interaction_start(bodyname):
 func request_interaction(bodyname):
 	if not multiplayer.is_server():
 		return
-	Serverscript.request_interaction(bodyname,self.get_parent().name)
+	var result = Serverscript.request_interaction(bodyname,self.get_parent().name)
+	if result == 4:
+		print("interactable out of range")

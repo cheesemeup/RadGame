@@ -28,41 +28,39 @@ func map_swap():
 ###############################################################
 ### INTERACTION
 ###############################################################
-@rpc("any_peer","call_remote")
 func request_interaction(sourcename,targetname):
 	# convert names to references
 	var source = $root/players.get_child(sourcename)
-	var target = $root/interactables.get_child(targetname)
-	# check distance (as previous "check" comes from client, not server)
+	var target = $root/maps.get_child(0).get_node("interactable_container").get_node(targetname)
+	# check distance
 	if source.global_transform.origin.distance_to(target.global_transform.origin) > \
 		target.interactable.collision_shape.shape.radius:
-		return
+		return 4
 	# interact
-	target.interaction(source)
-
+	target.interaction(target)
 ###############################################################
 ### COMBAT
 ###############################################################
-@rpc("any_peer")
 func request_combat_event_targeted(source,target,spell):
 	# check resource
 	if source.stats.stats_current.resource_current < spell.resource_cost:
-		return "insufficient resources"
+		return 2
 	# check target legality
+	if target == null:
+		return 3
 	var valid_group = false
 	for group in spell.targetgroup:
 		if target.is_in_group(group):
 			valid_group = true
 	if not valid_group:
-		return "invalid target"
+		return 3
 	# check range
 	if source.global_transform.origin.distance_to(target.global_transform.origin) > \
 		spell.range:
-		return
+		return 4
 	# on success, trigger cd on source
-	
-	# fire spell
-	pass
+	var result = Combat.combat_event_unprescribed(source,target,spell)
+	return result
 
 func request_combat_event_aoe():
 	# check resource

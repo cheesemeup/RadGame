@@ -30,7 +30,7 @@ func spell_init(spell_list):
 	for spell in spell_list:
 		var spell_scene = load("res://scenes/spells/spell_%s.tscn" % spell)
 		spell_scene = spell_scene.instantiate()
-		$spells.add_child(spell_scene)
+		$spell_container.add_child(spell_scene)
 	
 	pass
 
@@ -61,6 +61,7 @@ class StatsBase:
 	var primary: int
 	var avoidance: float
 	var crit_chance: float
+	var modifier: Array = [[[0,0],[0,0]],[[0,0],[0,0]]]
 	var damage_modifier: Array = [0,0]
 	var heal_modifier: Array = [0,0]
 	var defense_modifier: Array = [0,0]

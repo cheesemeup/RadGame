@@ -12,10 +12,6 @@ script = ExtResource("1_pi1ts")
 _spawnable_scenes = PackedStringArray("res://scenes/units/player.tscn")
 spawn_path = NodePath("..")
 
-[node name="npcs" type="Node" parent="."]
-
-[node name="interactables" type="Node" parent="."]
-
 [node name="maps" type="Node" parent="."]
 
 [node name="ui" type="Control" parent="."]

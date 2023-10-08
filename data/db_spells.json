@@ -1,13 +1,13 @@
 {
   "0":{
 	"spell_name":"Signpost Damage",
-	"type":"damage",
+	"event_type":0,
 	"resource_cost":0,
 	"cooldown":0,
 	"on_gcd":1,
 	"range":0,
 	"targetgroup":["player"],
-	"effect_type":"physical",
+	"effect_type":0,
 	"valuebase":"primary",
 	"base_modifier":1,
 	"casttime":0,

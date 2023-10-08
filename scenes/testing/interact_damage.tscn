@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bswgqikmxejv3"]
+[gd_scene load_steps=8 format=3 uid="uid://bswgqikmxejv3"]
 
 [ext_resource type="Script" path="res://scripts/testing/interact_damage.gd" id="1_7tgrq"]
 [ext_resource type="PackedScene" uid="uid://c6gu4pl7to5fs" path="res://scenes/functionalities/interactable.tscn" id="1_lwm3x"]
+[ext_resource type="PackedScene" uid="uid://drmxovwynq1fp" path="res://scenes/functionalities/spell_container.tscn" id="3_b0h3q"]
 [ext_resource type="PackedScene" uid="uid://c7w6drai61jnw" path="res://scenes/spells/spell_0.tscn" id="3_tsefa"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_goaoj"]
@@ -43,11 +44,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 0
 collision_mask = 2
 
+[node name="spell_container" parent="." instance=ExtResource("3_b0h3q")]
+
+[node name="spell_0" parent="spell_container" instance=ExtResource("3_tsefa")]
+
 [node name="auras" type="Node" parent="."]
-
-[node name="spells" type="Node" parent="."]
-
-[node name="spell_0" parent="spells" instance=ExtResource("3_tsefa")]
 
 [node name="collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

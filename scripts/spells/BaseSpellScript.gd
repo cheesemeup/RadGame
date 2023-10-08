@@ -4,6 +4,7 @@ class_name BaseSpell
 
 var spell_base: Spell
 var spell_current: Spell
+var result_strings
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,6 +15,11 @@ func initialize_base_spell(spell_id: String):
 	var spell_dict = json_dict[spell_id]
 	spell_base = Spell.new(spell_dict)
 	spell_current = spell_base
+	result_strings = [
+		"insufficient resources",
+		"invalid target",
+		"out of range"
+	]
 
 class Spell:
 	var spell_name
@@ -35,7 +41,7 @@ class Spell:
 
 	func _init(spell_dict):
 		self.spell_name = spell_dict["spell_name"]
-		self.type = spell_dict["type"]
+		self.type = spell_dict["event_type"]
 		self.resource_cost = spell_dict["resource_cost"]
 		self.cooldown = spell_dict["cooldown"]
 		self.on_gcd = spell_dict["on_gcd"]

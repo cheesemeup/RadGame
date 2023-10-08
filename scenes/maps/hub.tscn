@@ -54,8 +54,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
 [node name="test_npc_hostile2" parent="." instance=ExtResource("7_fnynw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
-[node name="interact_damage" parent="." instance=ExtResource("7_i8hkq")]
+[node name="interactable_container" type="Node" parent="."]
+
+[node name="interact_damage" parent="interactable_container" instance=ExtResource("7_i8hkq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8)
 
-[node name="interact_heal" parent="." instance=ExtResource("8_eqvn2")]
+[node name="interact_heal" parent="interactable_container" instance=ExtResource("8_eqvn2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)

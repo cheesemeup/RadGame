@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/units/player.gd" id="1_8gonl"]
 [ext_resource type="Script" path="res://old/Scripts/Units/player_camera.gd" id="2_1o6w5"]
-[ext_resource type="Script" path="res://old/Scripts/Units/spell_container.gd" id="3_8hejm"]
+[ext_resource type="PackedScene" uid="uid://drmxovwynq1fp" path="res://scenes/functionalities/spell_container.tscn" id="3_1xchh"]
 [ext_resource type="Script" path="res://scripts/functionalities/player_input.gd" id="4_lp8kc"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_16yd3"]
@@ -46,8 +46,7 @@ spring_length = 10.0
 [node name="player_camera" type="Camera3D" parent="camera_rotation/camera_arm"]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3, 5)
 
-[node name="spells" type="Node" parent="."]
-script = ExtResource("3_8hejm")
+[node name="spell_container" parent="." instance=ExtResource("3_1xchh")]
 
 [node name="auras" type="Node" parent="."]
 

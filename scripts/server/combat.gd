@@ -7,11 +7,18 @@ var aura_absorb = preload("res://scenes/auras/aura_absorb.tscn")
 ###############################################################
 ### COMBAT EVENTS
 ###############################################################
-func combat_event_damage(spell,source,target):
-	var is_avoid = spell["avoidable"] * check_avoidance(target)
-	var is_crit = spell["can_crit"] * check_crit(spell,source)
-	var value = damage_value(spell,source,target,is_crit)
-	apply_damage(spell,value,source,target,is_crit)
+func combat_event_unprescribed(spell,source,target):
+	# avoidance
+	if combat_event_rng_check(spell.is_avoidable,target.stats.stats_current.avoidance,spell.avoidance_modifier):
+		write_log_avoid(source.unit_name,target.unit_name,spell.spell_name)
+		return 1
+	var is_crit = combat_event_rng_check(
+		spell.can_crit,source.stats.stats_current.crit_chance,spell.crit_chance_modifier
+	)
+	var value = combat_event_value_primary(spell,source,target,is_crit)
+	apply_health_change(target,value)
+	write_log_health_change(source.unit_name,target.unit_name,spell,value,is_crit)
+	return 0
 func combat_event_damage_prescribed(spell,source,target,value):
 	var is_avoid = spell["avoidable"] * check_avoidance(target)
 	var is_crit = spell["can_crit"] * check_crit(spell,source)
@@ -31,22 +38,45 @@ func combat_event_heal_prescribed(spell,source,target):
 ###############################################################
 ### RNG CHECKS
 ###############################################################
-
+func combat_event_rng_check(capability,probability,modifier):
+	# get random number
+	var random = RandomNumberGenerator.new()
+	random.randomize()
+	var p : float = randf()
+	# check if below avoidance probability, set avoid to 1 if true
+	if p <= probability + modifier:
+		return capability
+	return 0
 ###############################################################
 ### UTILITY
 ###############################################################
-func damage_value(spell,source,target,is_crit):
-	var crit_modifier = 1. + is_crit * (1. + spell["crit_damage_modifier"])
-	var value = int(floor(source.stats_curr[spell["valuebase"]] *\
-				spell["primary_modifier"] *\
-				source.stats.stats_current.damage_modifier[spell["damagetype"]] * \
-				target.stats.stats_current.defense_modifier[spell["damagetype"]] * \
+func combat_event_value_primary(spell,source,target,is_crit):
+	var crit_modifier = 1. + is_crit * (1. + spell.crit_multiplier_modifier)
+	var value = int(floor(source.stats.stats_current.primary * \
+				spell.base_modifier * \
+				source.stats.stats_current.modifier[spell.event_type][0][spell.effect_type] * \
+				target.stats.stats_current.modifier[spell.event_type][1][spell.effect_type] * \
 				crit_modifier))
+	# change sign if damage
+	value += (spell.event_type - 1) * 2 * value
 	return value
-
+func apply_health_change(target,value):
+	target.stats.stats_current.health_current = clampi(
+		target.stats.stats_current.health_current+value,0,target.stats.stats_current.health_max
+	)
 ###############################################################
 ### LOG
 ###############################################################
+func write_log_avoid(source,target,spell):
+	print("%s avoided %s of %s" % [target,spell,source])
+func write_log_health_change(source,target,spell,value,is_crit):
+	var crit_appendix = ""
+	if is_crit:
+		crit_appendix = "(critical)"
+	if spell.event_type == 0:
+		print("%s hits %s with %s for %i %s" % [source,target,spell.spell_name,value,crit_appendix])
+	else:
+		print("%s heals %s with %s for %i %s", [source,target,spell.spell_name,value,crit_appendix])
 
 func check_avoidance(target):
 	var avoid : int = 0
