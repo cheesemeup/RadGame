@@ -24,3 +24,8 @@ offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_2so51")
+
+[node name="mpspawner_maps" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/maps/hub.tscn")
+spawn_path = NodePath("../maps")
+spawn_limit = 1

@@ -1,29 +1,39 @@
 extends Node
 
+var PORT = 4242
+
 # run this script if server
 func _ready():
 	if not "--server" in OS.get_cmdline_args():
 		return
 	print("start server _ready")
-	# initializations
+	# start server
+	multiplayer.multiplayer_peer = null
+	var peer = ENetMultiplayerPeer.new()
+	peer.create_server(PORT)
+	multiplayer.multiplayer_peer = peer
+	var server_uid = multiplayer.get_unique_id()
+	if server_uid != 1:
+		print("ERROR: SERVER_UID NOT 1")
+	# load hub map scene
 	Autoload.current_map_path = "res://scenes/maps/hub.tscn"
-	# run main function
-	server_main()
-
-func server_main():
-	print("start server main script")
+	var new_map_load = load(Autoload.current_map_path)
+	var map_instance = new_map_load.instantiate()
+	add_child(map_instance)
 
 ###############################################################
 ### MAP SWAPPING
 ###############################################################
-@rpc("any_peer")
-func _query_map():
-	# reply with the currently active map
-	return Autoload.current_map_path
-func map_swap():
-	# swap map according to player input
+func request_map_change():
 	pass
-
+func map_swap(new_map):
+	# remove old map
+	var map_container = $root/main/maps.get_child(0)
+	for c in map_container.get_children():
+		map_container.remove_child(c)
+		c.queue_free()
+	# add new map
+	map_container.add_child(new_map.instantiate())
 ###############################################################
 ### INTERACTION
 ###############################################################
