@@ -15,6 +15,17 @@ func _ready():
 	mainmenu = mainmenu.instantiate()
 	add_child(mainmenu)
 
+func start_server():
+	# start server
+	multiplayer.multiplayer_peer = null
+	var peer = ENetMultiplayerPeer.new()
+	peer.create_server(PORT)
+	multiplayer.multiplayer_peer = peer
+	var server_uid = multiplayer.get_unique_id()
+	if server_uid != 1:
+		print("ERROR: SERVER_UID NOT 1")
+	# load hub map scene
+
 func start_hosting():
 	# delete any multiplayer peer that might exist:
 	multiplayer.multiplayer_peer = null
