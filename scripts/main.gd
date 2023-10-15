@@ -4,6 +4,7 @@ extends Node
 var PORT = 4242
 
 func _ready():
+	print("start main")
 	# return if dedicated server
 	if "--server" in OS.get_cmdline_args():
 		return
