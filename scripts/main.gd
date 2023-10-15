@@ -5,8 +5,8 @@ var PORT = 4242
 
 func _ready():
 	print("start main")
-	if OS.has_feature("Server"):
-		print("has feature server")
+	if "--headless" in OS.get_cmdline_args():
+		print("has headless in cmd args")
 	# return if dedicated server
 	if "--server" in OS.get_cmdline_args():
 		return

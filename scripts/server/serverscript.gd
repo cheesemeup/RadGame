@@ -4,7 +4,7 @@ var PORT = 4242
 
 # run this script if server
 func _ready():
-	if not "--headless	" in OS.get_cmdline_args():
+	if not "--headless" in OS.get_cmdline_args():
 		return
 	print("start server _ready")
 	# start server
