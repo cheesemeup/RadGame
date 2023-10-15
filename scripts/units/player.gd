@@ -43,10 +43,10 @@ func _ready():
 	if not synchronizer.is_multiplayer_authority():
 		return
 	ready_authority()
-	if multiplayer.is_server():
-		set_model("res://scenes/units/knight_scene.tscn",multiplayer.get_unique_id())
-	else:
-		rpc_id(1,"set_model","res://scenes/units/knight_scene.tscn",multiplayer.get_unique_id())
+#	if multiplayer.is_server():
+#		set_model("res://scenes/units/knight_scene.tscn",multiplayer.get_unique_id())
+#	else:
+#		rpc_id(1,"set_model","res://scenes/units/knight_scene.tscn",multiplayer.get_unique_id())
 	# load spell scenes
 	# load_spell_scenes()
 	# a bit of hackyhack
@@ -180,15 +180,15 @@ func handle_movement(delta):
 #		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
 #		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
 
-# set player model
-@rpc("any_peer")
-func set_model(model_name,peer_id):
-	var playernode = $/root/main/players.find_child(str(peer_id),true,false)
-	if playernode.get_child(0).get_child_count() > 0:
-		for node in playernode.get_child(0).get_children():
-			node.queue_free()
-	var model = load(model_name).instantiate()
-	playernode.get_child(0).add_child(model,true)
+## set player model
+#@rpc("any_peer")
+#func set_model(model_name,peer_id):
+#	var playernode = $/root/main/players.find_child(str(peer_id),true,false)
+#	if playernode.get_child(0).get_child_count() > 0:
+#		for node in playernode.get_child(0).get_children():
+#			node.queue_free()
+#	var model = load(model_name).instantiate()
+#	playernode.get_child(0).add_child(model,true)
 	
 ###################################################################################################
 # target ray

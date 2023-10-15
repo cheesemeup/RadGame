@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dempeiar8tjic"]
+[gd_scene load_steps=8 format=3 uid="uid://dempeiar8tjic"]
 
 [ext_resource type="Script" path="res://scripts/units/player.gd" id="1_8gonl"]
 [ext_resource type="Script" path="res://old/Scripts/Units/player_camera.gd" id="2_1o6w5"]
@@ -21,6 +21,8 @@ properties/2/path = NodePath(".:stats.stats_current")
 properties/2/spawn = false
 properties/2/sync = true
 properties/2/watch = false
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ha78t"]
 
 [node name="player" type="CharacterBody3D" groups=["friendly", "playergroup"]]
 collision_layer = 2
@@ -58,3 +60,7 @@ replication_config = SubResource("SceneReplicationConfig_rfg56")
 
 [node name="player_input" type="MultiplayerSynchronizer" parent="."]
 script = ExtResource("4_lp8kc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_ha78t")
