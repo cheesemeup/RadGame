@@ -40,7 +40,7 @@ func start_server():
 #	initialize_persistent_ui()
 
 func start_joining(server):
-	print("starting join on port %i" % PORT)
+	print("starting join on port %d" % PORT)
 	multiplayer.multiplayer_peer = null
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(server, PORT)
