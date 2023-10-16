@@ -6,7 +6,15 @@ var PORT = 4242
 func _ready():
 	if not OS.has_feature("dedicated_server"):
 		return
-	print("start server _ready")
+	print("serverscript started")
+	# load hub map scene
+	# MOVE THIS TO MAIN
+	# such that main script handles actual loading of maps
+	Autoload.current_map_path = "res://scenes/maps/hub.tscn"
+	var new_map_load = load(Autoload.current_map_path)
+	var map_instance = new_map_load.instantiate()
+	add_child(map_instance)
+	print("hub map loaded")
 	# start server
 	multiplayer.multiplayer_peer = null
 	var peer = ENetMultiplayerPeer.new()
@@ -15,11 +23,7 @@ func _ready():
 	var server_uid = multiplayer.get_unique_id()
 	if server_uid != 1:
 		print("ERROR: SERVER_UID NOT 1")
-	# load hub map scene
-	Autoload.current_map_path = "res://scenes/maps/hub.tscn"
-	var new_map_load = load(Autoload.current_map_path)
-	var map_instance = new_map_load.instantiate()
-	add_child(map_instance)
+	print("multiplayer started")
 
 ###############################################################
 ### MAP SWAPPING

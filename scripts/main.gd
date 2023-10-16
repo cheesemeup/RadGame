@@ -5,14 +5,11 @@ var PORT = 4242
 
 func _ready():
 	print("start main")
-	if OS.has_feature("dedicated_server"):
-		print("has feature dedicated_server")
-	# return if dedicated server
-	if "--server" in OS.get_cmdline_args():
-		return
-	Autoload.main_reference = self
 	multiplayer.peer_connected.connect(spawn_player)
 	multiplayer.peer_disconnected.connect(remove_player)
+	if OS.has_feature("dedicated_server"):
+		return
+	Autoload.main_reference = self
 	multiplayer.connected_to_server.connect(load_map_on_spawn)
 	var mainmenu = preload("res://scenes/ui/mainmenu.tscn")
 	mainmenu = mainmenu.instantiate()
@@ -29,24 +26,24 @@ func start_server():
 		print("ERROR: SERVER_UID NOT 1")
 	# load hub map scene
 
-func start_hosting():
-	# delete any multiplayer peer that might exist:
-	multiplayer.multiplayer_peer = null
-	# create new peer and set its host, then tell our multiplayer API to use it:
-	var peer = ENetMultiplayerPeer.new()
-	peer.create_server(PORT)
-	multiplayer.multiplayer_peer = peer
-	# get our multiplayer UID (as server this should always be "1" in Godot 4)
-	var player_uid = multiplayer.get_unique_id()
-	spawn_player(player_uid)
-	current_map_reply("hub.tscn")
-	initialize_persistent_ui()
-
-#func start_joining(server): 
+#func start_hosting():
+#	# delete any multiplayer peer that might exist:
 #	multiplayer.multiplayer_peer = null
+#	# create new peer and set its host, then tell our multiplayer API to use it:
 #	var peer = ENetMultiplayerPeer.new()
-#	peer.create_client(server, PORT)
+#	peer.create_server(PORT)
 #	multiplayer.multiplayer_peer = peer
+#	# get our multiplayer UID (as server this should always be "1" in Godot 4)
+#	var player_uid = multiplayer.get_unique_id()
+#	spawn_player(player_uid)
+#	current_map_reply("hub.tscn")
+#	initialize_persistent_ui()
+
+func start_joining(server): 
+	multiplayer.multiplayer_peer = null
+	var peer = ENetMultiplayerPeer.new()
+	peer.create_client(server, PORT)
+	multiplayer.multiplayer_peer = peer
  
 func spawn_player(peer_id: int):
 	if not multiplayer.is_server():

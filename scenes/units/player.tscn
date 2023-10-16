@@ -31,7 +31,6 @@ script = ExtResource("1_8gonl")
 [node name="pivot" type="Node3D" parent="."]
 
 [node name="mpspawner" type="MultiplayerSpawner" parent="pivot"]
-_spawnable_scenes = PackedStringArray("res://scenes/units/knight_scene.tscn")
 spawn_path = NodePath("..")
 
 [node name="player_collision" type="CollisionShape3D" parent="."]
