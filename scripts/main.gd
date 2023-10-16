@@ -40,13 +40,15 @@ func start_server():
 #	initialize_persistent_ui()
 
 func start_joining(server):
-	print("starting join")
+	print("starting join on port %i" % PORT)
 	multiplayer.multiplayer_peer = null
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(server, PORT)
 	multiplayer.multiplayer_peer = peer
 	print("end join")
+	rpc_id(1,"spawn_player",peer)
  
+@rpc("any_peer")
 func spawn_player(peer_id: int):
 	print("spawn_player begin")
 	if not multiplayer.is_server():

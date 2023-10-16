@@ -23,7 +23,7 @@ func _ready():
 	var server_uid = multiplayer.get_unique_id()
 	if server_uid != 1:
 		print("ERROR: SERVER_UID NOT 1")
-	print("multiplayer started")
+	print("server started on port %i" % PORT)
 
 ###############################################################
 ### MAP SWAPPING
