@@ -7,10 +7,10 @@ func _ready():
 	print("start main")
 	multiplayer.peer_connected.connect(spawn_player)
 	multiplayer.peer_disconnected.connect(remove_player)
+	multiplayer.connected_to_server.connect(load_map_on_spawn)
 	if OS.has_feature("dedicated_server"):
 		return
 	Autoload.main_reference = self
-	multiplayer.connected_to_server.connect(load_map_on_spawn)
 	var mainmenu = preload("res://scenes/ui/mainmenu.tscn")
 	mainmenu = mainmenu.instantiate()
 	add_child(mainmenu)
@@ -39,15 +39,19 @@ func start_server():
 #	current_map_reply("hub.tscn")
 #	initialize_persistent_ui()
 
-func start_joining(server): 
+func start_joining(server):
+	print("starting join")
 	multiplayer.multiplayer_peer = null
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(server, PORT)
 	multiplayer.multiplayer_peer = peer
+	print("end join")
  
 func spawn_player(peer_id: int):
+	print("spawn_player begin")
 	if not multiplayer.is_server():
 		return
+	print("spawn_player no return")
 	var new_player = preload("res://scenes/units/player.tscn").instantiate()
 	new_player.name = str(peer_id)
 	new_player.player = peer_id
