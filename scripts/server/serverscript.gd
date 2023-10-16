@@ -1,6 +1,6 @@
 extends Node
 
-var PORT = 4242
+var PORT = 4545
 
 # run this script if server
 func _ready():

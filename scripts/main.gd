@@ -1,7 +1,7 @@
 extends Node
 
 
-var PORT = 4242
+var PORT = 4545
 
 func _ready():
 	print("start main")
