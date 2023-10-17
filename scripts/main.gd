@@ -58,14 +58,15 @@ func spawn_player(peer_id: int):
 	new_player.name = str(peer_id)
 	new_player.player = peer_id
 	$players.add_child(new_player,true)
-	initialize_persistent_ui()
+	rpc_id(peer_id,"initialize_persistent_ui")
 
 func remove_player(peer_id):
 	print("remove_player triggered")
 	var player = get_node_or_null("players/"+str(peer_id))
 	if multiplayer.is_server() and player:
 		player.queue_free()
-		
+
+@rpc("authority")
 func initialize_persistent_ui():
 	# add persistent ui child node
 	var ui_scene = load("res://scenes/ui/ui_main.tscn")
