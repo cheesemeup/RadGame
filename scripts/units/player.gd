@@ -123,7 +123,7 @@ func _process(_delta):
 
 func _physics_process(delta):
 	# dumb test hotfix
-	$root/player.position = Vector3.ZERO
+	$player.position = Vector3.ZERO
 	# targeting ray
 	space_state = get_world_3d().direct_space_state
 	if not synchronizer.is_multiplayer_authority(): 
