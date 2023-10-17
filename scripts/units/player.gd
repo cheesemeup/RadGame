@@ -6,7 +6,7 @@ extends BaseUnit
 @export var player := 1 :
 		set(id):
 			player = id
-			$player_input.set_multiplayer_authority(id)
+#			$player_input.set_multiplayer_authority(id)
 
 var playermodel_reference = null
 
