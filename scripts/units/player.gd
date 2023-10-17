@@ -122,9 +122,6 @@ func _process(_delta):
 		current_interact_target.show_interact_popup()
 
 func _physics_process(delta):
-	# dumb test hotfix
-	self.position = Vector3.ZERO
-	print(self.position)
 	# targeting ray
 	space_state = get_world_3d().direct_space_state
 	if not synchronizer.is_multiplayer_authority(): 
