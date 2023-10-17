@@ -45,7 +45,7 @@ offset_bottom = 0.319946
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 20
-text = "localhost"
+text = "cheese.okinawa"
 
 [node name="label_address_entry" type="Label" parent="."]
 anchors_preset = -1
