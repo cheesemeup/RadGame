@@ -1,4 +1,4 @@
-extends BaseUnit
+extends CharacterBody3D
 
 
 @onready var player_cam = $camera_rotation/camera_arm/player_camera
@@ -36,13 +36,14 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 #		$mpsynchronizer.set_multiplayer_authority(id)
 
 func _ready():
+	print("player ready function")
 	# REWORK ALL
 	# TODO: read save file
-	if multiplayer.is_server():
-		ready_server()
-	if not synchronizer.is_multiplayer_authority():
-		return
-	ready_authority()
+#	if multiplayer.is_server():
+#		ready_server()
+#	if not synchronizer.is_multiplayer_authority():
+#		return
+#	ready_authority()
 #	if multiplayer.is_server():
 #		set_model("res://scenes/units/knight_scene.tscn",multiplayer.get_unique_id())
 #	else:
@@ -73,9 +74,9 @@ func _ready():
 #	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_5").\
 #						assign_actionbar($spells.get_node("spell_14"))
 
-func ready_server():
-	# ready function for the server
-	initialize_base_unit("player","0")
+#func ready_server():
+#	# ready function for the server
+#	initialize_base_unit("player","0")
 
 func ready_authority():
 	# ready function for the multiplayer authority
@@ -125,42 +126,42 @@ func _physics_process(delta):
 	space_state = get_world_3d().direct_space_state
 	if not synchronizer.is_multiplayer_authority(): 
 		return
-	handle_movement(delta)
+#	handle_movement(delta)
 
-func handle_movement(delta):
-	# jumping
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Jump")
-		velocity.y = jump_velocity
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-	# movement
-	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	# unrotated direction vector
-	var direction_ur = (Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	# rotate direction vector using camera angle
-	var direction = Vector3(cos(-$camera_rotation.rotation.y)*direction_ur.x - sin(-$camera_rotation.rotation.y)*direction_ur.z, 0, \
-							sin(-$camera_rotation.rotation.y)*direction_ur.x + cos(-$camera_rotation.rotation.y)*direction_ur.z)
-	if direction:
-		velocity.x = direction.x * stats.stats_current.speed
-		velocity.z = direction.z * stats.stats_current.speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
-		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
-	# turn character to match movement direction
-	if direction != Vector3.ZERO:
-		$pivot.look_at(position + direction, Vector3.UP)
-	if velocity == Vector3.ZERO:
-		is_moving = false
-		# animation
-		if Autoload.playermodel_reference != null:
-			Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Idle")
-	else:
-		is_moving = true
-		# animation
-		if Autoload.playermodel_reference != null:
-				Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
-	move_and_slide()
+#func handle_movement(delta):
+#	# jumping
+#	if Input.is_action_just_pressed("jump") and is_on_floor():
+#		Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Jump")
+#		velocity.y = jump_velocity
+#	if not is_on_floor():
+#		velocity.y -= gravity * delta
+#	# movement
+#	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+#	# unrotated direction vector
+#	var direction_ur = (Vector3(input_dir.x, 0, input_dir.y)).normalized()
+#	# rotate direction vector using camera angle
+#	var direction = Vector3(cos(-$camera_rotation.rotation.y)*direction_ur.x - sin(-$camera_rotation.rotation.y)*direction_ur.z, 0, \
+#							sin(-$camera_rotation.rotation.y)*direction_ur.x + cos(-$camera_rotation.rotation.y)*direction_ur.z)
+#	if direction:
+#		velocity.x = direction.x * stats.stats_current.speed
+#		velocity.z = direction.z * stats.stats_current.speed
+#	else:
+#		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
+#		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
+#	# turn character to match movement direction
+#	if direction != Vector3.ZERO:
+#		$pivot.look_at(position + direction, Vector3.UP)
+#	if velocity == Vector3.ZERO:
+#		is_moving = false
+#		# animation
+#		if Autoload.playermodel_reference != null:
+#			Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Idle")
+#	else:
+#		is_moving = true
+#		# animation
+#		if Autoload.playermodel_reference != null:
+#				Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
+#	move_and_slide()
 	###################
 	### NEW
 #	# falling
