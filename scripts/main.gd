@@ -5,10 +5,10 @@ var PORT = 4545
 
 func _ready():
 	print("start main")
-	multiplayer.peer_connected.connect(spawn_player)
-	multiplayer.peer_disconnected.connect(remove_player)
-	multiplayer.connected_to_server.connect(load_map_on_spawn)
 	if OS.has_feature("dedicated_server"):
+		multiplayer.peer_connected.connect(spawn_player)
+		multiplayer.peer_disconnected.connect(remove_player)
+		multiplayer.connected_to_server.connect(load_map_on_spawn)
 		return
 	Autoload.main_reference = self
 	var mainmenu = preload("res://scenes/ui/mainmenu.tscn")
@@ -84,12 +84,12 @@ func load_map_on_spawn():
 func current_map_query(peer_id):
 	rpc_id(peer_id,"current_map_reply",Autoload.current_map_path)
 @rpc("authority")
-func current_map_reply(reply):
-	var new_map_load = load("res://scenes/maps/"+reply)
-	var map_instance = new_map_load.instantiate()
-	Autoload.current_map_reference = map_instance
-	add_child(map_instance)
-	Autoload.current_map_path = reply
+#func current_map_reply(reply):
+#	var new_map_load = load("res://scenes/maps/"+reply)
+#	var map_instance = new_map_load.instantiate()
+#	Autoload.current_map_reference = map_instance
+#	add_child(map_instance)
+#	Autoload.current_map_path = reply
 
 #func swap_map_init(new_map):
 #	# if only one player, load map
