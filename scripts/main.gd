@@ -4,7 +4,7 @@ extends Node
 var PORT = 4545
 
 func _ready():
-	get_tree().paused = true
+	#get_tree().paused = true
 	print("start main")
 	if OS.has_feature("dedicated_server"):
 		multiplayer.peer_connected.connect(spawn_player)
