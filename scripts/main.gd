@@ -46,7 +46,7 @@ func start_joining(server):
 	peer.create_client(server, PORT)
 	multiplayer.multiplayer_peer = peer
 	print("end join")
-	rpc_id(1,"spawn_player",peer)
+	# rpc_id(1,"spawn_player",peer)
  
 @rpc("any_peer")
 func spawn_player(peer_id: int):
