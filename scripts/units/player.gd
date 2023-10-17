@@ -25,7 +25,7 @@ var esc_level = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-@onready var input = $player_input
+#@onready var input = $player_input
 
 #func _enter_tree() -> void:
 #	# We need to set the authority before entering the tree, because by then,
