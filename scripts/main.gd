@@ -4,26 +4,27 @@ extends Node
 var PORT = 4545
 
 func _ready():
+	get_tree().paused = true
 	print("start main")
 	if OS.has_feature("dedicated_server"):
 		multiplayer.peer_connected.connect(spawn_player)
 		multiplayer.peer_disconnected.connect(remove_player)
-		multiplayer.connected_to_server.connect(load_map_on_spawn)
+#		multiplayer.connected_to_server.connect(load_map_on_spawn)
 		return
 	Autoload.main_reference = self
 	var mainmenu = preload("res://scenes/ui/mainmenu.tscn")
 	mainmenu = mainmenu.instantiate()
 	add_child(mainmenu)
-
-func start_server():
-	# start server
-	multiplayer.multiplayer_peer = null
-	var peer = ENetMultiplayerPeer.new()
-	peer.create_server(PORT)
-	multiplayer.multiplayer_peer = peer
-	var server_uid = multiplayer.get_unique_id()
-	if server_uid != 1:
-		print("ERROR: SERVER_UID NOT 1")
+#
+#func start_server():
+#	# start server
+#	multiplayer.multiplayer_peer = null
+#	var peer = ENetMultiplayerPeer.new()
+#	peer.create_server(PORT)
+#	multiplayer.multiplayer_peer = peer
+#	var server_uid = multiplayer.get_unique_id()
+#	if server_uid != 1:
+#		print("ERROR: SERVER_UID NOT 1")
 	# load hub map scene
 
 #func start_hosting():
@@ -46,9 +47,9 @@ func start_joining(server):
 	peer.create_client(server, PORT)
 	multiplayer.multiplayer_peer = peer
 	print("end join")
+	get_tree().paused = false
 	# rpc_id(1,"spawn_player",peer)
  
-@rpc("any_peer")
 func spawn_player(peer_id: int):
 	print("spawn_player begin")
 	if not multiplayer.is_server():
@@ -78,12 +79,12 @@ func initialize_persistent_ui():
 ##############################################################################################################################
 # Map loading and unloading
 # when spawning, join map that host is on
-func load_map_on_spawn():
-	rpc_id(1,"current_map_query",multiplayer.get_unique_id())
-@rpc("any_peer")
-func current_map_query(peer_id):
-	rpc_id(peer_id,"current_map_reply",Autoload.current_map_path)
-@rpc("authority")
+#func load_map_on_spawn():
+#	rpc_id(1,"current_map_query",multiplayer.get_unique_id())
+#@rpc("any_peer")
+#func current_map_query(peer_id):
+#	rpc_id(peer_id,"current_map_reply",Autoload.current_map_path)
+#@rpc("authority")
 #func current_map_reply(reply):
 #	var new_map_load = load("res://scenes/maps/"+reply)
 #	var map_instance = new_map_load.instantiate()
