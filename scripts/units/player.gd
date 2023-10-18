@@ -116,6 +116,7 @@ func handle_movement(delta):
 	###################
 	### NEW
 #	# movement
+	print("attempting movement")
 	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
 	if direction:
 		velocity.x = direction.x * stats.stats_current.speed
