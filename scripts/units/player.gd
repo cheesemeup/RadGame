@@ -9,7 +9,7 @@ extends BaseUnit
 			player = id
 			$player_input.set_multiplayer_authority(id)
 			$player_input.set_process(get_multiplayer_authority() == multiplayer.get_unique_id())
-			print("authority for player %s passed to peer %s" % [id, id])
+			print("input authority for player %s passed to peer %s" % [id, id])
 
 var playermodel_reference = null
 
@@ -45,7 +45,7 @@ func call_set_physics_process(arg):
 
 func post_ready(peer_id):
 	player = peer_id
-#	rpc_id(peer_id,"call_set_physics_process",true)
+	rpc_id(peer_id,"call_set_physics_process",true)
 
 func _ready():
 	# REWORK ALL
