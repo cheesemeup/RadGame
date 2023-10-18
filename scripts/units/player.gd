@@ -13,7 +13,7 @@ extends BaseUnit
 
 var playermodel_reference = null
 
-#const speed = 10.0
+var speed = 10.0
 const jump_velocity = 4.5
 
 # targeting vars - NEEDS REWORK FOR MULTIPLAYER
@@ -119,11 +119,11 @@ func handle_movement(delta):
 	print("attempting movement")
 	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
 	if direction:
-		velocity.x = direction.x * stats.stats_current.speed
-		velocity.z = direction.z * stats.stats_current.speed
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
-		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()
 
 ## set player model
