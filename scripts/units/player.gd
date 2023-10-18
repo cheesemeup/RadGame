@@ -40,7 +40,8 @@ func _ready():
 	# REWORK ALL
 	# TODO: read save file
 	if multiplayer.is_server():
-		ready_server()
+		print("ready server")
+#		ready_server()
 #	if not synchronizer.is_multiplayer_authority():
 #		return
 #	ready_authority()
@@ -74,9 +75,8 @@ func _ready():
 #	Autoload.player_ui_main_reference.get_node("ui_persistent").get_node("actionbars").get_node("actionbar1").get_node("actionbar1_5").\
 #						assign_actionbar($spells.get_node("spell_14"))
 
-func ready_server():
-	# ready function for the server
-	initialize_base_unit("player","0")
+#func ready_server():
+#	# ready function for the server
 
 func ready_authority():
 	# ready function for the multiplayer authority
