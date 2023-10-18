@@ -4,7 +4,6 @@ extends Node
 var PORT = 4545
 
 func _ready():
-	#get_tree().paused = true
 	print("start main")
 	if OS.has_feature("dedicated_server"):
 		multiplayer.peer_connected.connect(spawn_player)
@@ -15,7 +14,7 @@ func _ready():
 	var mainmenu = preload("res://scenes/ui/mainmenu.tscn")
 	mainmenu = mainmenu.instantiate()
 	add_child(mainmenu)
-#
+
 #func start_server():
 #	# start server
 #	multiplayer.multiplayer_peer = null
@@ -46,20 +45,16 @@ func start_joining(server):
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(server, PORT)
 	multiplayer.multiplayer_peer = peer
-	print("end join")
 	get_tree().paused = false
 	# rpc_id(1,"spawn_player",peer)
  
 func spawn_player(peer_id: int):
-	print("spawn_player begin")
 	if not multiplayer.is_server():
 		return
-	print("spawn_player no return")
 	var new_player = preload("res://scenes/units/player.tscn").instantiate()
 	new_player.name = str(peer_id)
 	new_player.player = peer_id
 	$players.add_child(new_player,true)
-	print("player spawned")
 	# rpc_id(peer_id,"initialize_persistent_ui")
 
 func remove_player(peer_id):

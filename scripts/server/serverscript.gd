@@ -24,8 +24,6 @@ func _ready():
 	var map_instance = new_map_load.instantiate()
 	add_child(map_instance)
 	print("hub map loaded")
-	get_tree().paused = false
-	print("server ready")
 
 ###############################################################
 ### MAP SWAPPING

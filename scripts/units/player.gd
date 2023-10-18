@@ -36,12 +36,12 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 #		$mpsynchronizer.set_multiplayer_authority(id)
 
 func _ready():
-	print("player ready function")
 	# REWORK ALL
 	# TODO: read save file
 	if not multiplayer.is_server():
 		return
 	initialize_base_unit("player","0")
+	print("player %d ready" % $player.name)
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
@@ -55,7 +55,7 @@ func _input(event):
 func _unhandled_input(event):
 	#targeting
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-		print("re-implement targeting ray in player script")
+		print("re-implement targeting ray in player_input script")
 #		# targeting ray
 #		var result = targetray(event.position)
 #		targeting(result)
