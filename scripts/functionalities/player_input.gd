@@ -5,8 +5,7 @@ extends MultiplayerSynchronizer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-#	set_process(get_multiplayer_authority() == multiplayer.get_unique_id())
+	set_process(get_multiplayer_authority() == multiplayer.get_unique_id())
 
 @rpc("call_local")
 func jump():

@@ -6,7 +6,7 @@ extends BaseUnit
 @export var player := 1 :
 		set(id):
 			player = id
-#			$player_input.set_multiplayer_authority(id)
+			$player_input.set_multiplayer_authority(id)
 
 var playermodel_reference = null
 
@@ -21,6 +21,7 @@ var interactables_in_range = []
 var current_interact_target = null
 
 # other
+# move to ui script
 var esc_level = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.

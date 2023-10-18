@@ -25,7 +25,7 @@ properties/2/sync = true
 properties/2/watch = false
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kjxoy"]
-properties/0/path = NodePath(".:direction")
+properties/0/path = NodePath("player_input:direction")
 properties/0/spawn = true
 properties/0/sync = true
 properties/0/watch = false
