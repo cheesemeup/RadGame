@@ -4,7 +4,8 @@ extends MultiplayerSynchronizer
 @export var jumping:= false
 
 # Called when the node enters the scene tree for the first time.
-#func _ready():
+func _ready():
+	set_process(false)
 
 @rpc("call_local")
 func jump():
