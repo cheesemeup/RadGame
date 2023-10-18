@@ -122,14 +122,14 @@ func handle_movement(delta):
 #		velocity.y = jump_velocity
 #	input.jumping = false
 #	# movement
-#	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
+	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
+	if direction:
+		velocity.x = direction.x * stats.stats_current.speed
+		velocity.z = direction.z * stats.stats_current.speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
+		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
 	move_and_slide()
-#	if direction:
-#		velocity.x = direction.x * stats.stats_current.speed
-#		velocity.z = direction.z * stats.stats_current.speed
-#	else:
-#		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
-#		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
 
 ## set player model
 #@rpc("any_peer")
