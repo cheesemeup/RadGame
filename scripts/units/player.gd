@@ -38,7 +38,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 #		$mpsynchronizer.set_multiplayer_authority(id)	
 
 func _ready():
-	print(stats.stats_current.speed)
 	# REWORK ALL
 	# TODO: read save file
 	if not multiplayer.is_server():
