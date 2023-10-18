@@ -42,13 +42,6 @@ func _ready():
 	if not multiplayer.is_server():
 		return
 	initialize_base_unit("player","0")
-	load_spell_scenes()
-
-func load_spell_scenes():
-	for spell in $spell_container.get_children():
-		spell.queue_free()
-	for spell_id in stats:
-		
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():

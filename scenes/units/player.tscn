@@ -26,7 +26,6 @@ properties/2/watch = false
 [node name="player" type="CharacterBody3D" groups=["friendly", "playergroup"]]
 collision_layer = 2
 script = ExtResource("1_8gonl")
-player = null
 
 [node name="pivot" type="Node3D" parent="."]
 
