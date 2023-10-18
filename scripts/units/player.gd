@@ -7,7 +7,6 @@ extends BaseUnit
 @export var player := 1 :
 		set(id):
 			player = id
-			print("setting authority")
 			$player_input.set_multiplayer_authority(id)
 
 var playermodel_reference = null
@@ -36,7 +35,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 #	if str(name).is_valid_int():
 #		var id := str(name).to_int()
 #		# Before ready, the variable `multiplayer_synchronizer` is not set yet
-#		$mpsynchronizer.set_multiplayer_authority(id)	
+#		$mpsynchronizer.set_multiplayer_authority(id)
 
 func _ready():
 	# REWORK ALL
