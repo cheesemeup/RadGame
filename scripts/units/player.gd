@@ -3,6 +3,7 @@ extends BaseUnit
 
 @onready var player_cam = $camera_rotation/camera_arm/player_camera
 @onready var synchronizer = $mpsynchronizer
+@onready var input = $player_input
 @export var player := 1 :
 		set(id):
 			player = id
@@ -44,58 +45,54 @@ func _ready():
 	initialize_base_unit("player","0")
 	print("player %s ready" % self.name)
 
-func _input(event):
-	if not synchronizer.is_multiplayer_authority():
-		return
-	if event.is_action_pressed("escape") and esc_level == 0:
-		Autoload.player_ui_main_reference.esc_menu()
-	if event.is_action_pressed("interact"):
-		if current_interact_target != null:
-			current_interact_target.interaction_start(self.name)
+#func _input(event):
+#	if not synchronizer.is_multiplayer_authority():
+#		return
+#	if event.is_action_pressed("escape") and esc_level == 0:
+#		Autoload.player_ui_main_reference.esc_menu()
+#	if event.is_action_pressed("interact"):
+#		if current_interact_target != null:
+#			current_interact_target.interaction_start(self.name)
 
-func _unhandled_input(event):
-	#targeting
-	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-		print("re-implement targeting ray in player_input script")
-#		# targeting ray
-#		var result = targetray(event.position)
-#		targeting(result)
+#func _unhandled_input(event):
+#	#targeting
+#	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
+#		print("re-implement targeting ray in player_input script")
+##		# targeting ray
+##		var result = targetray(event.position)
+##		targeting(result)
 
-func _process(_delta):
-	# resource regen
-#	if stats_curr["resource_regen"] != 0:
-#		stats_curr["resource_current"] = max(min(stats_curr["resource_current"]+stats_curr["resource_regen"]*delta,stats_curr["resource_max"]),0)
-	# interaction target sorting
-	if interactables_in_range.size() > 0:
-		var distance = 10000.
-		var distance_new = 0.
-		var old_interactable = null
-		if is_instance_valid(current_interact_target):
-			old_interactable = current_interact_target
-		for interactable_nearby in interactables_in_range:
-			distance_new = self.global_position.distance_to(interactable_nearby.global_position)
-			if distance_new < distance:
-				distance = distance_new
-				current_interact_target = interactable_nearby
-		if not old_interactable == current_interact_target:
-			if is_instance_valid(old_interactable):
-				old_interactable.hide_interact_popup()
-		current_interact_target.show_interact_popup()
+#func _process(_delta):
+#	# resource regen
+##	if stats_curr["resource_regen"] != 0:
+##		stats_curr["resource_current"] = max(min(stats_curr["resource_current"]+stats_curr["resource_regen"]*delta,stats_curr["resource_max"]),0)
+#	# interaction target sorting
+#	if interactables_in_range.size() > 0:
+#		var distance = 10000.
+#		var distance_new = 0.
+#		var old_interactable = null
+#		if is_instance_valid(current_interact_target):
+#			old_interactable = current_interact_target
+#		for interactable_nearby in interactables_in_range:
+#			distance_new = self.global_position.distance_to(interactable_nearby.global_position)
+#			if distance_new < distance:
+#				distance = distance_new
+#				current_interact_target = interactable_nearby
+#		if not old_interactable == current_interact_target:
+#			if is_instance_valid(old_interactable):
+#				old_interactable.hide_interact_popup()
+#		current_interact_target.show_interact_popup()
 
 func _physics_process(delta):
-	# targeting ray mopve to ui script
-	# space_state = get_world_3d().direct_space_state
-#	if not synchronizer.is_multiplayer_authority(): 
-#		return
 	handle_movement(delta)
 
 func handle_movement(delta):
 	# jumping
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Jump")
+	if input.jumping and is_on_floor():
 		velocity.y = jump_velocity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	input.jumping = false
 #	# movement
 #	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 #	# unrotated direction vector
@@ -114,15 +111,7 @@ func handle_movement(delta):
 #		$pivot.look_at(position + direction, Vector3.UP)
 #	if velocity == Vector3.ZERO:
 #		is_moving = false
-#		# animation
-#		if Autoload.playermodel_reference != null:
-#			Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Idle")
-#	else:
-#		is_moving = true
-#		# animation
-#		if Autoload.playermodel_reference != null:
-#				Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
-	move_and_slide()
+#	move_and_slide()
 	###################
 	### NEW
 #	# falling
@@ -134,7 +123,7 @@ func handle_movement(delta):
 #	input.jumping = false
 #	# movement
 #	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
-#	move_and_slide()
+	move_and_slide()
 #	if direction:
 #		velocity.x = direction.x * stats.stats_current.speed
 #		velocity.z = direction.z * stats.stats_current.speed
