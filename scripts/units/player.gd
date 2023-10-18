@@ -37,6 +37,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 #		# Before ready, the variable `multiplayer_synchronizer` is not set yet
 #		$mpsynchronizer.set_multiplayer_authority(id)
 
+func _enter_tree():
+	set_physics_process(false)
+
 func _ready():
 	# REWORK ALL
 	# TODO: read save file
@@ -122,12 +125,14 @@ func handle_movement(delta):
 #	input.jumping = false
 #	# movement
 	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
-	if direction:
-		velocity.x = direction.x * stats.stats_current.speed
-		velocity.z = direction.z * stats.stats_current.speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
-		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
+#	if direction:
+#		velocity.x = direction.x * stats.stats_current.speed
+#		velocity.z = direction.z * stats.stats_current.speed
+#	else:
+#		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
+#		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
+	print("physics process")
+	print(stats.stats_current.speed)
 	move_and_slide()
 
 ## set player model
