@@ -10,7 +10,7 @@ extends MultiplayerSynchronizer
 func jump():
 	jumping = true
 
-func _process(delta):
+func _process(_delta):
 	# unrotated direction from input
 	var direction_ur = Input.get_vector("move_left","move_right","move_forward","move_back")
 	# rotate input according to camera orientation

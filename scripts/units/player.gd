@@ -39,6 +39,10 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 #		# Before ready, the variable `multiplayer_synchronizer` is not set yet
 #		$mpsynchronizer.set_multiplayer_authority(id)
 
+@rpc("authority")
+func call_set_physics_process(arg):
+	set_physics_process(arg)
+
 func _ready():
 	# REWORK ALL
 	# TODO: read save file
@@ -116,7 +120,6 @@ func handle_movement(delta):
 	###################
 	### NEW
 #	# movement
-	print("attempting movement")
 	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
 	if direction:
 		velocity.x = direction.x * speed
