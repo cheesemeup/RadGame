@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dempeiar8tjic"]
+[gd_scene load_steps=8 format=3 uid="uid://dempeiar8tjic"]
 
 [ext_resource type="Script" path="res://scripts/units/player.gd" id="1_8gonl"]
 [ext_resource type="Script" path="res://old/Scripts/Units/player_camera.gd" id="2_1o6w5"]
 [ext_resource type="PackedScene" uid="uid://drmxovwynq1fp" path="res://scenes/functionalities/spell_container.tscn" id="3_1xchh"]
+[ext_resource type="Script" path="res://scripts/functionalities/player_input.gd" id="4_lp8kc"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_16yd3"]
 radius = 0.6
@@ -10,11 +11,11 @@ radius = 0.6
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rfg56"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = false
-properties/0/sync = true
+properties/0/sync = false
 properties/0/watch = false
 properties/1/path = NodePath("pivot:rotation")
 properties/1/spawn = false
-properties/1/sync = true
+properties/1/sync = false
 properties/1/watch = false
 properties/2/path = NodePath(".:stats.stats_current")
 properties/2/spawn = false
@@ -55,6 +56,9 @@ transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0,
 [node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_rfg56")
+
+[node name="player_input" type="MultiplayerSynchronizer" parent="."]
+script = ExtResource("4_lp8kc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
