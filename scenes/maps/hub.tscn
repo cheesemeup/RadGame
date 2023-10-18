@@ -1,9 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjr7k3cxd6jyj"]
-
-[ext_resource type="PackedScene" uid="uid://dwg5lusb6argd" path="res://scenes/testing/test_npc_friendly.tscn" id="6_50rac"]
-[ext_resource type="PackedScene" uid="uid://i6ufg7x2f1pt" path="res://scenes/testing/test_npc_hostile.tscn" id="7_fnynw"]
-[ext_resource type="PackedScene" uid="uid://bswgqikmxejv3" path="res://scenes/testing/interact_damage.tscn" id="7_i8hkq"]
-[ext_resource type="PackedScene" uid="uid://dohktoymlhhka" path="res://scenes/testing/interact_heal.tscn" id="8_eqvn2"]
+[gd_scene load_steps=4 format=3 uid="uid://bjr7k3cxd6jyj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ycfok"]
 size = Vector3(20, 2, 20)
@@ -32,22 +27,7 @@ mesh = SubResource("PlaneMesh_qi80i")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 0)
 
-[node name="test_npc_friendly" parent="." instance=ExtResource("6_50rac")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
-
-[node name="test_npc_hostile" parent="." instance=ExtResource("7_fnynw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
-
-[node name="test_npc_hostile2" parent="." instance=ExtResource("7_fnynw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-
 [node name="interactable_container" type="Node" parent="."]
-
-[node name="interact_damage" parent="interactable_container" instance=ExtResource("7_i8hkq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8)
-
-[node name="interact_heal" parent="interactable_container" instance=ExtResource("8_eqvn2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.814116, 0.580703, 0, -0.580703, 0.814116, -0.00597382, 4.23391, 5.67833)

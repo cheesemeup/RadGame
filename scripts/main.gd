@@ -68,7 +68,7 @@ func remove_player(peer_id):
 	if multiplayer.is_server() and player:
 		player.queue_free()
 
-@rpc("authority")
+@rpc("authority")		
 func initialize_persistent_ui():
 	# add persistent ui child node
 	var ui_scene = load("res://scenes/ui/ui_main.tscn")
