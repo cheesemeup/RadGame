@@ -57,6 +57,7 @@ func spawn_player(peer_id: int):
 	new_player.initialize_base_unit("player","0")
 	$players.add_child(new_player,true)
 	new_player.player = peer_id
+	print(new_player.stats.stats_current)
 	new_player.set_physics_process(true)
 
 func remove_player(peer_id):
