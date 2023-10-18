@@ -115,21 +115,14 @@ func handle_movement(delta):
 #	move_and_slide()
 	###################
 	### NEW
-#	# falling
-#	if not is_on_floor():
-#		velocity.y -= gravity * delta
-#	# jumping
-#	if input.jumping and is_on_floor():
-#		velocity.y = jump_velocity
-#	input.jumping = false
 #	# movement
-#	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
-#	if direction:
-#		velocity.x = direction.x * stats.stats_current.speed
-#		velocity.z = direction.z * stats.stats_current.speed
-#	else:
-#		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
-#		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
+	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
+	if direction:
+		velocity.x = direction.x * stats.stats_current.speed
+		velocity.z = direction.z * stats.stats_current.speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
+		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
 	move_and_slide()
 
 ## set player model

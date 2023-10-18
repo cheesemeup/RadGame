@@ -8,7 +8,6 @@ extends MultiplayerSynchronizer
 
 @rpc("call_local")
 func jump():
-	print("setting jump to true")
 	jumping = true
 
 func _process(delta):
@@ -18,5 +17,4 @@ func _process(delta):
 	direction = Vector2(cos(-$"../camera_rotation".rotation.y)*direction_ur.x - sin(-$"../camera_rotation".rotation.y)*direction_ur.y, \
 						sin(-$"../camera_rotation".rotation.y)*direction_ur.x + cos(-$"../camera_rotation".rotation.y)*direction_ur.y)
 	if Input.is_action_just_pressed("jump"):
-		print("rpc jump")
 		jump.rpc()
