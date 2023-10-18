@@ -42,7 +42,7 @@ func _ready():
 	if not multiplayer.is_server():
 		return
 	initialize_base_unit("player","0")
-	print("player %d ready" % $player.name)
+	print("player %s ready" % self.name)
 
 func _input(event):
 	if not synchronizer.is_multiplayer_authority():
@@ -83,19 +83,19 @@ func _process(_delta):
 		current_interact_target.show_interact_popup()
 
 func _physics_process(delta):
-	# targeting ray
-	space_state = get_world_3d().direct_space_state
-	if not synchronizer.is_multiplayer_authority(): 
-		return
-#	handle_movement(delta)
+	# targeting ray mopve to ui script
+	# space_state = get_world_3d().direct_space_state
+#	if not synchronizer.is_multiplayer_authority(): 
+#		return
+	handle_movement(delta)
 
-#func handle_movement(delta):
-#	# jumping
-#	if Input.is_action_just_pressed("jump") and is_on_floor():
-#		Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Jump")
-#		velocity.y = jump_velocity
-#	if not is_on_floor():
-#		velocity.y -= gravity * delta
+func handle_movement(delta):
+	# jumping
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Jump")
+		velocity.y = jump_velocity
+	if not is_on_floor():
+		velocity.y -= gravity * delta
 #	# movement
 #	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 #	# unrotated direction vector
@@ -122,7 +122,7 @@ func _physics_process(delta):
 #		# animation
 #		if Autoload.playermodel_reference != null:
 #				Autoload.playermodel_reference.get_node("AnimationPlayer").play("KayKit Animated Character|Run")
-#	move_and_slide()
+	move_and_slide()
 	###################
 	### NEW
 #	# falling
