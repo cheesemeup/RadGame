@@ -40,7 +40,7 @@ func _ready():
 	# REWORK ALL
 	# TODO: read save file
 	if multiplayer.is_server():
-		print("in player, is servers")
+		print("in player, is server")
 #		ready_server()
 #	if not synchronizer.is_multiplayer_authority():
 #		return
