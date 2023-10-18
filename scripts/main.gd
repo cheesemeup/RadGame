@@ -54,6 +54,7 @@ func spawn_player(peer_id: int):
 	var new_player = preload("res://scenes/units/player.tscn").instantiate()
 	new_player.name = str(peer_id)
 	new_player.player = peer_id
+	initialize_base_unit("player","0")
 	$players.add_child(new_player,true)
 	# rpc_id(peer_id,"initialize_persistent_ui")
 

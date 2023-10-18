@@ -42,7 +42,6 @@ func _ready():
 	# TODO: read save file
 	if not multiplayer.is_server():
 		return
-	initialize_base_unit("player","0")
 	print("player %s ready" % self.name)
 
 #func _input(event):
