@@ -43,6 +43,10 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func call_set_physics_process(arg):
 	set_physics_process(arg)
 
+func post_ready(peer_id):
+	player = peer_id
+#	rpc_id(peer_id,"call_set_physics_process",true)
+
 func _ready():
 	# REWORK ALL
 	# TODO: read save file

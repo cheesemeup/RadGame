@@ -56,9 +56,7 @@ func spawn_player(peer_id: int):
 	new_player.name = str(peer_id)
 	new_player.initialize_base_unit("player","0")
 	$players.add_child(new_player,true)
-	new_player.player = peer_id
-	print(new_player.stats.stats_current.speed)
-	rpc_id(peer_id,"new_player.call_set_physics_process",true)
+	new_player.post_ready(peer_id)
 
 func remove_player(peer_id):
 	print("remove_player triggered")
