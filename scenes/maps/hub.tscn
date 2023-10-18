@@ -48,3 +48,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8)
 
 [node name="interact_heal" parent="interactable_container" instance=ExtResource("8_eqvn2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.814116, 0.580703, 0, -0.580703, 0.814116, -0.00597382, 4.23391, 5.67833)

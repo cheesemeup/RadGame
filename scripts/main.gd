@@ -52,13 +52,13 @@ func start_joining(server):
  
 func spawn_player(peer_id: int):
 	print("spawn_player begin")
-	if not multiplayer.is_server():
-		return
-	print("spawn_player no return")
-	var new_player = preload("res://scenes/testing/test_player.tscn").instantiate()
-	new_player.name = str(peer_id)
-	new_player.player = peer_id
-	$players.add_child(new_player,true)
+#	if not multiplayer.is_server():
+#		return
+#	print("spawn_player no return")
+#	var new_player = preload("res://scenes/testing/test_player.tscn").instantiate()
+#	new_player.name = str(peer_id)
+#	new_player.player = peer_id
+#	$players.add_child(new_player,true)
 	print("player spawned")
 	# rpc_id(peer_id,"initialize_persistent_ui")
 
