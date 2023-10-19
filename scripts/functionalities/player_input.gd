@@ -14,7 +14,6 @@ func jump():
 func _process(_delta):
 	if self.is_multiplayer_authority():
 		print("process call authority")
-		return
 	print("process call all")
 	# unrotated direction from input
 	var direction_ur = Input.get_vector("move_left","move_right","move_forward","move_back")
