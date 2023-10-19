@@ -8,7 +8,7 @@ extends BaseUnit
 		set(id):
 			player = id
 			$player_input.set_multiplayer_authority(id)
-			$player_input.set_process(false)
+			# $player_input.set_process(false)
 			print("authority for player_input passed to peer %s" % id)
 
 var playermodel_reference = null
