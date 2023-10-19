@@ -7,6 +7,7 @@ extends BaseUnit
 @export var player := 1 :
 		set(id):
 			player = id
+			# disable _process for all, is enabled for peer in post_ready
 			input.set_process(false)
 
 var playermodel_reference = null
@@ -45,16 +46,17 @@ func call_set_mp_authority(peer_id):
 	input.set_multiplayer_authority(peer_id)
 	print("authority for player_input passed to peer %s" % peer_id)
 
-func post_ready(peer_id):
-	# have only peer do _process on input node
-	rpc_id(peer_id,"call_set_input_process",true)
-	rpc("call_set_mp_authority",peer_id)
+#func post_ready(peer_id):
 
 func _ready():
 	# REWORK ALL
 	# TODO: read save file
 	if not multiplayer.is_server():
 		return
+	# have only peer do _process on input node
+	rpc_id(int(self.name),"call_set_input_process",true)
+	# set input authority
+	rpc("call_set_mp_authority",int(self.name))
 	print("player %s ready" % self.name)
 
 #func _input(event):
@@ -96,8 +98,6 @@ func _ready():
 #		current_interact_target.show_interact_popup()
 
 func _physics_process(delta):
-	print("is player_input authority: ", input.is_multiplayer_authority())
-	print("player_input authority: ", input.get_multiplayer_authority())
 	handle_movement(delta)
 
 func handle_movement(delta):
