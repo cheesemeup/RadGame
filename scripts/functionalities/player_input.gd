@@ -12,7 +12,6 @@ func jump():
 	jumping = true
 
 func _process(_delta):
-	print("authority: ",self.get_multiplayer_authority())
 	# unrotated direction from input
 	var direction_ur = Input.get_vector("move_left","move_right","move_forward","move_back")
 	# rotate input according to camera orientation
