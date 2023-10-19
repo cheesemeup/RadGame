@@ -48,7 +48,7 @@ func call_set_mp_authority(peer_id):
 func post_ready(peer_id):
 	# have only peer do _process on input node
 	rpc_id(peer_id,"call_set_input_process",true)
-	rpc(peer_id,"call_set_mp_authority",peer_id)
+	rpc("call_set_mp_authority",peer_id)
 
 func _ready():
 	# REWORK ALL
