@@ -28,15 +28,7 @@ var esc_level = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-#@onready var input = $player_input
 
-#func _enter_tree() -> void:
-#	# We need to set the authority before entering the tree, because by then,
-#	# we already have started sending data.
-#	if str(name).is_valid_int():
-#		var id := str(name).to_int()
-#		# Before ready, the variable `multiplayer_synchronizer` is not set yet
-#		$mpsynchronizer.set_multiplayer_authority(id)
 
 @rpc("authority")
 func call_set_input_process(arg):
@@ -47,13 +39,13 @@ func call_set_mp_authority(peer_id):
 	print("authority for player_input passed to peer %s" % peer_id)
 
 func post_ready(peer_id):
+	# some things should be done after _ready is finished
 	# have only peer do _process on input node
 	rpc_id(peer_id,"call_set_input_process",true)
 	# set input authority
 	rpc("call_set_mp_authority",peer_id)
 
 func _ready():
-	# REWORK ALL
 	# TODO: read save file
 	input.set_process(false)
 	if not multiplayer.is_server():
@@ -133,7 +125,7 @@ func handle_movement(delta):
 	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
 	print("direction player",direction)
 	if direction:
-		velocity.x = direction.x * speed
+		velocity.x = direction.x * stats.stats_current.speed
 		velocity.z = direction.z * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
