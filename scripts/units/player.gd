@@ -55,6 +55,7 @@ func post_ready(peer_id):
 func _ready():
 	# REWORK ALL
 	# TODO: read save file
+	input.set_process(false)
 	if not multiplayer.is_server():
 		return
 	print("player %s ready" % self.name)
