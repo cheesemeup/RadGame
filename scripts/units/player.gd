@@ -40,7 +40,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @rpc("authority")
 func call_set_input_process(arg):
 	input.set_process(arg)
-@rpc("authority")
+@rpc("authority","call_local")
 func call_set_mp_authority(peer_id):
 	input.set_multiplayer_authority(peer_id)
 	print("authority for player_input passed to peer %s" % peer_id)
