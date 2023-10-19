@@ -94,6 +94,7 @@ func _ready():
 
 func _physics_process(delta):
 	print("is player_input authority: ", input.is_multiplayer_authority())
+	print("play_input authority: ", input.get_multiplayer_authority())
 	handle_movement(delta)
 
 func handle_movement(delta):
