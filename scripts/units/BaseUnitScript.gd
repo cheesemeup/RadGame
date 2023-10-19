@@ -15,7 +15,7 @@ func initialize_base_unit(unittype,UnitID):
 	# stats
 	stat_init(unittype,UnitID)
 	# spells
-	spell_init(self.stats.stats_current.spell_list)
+	spell_container_update(self.stats.stats_current.spell_list)
 
 func stat_init(unit_type: String,unit_id: String) -> void:
 	# read stats dict from file
@@ -25,7 +25,10 @@ func stat_init(unit_type: String,unit_id: String) -> void:
 	# instantiate stat object
 	stats = Stats.new(stats_dict)
 
-func spell_init(spell_list):
+func spell_container_update(spell_list):
+	# remove previous spells
+	for spell in $spell_container.get_children():
+		spell.queue_free()
 	# add spells to spell container
 	for spell in spell_list:
 		var spell_scene = load("res://scenes/spells/spell_%s.tscn" % spell)

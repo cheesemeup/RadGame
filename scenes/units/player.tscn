@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dempeiar8tjic"]
+[gd_scene load_steps=9 format=3 uid="uid://dempeiar8tjic"]
 
 [ext_resource type="Script" path="res://scripts/units/player.gd" id="1_8gonl"]
 [ext_resource type="Script" path="res://old/Scripts/Units/player_camera.gd" id="2_1o6w5"]
@@ -8,19 +8,27 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_16yd3"]
 radius = 0.6
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ha78t"]
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rfg56"]
 properties/0/path = NodePath(".:position")
-properties/0/spawn = false
+properties/0/spawn = true
 properties/0/sync = true
 properties/0/watch = false
 properties/1/path = NodePath("pivot:rotation")
-properties/1/spawn = false
+properties/1/spawn = true
 properties/1/sync = true
 properties/1/watch = false
-properties/2/path = NodePath(".:stats.stats_current")
-properties/2/spawn = false
+properties/2/path = NodePath(".:stats")
+properties/2/spawn = true
 properties/2/sync = true
 properties/2/watch = false
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kjxoy"]
+properties/0/path = NodePath("player_input:direction")
+properties/0/spawn = false
+properties/0/sync = true
+properties/0/watch = false
 
 [node name="player" type="CharacterBody3D" groups=["friendly", "playergroup"]]
 collision_layer = 2
@@ -29,7 +37,6 @@ script = ExtResource("1_8gonl")
 [node name="pivot" type="Node3D" parent="."]
 
 [node name="mpspawner" type="MultiplayerSpawner" parent="pivot"]
-_spawnable_scenes = PackedStringArray("res://scenes/units/knight_scene.tscn")
 spawn_path = NodePath("..")
 
 [node name="player_collision" type="CollisionShape3D" parent="."]
@@ -52,9 +59,14 @@ transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0,
 
 [node name="absorbs" type="Node" parent="."]
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_ha78t")
+
 [node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_rfg56")
 
 [node name="player_input" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_kjxoy")
 script = ExtResource("4_lp8kc")

@@ -1,9 +1,6 @@
 # Signpost Heal
 extends BaseSpell
 
-var cd_timer = Timer.new()
-var on_cd = false
-
 func _ready():
 	initialize_base_spell("1")
 	cd_timer.one_shot = true

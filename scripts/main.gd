@@ -1,54 +1,70 @@
 extends Node
 
 
-var PORT = 4242
+var PORT = 4545
 
 func _ready():
-	# return if dedicated server
-	if "--server" in OS.get_cmdline_args():
+	print("start main")
+	if OS.has_feature("dedicated_server"):
+		multiplayer.peer_connected.connect(spawn_player)
+		multiplayer.peer_disconnected.connect(remove_player)
+#		multiplayer.connected_to_server.connect(load_map_on_spawn)
 		return
 	Autoload.main_reference = self
-	multiplayer.peer_connected.connect(spawn_player)
-	multiplayer.peer_disconnected.connect(remove_player)
-	multiplayer.connected_to_server.connect(load_map_on_spawn)
 	var mainmenu = preload("res://scenes/ui/mainmenu.tscn")
 	mainmenu = mainmenu.instantiate()
 	add_child(mainmenu)
 
-func start_hosting():
-	# delete any multiplayer peer that might exist:
-	multiplayer.multiplayer_peer = null
-	# create new peer and set its host, then tell our multiplayer API to use it:
-	var peer = ENetMultiplayerPeer.new()
-	peer.create_server(PORT)
-	multiplayer.multiplayer_peer = peer
-	# get our multiplayer UID (as server this should always be "1" in Godot 4)
-	var player_uid = multiplayer.get_unique_id()
-	spawn_player(player_uid)
-	current_map_reply("hub.tscn")
-	initialize_persistent_ui()
-
-#func start_joining(server): 
+#func start_server():
+#	# start server
 #	multiplayer.multiplayer_peer = null
 #	var peer = ENetMultiplayerPeer.new()
-#	peer.create_client(server, PORT)
+#	peer.create_server(PORT)
 #	multiplayer.multiplayer_peer = peer
+#	var server_uid = multiplayer.get_unique_id()
+#	if server_uid != 1:
+#		print("ERROR: SERVER_UID NOT 1")
+	# load hub map scene
+
+#func start_hosting():
+#	# delete any multiplayer peer that might exist:
+#	multiplayer.multiplayer_peer = null
+#	# create new peer and set its host, then tell our multiplayer API to use it:
+#	var peer = ENetMultiplayerPeer.new()
+#	peer.create_server(PORT)
+#	multiplayer.multiplayer_peer = peer
+#	# get our multiplayer UID (as server this should always be "1" in Godot 4)
+#	var player_uid = multiplayer.get_unique_id()
+#	spawn_player(player_uid)
+#	current_map_reply("hub.tscn")
+#	initialize_persistent_ui()
+
+func start_joining(server):
+	print("starting join on port %d" % PORT)
+	multiplayer.multiplayer_peer = null
+	var peer = ENetMultiplayerPeer.new()
+	peer.create_client(server, PORT)
+	multiplayer.multiplayer_peer = peer
+	get_tree().paused = false
+	# rpc_id(1,"spawn_player",peer)
  
 func spawn_player(peer_id: int):
 	if not multiplayer.is_server():
 		return
 	var new_player = preload("res://scenes/units/player.tscn").instantiate()
 	new_player.name = str(peer_id)
+	new_player.initialize_base_unit("player","0")
 	new_player.player = peer_id
 	$players.add_child(new_player,true)
-	initialize_persistent_ui()
+	new_player.post_ready(peer_id)
 
 func remove_player(peer_id):
 	print("remove_player triggered")
 	var player = get_node_or_null("players/"+str(peer_id))
 	if multiplayer.is_server() and player:
 		player.queue_free()
-		
+
+@rpc("authority")		
 func initialize_persistent_ui():
 	# add persistent ui child node
 	var ui_scene = load("res://scenes/ui/ui_main.tscn")
@@ -59,18 +75,18 @@ func initialize_persistent_ui():
 ##############################################################################################################################
 # Map loading and unloading
 # when spawning, join map that host is on
-func load_map_on_spawn():
-	rpc_id(1,"current_map_query",multiplayer.get_unique_id())
-@rpc("any_peer")
-func current_map_query(peer_id):
-	rpc_id(peer_id,"current_map_reply",Autoload.current_map_path)
-@rpc("authority")
-func current_map_reply(reply):
-	var new_map_load = load("res://scenes/maps/"+reply)
-	var map_instance = new_map_load.instantiate()
-	Autoload.current_map_reference = map_instance
-	add_child(map_instance)
-	Autoload.current_map_path = reply
+#func load_map_on_spawn():
+#	rpc_id(1,"current_map_query",multiplayer.get_unique_id())
+#@rpc("any_peer")
+#func current_map_query(peer_id):
+#	rpc_id(peer_id,"current_map_reply",Autoload.current_map_path)
+#@rpc("authority")
+#func current_map_reply(reply):
+#	var new_map_load = load("res://scenes/maps/"+reply)
+#	var map_instance = new_map_load.instantiate()
+#	Autoload.current_map_reference = map_instance
+#	add_child(map_instance)
+#	Autoload.current_map_path = reply
 
 #func swap_map_init(new_map):
 #	# if only one player, load map
