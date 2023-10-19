@@ -8,7 +8,7 @@ extends BaseUnit
 		set(id):
 			player = id
 			$player_input.set_multiplayer_authority(id)
-			$player_input.set_process(false)#get_multiplayer_authority() == multiplayer.get_unique_id())
+			$player_input.set_process(false)
 			print("authority for player_input passed to peer %s" % id)
 
 var playermodel_reference = null
@@ -93,6 +93,7 @@ func _ready():
 #		current_interact_target.show_interact_popup()
 
 func _physics_process(delta):
+	print(self.position)
 	handle_movement(delta)
 
 func handle_movement(delta):
