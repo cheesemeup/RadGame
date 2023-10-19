@@ -12,15 +12,17 @@ extends BaseUnit
 
 var playermodel_reference = null
 
+# speed cannot be read from stats directly, so the speed var needs to be updated
+# when speed changes
 var speed = 10.0
 const jump_velocity = 4.5
 
 # targeting vars - NEEDS REWORK FOR MULTIPLAYER
-var space_state
-var unit_selectedtarget = null
-var unit_mouseover_target = null
-var interactables_in_range = []
-var current_interact_target = null
+#var space_state
+#var unit_selectedtarget = null
+#var unit_mouseover_target = null
+#var interactables_in_range = []
+#var current_interact_target = null
 
 # other
 # move to ui script
@@ -44,6 +46,7 @@ func post_ready(peer_id):
 	rpc_id(peer_id,"call_set_input_process",true)
 	# set input authority
 	rpc("call_set_mp_authority",peer_id)
+	# initialize ui on player
 
 func _ready():
 	# TODO: read save file
@@ -100,32 +103,9 @@ func handle_movement(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	input.jumping = false
-#	# movement
-#	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-#	# unrotated direction vector
-#	var direction_ur = (Vector3(input_dir.x, 0, input_dir.y)).normalized()
-#	# rotate direction vector using camera angle
-#	var direction = Vector3(cos(-$camera_rotation.rotation.y)*direction_ur.x - sin(-$camera_rotation.rotation.y)*direction_ur.z, 0, \
-#							sin(-$camera_rotation.rotation.y)*direction_ur.x + cos(-$camera_rotation.rotation.y)*direction_ur.z)
-#	if direction:
-#		velocity.x = direction.x * stats.stats_current.speed
-#		velocity.z = direction.z * stats.stats_current.speed
-#	else:
-#		velocity.x = move_toward(velocity.x, 0, stats.stats_current.speed)
-#		velocity.z = move_toward(velocity.z, 0, stats.stats_current.speed)
-#	# turn character to match movement direction
-#	if direction != Vector3.ZERO:
-#		$pivot.look_at(position + direction, Vector3.UP)
-#	if velocity == Vector3.ZERO:
-#		is_moving = false
-#	move_and_slide()
-	###################
-	### NEW
-#	# movement
 	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
-	print("direction player",direction)
 	if direction:
-		velocity.x = direction.x * stats.stats_current.speed
+		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
@@ -141,16 +121,16 @@ func handle_movement(delta):
 #			node.queue_free()
 #	var model = load(model_name).instantiate()
 #	playernode.get_child(0).add_child(model,true)
-	
+
 ###################################################################################################
 # target ray
-func targetray(eventposition):
-	var origin = player_cam
-	var from = origin.project_ray_origin(eventposition)
-	var to = from + origin.project_ray_normal(eventposition) * 1000
-	var query = PhysicsRayQueryParameters3D.create(from,to)
-	var result = space_state.intersect_ray(query)
-	return result
+#func targetray(eventposition):
+#	var origin = player_cam
+#	var from = origin.project_ray_origin(eventposition)
+#	var to = from + origin.project_ray_normal(eventposition) * 1000
+#	var query = PhysicsRayQueryParameters3D.create(from,to)
+#	var result = space_state.intersect_ray(query)
+#	return result
 	
 #func targeting(result) -> void:
 #	# unset target and return if no collider is hit (like when clicking the sky)
