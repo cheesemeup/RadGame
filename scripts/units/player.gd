@@ -7,9 +7,7 @@ extends BaseUnit
 @export var player := 1 :
 		set(id):
 			player = id
-			input.set_multiplayer_authority(id)
 			input.set_process(false)
-			print("authority for player_input passed to peer %s" % id)
 
 var playermodel_reference = null
 
@@ -42,10 +40,15 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @rpc("authority")
 func call_set_input_process(arg):
 	input.set_process(arg)
+@rpc("authority")
+func call_set_mp_authority(peer_id):
+	input.set_multiplayer_authority(peer_id)
+	print("authority for player_input passed to peer %s" % peer_id)
 
 func post_ready(peer_id):
 	# have only peer do _process on input node
 	rpc_id(peer_id,"call_set_input_process",true)
+	rpc(peer_id,"call_set_mp_authority",peer_id)
 
 func _ready():
 	# REWORK ALL
@@ -94,7 +97,7 @@ func _ready():
 
 func _physics_process(delta):
 	print("is player_input authority: ", input.is_multiplayer_authority())
-	print("play_input authority: ", input.get_multiplayer_authority())
+	print("player_input authority: ", input.get_multiplayer_authority())
 	handle_movement(delta)
 
 func handle_movement(delta):
