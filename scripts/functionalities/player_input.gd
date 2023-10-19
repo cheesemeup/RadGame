@@ -23,3 +23,4 @@ func _process(_delta):
 						sin(-$"../camera_rotation".rotation.y)*direction_ur.x + cos(-$"../camera_rotation".rotation.y)*direction_ur.y)
 	if Input.is_action_just_pressed("jump"):
 		jump.rpc()
+	print("direction input: ",direction)

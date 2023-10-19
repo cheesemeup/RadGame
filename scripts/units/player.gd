@@ -93,7 +93,6 @@ func _ready():
 #		current_interact_target.show_interact_popup()
 
 func _physics_process(delta):
-	print(self.position)
 	handle_movement(delta)
 
 func handle_movement(delta):
@@ -126,6 +125,7 @@ func handle_movement(delta):
 	### NEW
 #	# movement
 	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
+	print("direction player",direction)
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
