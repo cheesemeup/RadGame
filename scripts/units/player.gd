@@ -46,17 +46,17 @@ func call_set_mp_authority(peer_id):
 	input.set_multiplayer_authority(peer_id)
 	print("authority for player_input passed to peer %s" % peer_id)
 
-#func post_ready(peer_id):
+func post_ready(peer_id):
+	# have only peer do _process on input node
+	rpc_id(peer_id,"call_set_input_process",true)
+	# set input authority
+	rpc("call_set_mp_authority",peer_id)
 
 func _ready():
 	# REWORK ALL
 	# TODO: read save file
 	if not multiplayer.is_server():
 		return
-	# have only peer do _process on input node
-	rpc_id(int(self.name),"call_set_input_process",true)
-	# set input authority
-	rpc("call_set_mp_authority",int(self.name))
 	print("player %s ready" % self.name)
 
 #func _input(event):
