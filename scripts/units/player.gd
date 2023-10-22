@@ -40,9 +40,8 @@ func call_set_mp_authority(peer_id):
 	input.set_multiplayer_authority(peer_id)
 	print("authority for player_input passed to peer %s" % peer_id)
 
-func _enter_tree():
-	# set authority
-	print("player_enter_tree")
+func pre_enter(peer_id):
+	print("pre enter")
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished

@@ -46,22 +46,17 @@ func start_joining(server):
 	peer.create_client(server, PORT)
 	multiplayer.multiplayer_peer = peer
 	get_tree().paused = false
-	# rpc_id(1,"spawn_player",peer)
  
 func spawn_player(peer_id: int):
 	if not multiplayer.is_server():
 		return
 	var new_player = preload("res://scenes/units/player.tscn").instantiate()
 	new_player.name = str(peer_id)
-	print("player.name set")
 	new_player.initialize_base_unit("player","0")
-	print("base stats initialized")
 	new_player.player = peer_id
-	print("palyer var set")
+	new_player.pre_enter(peer_id)
 	$players.add_child(new_player,true)
-	print("player added as child")
 	new_player.post_ready(peer_id)
-	print("player post ready called")
 
 func remove_player(peer_id):
 	print("remove_player triggered")
