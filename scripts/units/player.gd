@@ -40,7 +40,7 @@ func post_ready(peer_id):
 	rpc_id(peer_id,"call_set_input_process",true)
 	# set mp authority for input
 	for player in $/root/main/players.get_children():
-		rpc("call_set_mp_authority")
+		rpc("call_set_mp_authority",player)
 	print("player %s ready" % self.name)
 
 func _ready():
