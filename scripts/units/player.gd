@@ -38,8 +38,9 @@ func post_ready(peer_id):
 	# some things should be done after _ready is finished
 	# have only peer do _process on input node
 	rpc_id(peer_id,"call_set_input_process",true)
-	# initialize ui on player
-	rpc("call_set_mp_authority")
+	# set mp authority for input
+	for player in $/root/main/players.get_children():
+		rpc("call_set_mp_authority")
 	print("player %s ready" % self.name)
 
 func _ready():
@@ -87,7 +88,6 @@ func _ready():
 #		current_interact_target.show_interact_popup()
 
 func _physics_process(delta):
-	print(get_multiplayer_authority())
 	handle_movement(delta)
 
 func handle_movement(delta):
