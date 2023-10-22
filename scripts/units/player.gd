@@ -42,6 +42,7 @@ func call_set_mp_authority(peer_id):
 
 func pre_enter(peer_id):
 	print("pre enter")
+	input.set_multiplayer_authority(peer_id)
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
