@@ -26,7 +26,6 @@ var esc_level = 0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-
 @rpc("authority")
 func call_set_input_process(arg):
 	input.set_process(arg)
@@ -88,7 +87,7 @@ func _ready():
 #		current_interact_target.show_interact_popup()
 
 func _physics_process(delta):
-	print(input.get_multiplayer_authority())
+	print(get_multiplayer_authority())
 	handle_movement(delta)
 
 func handle_movement(delta):
