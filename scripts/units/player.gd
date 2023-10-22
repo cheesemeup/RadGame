@@ -46,13 +46,13 @@ func post_ready(peer_id):
 	rpc_id(peer_id,"call_set_input_process",true)
 	# initialize ui on player
 	rpc("call_set_mp_authority",peer_id)
+	print("player %s ready" % self.name)
 
 func _ready():
 	# TODO: read save file
 	input.set_process(false)
 	if not multiplayer.is_server():
 		return
-	print("player %s ready" % self.name)
 
 #func _input(event):
 #	if not synchronizer.is_multiplayer_authority():
