@@ -36,8 +36,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func call_set_input_process(arg):
 	input.set_process(arg)
 @rpc("authority","call_local")
-func call_set_mp_authority():
-	input.set_multiplayer_authority(self.player)
+func call_set_mp_authority(peer_id):
+	input.set_multiplayer_authority(peer_id)
 	print("authority for player_input passed to peer %d" % self.player)
 
 func post_ready(peer_id):
@@ -45,7 +45,7 @@ func post_ready(peer_id):
 	# have only peer do _process on input node
 	rpc_id(peer_id,"call_set_input_process",true)
 	# initialize ui on player
-	rpc("call_set_mp_authority")
+	rpc("call_set_mp_authority",peer_id)
 	print("player %s ready" % self.name)
 
 func _ready():
