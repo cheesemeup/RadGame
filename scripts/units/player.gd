@@ -4,11 +4,6 @@ extends BaseUnit
 @onready var player_cam = $camera_rotation/camera_arm/player_camera
 @onready var synchronizer = $mpsynchronizer
 @onready var input = $player_input
-@export var player := 1 :
-		set(id):
-			player = id
-			# disable _process for all, is enabled for peer in post_ready
-			input.set_process(false)
 
 var playermodel_reference = null
 
