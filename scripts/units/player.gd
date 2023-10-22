@@ -42,7 +42,7 @@ func call_set_mp_authority(peer_id):
 
 func _enter_tree():
 	# set authority
-	rpc("call_set_mp_authority",int(self.name))
+	print("player_enter_tree")
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
