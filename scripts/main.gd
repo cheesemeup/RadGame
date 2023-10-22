@@ -54,7 +54,6 @@ func spawn_player(peer_id: int):
 	new_player.name = str(peer_id)
 	new_player.initialize_base_unit("player","0")
 	new_player.player = peer_id
-	new_player.pre_enter(peer_id)
 	$players.add_child(new_player,true)
 	new_player.post_ready(peer_id)
 

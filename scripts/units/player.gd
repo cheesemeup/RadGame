@@ -40,15 +40,12 @@ func call_set_mp_authority(peer_id):
 	input.set_multiplayer_authority(peer_id)
 	print("authority for player_input passed to peer %s" % peer_id)
 
-func pre_enter(peer_id):
-	print("pre enter")
-	input.set_multiplayer_authority(peer_id)
-
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
 	# have only peer do _process on input node
 	rpc_id(peer_id,"call_set_input_process",true)
 	# initialize ui on player
+	rpc("call_set_mp_authority",peer_id)
 
 func _ready():
 	# TODO: read save file
