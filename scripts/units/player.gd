@@ -32,7 +32,7 @@ func call_set_input_process(arg):
 @rpc("authority","call_local")
 func call_set_mp_authority(player):
 	input.set_multiplayer_authority(int(str(player.name)))
-	print("authority for player_input of %s passed to peer %s" % player.name)
+	print("authority for player_input of %s passed to peer %s" % [player.name, player.name])
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
