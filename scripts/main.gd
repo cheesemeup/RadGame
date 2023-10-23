@@ -54,7 +54,8 @@ func spawn_player(peer_id: int):
 	new_player.name = str(peer_id)
 	new_player.initialize_base_unit("player","0")
 	$players.add_child(new_player,true)
-	new_player.post_ready(peer_id)
+	for player in $players.get_children():
+		player.post_ready(peer_id)
 
 func remove_player(peer_id):
 	print("remove_player triggered")
