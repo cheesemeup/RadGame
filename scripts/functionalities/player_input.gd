@@ -8,6 +8,7 @@ func jump():
 	jumping = true
 
 func _process(_delta):
+	print("%d has authority over %s" % [get_multiplayer_authority(), get_parent().name])
 	# unrotated direction from input
 	var direction_ur = Input.get_vector("move_left","move_right","move_forward","move_back")
 	# rotate input according to camera orientation
