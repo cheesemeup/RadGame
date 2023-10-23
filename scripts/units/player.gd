@@ -44,6 +44,8 @@ func post_ready(peer_id):
 	rpc("call_set_input_process",peer_id)
 	# set mp authority for input for all players
 	for player in $/root/main/players.get_children():
+		if str(player.name) == "mpspawner_player":
+			continue
 		rpc("call_set_mp_authority",player.name)
 	print("player %s ready" % self.name)
 
