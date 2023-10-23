@@ -31,12 +31,8 @@ func call_set_input_process(peer_id):
 	input.set_process(peer_id == int(str(self.name)))
 @rpc("authority","call_local")
 func call_set_mp_authority(playername):
-	print("player: ", playername)
 	var playernode = $/root/main/players.get_node(str(playername))
 	playernode.get_node("player_input").set_multiplayer_authority(int(str(playername)))
-#	if peer_id == int(str(self.name)):
-#		input.set_multiplayer_authority(int(str(self.name)))
-#		print("authority for player_input of %s passed to peer %s" % [self.name, self.name])
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
