@@ -30,9 +30,10 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func call_set_input_process(peer_id):
 	input.set_process(peer_id == int(str(self.name)))
 @rpc("authority","call_local")
-func call_set_mp_authority(player):
-	print("player: ", player)
-	player.get_node("input").set_multiplayer_authority(int(str(player.name)))
+func call_set_mp_authority(playername):
+	print("player: ", playername)
+	var playernode = $/root/main/players.get_node(playername)
+	playernode.get_node("input").set_multiplayer_authority(int(playername))
 #	if peer_id == int(str(self.name)):
 #		input.set_multiplayer_authority(int(str(self.name)))
 #		print("authority for player_input of %s passed to peer %s" % [self.name, self.name])
@@ -43,7 +44,7 @@ func post_ready(peer_id):
 	rpc("call_set_input_process",peer_id)
 	# set mp authority for input for all players
 	for player in $/root/main/players.get_children():
-		rpc("call_set_mp_authority",player)
+		rpc("call_set_mp_authority",player.name)
 	print("player %s ready" % self.name)
 
 func _ready():
