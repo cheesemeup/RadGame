@@ -35,7 +35,7 @@ func call_set_mp_authority(playername):
 	playernode.get_node("player_input").set_multiplayer_authority(int(str(playername)))
 @rpc("authority")
 func add_player_camera():
-	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate)
+	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
