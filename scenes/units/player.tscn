@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dempeiar8tjic"]
+[gd_scene load_steps=8 format=3 uid="uid://dempeiar8tjic"]
 
 [ext_resource type="Script" path="res://scripts/units/player.gd" id="1_8gonl"]
-[ext_resource type="Script" path="res://old/Scripts/Units/player_camera.gd" id="2_1o6w5"]
 [ext_resource type="PackedScene" uid="uid://drmxovwynq1fp" path="res://scenes/functionalities/spell_container.tscn" id="3_1xchh"]
 [ext_resource type="Script" path="res://scripts/functionalities/player_input.gd" id="4_lp8kc"]
 
@@ -42,16 +41,6 @@ spawn_path = NodePath("..")
 [node name="player_collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_16yd3")
-
-[node name="camera_rotation" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-script = ExtResource("2_1o6w5")
-
-[node name="camera_arm" type="SpringArm3D" parent="camera_rotation"]
-spring_length = 10.0
-
-[node name="player_camera" type="Camera3D" parent="camera_rotation/camera_arm"]
-transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3, 5)
 
 [node name="spell_container" parent="." instance=ExtResource("3_1xchh")]
 
