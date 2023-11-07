@@ -26,13 +26,13 @@ var esc_level = 0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-@rpc("authority")
-func call_set_input_process(peer_id):
-	input.set_process(peer_id == int(str(self.name)))
 @rpc("authority","call_local")
 func call_set_mp_authority(playername):
 	var playernode = $/root/main/players.get_node(str(playername))
 	playernode.get_node("player_input").set_multiplayer_authority(int(str(playername)))
+@rpc("authority")
+func call_set_input_process(peer_id):
+	input.set_process(peer_id == int(str(self.name)))
 @rpc("authority")
 func add_player_camera():
 	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
@@ -45,9 +45,9 @@ func post_ready(peer_id):
 			continue
 		rpc("call_set_mp_authority",player.name)
 	# activate input _process for authority
-	rpc("call_set_input_process",peer_id)
+	#rpc("call_set_input_process",peer_id)
 	# add camera functionality to authority peer
-	rpc_id(peer_id,"add_player_camera")
+	#rpc_id(peer_id,"add_player_camera")
 	print("player %s ready" % self.name)
 
 func _ready():
