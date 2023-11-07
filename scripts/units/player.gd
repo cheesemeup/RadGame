@@ -31,6 +31,14 @@ func pre_ready(peer_id):
 	self.name = str(peer_id)
 	initialize_base_unit("player","0")
 	$player_input.set_process(false)
+	# set mp authority for player_input for all players
+	for player in $/root/main/players.get_children():
+		if str(player.name) == "mpspawner_player":
+			continue
+		rpc("call_set_mp_authority",player.name)
+	# add camera functionality to authority peer
+	if $player_input.is_multiplayer_authority():
+		rpc_id(peer_id,"add_player_camera")
 
 @rpc("authority","call_local")
 func call_set_mp_authority(playername):
@@ -43,25 +51,17 @@ func add_player_camera():
 func call_set_input_process(peer_id):
 	input.set_process(peer_id == int(str(self.name)))
 
-func post_ready(peer_id):
-	# some things should be done after _ready is finished
-	# set mp authority for input for all players
-	for player in $/root/main/players.get_children():
-		if str(player.name) == "mpspawner_player":
-			continue
-		rpc("call_set_mp_authority",player.name)
-	# add camera functionality to authority peer
-	if $player_input.is_multiplayer_authority():
-		rpc_id(peer_id,"add_player_camera")
-	# activate input _process for authority
-	#rpc("call_set_input_process",peer_id)
-	print("player %s ready" % self.name)
-
-func _ready():
-	# TODO: read save file
-	input.set_process(false)
-	if not multiplayer.is_server():
-		return
+#func post_ready(peer_id):
+#	# some things should be done after _ready is finished
+#	# activate input _process for authority
+#	#rpc("call_set_input_process",peer_id)
+#	print("player %s ready" % self.name)
+#
+#func _ready():
+#	# TODO: read save file
+#	input.set_process(false)
+#	if not multiplayer.is_server():
+#		return
 
 #func _input(event):
 #	if not synchronizer.is_multiplayer_authority():
