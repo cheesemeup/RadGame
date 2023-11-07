@@ -31,11 +31,11 @@ func call_set_mp_authority(playername):
 	var playernode = $/root/main/players.get_node(str(playername))
 	playernode.get_node("player_input").set_multiplayer_authority(int(str(playername)))
 @rpc("authority")
-func call_set_input_process(peer_id):
-	input.set_process(peer_id == int(str(self.name)))
-@rpc("authority")
 func add_player_camera():
 	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
+@rpc("authority")
+func call_set_input_process(peer_id):
+	input.set_process(peer_id == int(str(self.name)))
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
@@ -44,10 +44,11 @@ func post_ready(peer_id):
 		if str(player.name) == "mpspawner_player":
 			continue
 		rpc("call_set_mp_authority",player.name)
+	# add camera functionality to authority peer
+	if $player_input.is_multiplayer_authority():
+		rpc_id(peer_id,"add_player_camera")
 	# activate input _process for authority
 	#rpc("call_set_input_process",peer_id)
-	# add camera functionality to authority peer
-	#rpc_id(peer_id,"add_player_camera")
 	print("player %s ready" % self.name)
 
 func _ready():
