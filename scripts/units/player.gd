@@ -1,7 +1,7 @@
 extends BaseUnit
 
 
-@onready var player_cam = $camera_rotation/camera_arm/player_camera
+#@onready var player_cam = $camera_rotation/camera_arm/player_camera
 @onready var synchronizer = $mpsynchronizer
 @onready var input = $player_input
 
@@ -39,13 +39,13 @@ func add_player_camera():
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
-	# have only authority peer do _process on input node
-	rpc("call_set_input_process",peer_id)
 	# set mp authority for input for all players
 	for player in $/root/main/players.get_children():
 		if str(player.name) == "mpspawner_player":
 			continue
 		rpc("call_set_mp_authority",player.name)
+	# activate input _process for authority
+	rpc("call_set_input_process",peer_id)
 	# add camera functionality to authority peer
 	rpc_id(peer_id,"add_player_camera")
 	print("player %s ready" % self.name)
