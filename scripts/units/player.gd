@@ -26,6 +26,11 @@ var esc_level = 0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func pre_ready(peer_id):
+	self.name = str(peer_id)
+	initialize_base_unit("player","0")
+	$player_input.set_process(false)
+
 @rpc("authority","call_local")
 func call_set_mp_authority(playername):
 	var playernode = $/root/main/players.get_node(str(playername))

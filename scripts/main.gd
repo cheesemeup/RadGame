@@ -51,11 +51,12 @@ func spawn_player(peer_id: int):
 	if not multiplayer.is_server():
 		return
 	var new_player = preload("res://scenes/units/player.tscn").instantiate()
-	new_player.name = str(peer_id)
-	new_player.initialize_base_unit("player","0")
-	new_player.get_node("player_input").set_process(false)
+	new_player.pre_ready()
+	#new_player.name = str(peer_id)
+	#new_player.initialize_base_unit("player","0")
+	#new_player.get_node("player_input").set_process(false)
 	$players.add_child(new_player,true)
-	new_player.post_ready(peer_id)
+	#new_player.post_ready(peer_id)
 
 func remove_player(peer_id):
 	print("remove_player triggered")
@@ -63,7 +64,7 @@ func remove_player(peer_id):
 	if multiplayer.is_server() and player:
 		player.queue_free()
 
-@rpc("authority")		
+@rpc("authority")
 func initialize_persistent_ui():
 	# add persistent ui child node
 	var ui_scene = load("res://scenes/ui/ui_main.tscn")	
