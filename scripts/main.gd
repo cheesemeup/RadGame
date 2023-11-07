@@ -51,7 +51,7 @@ func spawn_player(peer_id: int):
 	if not multiplayer.is_server():
 		return
 	var new_player = preload("res://scenes/units/player.tscn").instantiate()
-	new_player.pre_ready()
+	new_player.pre_ready(peer_id)
 	#new_player.name = str(peer_id)
 	#new_player.initialize_base_unit("player","0")
 	#new_player.get_node("player_input").set_process(false)

@@ -27,6 +27,7 @@ var esc_level = 0
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func pre_ready(peer_id):
+	print(peer_id, " pre_ready call")
 	self.name = str(peer_id)
 	initialize_base_unit("player","0")
 	$player_input.set_process(false)
