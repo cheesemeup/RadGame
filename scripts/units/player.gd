@@ -43,7 +43,7 @@ func post_ready(peer_id):
 	# add player camera node for authority
 	rpc_id(peer_id,"add_player_camera")
 #	# activate input _process for authority
-#	rpc("call_set_input_process",peer_id)
+	rpc("call_set_input_process",peer_id)
 	print("player %s ready" % name)
 
 #func _ready():
