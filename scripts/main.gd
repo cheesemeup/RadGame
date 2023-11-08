@@ -45,7 +45,6 @@ func start_joining(server):
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(server, PORT)
 	multiplayer.multiplayer_peer = peer
-	get_tree().paused = false
  
 func spawn_player(peer_id: int):
 	if not multiplayer.is_server():
@@ -56,7 +55,7 @@ func spawn_player(peer_id: int):
 	#new_player.initialize_base_unit("player","0")
 	#new_player.get_node("player_input").set_process(false)
 	$players.add_child(new_player,true)
-	#new_player.post_ready(peer_id)
+	new_player.post_ready(peer_id)
 
 func remove_player(peer_id):
 	print("remove_player triggered")

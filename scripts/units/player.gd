@@ -31,18 +31,6 @@ func pre_ready(peer_id):
 	self.name = str(peer_id)
 	initialize_base_unit("player","0")
 	$player_input.set_process(false)
-	# set mp authority for player_input for all players
-	##########################
-	## can't use absolute path, because not in tree yet
-	## back to post_ready?
-	
-	for player in $/root/main/players.get_children():
-		if str(player.name) == "mpspawner_player":
-			continue
-		rpc("call_set_mp_authority",player.name)
-	# add camera functionality to authority peer
-	if $player_input.is_multiplayer_authority():
-		rpc_id(peer_id,"add_player_camera")
 
 @rpc("authority","call_local")
 func call_set_mp_authority(playername):
