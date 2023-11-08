@@ -22,6 +22,9 @@ const jump_velocity = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func _enter_tree():
+	$player_input.set_multiplayer_authority(str(name).to_int())
+
 func pre_ready(peer_id):
 	print(peer_id, " pre_ready call")
 	self.name = str(peer_id)
