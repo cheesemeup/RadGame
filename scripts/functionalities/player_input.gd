@@ -3,6 +3,9 @@ extends MultiplayerSynchronizer
 @export var direction:= Vector2()
 @export var jumping:= false
 
+func _ready():
+	set_process(false)
+
 @rpc("call_local")
 func jump():
 	jumping = true
