@@ -35,7 +35,7 @@ func add_player_camera():
 	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
 	$camera_rotation/camera_arm/player_camera.current = true
 @rpc("authority")
-func call_set_input_process(peer_id):
+func call_set_input_process():
 	input.set_process(true)
 
 func post_ready(peer_id):
