@@ -29,8 +29,8 @@ func pre_ready(peer_id):
 
 @rpc("authority","call_local")
 func call_set_mp_authority(playername):
-	var playernode = $/root/main/players.get_node(playername)
-	playernode.get_node("player_input").set_multiplayer_authority(int(playername))
+	var playernode = $/root/main/players.get_node(str(playername))
+	playernode.get_node("player_input").set_multiplayer_authority(int(str(playername)))
 @rpc("authority")
 func add_player_camera():
 	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
@@ -45,7 +45,7 @@ func post_ready(peer_id):
 	for player in $/root/main/players.get_children():
 		if str(player.name) == "mpspawner_player":
 			continue  # skip the mp spawner node
-		rpc("call_set_mp_auhtority",str(player.name))
+		rpc("call_set_mp_authority",player.name)
 #	# add player camera node for authority
 #	rpc_id(peer_id,"add_player_camera")
 #	# activate input _process for authority
