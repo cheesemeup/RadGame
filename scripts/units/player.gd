@@ -22,10 +22,12 @@ const jump_velocity = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+@rpc("authority","call_local")
+func disable_process_for_peers():
+	$player_input.set_process(false)
 @rpc("authority")
 func disable_process_on_join():
 	# disable _process in player_input for all players for joining peer
-	$player_input.set_process(false)
 	for player in $/root/main/players.get_children():
 		if str(player.name) == "mpspawner_player":
 			continue  # skip the mp spawner node
@@ -35,7 +37,8 @@ func pre_ready(peer_id):
 	print(peer_id, " pre_ready call")
 	self.name = str(peer_id)
 	initialize_base_unit("player","0")
-	rpc_id(peer_id,"disable_process_on_join")
+	rpc("disable_process_for_peers")
+	#rpc_id(peer_id,"disable_process_on_join")
 
 @rpc("authority","call_local")
 func call_set_mp_authority(playername):
