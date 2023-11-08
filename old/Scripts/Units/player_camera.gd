@@ -10,8 +10,8 @@ var h_acceleration = 10
 var v_acceleration = 10
 var mouse_position
 
-func _ready():
-	print("camera added for ", self.get_parent().name)
+###########################
+## IMPLEMENT CAMERA FUNCTIONALITY
 
 #func _input(event):
 #	if not %mpsynchronizer.is_multiplayer_authority(): return
