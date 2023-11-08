@@ -37,8 +37,8 @@ func pre_ready(peer_id):
 	print(peer_id, " pre_ready call")
 	self.name = str(peer_id)
 	initialize_base_unit("player","0")
-	$player_input.set_process(false)
-	rpc("disable_process_for_peers")
+	#$player_input.set_process(false)
+	#rpc("disable_process_for_peers")
 	#rpc_id(peer_id,"disable_process_on_join")
 
 @rpc("authority","call_local")
