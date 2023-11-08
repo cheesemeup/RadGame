@@ -32,6 +32,10 @@ func pre_ready(peer_id):
 	initialize_base_unit("player","0")
 	$player_input.set_process(false)
 	# set mp authority for player_input for all players
+	##########################
+	## can't use absolute path, because not in tree yet
+	## back to post_ready?
+	
 	for player in $/root/main/players.get_children():
 		if str(player.name) == "mpspawner_player":
 			continue
@@ -47,16 +51,24 @@ func call_set_mp_authority(playername):
 @rpc("authority")
 func add_player_camera():
 	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
+	$player_camera/camera_arm/player_camera.current = true
 @rpc("authority")
 func call_set_input_process(peer_id):
 	input.set_process(peer_id == int(str(self.name)))
 
-#func post_ready(peer_id):
-#	# some things should be done after _ready is finished
-#	# activate input _process for authority
-#	#rpc("call_set_input_process",peer_id)
-#	print("player %s ready" % self.name)
-#
+func post_ready(peer_id):
+	# some things should be done after _ready is finished
+	# set mp authority of player_input for all player nodes and all peers
+	for player in $/root/main/players.get_children():
+		if str(player.name) == "mpspawner_player":
+			continue  # skip the mp spawner node
+		rpc("call_set_mp_auhtority",player.name)
+	# add player camera node for authority
+	rpc_id(peer_id,"add_player_camera")
+	# activate input _process for authority
+	#rpc("call_set_input_process",peer_id)
+	print("player %s ready" % self.name)
+
 #func _ready():
 #	# TODO: read save file
 #	input.set_process(false)
