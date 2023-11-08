@@ -27,7 +27,7 @@ func _enter_tree():
 
 func pre_ready(peer_id):
 	print(peer_id, " pre_ready call")
-	self.name = str(peer_id)
+	name = str(peer_id)
 	initialize_base_unit("player","0")
 
 @rpc("authority")
@@ -36,15 +36,15 @@ func add_player_camera():
 	$camera_rotation/camera_arm/player_camera.current = true
 @rpc("authority")
 func call_set_input_process(peer_id):
-	input.set_process(peer_id == int(str(self.name)))
+	input.set_process(peer_id == int(str(name)))
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
 	# add player camera node for authority
 	rpc_id(peer_id,"add_player_camera")
 #	# activate input _process for authority
-#	#rpc("call_set_input_process",peer_id)
-	print("player %s ready" % self.name)
+#	rpc("call_set_input_process",peer_id)
+	print("player %s ready" % name)
 
 #func _ready():
 #	# TODO: read save file
