@@ -3,6 +3,10 @@ extends MultiplayerSynchronizer
 @export var direction:= Vector2()
 @export var jumping:= false
 
+func _enter_tree():
+	# this line causes a non-fatal error. I am currently unaware of a fix to this
+	set_multiplayer_authority(get_parent().name.to_int())
+
 func _ready():
 	set_process(false)
 
