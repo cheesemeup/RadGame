@@ -3,6 +3,9 @@ extends MultiplayerSynchronizer
 @export var direction:= Vector2()
 @export var jumping:= false
 
+func _enter_tree():
+	set_multiplayer_authority(int(str(get_parent().name)))
+
 func _ready():
 	set_process(false)
 
