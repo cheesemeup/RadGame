@@ -39,7 +39,7 @@ func call_set_mp_authority(playername):
 @rpc("authority")
 func add_player_camera():
 	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
-	$player_camera/camera_arm/player_camera.current = true
+	$camera_rotation/camera_arm/player_camera.current = true
 @rpc("authority")
 func call_set_input_process(peer_id):
 	input.set_process(peer_id == int(str(self.name)))
