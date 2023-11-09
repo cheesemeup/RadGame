@@ -12,15 +12,16 @@ var mouse_position
 
 
 func _input(event):
-	# move camera if rightlick pressed and mouse moves
+		# get mouse position when click is initiated and hide cursor
+	if Input.is_action_just_pressed("rightclick"):
+		mouse_position = event.position
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+	# move camera and reset mouse position if rightlick pressed and mouse moves
 	if event is InputEventMouseMotion and Input.is_action_pressed("rightclick"):
 		self.rotation_degrees.y -= event.relative.x * h_sensitivity
 		self.rotation_degrees.x += clamp(-event.relative.y * v_sensitivity, cam_v_min, cam_v_max)
-
-	# get mouse position when click is initiated and hide cursor
-	if event is InputEventMouseButton and Input.is_action_pressed("rightclick"):
-		mouse_position = event.position
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		get_viewport().warp_mouse(mouse_position)
 
 	# move mouse to last visible position and show cursor
 	if Input.is_action_just_released("rightclick"):
