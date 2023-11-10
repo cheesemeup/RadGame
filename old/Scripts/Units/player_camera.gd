@@ -21,8 +21,8 @@ func _input(event):
 	# move camera if rightlick is pressed
 	if event is InputEventMouseMotion and Input.is_action_pressed("rightclick"):
 		self.rotation_degrees.y -= event.relative.x * h_sensitivity
-		camrot_v += -event.relative.y * v_sensitivity
-		self.rotation_degrees.x = clamp(camrot_v, cam_v_min, cam_v_max)
+		camrot_v = clamp(camrot_v - event.relative.y * v_sensitivity, cam_v_min, cam_v_max)
+		self.rotation_degrees.x = camrot_v
 
 	# move mouse to last visible position and show cursor
 	if Input.is_action_just_released("rightclick"):
