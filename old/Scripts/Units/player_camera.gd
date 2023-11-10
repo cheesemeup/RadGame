@@ -2,7 +2,7 @@ extends Node3D
 
 var camrot_h = 0
 var camrot_v = 0
-var cam_v_min = -65
+var cam_v_min = -75
 var cam_v_max = 55
 var h_sensitivity = 0.3
 var v_sensitivity = 0.3
@@ -16,7 +16,7 @@ func _input(event):
 	if event is InputEventMouseButton and Input.is_action_just_pressed("rightclick"):
 		mouse_position = event.position
 		print(mouse_position)
-		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 	# move camera if rightlick is pressed
 	if event is InputEventMouseMotion and Input.is_action_pressed("rightclick"):
