@@ -2,7 +2,7 @@ extends Node3D
 
 var camrot_h = 0
 var camrot_v = 0
-var cam_v_min = 0
+var cam_v_min = -75
 var cam_v_max = 55
 var h_sensitivity = 0.3
 var v_sensitivity = 0.3
@@ -22,6 +22,7 @@ func _input(event):
 	if event is InputEventMouseMotion and Input.is_action_pressed("rightclick"):
 		self.rotation_degrees.y -= event.relative.x * h_sensitivity
 		self.rotation_degrees.x += clamp(-event.relative.y * v_sensitivity, cam_v_min, cam_v_max)
+		print(rotation_degrees.x)
 
 	# move mouse to last visible position and show cursor
 	if Input.is_action_just_released("rightclick"):
