@@ -1,14 +1,9 @@
 extends BaseUnit
 
 
-@onready var player_cam = $camera_rotation/camera_arm/player_camera
+#@onready var player_cam = $camera_rotation/camera_arm/player_camera
 @onready var synchronizer = $mpsynchronizer
 @onready var input = $player_input
-@export var player := 1 :
-		set(id):
-			player = id
-			# disable _process for all, is enabled for peer in post_ready
-			input.set_process(false)
 
 var playermodel_reference = null
 
@@ -24,36 +19,38 @@ const jump_velocity = 4.5
 #var interactables_in_range = []
 #var current_interact_target = null
 
-# other
-# move to ui script
-var esc_level = 0
-
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func _enter_tree():
+	$player_input.set_multiplayer_authority(str(name).to_int())
+
+func pre_ready(peer_id):
+	print(peer_id, " pre_ready call")
+	name = str(peer_id)
+	initialize_base_unit("player","0")
 
 @rpc("authority")
-func call_set_input_process(arg):
-	input.set_process(arg)
-@rpc("authority","call_local")
-func call_set_mp_authority(peer_id):
-	input.set_multiplayer_authority(peer_id)
-	print("authority for player_input passed to peer %s" % peer_id)
+func add_player_camera():
+	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
+	$camera_rotation/camera_arm/player_camera.current = true
+@rpc("authority")
+func call_set_input_process():
+	input.set_process(true)
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
-	# have only peer do _process on input node
-	rpc_id(peer_id,"call_set_input_process",true)
-	# set input authority
-	rpc("call_set_mp_authority",peer_id)
-	# initialize ui on player
+	# add player camera node for authority
+	rpc_id(peer_id,"add_player_camera")
+#	# activate input _process for authority
+	rpc_id(peer_id,"call_set_input_process")
+	print("player %s ready" % name)
 
-func _ready():
-	# TODO: read save file
-	input.set_process(false)
-	if not multiplayer.is_server():
-		return
-	print("player %s ready" % self.name)
+#func _ready():
+#	# TODO: read save file
+#	input.set_process(false)
+#	if not multiplayer.is_server():
+#		return
 
 #func _input(event):
 #	if not synchronizer.is_multiplayer_authority():
