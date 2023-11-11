@@ -29,6 +29,8 @@ func _input(event):
 	# move mouse to last visible position and show cursor
 	if Input.is_action_just_released("rightclick"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		# warp if not screen center
+		print("warping mouse position to: ",mouse_position)
 		get_viewport().warp_mouse(mouse_position)
 		# save mouse position to screen center
 		#mouse_position = Vector2(960,590)
