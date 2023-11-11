@@ -12,8 +12,10 @@ var mouse_position
 
 
 func _input(event):
-		# get mouse position when click is initiated and hide cursor
+	# get mouse position when click is initiated and hide cursor
 	if event is InputEventMouseButton and Input.is_action_just_pressed("rightclick"):
+		# only save mouse position if not center, to avoid erratic behavior
+#		if event.position != Vector2(960,590):
 		mouse_position = event.position
 		print(mouse_position)
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -26,5 +28,7 @@ func _input(event):
 
 	# move mouse to last visible position and show cursor
 	if Input.is_action_just_released("rightclick"):
-		get_viewport().warp_mouse(mouse_position)
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		get_viewport().warp_mouse(mouse_position)
+		# save mouse position to screen center
+		#mouse_position = Vector2(960,590)
