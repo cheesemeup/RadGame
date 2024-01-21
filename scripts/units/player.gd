@@ -22,6 +22,8 @@ const jump_velocity = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+####################################################################################################
+# SPAWNING
 func _enter_tree():
 	$player_input.set_multiplayer_authority(str(name).to_int())
 
@@ -46,6 +48,10 @@ func post_ready(peer_id):
 	rpc_id(peer_id,"call_set_input_process")
 	print("player %s ready" % name)
 
+####################################################################################################
+# TARGETING
+# When an unhandled leftclick occurs, send targeting ray to detect collision with unit
+# If a unit is collided with, set this unit as the new target
 #func _ready():
 #	# TODO: read save file
 #	input.set_process(false)

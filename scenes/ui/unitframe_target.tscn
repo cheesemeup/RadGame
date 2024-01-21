@@ -1,9 +1,12 @@
-[gd_scene format=3 uid="uid://cj35st4iqra2l"]
+[gd_scene load_steps=2 format=3 uid="uid://cj35st4iqra2l"]
 
-[node name="UnitframeTarget" type="Control"]
+[ext_resource type="Script" path="res://scripts/ui/unitframe_target.gd" id="1_bm7bp"]
+
+[node name="unitframe_target" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_bm7bp")

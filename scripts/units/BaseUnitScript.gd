@@ -7,6 +7,9 @@ var stats: Stats
 var aura_dict: Dictionary
 var absorb_dict: Dictionary
 
+# targeting
+var target = null
+
 # state
 var is_dead: bool = false
 var is_moving: bool = false
