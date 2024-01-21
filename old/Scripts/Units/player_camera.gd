@@ -12,8 +12,9 @@ var mouse_position
 
 
 func _input(event):
-	# if debug required:
-	# snappin to center may be caused by clicking and releasing in same frame
+	# debug: edge case where press and release of RMB is in same frame
+	
+	
 	# get mouse position when click is initiated and hide cursor
 	if event is InputEventMouseButton and Input.is_action_just_pressed("rightclick"):
 		mouse_position = event.position
