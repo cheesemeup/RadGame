@@ -16,6 +16,8 @@ func load_unitframes():
 	targetframe = preload("res://scenes/ui/unitframe_target.tscn")
 	targetframe = targetframe.instantiate()
 	add_child(targetframe)
+
+# SHOULD NOT BE A TOGGLE, AS SOME FUNCTIONS WILL WANT TO SPECIFICALL SHOW, OTHERS WANT TO SPECIFICALLY HIDE, TOGGLE NOT REALLY THE WAY TO GO
 func toggle_targetframe():
 	if targetframe.visible:
 		targetframe.visible = false

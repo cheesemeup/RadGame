@@ -13,7 +13,7 @@ var speed = 10.0
 const jump_velocity = 4.5
 
 # targeting vars - NEEDS REWORK FOR MULTIPLAYER
-#var space_state
+var space_state
 #var unit_selectedtarget = null
 #var unit_mouseover_target = null
 #var interactables_in_range = []
@@ -23,12 +23,20 @@ const jump_velocity = 4.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 ####################################################################################################
+# FRAME
+func _physics_process(delta):
+	handle_movement(delta)
+	# section that is only relevant for specific player
+	if not input.is_multiplayer_authority():
+		return
+	space_state = get_world_3d().direct_space_state
+
+####################################################################################################
 # SPAWNING
 func _enter_tree():
 	$player_input.set_multiplayer_authority(str(name).to_int())
 
 func pre_ready(peer_id):
-	print(peer_id, " pre_ready call")
 	name = str(peer_id)
 	initialize_base_unit("player","0")
 
@@ -42,7 +50,7 @@ func call_set_input_process():
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
-	# add player camera node for authority
+	# add player camera node for authority only
 	rpc_id(peer_id,"add_player_camera")
 #	# activate input _process for authority
 	rpc_id(peer_id,"call_set_input_process")
@@ -51,13 +59,35 @@ func post_ready(peer_id):
 	print("player %s ready" % name)
 
 ####################################################################################################
-# INPUT
-func _unhandled_input(event):
-	pass
-
-####################################################################################################
 # TARGETING
-
+	# set target if legal, show target frame if not already visible
+	# set target to null if not legal, hide target frame if not already hidden
+	# sync target to all peers
+func targeting(event_position):
+	# send a target ray, and check for collision with any object
+	var targeted_object = targetray(event_position)
+	print("target of ray: ",targeted_object)
+	# check if collision is with a legal target, else set target to null
+	if not is_legal_target(targeted_object):
+		target = null
+		print("illegal target")
+		return
+	print("target legal")
+	
+func targetray(event_position):
+	var origin = $"camera_rotation/camera_arm/player_camera"
+	print("preparing ray endpoints")
+	var from = origin.project_ray_origin(event_position)
+	var to = from + origin.project_ray_normal(event_position) * 1000
+	print("casting ray")
+	var query = PhysicsRayQueryParameters3D.create(from,to)
+	print("declare result")
+	var collision_object = $"../player".space_state.intersect_ray(query)
+	return collision_object
+func is_legal_target(object):
+	# check if there is an object
+	# check if object is in appropriate group
+	return true
 
 #func _ready():
 #	# TODO: read save file
@@ -102,9 +132,6 @@ func _unhandled_input(event):
 #			if is_instance_valid(old_interactable):
 #				old_interactable.hide_interact_popup()
 #		current_interact_target.show_interact_popup()
-
-func _physics_process(delta):
-	handle_movement(delta)
 
 func handle_movement(delta):
 	# jumping

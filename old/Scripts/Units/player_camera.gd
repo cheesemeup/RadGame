@@ -11,11 +11,7 @@ var v_acceleration = 10
 var mouse_position
 
 
-func _input(event):
-	# debug: edge case where press and release of RMB is in same frame
-	
-	
-	# get mouse position when click is initiated and hide cursor
+func _input(event):# get mouse position when click is initiated and hide cursor
 	if event is InputEventMouseButton and Input.is_action_just_pressed("rightclick"):
 		mouse_position = event.position
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
