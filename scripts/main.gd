@@ -11,9 +11,8 @@ func _ready():
 #		multiplayer.connected_to_server.connect(load_map_on_spawn)
 		return
 	Autoload.main_reference = self
-	var mainmenu = preload("res://scenes/ui/mainmenu.tscn")
-	mainmenu = mainmenu.instantiate()
-	add_child(mainmenu)
+	# load main menu for players
+	UIHandler.load_mainmenu()
 
 #func start_server():
 #	# start server

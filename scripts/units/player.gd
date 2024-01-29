@@ -46,12 +46,19 @@ func post_ready(peer_id):
 	rpc_id(peer_id,"add_player_camera")
 #	# activate input _process for authority
 	rpc_id(peer_id,"call_set_input_process")
+	if input.is_multiplayer_authority():
+		Autoload.player_reference = self
 	print("player %s ready" % name)
 
 ####################################################################################################
+# INPUT
+func _unhandled_input(event):
+	pass
+
+####################################################################################################
 # TARGETING
-# When an unhandled leftclick occurs, send targeting ray to detect collision with unit
-# If a unit is collided with, set this unit as the new target
+
+
 #func _ready():
 #	# TODO: read save file
 #	input.set_process(false)

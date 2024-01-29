@@ -1,10 +1,8 @@
 extends Control
 
-# show target frame when a target is selected
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if not self.visible:
+		return
 	# update health bar
 	
 	# update mana bar
