@@ -17,9 +17,12 @@ func load_unitframes():
 	targetframe = targetframe.instantiate()
 	add_child(targetframe)
 
-# SHOULD NOT BE A TOGGLE, AS SOME FUNCTIONS WILL WANT TO SPECIFICALL SHOW, OTHERS WANT TO SPECIFICALLY HIDE, TOGGLE NOT REALLY THE WAY TO GO
-func toggle_targetframe():
-	if targetframe.visible:
-		targetframe.visible = false
-		return
+# TARGEFRAME
+func show_targetframe():
 	targetframe.visible = true
+	# enable processing health and resource information
+	targetframe.set_process(true)
+func hide_targetframae():
+	# disable processing health and resource information
+	targetframe.set_process(false)
+	targetframe.visible = false

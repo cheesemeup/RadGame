@@ -1,9 +1,9 @@
 extends Control
 
+var target_reference
+
 func _process(delta):
-	if not self.visible:
-		return
 	# update health bar
-	
+	$hpbar_value.value = 0
 	# update mana bar
-	pass
+	$resourcebar_value.value = 0
