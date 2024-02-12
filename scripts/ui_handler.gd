@@ -24,7 +24,7 @@ func show_targetframe():
 	targetframe.visible = true
 	# enable processing health and resource information
 	targetframe.set_process(true)
-func hide_targetframae():
+func hide_targetframe():
 	# disable processing health and resource information
 	targetframe.set_process(false)
 	targetframe.visible = false
