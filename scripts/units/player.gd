@@ -45,6 +45,9 @@ func add_player_camera():
 	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
 	$camera_rotation/camera_arm/player_camera.current = true
 @rpc("authority")
+func load_ui_initial():
+	UIHandler.load_unitframes()
+@rpc("authority")
 func call_set_input_process():
 	input.set_process(true)
 
@@ -52,6 +55,8 @@ func post_ready(peer_id):
 	# some things should be done after _ready is finished
 	# add player camera node for authority only
 	rpc_id(peer_id,"add_player_camera")
+	# add UI elements
+	rpc_id(peer_id,"load_ui_initial")
 #	# activate input _process for authority
 	rpc_id(peer_id,"call_set_input_process")
 	if input.is_multiplayer_authority():

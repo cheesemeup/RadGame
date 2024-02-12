@@ -1,3 +1,4 @@
+# This script loads, unloads, shows and hides UI elements
 extends Node
 
 var targetframe
@@ -15,7 +16,8 @@ func load_unitframes():
 	# initially invisible targetframe
 	targetframe = preload("res://scenes/ui/unitframe_target.tscn")
 	targetframe = targetframe.instantiate()
-	add_child(targetframe)
+	$"/main/ui".add_child(targetframe)
+	print("targetframe loaded")
 
 # TARGEFRAME
 func show_targetframe():
