@@ -60,8 +60,6 @@ func post_ready(peer_id):
 
 ####################################################################################################
 # TARGETING
-	# set target if legal, show target frame if not already visible
-	# set target to null if not legal, hide target frame if not already hidden
 	# sync target to all peers
 func targeting(event_position):
 	# send a target ray, and check for collision with any object
@@ -72,12 +70,12 @@ func targeting(event_position):
 		print("illegal target")
 		target = null
 		print("hiding target frame")
-		UIHandler.show_targetframe()
+		UIHandler.hide_targetframe()
 		return
 	print("target legal")
 	target = target_dict["collider"]
 	print("showing target frame")
-	UIHandler.hide_targetframe()
+	UIHandler.show_targetframe()
 	
 func targetray(event_position):
 	# only the controlling player can do this, as the camera is required
@@ -87,7 +85,7 @@ func targetray(event_position):
 	var to = from + origin.project_ray_normal(event_position) * 1000
 	print("casting ray")
 	var query = PhysicsRayQueryParameters3D.create(from,to)
-	print("declare result")
+	print("query space state")
 	var target_dict = $"../player".space_state.intersect_ray(query)
 	return target_dict
 func is_legal_target(target_dict):
@@ -96,7 +94,7 @@ func is_legal_target(target_dict):
 	if target_dict == {}:
 		return false
 	# check if object is in appropriate group
-	if not target_dict["collider"].is_in_group("npc"):
+	if not (target_dict["collider"].is_in_group("npc") or target_dict["collider"].is_in_group("player")):
 		return false
 	return true
 
