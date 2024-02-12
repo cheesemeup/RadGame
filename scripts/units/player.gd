@@ -86,7 +86,7 @@ func targetray(event_position):
 	print("casting ray")
 	var query = PhysicsRayQueryParameters3D.create(from,to)
 	print("query space state")
-	var target_dict = $"../player".space_state.intersect_ray(query)
+	var target_dict = space_state.intersect_ray(query)
 	return target_dict
 func is_legal_target(target_dict):
 	print("checking target legality")
