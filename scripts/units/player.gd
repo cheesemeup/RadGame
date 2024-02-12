@@ -50,6 +50,7 @@ func load_ui_initial():
 @rpc("authority")
 func call_set_input_process():
 	input.set_process(true)
+	input.set_process_unhandled_input(true)
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished

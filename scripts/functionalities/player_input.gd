@@ -6,6 +6,7 @@ var space_state
 
 func _ready():
 	set_process(false)
+	set_process_unhandled_input(false)
 
 func _process(_delta):
 	movement_direction()
