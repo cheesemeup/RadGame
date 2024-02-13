@@ -27,7 +27,6 @@ func stat_init(unit_type: String,unit_id: String) -> void:
 	var stats_dict = json_dict[unit_id]
 	# instantiate stat object
 	stats = Stats.new(stats_dict)
-	print("stats: ",stats)
 
 func spell_container_update(spell_list):
 	# remove previous spells
