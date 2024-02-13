@@ -70,19 +70,14 @@ func post_ready(peer_id):
 func targeting(event_position):
 	# send a target ray, and check for collision with any object
 	var target_dict = targetray(event_position)
-	print("target dict of ray: ",target_dict)
 	# check if collision is with a legal target, else set target to null
 	if not is_legal_target(target_dict):
-		print("illegal target")
 		target = null
-		print("hiding target frame")
 		UIHandler.hide_targetframe()
 		return
-	print("target legal")
 	target = target_dict["collider"]
-	print("showing target frame")
 	UIHandler.show_targetframe()
-	
+
 func targetray(event_position):
 	# only the controlling player can do this, as the camera is required
 	var origin = $"camera_rotation/camera_arm/player_camera"
