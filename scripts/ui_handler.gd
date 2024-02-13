@@ -4,11 +4,11 @@ extends Node
 # targetframe
 var targetframe
 var targetframe_hp_x = 1080  # x position
-var targetframe_hp_y = 745  # y position
+var targetframe_hp_y = 795  # y position
 var targetframe_hp_w = 220  # width
 var targetframe_hp_h = 60  # height
 var targetframe_res_x = 1080  # x position
-var targetframe_res_y = 805  # y position
+var targetframe_res_y = 855  # y position
 var targetframe_res_w = 220  # width
 var targetframe_res_h = 25  # height
 

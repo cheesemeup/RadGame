@@ -4,6 +4,6 @@ var target_reference
 
 func _process(delta):
 	# update health bar
-	$hpbar_value.value = 25
-	# update mana bar
-	$resourcebar_value.value = 35
+	$hpbar_value.value = 100 * target_reference.stats_current.health_current / target_reference.stats_current.health_max
+	# update resource bar
+	$resourcebar_value.value = 100 * target_reference.stats_current.resource_current / target_reference.stats_current.resource_max
