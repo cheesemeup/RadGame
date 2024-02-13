@@ -73,11 +73,11 @@ func targeting(event_position):
 	# check if collision is with a legal target, else set target to null
 	if not is_legal_target(target_dict):
 		target = null
-		$"/root/main/ui/targetframe".target_reference = target
+		$"/root/main/ui/unitframe_target".target_reference = target
 		UIHandler.hide_targetframe()
 		return
 	target = target_dict["collider"]
-	$"/root/main/ui/targetframe".target_reference = target
+	$"/root/main/ui/unitframe_target".target_reference = target
 	UIHandler.show_targetframe()
 
 func targetray(event_position):
