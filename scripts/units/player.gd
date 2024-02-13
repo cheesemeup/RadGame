@@ -55,7 +55,7 @@ func call_set_input_process():
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
-	initialize_base_unit("player","0")
+	initialize_base_unit("player","0").rpc()
 	# add player camera node for authority only
 	rpc_id(peer_id,"add_player_camera")
 	# add UI elements

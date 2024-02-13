@@ -14,6 +14,7 @@ var target = null
 var is_dead: bool = false
 var is_moving: bool = false
 
+@rpc("authority","call_local")
 func initialize_base_unit(unittype,UnitID):
 	# stats
 	stat_init(unittype,UnitID)
