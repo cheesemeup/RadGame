@@ -64,7 +64,7 @@ func post_ready(peer_id):
 	if input.is_multiplayer_authority():
 		Autoload.player_reference = self
 	print("player %s ready" % name)
-	print(stats)
+	print(stats.stats_current)
 
 ####################################################################################################
 # TARGETING
