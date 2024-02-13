@@ -39,7 +39,7 @@ func _enter_tree():
 func pre_ready(peer_id):
 	name = str(peer_id)
 	# initialize stats for all peers
-	#initialize_base_unit("player","0")
+	initialize_base_unit("player","0")
 
 @rpc("authority")
 func add_player_camera():
@@ -55,7 +55,6 @@ func call_set_input_process():
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
-	initialize_base_unit("player","0").rpc()
 	# add player camera node for authority only
 	rpc_id(peer_id,"add_player_camera")
 	# add UI elements
@@ -65,6 +64,7 @@ func post_ready(peer_id):
 	if input.is_multiplayer_authority():
 		Autoload.player_reference = self
 	print("player %s ready" % name)
+	print(stats)
 
 ####################################################################################################
 # TARGETING
