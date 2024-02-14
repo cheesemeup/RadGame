@@ -8,8 +8,8 @@ func _process(delta):
 		return
 	# update health bar
 	$hpbar_value.value = 100 * target_reference.stats_current.health_current / target_reference.stats_current.health_max
-	$"hpbar_value/health".text = "%s/%s | %.2f%" % \
+	$"hpbar_value/health".text = "%s/%s | %.2f%s" % \
 		[target_reference.stats_current.health_current, target_reference.stats_current.health_max,\
-		target_reference.stats_current.health_current/target_reference.stats_current.health_max]
+		target_reference.stats_current.health_current/target_reference.stats_current.health_max, "%"]
 	# update resource bar
 	$resourcebar_value.value = 100 * target_reference.stats_current.resource_current / target_reference.stats_current.resource_max
