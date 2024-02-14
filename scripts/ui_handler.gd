@@ -37,6 +37,7 @@ func set_targetframe_position():
 	targetframe.get_node("hpbar_value").position = Vector2(targetframe_hp_x,targetframe_hp_y)
 	targetframe.get_node("hpbar_value").get_node("unitname").size = Vector2(targetframe_hp_w/2,targetframe_hp_h)
 	targetframe.get_node("hpbar_value").get_node("health").size = Vector2(targetframe_hp_w/2,targetframe_hp_h)
+	targetframe.get_node("hpbar_value").get_node("health").x = targetframe.get_node("hpbar_value").x + targetframe.get_node("hpbar_value").size.x/2
 	targetframe.get_node("resourcebar_value").size = Vector2(targetframe_res_w,targetframe_res_h)
 	targetframe.get_node("resourcebar_value").position = Vector2(targetframe_res_x,targetframe_res_y)
 	

@@ -6,7 +6,7 @@
 bg_color = Color(0.101961, 0.101961, 0.101961, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnixq"]
-bg_color = Color(0.239216, 0.709804, 0.2, 1)
+bg_color = Color(0, 0.517647, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhtwl"]
 bg_color = Color(0.101961, 0.101961, 0.101961, 1)
@@ -32,6 +32,8 @@ show_percentage = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+text = "test"
 vertical_alignment = 1
 
 [node name="health" type="Label" parent="hpbar_value"]
