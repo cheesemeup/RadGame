@@ -15,6 +15,7 @@ bg_color = Color(0.101961, 0.101961, 0.101961, 1)
 bg_color = Color(0, 0.372549, 0.917647, 1)
 
 [node name="unitframe_player" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_bm7bp")
