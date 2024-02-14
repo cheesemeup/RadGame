@@ -15,7 +15,6 @@ bg_color = Color(0.101961, 0.101961, 0.101961, 1)
 bg_color = Color(0, 0.372549, 0.917647, 1)
 
 [node name="unitframe_target" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_bm7bp")
@@ -27,6 +26,18 @@ offset_bottom = 60.0
 theme_override_styles/background = SubResource("StyleBoxFlat_fefi4")
 theme_override_styles/fill = SubResource("StyleBoxFlat_cnixq")
 value = 25.0
+show_percentage = false
+
+[node name="unitname" type="Label" parent="hpbar_value"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+vertical_alignment = 1
+
+[node name="health" type="Label" parent="hpbar_value"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="resourcebar_value" type="ProgressBar" parent="."]
 layout_mode = 1
@@ -36,3 +47,9 @@ offset_bottom = 85.0
 theme_override_styles/background = SubResource("StyleBoxFlat_bhtwl")
 theme_override_styles/fill = SubResource("StyleBoxFlat_egst5")
 value = 45.0
+show_percentage = false
+
+[node name="resource" type="Label" parent="resourcebar_value"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
