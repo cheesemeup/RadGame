@@ -15,13 +15,14 @@ bg_color = Color(0.101961, 0.101961, 0.101961, 1)
 bg_color = Color(0, 0.372549, 0.917647, 1)
 
 [node name="unitframe_target" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_bm7bp")
 
 [node name="hpbar_value" type="ProgressBar" parent="."]
 layout_mode = 1
-offset_right = 220.0
+offset_right = 240.0
 offset_bottom = 60.0
 theme_override_styles/background = SubResource("StyleBoxFlat_fefi4")
 theme_override_styles/fill = SubResource("StyleBoxFlat_cnixq")
@@ -33,7 +34,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 12
-text = "test"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="health" type="Label" parent="hpbar_value"]
@@ -41,13 +42,20 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 12
-text = "non_process test"
-vertical_alignment = 1
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="healthpercent" type="Label" parent="hpbar_value"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 2
 
 [node name="resourcebar_value" type="ProgressBar" parent="."]
 layout_mode = 1
 offset_top = 60.0
-offset_right = 220.0
+offset_right = 240.0
 offset_bottom = 85.0
 theme_override_styles/background = SubResource("StyleBoxFlat_bhtwl")
 theme_override_styles/fill = SubResource("StyleBoxFlat_egst5")
@@ -58,3 +66,13 @@ show_percentage = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="resourcepercent" type="Label" parent="resourcebar_value"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 1
