@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://cj35st4iqra2l"]
+
+[ext_resource type="Script" path="res://scripts/ui/unitframe_target.gd" id="1_bm7bp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fefi4"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnixq"]
+bg_color = Color(0, 0.517647, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhtwl"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egst5"]
+bg_color = Color(0, 0.372549, 0.917647, 1)
+
+[node name="unitframe_target" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_bm7bp")
+
+[node name="hpbar_value" type="ProgressBar" parent="."]
+layout_mode = 1
+offset_right = 240.0
+offset_bottom = 60.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fefi4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cnixq")
+value = 25.0
+show_percentage = false
+
+[node name="unitname" type="Label" parent="hpbar_value"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="health" type="Label" parent="hpbar_value"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="healthpercent" type="Label" parent="hpbar_value"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 2
+
+[node name="resourcebar_value" type="ProgressBar" parent="."]
+layout_mode = 1
+offset_top = 60.0
+offset_right = 240.0
+offset_bottom = 85.0
+theme_override_styles/background = SubResource("StyleBoxFlat_bhtwl")
+theme_override_styles/fill = SubResource("StyleBoxFlat_egst5")
+value = 45.0
+show_percentage = false
+
+[node name="resource" type="Label" parent="resourcebar_value"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="resourcepercent" type="Label" parent="resourcebar_value"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 1

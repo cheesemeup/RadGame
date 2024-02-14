@@ -13,7 +13,7 @@ var speed = 10.0
 const jump_velocity = 4.5
 
 # targeting vars - NEEDS REWORK FOR MULTIPLAYER
-#var space_state
+var space_state
 #var unit_selectedtarget = null
 #var unit_mouseover_target = null
 #var interactables_in_range = []
@@ -22,12 +22,23 @@ const jump_velocity = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+####################################################################################################
+# FRAME
+func _physics_process(delta):
+	handle_movement(delta)
+	# section that is only relevant for specific player
+	if not input.is_multiplayer_authority():
+		return
+	space_state = get_world_3d().direct_space_state
+
+####################################################################################################
+# SPAWNING
 func _enter_tree():
 	$player_input.set_multiplayer_authority(str(name).to_int())
 
 func pre_ready(peer_id):
-	print(peer_id, " pre_ready call")
 	name = str(peer_id)
+	# initialize stats for all peers
 	initialize_base_unit("player","0")
 
 @rpc("authority")
@@ -35,16 +46,61 @@ func add_player_camera():
 	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
 	$camera_rotation/camera_arm/player_camera.current = true
 @rpc("authority")
+func load_ui_initial():
+	UIHandler.load_unitframes()
+@rpc("authority")
 func call_set_input_process():
 	input.set_process(true)
+	input.set_process_unhandled_input(true)
 
 func post_ready(peer_id):
 	# some things should be done after _ready is finished
-	# add player camera node for authority
+	# add player camera node for authority only
 	rpc_id(peer_id,"add_player_camera")
+	# add UI elements
+	rpc_id(peer_id,"load_ui_initial")
 #	# activate input _process for authority
 	rpc_id(peer_id,"call_set_input_process")
+	if input.is_multiplayer_authority():
+		Autoload.player_reference = self
 	print("player %s ready" % name)
+
+####################################################################################################
+# TARGETING
+	# sync target to all peers
+func targeting(event_position):
+	# send a target ray, and check for collision with any object
+	var target_dict = targetray(event_position)
+	# check if collision is with a legal target, else set target to null
+	if not is_legal_target(target_dict):
+		target = null
+		$"/root/main/ui/unitframe_target".target_reference = target
+		UIHandler.hide_targetframe()
+		return
+	target = target_dict["collider"]
+	$"/root/main/ui/unitframe_target".target_reference = target
+	UIHandler.show_targetframe()
+
+func targetray(event_position):
+	# only the controlling player can do this, as the camera is required
+	var origin = $"camera_rotation/camera_arm/player_camera"
+	print("getting ray endpoints")
+	var from = origin.project_ray_origin(event_position)
+	var to = from + origin.project_ray_normal(event_position) * 1000
+	print("casting ray")
+	var query = PhysicsRayQueryParameters3D.create(from,to)
+	print("query space state")
+	var target_dict = space_state.intersect_ray(query)
+	return target_dict
+func is_legal_target(target_dict):
+	print("checking target legality")
+	# check if there is an object
+	if target_dict == {}:
+		return false
+	# check if object is in appropriate group
+	if not (target_dict["collider"].is_in_group("npc") or target_dict["collider"].is_in_group("player")):
+		return false
+	return true
 
 #func _ready():
 #	# TODO: read save file
@@ -89,9 +145,6 @@ func post_ready(peer_id):
 #			if is_instance_valid(old_interactable):
 #				old_interactable.hide_interact_popup()
 #		current_interact_target.show_interact_popup()
-
-func _physics_process(delta):
-	handle_movement(delta)
 
 func handle_movement(delta):
 	# jumping
