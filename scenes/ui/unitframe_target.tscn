@@ -1,6 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cj35st4iqra2l"]
-
-[ext_resource type="Script" path="res://scripts/ui/unitframe_target.gd" id="1_bm7bp"]
+[gd_scene load_steps=5 format=3 uid="uid://cj35st4iqra2l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fefi4"]
 bg_color = Color(0.101961, 0.101961, 0.101961, 1)
@@ -14,11 +12,9 @@ bg_color = Color(0.101961, 0.101961, 0.101961, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egst5"]
 bg_color = Color(0, 0.372549, 0.917647, 1)
 
-[node name="unitframe_target" type="Control"]
-visible = false
+[node name="unitframe_player" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_bm7bp")
 
 [node name="hpbar_value" type="ProgressBar" parent="."]
 layout_mode = 1
