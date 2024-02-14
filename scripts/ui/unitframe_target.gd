@@ -11,4 +11,4 @@ func _process(delta):
 	print(target_reference.stats_current.health_current)
 	$hpbar_value.value = 100 * target_reference.stats_current.health_current / target_reference.stats_current.health_max
 	# update resource bar
-	$resourcebar_value.value = 100 * target_reference.stats.stats_current.resource_current / target_reference.stats.stats_current.resource_max
+	$resourcebar_value.value = 100 * target_reference.stats_current.resource_current / target_reference.stats_current.resource_max
