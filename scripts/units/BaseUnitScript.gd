@@ -3,6 +3,8 @@ extends CharacterBody3D
 class_name BaseUnit
 
 # combat
+@export var stats_current: Dictionary
+var stats_base: Dictionary
 var stats: Stats
 var aura_dict: Dictionary
 var absorb_dict: Dictionary
@@ -24,9 +26,11 @@ func stat_init(unit_type: String,unit_id: String) -> void:
 	# read stats dict from file
 	var file = "res://data/db_stats_"+unit_type+".json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
-	var stats_dict = json_dict[unit_id]
+	var stats_base = json_dict[unit_id]
+	# rework stats: don't use custom class, as these cannot be synced
+	stats_current = stats_base.duplicate()
 	# instantiate stat object
-	stats = Stats.new(stats_dict)
+	# stats = Stats.new(stats_dict)
 
 func spell_container_update(spell_list):
 	# remove previous spells
@@ -37,8 +41,6 @@ func spell_container_update(spell_list):
 		var spell_scene = load("res://scenes/spells/spell_%s.tscn" % spell)
 		spell_scene = spell_scene.instantiate()
 		$spell_container.add_child(spell_scene)
-	
-	pass
 
 class Stats:
 	var stats_base: StatsBase
