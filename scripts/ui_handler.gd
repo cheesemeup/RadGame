@@ -33,8 +33,8 @@ func load_mainmenu():
 ####################################################################################################
 # UNITFRAMES
 func load_unitframes():
-	initialize_playerframe()
 	initialize_targetframe()
+	initialize_playerframe()
 
 # PLAYERFRAME
 func initialize_playerframe():
