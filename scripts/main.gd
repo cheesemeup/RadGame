@@ -54,19 +54,19 @@ func spawn_player(peer_id: int):
 	$players.add_child(new_player,true)
 	new_player.post_ready(peer_id)
 
-func remove_player(peer_id):
-	print("remove_player triggered")
+func remove_player(peer_id: int):
+	print("remove_player triggered for %s" % peer_id)
 	var player = get_node_or_null("players/"+str(peer_id))
 	if multiplayer.is_server() and player:
 		player.queue_free()
 
-@rpc("authority")
-func initialize_persistent_ui():
-	# add persistent ui child node
-	var ui_scene = load("res://scenes/ui/ui_main.tscn")	
-	ui_scene = ui_scene.instantiate()
-	add_child(ui_scene)
-	Autoload.player_ui_main_reference = ui_scene
+#@rpc("authority")
+#func initialize_persistent_ui():
+	## add persistent ui child node
+	#var ui_scene = load("res://scenes/ui/ui_main.tscn")	
+	#ui_scene = ui_scene.instantiate()
+	#add_child(ui_scene)
+	#Autoload.player_ui_main_reference = ui_scene
 
 ##############################################################################################################################
 # Map loading and unloading
