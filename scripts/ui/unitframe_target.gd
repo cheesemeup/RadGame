@@ -2,7 +2,7 @@ extends Control
 
 var target_reference = null
 
-func _process(delta):
+func _process(_delta):
 	# return if there is no target set
 	if target_reference == null:
 		return

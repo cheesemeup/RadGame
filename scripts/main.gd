@@ -8,7 +8,9 @@ func _ready():
 	if OS.has_feature("dedicated_server"):
 		multiplayer.peer_connected.connect(spawn_player)
 		multiplayer.peer_disconnected.connect(remove_player)
-#		multiplayer.connected_to_server.connect(load_map_on_spawn)
+		# stupid in-between test to check if npc spawns properly from code
+		var test_npc = preload("res://scenes/testing/test_npc_hostile.tscn").instantiate
+		$npcs.add_child(test_npc)
 		return
 	Autoload.main_reference = self
 	# load main menu for players
