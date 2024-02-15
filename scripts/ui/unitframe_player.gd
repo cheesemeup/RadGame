@@ -2,6 +2,9 @@ extends Control
 
 var player_reference = null
 
+func _ready():
+	player_reference = Autoload.player_reference
+
 func _process(delta):
 	# update health bar
 	$hpbar_value.value = 100 * player_reference.stats_current.health_current / player_reference.stats_current.health_max

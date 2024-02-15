@@ -47,6 +47,8 @@ func add_player_camera():
 	$camera_rotation/camera_arm/player_camera.current = true
 @rpc("authority")
 func load_ui_initial():
+	# set player reference before initializing the unitframes
+	Autoload.player_reference = self
 	UIHandler.load_unitframes()
 @rpc("authority")
 func call_set_input_process():
