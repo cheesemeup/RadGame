@@ -22,7 +22,7 @@ properties/2/path = NodePath(".:stats_current")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="test_npc_hostile" type="CharacterBody3D" groups=["hostile", "npcgroup_targetable"]]
+[node name="test_npc_hostile" type="CharacterBody3D" groups=["hostile", "npc"]]
 collision_layer = 2
 script = ExtResource("1_qhdg4")
 
@@ -40,5 +40,5 @@ shape = SubResource("CylinderShape3D_ccd1k")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_uxrmc")
 
-[node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="." groups=["hostile", "npc"]]
+[node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ifk6o")
