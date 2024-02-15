@@ -5,7 +5,8 @@ var spells_base: Dictionary
 @export var spells_curr: Dictionary
 
 func _ready():
-	# load stats and spells
+	# initialize BaseUnit
+	initialize_base_unit("npc","2")
 	var file = "res://data/db_stats_npc.json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	stats_base = json_dict["2"]
