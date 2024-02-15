@@ -40,5 +40,5 @@ shape = SubResource("CylinderShape3D_ccd1k")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_uxrmc")
 
-[node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="." groups=["hostile", "npc"]]
 replication_config = SubResource("SceneReplicationConfig_ifk6o")
