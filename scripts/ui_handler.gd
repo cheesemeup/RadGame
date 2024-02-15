@@ -3,23 +3,23 @@ extends Node
 
 # playerframe
 var playerframe
-var playerframe_hp_x = 1080  # x position
+var playerframe_hp_x = 1130  # x position
 var playerframe_hp_y = 735  # y position
 var playerframe_hp_w = 220  # width
-var playerframe_hp_h = 60  # height
+var playerframe_hp_h = 70  # height
 var playerframe_res_x = 840  # x position
-var playerframe_res_y = 700  # y position
+var playerframe_res_y = 735  # y position
 var playerframe_res_w = 240  # width
 var playerframe_res_h = 40  # height
 
 # targetframe
 var targetframe
-var targetframe_hp_x = 1080  # x position
-var targetframe_hp_y = 795  # y position
+var targetframe_hp_x = 1130  # x position
+var targetframe_hp_y = 805  # y position
 var targetframe_hp_w = 220  # width
 var targetframe_hp_h = 60  # height
-var targetframe_res_x = 1080  # x position
-var targetframe_res_y = 855  # y position
+var targetframe_res_x = 1130  # x position
+var targetframe_res_y = 865  # y position
 var targetframe_res_w = 220  # width
 var targetframe_res_h = 25  # height
 

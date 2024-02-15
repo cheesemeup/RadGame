@@ -4,6 +4,7 @@ var player_reference = null
 
 func _ready():
 	player_reference = Autoload.player_reference
+	$"hpbar_value/unitname".text = player_reference.stats_current["unit_name"]
 
 func _process(delta):
 	# update health bar
