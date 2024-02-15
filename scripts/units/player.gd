@@ -1,7 +1,5 @@
 extends BaseUnit
 
-
-#@onready var player_cam = $camera_rotation/camera_arm/player_camera
 @onready var synchronizer = $mpsynchronizer
 @onready var input = $player_input
 
