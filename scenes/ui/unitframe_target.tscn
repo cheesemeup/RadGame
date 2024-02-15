@@ -14,7 +14,7 @@ bg_color = Color(0.101961, 0.101961, 0.101961, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egst5"]
 bg_color = Color(0, 0.372549, 0.917647, 1)
 
-[node name="unitframe_player" type="Control"]
+[node name="unitframe_target" type="Control"]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -75,4 +75,5 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
 vertical_alignment = 1

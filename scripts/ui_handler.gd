@@ -8,7 +8,7 @@ var playerframe_hp_y = 735  # y position
 var playerframe_hp_w = 220  # width
 var playerframe_hp_h = 60  # height
 var playerframe_res_x = 840  # x position
-var playerframe_res_y = 650  # y position
+var playerframe_res_y = 700  # y position
 var playerframe_res_w = 240  # width
 var playerframe_res_h = 40  # height
 
