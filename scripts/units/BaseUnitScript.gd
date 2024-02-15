@@ -17,11 +17,11 @@ var target = null
 var is_dead: bool = false
 var is_moving: bool = false
 
-func initialize_base_unit(unittype,UnitID):
+func initialize_base_unit(unittype: String,UnitID: String):
 	# stats
 	stat_init(unittype,UnitID)
 	# spells
-	spell_container_init(self.stats.stats_current.spell_list)
+	spell_container_init(self.stats_current.spell_list)
 
 func stat_init(unit_type: String,unit_id: String) -> void:
 	# read stats dict from file

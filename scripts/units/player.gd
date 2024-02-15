@@ -1,7 +1,5 @@
 extends BaseUnit
 
-
-#@onready var player_cam = $camera_rotation/camera_arm/player_camera
 @onready var synchronizer = $mpsynchronizer
 @onready var input = $player_input
 
@@ -86,16 +84,12 @@ func targeting(event_position):
 func targetray(event_position):
 	# only the controlling player can do this, as the camera is required
 	var origin = $"camera_rotation/camera_arm/player_camera"
-	print("getting ray endpoints")
 	var from = origin.project_ray_origin(event_position)
 	var to = from + origin.project_ray_normal(event_position) * 1000
-	print("casting ray")
 	var query = PhysicsRayQueryParameters3D.create(from,to)
-	print("query space state")
 	var target_dict = space_state.intersect_ray(query)
 	return target_dict
 func is_legal_target(target_dict):
-	print("checking target legality")
 	# check if there is an object
 	if target_dict == {}:
 		return false
