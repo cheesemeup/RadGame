@@ -1,6 +1,5 @@
 extends BaseUnit
 
-var stats_base: Dictionary
 @export var stats_curr: Dictionary
 var spells_base: Dictionary
 @export var spells_curr: Dictionary

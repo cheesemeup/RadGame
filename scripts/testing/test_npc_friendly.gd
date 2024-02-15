@@ -1,6 +1,7 @@
 extends BaseUnit
 
-var stats_base: Dictionary
+# prepare test np hostile for testing combat spells
+
 @export var stats_curr: Dictionary
 var spells_base: Dictionary
 @export var spells_curr: Dictionary
