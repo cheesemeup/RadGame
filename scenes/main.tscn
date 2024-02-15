@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://oqfu77ry4jv0"]
+[gd_scene load_steps=5 format=3 uid="uid://oqfu77ry4jv0"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_pi1ts"]
 [ext_resource type="Script" path="res://old/Scripts/UI/handle_ui.gd" id="2_2so51"]
 [ext_resource type="PackedScene" uid="uid://bjr7k3cxd6jyj" path="res://scenes/maps/hub.tscn" id="2_8hbw6"]
+[ext_resource type="PackedScene" uid="uid://i6ufg7x2f1pt" path="res://scenes/testing/test_npc_hostile.tscn" id="4_vbyes"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_pi1ts")
@@ -12,6 +13,15 @@ script = ExtResource("1_pi1ts")
 [node name="mpspawner_player" type="MultiplayerSpawner" parent="players"]
 _spawnable_scenes = PackedStringArray("res://scenes/units/player.tscn")
 spawn_path = NodePath("..")
+
+[node name="npcs" type="Node" parent="."]
+
+[node name="mpspawner_npc" type="MultiplayerSpawner" parent="npcs"]
+_spawnable_scenes = PackedStringArray("res://scenes/testing/test_npc_hostile.tscn")
+spawn_path = NodePath("..")
+
+[node name="test_npc_hostile" parent="npcs" instance=ExtResource("4_vbyes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.77386, 0, -5.65588)
 
 [node name="maps" type="Node" parent="."]
 

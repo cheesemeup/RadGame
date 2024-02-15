@@ -60,14 +60,6 @@ func remove_player(peer_id: int):
 	if multiplayer.is_server() and player:
 		player.queue_free()
 
-#@rpc("authority")
-#func initialize_persistent_ui():
-	## add persistent ui child node
-	#var ui_scene = load("res://scenes/ui/ui_main.tscn")	
-	#ui_scene = ui_scene.instantiate()
-	#add_child(ui_scene)
-	#Autoload.player_ui_main_reference = ui_scene
-
 ##############################################################################################################################
 # Map loading and unloading
 # when spawning, join map that host is on

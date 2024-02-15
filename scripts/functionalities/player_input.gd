@@ -14,7 +14,6 @@ func _process(_delta):
 func _unhandled_input(event):
 	# if event is leftclick pressed, send target ray
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-		print("call to targetray in playerscript")
 		get_parent().targeting(event.position)
 
 ####################################################################################################
