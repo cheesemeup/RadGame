@@ -24,7 +24,7 @@ func combat_event_heal(spell,source,target,value):
 			source.stats_current["heal_modifier"][spell["healtype"]],\
 			target.stats_current["heal_taken_modifier"][spell["healtype"]])
 	# determine critical hit
-	if is_critical(spell["crit_chance_modifier"],source["crit chance"]):
+	if is_critical(spell["crit_chance_modifier"],source.stats_current["crit_chance"]):
 		value = value * (1 + spell["crit_heal_modifier"])
 	# apply healing
 	apply_heal(value,target)
