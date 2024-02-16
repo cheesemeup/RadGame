@@ -24,8 +24,11 @@ func combat_event_heal(spell,source,target,value):
 			source.stats_current["heal_modifier"][spell["healtype"]],\
 			target.stats_current["heal_taken_modifier"][spell["healtype"]])
 	# determine critical hit
-	if is_critical(spell["crit_chance_modifier"],source.stats_current["crit_chance"]):
-		value = value * (1 + spell["crit_heal_modifier"])
+	if spell["can_crit"] == 1:
+		value = value *\
+				(1 +\
+				is_critical(spell["crit_chance_modifier"],source.stats_current["crit_chance"]) *\
+				spell["crit_heal_modifier"])
 	# apply healing
 	apply_heal(value,target)
 	# show floating combat text for source via rpc, if source is player
@@ -45,8 +48,8 @@ func is_critical(crit_modifier,crit_base):
 	random.randomize()
 	var p : float = randf()
 	if p <= crit_base + crit_modifier:
-		return true
-	return false
+		return 1
+	return 0
 
 ####################################################################################################
 # VALUE APPLICATION
