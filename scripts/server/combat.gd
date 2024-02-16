@@ -1,39 +1,65 @@
 extends Node
 
 ####################################################################################################
-# COMBAT EVENTS
-@rpc("any_peer")
+# ENTRYPOINTS
 func combat_event_entrypoint(spell: Dictionary,source,target,value: int=-1):
 	# determine type of event and call appropriate function
 	if spell["spelltype"] == "damage":
 		combat_event_damage(spell,source,target,value)
 	if spell["spelltype"] == "heal":
 		combat_event_heal(spell,source,target,value)
+func value_query(coeff: float, primary: int, mod_inc: float, mod_dec: float):
+	# returns the value of a damage or healing spell based on the coefficient, the primary stat,
+	# and the two applicable modifiers. Used for combat events and for snapshotting values.
+	return int(floor(coeff * primary * mod_inc * mod_dec))
+
+####################################################################################################
+# COMBAT EVENTS
 func combat_event_damage(spell,source,target,value):
 	pass
 func combat_event_heal(spell,source,target,value):
-	# query value of event if not prescribed
+	# query base value of event if not prescribed
 	if value == -1:
 		value = value_query(spell["primary_modifier"],source.stats_current["primary"],\
 			source.stats_current["heal_modifier"]["healtype"],\
 			target.stats_current["heal_taken_modifier"]["healtype"])
 	# determine critical hit
-	if is_critical():
+	if is_critical(spell["crit_chance_modifier"],source["crit chance"]):
 		value = value * (1 + spell["crit_heal_modifier"])
 	# apply healing
-	# show floating combat text
+	apply_heal(value,target)
+	# show floating combat text for source via rpc, if source is player
+	if source.is_in_group("player"):
+		# rpc call to player scene, which calls ui function
+		pass
 	# write to log
+	log_heal(value,source,target)
 func combat_event_aura():
 	pass
-func value_query(coeff: float, primary: int, mod_inc: float, mod_dec: float):
-	# returns the value of a damage or healing spell based on the coefficient, the primary stat,
-	# and the two applicable modifiers. Used for combat events and for snapshotting values.
-	var value = 0
-
+	
 ####################################################################################################
 # CHECKS
-func is_critical():
+func is_critical(crit_modifier,crit_base):
+	# get random number
+	var random = RandomNumberGenerator.new()
+	random.randomize()
+	var p : float = randf()
+	if p <= crit_base + crit_modifier:
+		return true
 	return false
+
+####################################################################################################
+# VALUE APPLICATION
+func apply_damage():
+	pass
+func apply_heal(value: int,target):
+	target.stats_current["health_current"] = min(target.stats_current["health_current"]+value,\
+													target.stats_current["health_max"])
+
+####################################################################################################
+# LOG MESSAGES
+func log_heal(value: int,source,target):
+	print("log heal message")
 
 ## preload common auras
 #var aura_general = preload("res://scenes/auras/aura_general.tscn")
