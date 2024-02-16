@@ -14,10 +14,10 @@ func _ready():
 		test_npc.set_process(false)
 		test_npc.position = Vector3(-6,0,-6)
 		$npcs.add_child(test_npc)
-		#test_npc = preload("res://scenes/testing/test_npc_friendly.tscn").instantiate()
-		#test_npc.set_process(false)
-		#test_npc.position = Vector3(-3,0,-6)
-		#$npcs.add_child(test_npc)
+		test_npc = preload("res://scenes/testing/test_npc_friendly.tscn").instantiate()
+		test_npc.set_process(false)
+		test_npc.position = Vector3(-3,0,-6)
+		$npcs.add_child(test_npc)
 		print("map loaded")
 		return
 	Autoload.main_reference = self
