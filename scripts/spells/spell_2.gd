@@ -1,7 +1,5 @@
 extends Node
 
-# NOT FUNCTIONAL
-
 #Test NPC Heal Self
 var spell_base : Dictionary
 var spell_curr : Dictionary
@@ -12,4 +10,6 @@ func _ready():
 	spell_curr = spell_base.duplicate(true)
 
 func trigger():
-	get_parent().get_parent().send_combat_event(spell_curr)
+	# checks not necessary for this spell, as it is free, off gcd, and cast on self
+	var source = get_parent().get_parent()
+	Combat.combat_event_entrypoint(spell_curr,source,source)

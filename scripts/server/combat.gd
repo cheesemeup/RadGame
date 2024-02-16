@@ -3,13 +3,26 @@ extends Node
 ####################################################################################################
 # COMBAT EVENTS
 @rpc("any_peer")
-func combat_event_entrypoint(spell: Dictionary,source,target,value: int=0):
+func combat_event_entrypoint(spell: Dictionary,source,target,value: int=-1):
 	# determine type of event and call appropriate function
+	if spell["spelltype"] == "damage":
+		combat_event_damage(spell,source,target,value)
+	if spell["spelltype"] == "heal":
+		combat_event_heal(spell,source,target,value)
+func combat_event_damage(spell,source,target,value):
 	pass
-func combat_event_damage():
-	pass
-func combat_event_heal():
-	pass
+func combat_event_heal(spell,source,target,value):
+	# query value of event if not prescribed
+	if value == -1:
+		value = value_query(spell["primary_modifier"],source.stats_current["primary"],\
+			source.stats_current["heal_modifier"]["healtype"],\
+			target.stats_current["heal_taken_modifier"]["healtype"])
+	# determine critical hit
+	if is_critical():
+		value = value * (1 + spell["crit_heal_modifier"])
+	# apply healing
+	# show floating combat text
+	# write to log
 func combat_event_aura():
 	pass
 func value_query(coeff: float, primary: int, mod_inc: float, mod_dec: float):
@@ -19,6 +32,8 @@ func value_query(coeff: float, primary: int, mod_inc: float, mod_dec: float):
 
 ####################################################################################################
 # CHECKS
+func is_critical():
+	return false
 
 ## preload common auras
 #var aura_general = preload("res://scenes/auras/aura_general.tscn")
