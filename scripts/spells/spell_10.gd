@@ -18,7 +18,21 @@ func _ready():
 	get_parent().signal_gcd.connect(trigger_cd)
 
 func trigger():
+	# PUT A LOT OF THIS INTO BASE SPELL CLASS
+	# get source and target nodes
 	var sourcenode = get_parent().get_parent()
+	# check for cooldown
+	# check resource availability
+	# check range
+	# check line of sight
+	# apply resource cost
+	# send gcd
+	# apply spell cd if not on gcd
+	# send event to combat script
+	
+	
+	
+	
 	# check cooldown
 	if on_cd:
 		print("on cooldown")

@@ -15,6 +15,9 @@ func _unhandled_input(event):
 	# if event is leftclick pressed, send target ray
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
 		get_parent().targeting(event.position)
+	# this is a dumbcunt workaround for triggering spells from the actionbar for testing only
+	if Input.is_action_pressed("actionbar1_1"):
+		rpc_id(1,"enter_spell_container","10")
 
 ####################################################################################################
 # MOVEMENT
@@ -25,7 +28,15 @@ func movement_direction():
 	# unrotated direction from input
 	var direction_ur = Input.get_vector("move_left","move_right","move_forward","move_back")
 	# rotate input according to camera orientation
-	direction = Vector2(cos(-$"../camera_rotation".rotation.y)*direction_ur.x - sin(-$"../camera_rotation".rotation.y)*direction_ur.y, \
-						sin(-$"../camera_rotation".rotation.y)*direction_ur.x + cos(-$"../camera_rotation".rotation.y)*direction_ur.y)
+	direction = Vector2(cos(-$"../camera_rotation".rotation.y)*direction_ur.x -\
+						sin(-$"../camera_rotation".rotation.y)*direction_ur.y, \
+						sin(-$"../camera_rotation".rotation.y)*direction_ur.x +\
+						cos(-$"../camera_rotation".rotation.y)*direction_ur.y)
 	if Input.is_action_just_pressed("jump"):
 		jump.rpc()
+
+####################################################################################################
+# SPELLS
+@rpc("authority")
+func enter_spell_container(spell_id: String):
+	$"../spell_container".spell_entrypoint(spell_id)
