@@ -21,8 +21,8 @@ func combat_event_heal(spell,source,target,value):
 	# query base value of event if not prescribed
 	if value == -1:
 		value = value_query(spell["primary_modifier"],source.stats_current["primary"],\
-			source.stats_current["heal_modifier"]["healtype"],\
-			target.stats_current["heal_taken_modifier"]["healtype"])
+			source.stats_current["heal_modifier"][spell["healtype"]],\
+			target.stats_current["heal_taken_modifier"][spell["healtype"]])
 	# determine critical hit
 	if is_critical(spell["crit_chance_modifier"],source["crit chance"]):
 		value = value * (1 + spell["crit_heal_modifier"])
