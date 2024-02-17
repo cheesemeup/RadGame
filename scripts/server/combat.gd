@@ -8,10 +8,10 @@ func combat_event_entrypoint(spell: Dictionary,source,target,value: int=-1):
 		combat_event_damage(spell,source,target,value)
 	if spell["spelltype"] == "heal":
 		combat_event_heal(spell,source,target,value)
-func value_query(coeff: float, primary: int, mod_inc: float, mod_dec: float):
-	# returns the value of a damage or healing spell based on the coefficient, the primary stat,
+func value_query(coeff: float, base: int, mod_inc: float, mod_dec: float):
+	# returns the value of a damage or healing spell based on the coefficient, the base value stat,
 	# and the two applicable modifiers. Used for combat events and for snapshotting values.
-	return int(floor(coeff * primary * mod_inc * mod_dec))
+	return int(floor(coeff * base * mod_inc * mod_dec))
 
 ####################################################################################################
 # COMBAT EVENTS
@@ -20,15 +20,14 @@ func combat_event_damage(spell,source,target,value):
 func combat_event_heal(spell,source,target,value):
 	# query base value of event if not prescribed
 	if value == -1:
-		value = value_query(spell["primary_modifier"],source.stats_current["primary"],\
-			source.stats_current["heal_modifier"][spell["healtype"]],\
-			target.stats_current["heal_taken_modifier"][spell["healtype"]])
+		value = value_query(spell["value_modifier"],source.stats_current[spell["value_base"]],\
+			source.stats_current["heal_modifier"][spell["effecttype"]],\
+			target.stats_current["heal_taken_modifier"][spell["effecttype"]])
 	# determine critical hit
+	var crit = 0
 	if spell["can_crit"] == 1:
-		value = value *\
-				(1 +\
-				is_critical(spell["crit_chance_modifier"],source.stats_current["crit_chance"]) *\
-				spell["crit_heal_modifier"])
+		crit = is_critical(spell["crit_chance_modifier"],source.stats_current["crit_chance"])
+		value = value * (1 + crit * spell["crit_magnitude_modifier"])
 	# apply healing
 	apply_heal(value,target)
 	# show floating combat text for source via rpc, if source is player
@@ -36,7 +35,7 @@ func combat_event_heal(spell,source,target,value):
 		# rpc call to player scene, which calls ui function
 		pass
 	# write to log
-	log_heal(value,source,target)
+	log_heal(value,source,target,crit)
 func combat_event_aura():
 	pass
 	
@@ -61,7 +60,7 @@ func apply_heal(value: int,target):
 
 ####################################################################################################
 # LOG MESSAGES
-func log_heal(value: int,source,target):
+func log_heal(value: int,source,target,crit: int):
 	print("log heal message")
 
 ## preload common auras

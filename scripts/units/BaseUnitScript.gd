@@ -28,7 +28,7 @@ func stat_init(unit_type: String,unit_id: String) -> void:
 	var file = "res://data/db_stats_"+unit_type+".json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	stats_base = json_dict[unit_id]
-	stats_current = stats_base.duplicate()
+	stats_current = stats_base.duplicate(true)
 	stats_mult = initialize_statmult()
 	stats_add = initialize_statadd()
 

@@ -1,16 +1,8 @@
-extends Node
-
 # Fingers of Frost
-var spell_base : Dictionary
-var spell_curr : Dictionary
-var cd_timer = Timer.new()
-var on_cd = false
-var actionbar = []
+extends BaseSpell
 
 func _ready():
-	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
-	spell_base = json_dict["10"]
-	spell_curr = spell_base.duplicate(true)
+	initialize_base_spell("10")
 	cd_timer.one_shot = true
 	cd_timer.connect("timeout",set_ready.bind())
 	add_child(cd_timer)
