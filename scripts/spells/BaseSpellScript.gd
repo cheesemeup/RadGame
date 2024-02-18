@@ -20,6 +20,12 @@ func initialize_base_spell(spell_id: String):
 		get_parent().signal_gcd.connect(trigger_cd)
 
 ####################################################################################################
+# TARGET
+func get_spell_target():
+	# retur either selected or mouseovered target, depending on setting
+	pass
+
+####################################################################################################
 # CHECKS
 func is_on_cd():
 	if cd_timer.time_left > 0:
@@ -33,8 +39,12 @@ func is_not_in_range(source_position: Vector3, target_position: Vector3, range: 
 	if source_position.distance_to(target_position) > range:
 		return true
 	return false
-func is_not_in_line_of_sight():
-	pass
+func is_not_in_line_of_sight(source: CharacterBody3D,target_position: Vector3):
+	# cast a ray that uses the collision layer for terrain (layer 1)
+	var query = PhysicsRayQueryParameters3D.create(source.position,target_position)
+	if source.space_state.intersect_ray(query)["collider"] == {}:
+		return false
+	return true
 
 ####################################################################################################
 # COOLDOWN
