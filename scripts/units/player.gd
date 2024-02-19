@@ -73,13 +73,11 @@ func targeting(event_position):
 	var target_dict = targetray(event_position)
 	# check if collision is with a legal target, else set target to null
 	if not is_legal_target(target_dict):
-		print("set target to: ",target_dict["collider"])
 		target = null
 		rpc_id(1,"set_target",null,null)
 		$"/root/main/ui/unitframe_target".target_reference = target
 		UIHandler.hide_targetframe()
 		return
-	print("set target to: ",target_dict["collider"])
 	target = target_dict["collider"]
 	rpc_id(1,"set_target",target_dict["collider"].name,target_dict["collider"].get_parent().name)
 	$"/root/main/ui/unitframe_target".target_reference = target
@@ -103,11 +101,7 @@ func is_legal_target(target_dict):
 	return true
 @rpc("any_peer")
 func set_target(requested_target,parent):
-	print("set target to: %s in %s"%[requested_target,parent])
-	if requested_target == null:
-		selected_target = null
-	else:
-		selected_target = get_node("/root/main/%s/%s"%[parent,requested_target])
+	selected_target = get_node_or_null("/root/main/%s/%s"%[parent,requested_target])
 	print(selected_target)
 
 #func _ready():

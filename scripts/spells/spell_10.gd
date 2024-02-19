@@ -13,7 +13,7 @@ func trigger():
 	print("source: ", source)
 	print("setting target")
 	var target = get_spell_target(source)
-	print("source target: ",source.target)
+	print("source target: ",source.selected_target)
 	print("source motarget: ", source.mouseover_target)
 	print("target: ",target)
 	# set target to self if there is no target
