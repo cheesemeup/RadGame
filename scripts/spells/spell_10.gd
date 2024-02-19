@@ -10,8 +10,11 @@ func trigger():
 	# get source and target nodes
 	print("setting source")
 	var source = get_parent().get_parent()
+	print("source: ", source)
 	print("setting target")
 	var target = get_spell_target(source)
+	print("source target: ",source.target)
+	print("source motarget:1 ", source.mouseover_target)
 	print("target: ",target)
 	# set target to self if there is no target
 	if target == null:
