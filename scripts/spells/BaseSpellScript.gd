@@ -49,6 +49,7 @@ func is_not_in_range(source_position: Vector3, target_position: Vector3, range: 
 func is_not_in_line_of_sight(source: CharacterBody3D,target_position: Vector3):
 	# cast a ray that uses the collision layer for terrain (layer 1)
 	var query = PhysicsRayQueryParameters3D.create(source.position,target_position)
+	print(source.space_state.intersect_ray(query)["collider"])
 	if source.space_state.intersect_ray(query)["collider"] == {}:
 		return false
 	return true
