@@ -6,15 +6,9 @@ func _ready():
 	# connect to gcd signal of spell container
 
 func trigger():
-	print("trigger entered")
 	# get source and target nodes
-	print("setting source")
 	var source = get_parent().get_parent()
-	print("source: ", source)
-	print("setting target")
 	var target = get_spell_target(source)
-	print("source target: ",source.selected_target)
-	print("source motarget: ", source.mouseover_target)
 	print("target: ",target)
 	# set target to self if there is no target
 	if target == null:
@@ -34,7 +28,8 @@ func trigger():
 	print("checking resource")
 	if insufficient_resource(spell_current["resource_cost"],\
 								source.stats_current["resource_current"]):
-		print("insufficient resources")
+		print("insufficient resources: %s / %s"%spell_current["resource_cost"],\
+								source.stats_current["resource_current"])
 		return 3
 	# check range
 	print("checking range")
