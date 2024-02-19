@@ -8,11 +8,11 @@ signal signal_gcd(duration)
 func spell_entrypoint(spell_id: String):
 	# determine whether spell is present in container
 	var node_name = "spell_"+spell_id
-	if get_node_or_null(node_name) == null:
+	var spell_node = get_node_or_null(node_name)
+	if spell_node == null:
 		return 1  # spell not known
 	# trigger spell
-	node_name.trigger()
-	pass
+	spell_node.trigger()
 
 # apply role swap changes
 

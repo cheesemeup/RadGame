@@ -12,6 +12,7 @@ var absorb_dict: Dictionary
 
 # targeting
 var target = null
+var mouseover_target
 
 # state
 var is_dead: bool = false

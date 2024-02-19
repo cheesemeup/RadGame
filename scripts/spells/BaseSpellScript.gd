@@ -6,6 +6,7 @@ var spell_base: Dictionary
 var spell_current: Dictionary
 var result_strings
 var cd_timer = Timer.new()
+var mouseover = false
 
 func _ready():
 	cd_timer.one_shot = true
@@ -21,12 +22,18 @@ func initialize_base_spell(spell_id: String):
 
 ####################################################################################################
 # TARGET
-func get_spell_target():
-	# retur either selected or mouseovered target, depending on setting
-	pass
+func get_spell_target(source: CharacterBody3D):
+	# return either selected or mouseovered target, depending on setting
+	if mouseover:
+		return source.mouseover_target
+	return source.target
 
 ####################################################################################################
 # CHECKS
+func is_illegal_target(valid_group,target):
+	if target.is_in_group(valid_group):
+		return false
+	return true
 func is_on_cd():
 	if cd_timer.time_left > 0:
 		return true
