@@ -75,13 +75,13 @@ func targeting(event_position):
 	if not is_legal_target(target_dict):
 		print("set target to: ",target_dict["collider"])
 		target = null
-		rpc_id(1,"set_target",[null,null])
+		rpc_id(1,"set_target",null,null)
 		$"/root/main/ui/unitframe_target".target_reference = target
 		UIHandler.hide_targetframe()
 		return
 	print("set target to: ",target_dict["collider"])
 	target = target_dict["collider"]
-	rpc_id(1,"set_target",[target_dict["collider"].name,target_dict["collider"].get_parent()])
+	rpc_id(1,"set_target",target_dict["collider"].name,target_dict["collider"].get_parent())
 	$"/root/main/ui/unitframe_target".target_reference = target
 	UIHandler.show_targetframe()
 
@@ -108,6 +108,7 @@ func set_target(requested_target,parent):
 		selected_target = null
 		return
 	selected_target = get_node_or_null("/root/main/units/%s/%s"%[parent,requested_target])
+	print(selected_target)
 
 #func _ready():
 #	# TODO: read save file
