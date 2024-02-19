@@ -40,8 +40,8 @@ func is_on_cd():
 	return false
 func insufficient_resource(cost: int, resource: int):
 	if cost < resource:
-		return true
-	return false
+		return false
+	return true
 func is_not_in_range(source_position: Vector3, target_position: Vector3, range: float):
 	if source_position.distance_to(target_position) > range:
 		return true
