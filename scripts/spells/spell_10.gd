@@ -28,8 +28,8 @@ func trigger():
 	print("checking resource")
 	if insufficient_resource(spell_current["resource_cost"],\
 								source.stats_current["resource_current"]):
-		print("insufficient resources: %s / %s"%spell_current["resource_cost"],\
-								source.stats_current["resource_current"])
+		print("insufficient resources: %s / %s"%[spell_current["resource_cost"],\
+								source.stats_current["resource_current"]])
 		return 3
 	# check range
 	print("checking range")
