@@ -72,15 +72,16 @@ func targeting(event_position):
 	# send a target ray, and check for collision with any object
 	var target_dict = targetray(event_position)
 	# check if collision is with a legal target, else set target to null
-	# explicit local calls before rpc are required for targetframe to update properly and not crash
 	if not is_legal_target(target_dict):
+		print("set target to: ",target_dict["collider"])
 		target = null
-		rpc_id(1,"set_target",null)
+		rpc_id(1,"set_target",[null,null])
 		$"/root/main/ui/unitframe_target".target_reference = target
 		UIHandler.hide_targetframe()
 		return
+	print("set target to: ",target_dict["collider"])
 	target = target_dict["collider"]
-	rpc_id(1,"set_target",target_dict["collider"])
+	rpc_id(1,"set_target",[target_dict["collider"].name,target_dict["collider"].get_parent()])
 	$"/root/main/ui/unitframe_target".target_reference = target
 	UIHandler.show_targetframe()
 
@@ -101,8 +102,12 @@ func is_legal_target(target_dict):
 		return false
 	return true
 @rpc("any_peer")
-func set_target(requested_target):
-	target = requested_target
+func set_target(requested_target,parent):
+	print("set target to: ",requested_target)
+	if requested_target == null:
+		selected_target = null
+		return
+	selected_target = get_node_or_null("/root/main/units/%s/%s"%[parent,requested_target])
 
 #func _ready():
 #	# TODO: read save file

@@ -11,8 +11,9 @@ var aura_dict: Dictionary
 var absorb_dict: Dictionary
 
 # targeting
-var target = null
-var mouseover_target
+var target = null  # for unitframes, only local
+var selected_target = null  # for targeting with spells
+var mouseover_target = null  # for targeting with spells
 
 # state
 var is_dead: bool = false
