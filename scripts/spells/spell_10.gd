@@ -12,13 +12,15 @@ func trigger():
 	var source = get_parent().get_parent()
 	print("setting target")
 	var target = get_spell_target(source)
+	print("target: ",target)
 	# set target to self if there is no target
 	if target == null:
+		print("resetting target to self")
 		target = source
 	# check target legality
 	print("checking legality of target", target)
 	if is_illegal_target(spell_current["targetgroup"],target):
-		print("illegal target")
+		print("illegal target: ",spell_current["targetgroup"],target)
 		return 1
 	# check for cooldown
 	print("checking cd")
