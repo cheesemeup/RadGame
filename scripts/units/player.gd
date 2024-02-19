@@ -73,6 +73,7 @@ func targeting(event_position):
 	var target_dict = targetray(event_position)
 	# check if collision is with a legal target, else set target to null
 	if not is_legal_target(target_dict):
+		target = null
 		rpc_id(1,"set_target",null)
 		$"/root/main/ui/unitframe_target".target_reference = target
 		UIHandler.hide_targetframe()
@@ -97,7 +98,7 @@ func is_legal_target(target_dict):
 	if not (target_dict["collider"].is_in_group("npc") or target_dict["collider"].is_in_group("player")):
 		return false
 	return true
-@rpc("any_peer")
+@rpc("any_peer","call_local")
 func set_target(requested_target):
 	target = requested_target
 
