@@ -26,7 +26,7 @@ func get_spell_target(source: CharacterBody3D):
 	# return either selected or mouseovered target, depending on setting
 	if mouseover:
 		return source.mouseover_target
-	return source.target
+	return source.selected_target
 
 ####################################################################################################
 # CHECKS
