@@ -72,6 +72,7 @@ func targeting(event_position):
 	# send a target ray, and check for collision with any object
 	var target_dict = targetray(event_position)
 	# check if collision is with a legal target, else set target to null
+	# explicit local calls before rpc are required for targetframe to update properly and not crash
 	if not is_legal_target(target_dict):
 		target = null
 		rpc_id(1,"set_target",null)
@@ -99,7 +100,7 @@ func is_legal_target(target_dict):
 	if not (target_dict["collider"].is_in_group("npc") or target_dict["collider"].is_in_group("player")):
 		return false
 	return true
-@rpc("any_peer","call_local")
+@rpc("any_peer")
 func set_target(requested_target):
 	target = requested_target
 
