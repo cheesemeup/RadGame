@@ -78,6 +78,7 @@ func targeting(event_position):
 		$"/root/main/ui/unitframe_target".target_reference = target
 		UIHandler.hide_targetframe()
 		return
+	target = target_dict["collider"]
 	rpc_id(1,"set_target",target_dict["collider"])
 	$"/root/main/ui/unitframe_target".target_reference = target
 	UIHandler.show_targetframe()
