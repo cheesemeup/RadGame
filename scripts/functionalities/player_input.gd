@@ -16,7 +16,10 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
 		get_parent().targeting(event.position)
 	# this is a dumbcunt workaround for triggering spells from the actionbar for testing only
-	if Input.is_action_pressed("actionbar1_1"):
+	print(event)
+	#if not event is InputEventMouse and event.keycode == 49 and event.pressed:
+	if event is InputEventKey and event.is_action_pressed("actionbar1_1"):
+		print("sending rpc")
 		rpc_id(1,"enter_spell_container","10")
 
 ####################################################################################################
@@ -39,4 +42,5 @@ func movement_direction():
 # SPELLS
 @rpc("authority")
 func enter_spell_container(spell_id: String):
+	print("entering spell container via entrypoint")
 	$"../spell_container".spell_entrypoint(spell_id)
