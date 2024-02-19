@@ -103,11 +103,11 @@ func is_legal_target(target_dict):
 	return true
 @rpc("any_peer")
 func set_target(requested_target,parent):
-	print("set target to: ",requested_target)
+	print("set target to: %s in %s"%[requested_target,parent])
 	if requested_target == null:
 		selected_target = null
 	else:
-		selected_target = get_node_or_null("/root/main/%s/%s"%[parent,requested_target])
+		selected_target = get_node("/root/main/%s/%s"%[parent,requested_target])
 	print(selected_target)
 
 #func _ready():
