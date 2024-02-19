@@ -81,7 +81,7 @@ func targeting(event_position):
 		return
 	print("set target to: ",target_dict["collider"])
 	target = target_dict["collider"]
-	rpc_id(1,"set_target",target_dict["collider"].name,target_dict["collider"].get_parent())
+	rpc_id(1,"set_target",target_dict["collider"].name,target_dict["collider"].get_parent().name)
 	$"/root/main/ui/unitframe_target".target_reference = target
 	UIHandler.show_targetframe()
 
