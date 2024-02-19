@@ -22,6 +22,17 @@ shape = SubResource("BoxShape3D_ycfok")
 [node name="floor1_mesh" type="MeshInstance3D" parent="floor1"]
 mesh = SubResource("PlaneMesh_qi80i")
 
+[node name="floor2" type="StaticBody3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, -6, 0, -4)
+collision_mask = 0
+
+[node name="floor1_collision" type="CollisionShape3D" parent="floor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_ycfok")
+
+[node name="floor1_mesh" type="MeshInstance3D" parent="floor2"]
+mesh = SubResource("PlaneMesh_qi80i")
+
 [node name="spawnlocation" type="Marker3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
