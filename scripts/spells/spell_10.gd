@@ -45,11 +45,13 @@ func trigger():
 		return 5
 	# apply resource cost 
 	print("applying resource cost")
-	source.stats_current["resource_current"] = update_resource(
+	#source.stats_current["resource_current"] = update_resource(
+	var check_this_var = update_resource(
 		spell_current["resource_cost"],
 		source.stats_current["resource_cost"],
 		source.stats_current["resource_max"]
 	)
+	print("var check: %s"%check_this_var)
 	# send gcd
 	print("sending gcd")
 	# apply spell cd if it exists
