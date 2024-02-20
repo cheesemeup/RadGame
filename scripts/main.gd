@@ -2,7 +2,7 @@ extends Node
 
 
 var PORT = 4545
-	
+
 func _ready():
 	print("start main")
 	if OS.has_feature("dedicated_server"):
