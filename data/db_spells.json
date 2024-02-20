@@ -41,7 +41,7 @@
 	"spelltype":"heal",
 	"effecttype":"magic",
 	"value_base":"health_max",
-	"value_modifier":0.3,
+	"value_modifier":0.4,
 	"avoidable":0,
 	"can_crit":1,
 	"crit_chance_modifier":1,
