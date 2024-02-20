@@ -23,5 +23,6 @@ func spell_entrypoint(spell_id: String):
 
 # send gcd
 func send_gcd():
+	print("sending gcd signal")
 	# emit signal
 	signal_gcd.emit(gcd_timer)

@@ -14,8 +14,6 @@ func _ready():
 	cd_timer.one_shot = true
 	cd_timer.connect("timeout",set_ready.bind())
 	add_child(cd_timer)
-	# connect to gcd signal of spell container
-	get_parent().signal_gcd.connect(trigger_cd)
 
 func trigger():
 	var sourcenode = get_parent().get_parent()

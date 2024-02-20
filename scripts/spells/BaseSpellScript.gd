@@ -12,6 +12,7 @@ func _ready():
 	add_child(cd_timer)
 
 func initialize_base_spell(spell_id: String):
+	# load spell data from data file
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
 	spell_base = json_dict[spell_id]
 	spell_current = spell_base.duplicate(true)
@@ -60,6 +61,7 @@ func is_not_in_line_of_sight(source: CharacterBody3D, target_position: Vector3):
 ####################################################################################################
 # COOLDOWN
 func trigger_cd(duration: float):
+	print("triggering cd in base class")
 	# check if current cooldown exceeds requested cooldown
 	if cd_timer.time_left > duration:
 		return
@@ -72,10 +74,6 @@ func trigger_cd(duration: float):
 #func update_resource():
 	#print("updating resource")
 	#print("updating resource finished")
-func update_resource(cost, current_resource, current_resource_max):
+func update_resource(cost: int, current_resource: int, current_resource_max: int):
 	# update the new current resource value of the source after the spell cost is applied
-	print("update_resource begin")
-	print("clamping: %s %s %s"%[current_resource-cost, 0, current_resource_max])
-	print(clamp(current_resource-cost, 0, current_resource_max))
-	print("update_resource end")
 	return clamp(current_resource-cost, 0, current_resource_max)

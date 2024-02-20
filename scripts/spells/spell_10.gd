@@ -3,20 +3,15 @@ extends BaseSpell
 
 func _ready():
 	initialize_base_spell("10")
-	# connect to gcd signal of spell container
 
 func trigger():
 	# get source and target nodes
 	var source = get_parent().get_parent()
 	var target = get_spell_target(source)
-	print("source: %s"%source)
-	print("target: %s"%target)
 	# set target to self if there is no target
 	if target == null:
-		print("resetting target to self")
 		target = source
 	# check target legality
-	print("checking legality of target: %s"%target)
 	if is_illegal_target(spell_current["targetgroup"], target):
 		return 1
 	# check for cooldown
@@ -30,8 +25,7 @@ func trigger():
 		spell_current["resource_cost"],
 		source.stats_current["resource_current"]
 	):
-		print("insufficient resources: %s / %s"%[spell_current["resource_cost"],\
-								source.stats_current["resource_current"]])
+		print("insufficient resources")
 		return 3
 	# check range
 	print("checking range")
@@ -45,16 +39,15 @@ func trigger():
 		return 5
 	# apply resource cost 
 	print("applying resource cost")
-	source.stats_current["resource_current"] = update_resource(spell_current["resource_cost"], source.stats_current["resource_current"], source.stats_current["resource_max"])
-	#source.stats_current["resource_current"] = update_resource(
-	#var check_this_var = update_resource(
-		#spell_current["resource_cost"],
-		#source.stats_current["resource_cost"],
-		#source.stats_current["resource_max"]
-	#)
-	#print("var check: %s"%check_this_var)
+	source.stats_current["resource_current"] = update_resource(
+		spell_current["resource_cost"],
+		source.stats_current["resource_current"],
+		source.stats_current["resource_max"]
+	)
 	# send gcd
 	print("sending gcd")
+	if spell_current["on_gcd"] == 1:
+		get_parent().send_gcd()
 	# apply spell cd if it exists
 	print("applying spell cd")
 	# send event to combat script
