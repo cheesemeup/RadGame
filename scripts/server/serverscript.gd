@@ -20,9 +20,8 @@ func _ready():
 	# such that main script handles actual loading of maps
 	# load hub map scene
 	Autoload.current_map_path = "res://scenes/maps/hub.tscn"
-	var new_map_load = load(Autoload.current_map_path)
-	var map_instance = new_map_load.instantiate()
-	$/root/main/maps.add_child(map_instance)
+	var hub_map_instance = preload("res://scenes/maps/hub.tscn").instantiate
+	$/root/main/maps.add_child(hub_map_instance)
 	print("hub map loaded")
 
 ###############################################################
