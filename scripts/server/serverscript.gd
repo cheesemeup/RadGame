@@ -16,12 +16,11 @@ func _ready():
 	if server_uid != 1:
 		print("ERROR: SERVER_UID NOT 1")
 	print("server started on port %d" % PORT)
-	# MOVE THIS TO MAIN
 	# such that main script handles actual loading of maps
 	# load hub map scene
-	Autoload.current_map_path = "res://scenes/maps/hub.tscn"
-	var hub_map_instance = preload("res://scenes/maps/hub.tscn").instantiate
-	$/root/main/maps.add_child(hub_map_instance)
+	#Autoload.current_map_path = "res://scenes/maps/hub.tscn"
+	#var hub_map_instance = preload("res://scenes/maps/hub.tscn").instantiate
+	#$/root/main/maps.add_child(hub_map_instance)
 	print("hub map loaded")
 
 ###############################################################
