@@ -121,7 +121,7 @@ func is_avoid(avoidance: float):
 func apply_damage(value: int, target: CharacterBody3D):
 	target.stats_current["health_current"] = max(0,target.stats_current["health_current"]-value)
 func apply_heal(value: int, target: CharacterBody3D):
-	print("heal_current + value: %s"%target.stats_current["health_current"]+value)
+	print("heal_current + value: %s"%[target.stats_current["health_current"]+value])
 	#print("max health: %s"%target.stats_current["health_max"])
 	#print("diff: %s"%target.stats_current["health_current"]+value - target.stats_current["health_max"])
 	var overheal = target.stats_current["health_current"]+value - target.stats_current["health_max"]
