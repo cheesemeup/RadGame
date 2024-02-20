@@ -145,7 +145,7 @@ func log_heal(
 	var overheal_suffix = ""
 	if overheal > 0:
 		overheal_suffix = "(%s overheal)" % overheal
-	print("%s heals %s with %s for %s%s." % [source_name, target_name, spell_name, value, crit_suffix])
+	print("%s heals %s with %s for %s %s %s." % [source_name, target_name, spell_name, value, crit_suffix, overheal_suffix])
 func log_avoid(spell_name: String, source_name: String , target_name: String):
 	print("%s avoided %s of %s."%[source_name, spell_name, target_name])
 
