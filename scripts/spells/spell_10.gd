@@ -17,8 +17,7 @@ func trigger():
 		target = source
 	# check target legality
 	print("checking legality of target: %s"%target)
-	if is_illegal_target(spell_current["targetgroup"],target):
-		print("illegal target: %s %s"%[spell_current["targetgroup"],target])
+	if is_illegal_target(spell_current["targetgroup"], target):
 		return 1
 	# check for cooldown
 	print("checking cd")
@@ -27,8 +26,10 @@ func trigger():
 		return 2
 	# check resource availability
 	print("checking resource")
-	if insufficient_resource(spell_current["resource_cost"],\
-								source.stats_current["resource_current"]):
+	if insufficient_resource(
+		spell_current["resource_cost"],
+		source.stats_current["resource_current"]
+	):
 		print("insufficient resources: %s / %s"%[spell_current["resource_cost"],\
 								source.stats_current["resource_current"]])
 		return 3
@@ -44,9 +45,14 @@ func trigger():
 		return 5
 	# apply resource cost 
 	print("applying resource cost")
+	source.stats_current["resource_current"] = update_resource(
+		spell_current["resource_cost"],
+		source.stats_current["resource_cost"],
+		source.stats_current["resource_max"]
+	)
 	# send gcd
 	print("sending gcd")
-	# apply spell cd if not on gcd
+	# apply spell cd if it exists
 	print("applying spell cd")
 	# send event to combat script
 	print("triggering event in combat script")
