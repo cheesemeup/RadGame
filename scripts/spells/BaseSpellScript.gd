@@ -7,9 +7,10 @@ var spell_current: Dictionary
 var cd_timer = Timer.new()
 var use_mouseover_target = false
 
-func _ready():
-	cd_timer.one_shot = true
-	add_child(cd_timer)
+#func _ready():
+	#cd_timer.one_shot = true
+	#add_child(cd_timer)
+	#print("cd timer added for spell")
 
 func initialize_base_spell(spell_id: String):
 	# load spell data from data file
@@ -19,6 +20,9 @@ func initialize_base_spell(spell_id: String):
 	# connect gcd signal if spell is on gcd
 	if spell_current["on_gcd"] == 1:
 		get_parent().signal_gcd.connect(trigger_cd)
+	cd_timer.one_shot = true
+	add_child(cd_timer)
+	print("cd timer added for spell")
 
 ####################################################################################################
 # TARGET
@@ -66,8 +70,11 @@ func trigger_cd(duration: float):
 	if cd_timer.time_left > duration:
 		return
 	# start timer
+	print("resetting duration")
 	cd_timer.wait_time = duration
+	print("starting timer")
 	cd_timer.start()
+	print("cd timer started")
 
 ####################################################################################################
 # FUNCTIONALITIES
