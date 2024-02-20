@@ -10,7 +10,6 @@ func spell_entrypoint(spell_id: String):
 	var node_name = "spell_"+spell_id
 	var spell_node = get_node_or_null(node_name)
 	if spell_node == null:
-		print("spell not known")
 		return 1  # spell not known
 	# trigger spell
 	print("triggering ",spell_id)
@@ -22,6 +21,5 @@ func spell_entrypoint(spell_id: String):
 
 # send gcd
 func send_gcd():
-	print("sending gcd signal")
 	# emit signal
 	signal_gcd.emit(gcd_timer)

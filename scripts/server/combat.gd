@@ -2,7 +2,12 @@ extends Node
 
 ####################################################################################################
 # ENTRYPOINTS
-func combat_event_entrypoint(spell: Dictionary,source,target,value: int=-1):
+func combat_event_entrypoint(
+	spell: Dictionary,
+	source: CharacterBody3D,
+	target: CharacterBody3D,
+	value: int=-1
+):
 	# determine type of event and call appropriate function
 	if spell["spelltype"] == "damage":
 		combat_event_damage(spell,source,target,value)
@@ -15,53 +20,134 @@ func value_query(coeff: float, base: int, mod_inc: float, mod_dec: float):
 
 ####################################################################################################
 # COMBAT EVENTS
-func combat_event_damage(spell,source,target,value):
-	pass
-func combat_event_heal(spell,source,target,value):
+func combat_event_damage(
+	spell: Dictionary,
+	source: CharacterBody3D,
+	target: CharacterBody3D,
+	value: int
+):
 	# query base value of event if not prescribed
 	if value == -1:
-		value = value_query(spell["value_modifier"],source.stats_current[spell["value_base"]],\
-			source.stats_current["heal_modifier"][spell["effecttype"]],\
-			target.stats_current["heal_taken_modifier"][spell["effecttype"]])
+		value = value_query(
+			spell["value_modifier"],
+			source.stats_current[spell["value_base"]],
+			source.stats_current["damage_modifier"][spell["effecttype"]],
+			target.stats_current["damage_taken_modifier"][spell["effecttype"]]
+		)
+	# determine avoid
+	if spell["avoidable"] == 1 and is_avoid(target.stats_current["avoidance"]):
+		log_avoid(
+			spell["name"],
+			source.stats_current["unit_name"],
+			target.stats_cruten["unit_name"]
+		)
+		return
+	# determine critical hit
+	var crit = 0
+	if spell["can_crit"] == 1:
+		crit = is_critical(spell["crit_chance_modifier"], source.stats_current["crit_chance"])
+		value = value * (1 + crit * spell["crit_magnitude_modifier"])
+	# apply damage
+	apply_damage(value,target)
+	# show floating combat test for source via rpc, if source is player
+	if source.is_in_group("player"):
+		#rpc call to player scene, which call ui function
+		pass
+	# write to log
+	#log_damage(
+		#spell["name"],
+		#source.stats_current["unit_name"],
+		#target.stats_current["unit_name"],
+		#value
+	#)
+func combat_event_heal(
+	spell: Dictionary,
+	source: CharacterBody3D,
+	target: CharacterBody3D,
+	value: int
+):
+	# query base value of event if not prescribed
+	if value == -1:
+		value = value_query(
+			spell["value_modifier"],
+			source.stats_current[spell["value_base"]],
+			source.stats_current["heal_modifier"][spell["effecttype"]],
+			target.stats_current["heal_taken_modifier"][spell["effecttype"]]
+		)
 	# determine critical hit
 	var crit = 0
 	if spell["can_crit"] == 1:
 		crit = is_critical(spell["crit_chance_modifier"],source.stats_current["crit_chance"])
 		value = value * (1 + crit * spell["crit_magnitude_modifier"])
 	# apply healing
-	apply_heal(value,target)
+	var overheal = apply_heal(value,target)
 	# show floating combat text for source via rpc, if source is player
 	if source.is_in_group("player"):
 		# rpc call to player scene, which calls ui function
 		pass
 	# write to log
-	log_heal(value,source,target,crit)
+	log_heal(
+		spell["name"],
+		source.stats_current["unit_name"],
+		target.stats_current["unit_name"],
+		value,
+		crit,
+		overheal
+	)
 func combat_event_aura():
 	pass
 	
 ####################################################################################################
 # CHECKS
-func is_critical(crit_modifier,crit_base):
+func is_critical(crit_modifier: float, crit_base: float):
 	# get random number
 	var random = RandomNumberGenerator.new()
 	random.randomize()
-	var p : float = randf()
+	var p: float = randf()
 	if p <= crit_base + crit_modifier:
 		return 1
 	return 0
+func is_avoid(avoidance: float):
+	var random = RandomNumberGenerator.new()
+	random.randomize()
+	var p: float = randf()
+	if p <= avoidance:
+		return true
+	return false
 
 ####################################################################################################
 # VALUE APPLICATION
-func apply_damage():
-	pass
-func apply_heal(value: int,target):
-	target.stats_current["health_current"] = min(target.stats_current["health_current"]+value,\
-													target.stats_current["health_max"])
+func apply_damage(value: int, target: CharacterBody3D):
+	target.stats_current["health_current"] = max(0,target.stats_current["health_current"]-value)
+func apply_heal(value: int, target: CharacterBody3D):
+	var overheal = target.stats_current["health_current"]+value - target.stats_current["health_max"]
+	target.stats_current["health_current"] = min(
+		target.stats_current["health_current"]+value,
+		target.stats_current["health_max"]
+	)
+	return overheal
 
 ####################################################################################################
 # LOG MESSAGES
-func log_heal(value: int,source,target,crit: int):
-	print("log heal message")
+#func log_damage(spell_name: String, source_name: String , target_name: String, value: int, crit: int, kill: bool):
+	#print("%s hits %s with %s for %s."%[source_name, target_name, spell_name, value])
+func log_heal(
+	spell_name: String,
+	source_name: String,
+	target_name: String,
+	value: int,
+	crit: int,
+	overheal: int
+):
+	var crit_suffix = ""
+	if crit == 1:
+		crit_suffix = "(Critical)"
+	var overheal_suffix = ""
+	if overheal > 0:
+		overheal_suffix = "(%s overheal)" % overheal
+	print("%s heals %s with %s for %s%s." % [source_name, target_name, spell_name, value, crit_suffix])
+func log_avoid(spell_name: String, source_name: String , target_name: String):
+	print("%s avoided %s of %s."%[source_name, spell_name, target_name])
 
 ## preload common auras
 #var aura_general = preload("res://scenes/auras/aura_general.tscn")

@@ -43,8 +43,8 @@
 	"value_base":"health_max",
 	"value_modifier":0.3,
 	"avoidable":0,
-	"can_crit":0,
-	"crit_chance_modifier":0,
+	"can_crit":1,
+	"crit_chance_modifier":1,
 	"crit_magnitude_modifier":1,
   },
 "3":{
