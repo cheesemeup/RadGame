@@ -71,5 +71,8 @@ func trigger_cd(duration: float):
 # FUNCTIONALITIES
 func update_resource(cost: int, current_resource: int, current_resource_max: int):
 	# update the new current resource value of the source after the spell cost is applied
+	print("update_resource begin")
+	print("clamping: %s %s %s"%[current_resource-cost, 0, current_resource_max])
 	print(clamp(current_resource-cost, 0, current_resource_max))
+	print("update_resource end")
 	return int(clamp(current_resource-cost, 0, current_resource_max))
