@@ -81,6 +81,7 @@ func combat_event_heal(
 		value = value * (1 + crit * spell["crit_magnitude_modifier"])
 	# apply healing
 	var overheal = apply_heal(value,target)
+	print("overheal: %s"%overheal)
 	# show floating combat text for source via rpc, if source is player
 	if source.is_in_group("player"):
 		# rpc call to player scene, which calls ui function
@@ -141,11 +142,11 @@ func log_heal(
 ):
 	var crit_suffix = ""
 	if crit == 1:
-		crit_suffix = "(Critical)"
+		crit_suffix = " (Critical)"
 	var overheal_suffix = ""
 	if overheal > 0:
-		overheal_suffix = "(%s overheal)" % overheal
-	print("%s heals %s with %s for %s %s %s." % [source_name, target_name, spell_name, value, crit_suffix, overheal_suffix])
+		overheal_suffix = " (%s overheal)" % overheal
+	print("%s heals %s with %s for %s%s%s." % [source_name, target_name, spell_name, value, crit_suffix, overheal_suffix])
 func log_avoid(spell_name: String, source_name: String , target_name: String):
 	print("%s avoided %s of %s."%[source_name, spell_name, target_name])
 
