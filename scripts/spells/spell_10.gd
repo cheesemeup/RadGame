@@ -52,7 +52,7 @@ func trigger():
 		#source.stats_current["resource_cost"],
 		#source.stats_current["resource_max"]
 	#)
-	print("var check: %s"%check_this_var)
+	#print("var check: %s"%check_this_var)
 	# send gcd
 	print("sending gcd")
 	# apply spell cd if it exists
