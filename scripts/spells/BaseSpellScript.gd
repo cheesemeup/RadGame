@@ -78,4 +78,4 @@ func update_resource(cost, current_resource, current_resource_max):
 	print("clamping: %s %s %s"%[current_resource-cost, 0, current_resource_max])
 	print(clamp(current_resource-cost, 0, current_resource_max))
 	print("update_resource end")
-	#return int(clamp(current_resource-cost, 0, current_resource_max))
+	return clamp(current_resource-cost, 0, current_resource_max)

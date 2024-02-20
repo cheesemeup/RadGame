@@ -45,7 +45,7 @@ func trigger():
 		return 5
 	# apply resource cost 
 	print("applying resource cost")
-	update_resource(-20, 0, 100)
+	update_resource(spell_current["resource_cost"], source.stats_current["resource_current"], source.stats_current["resource_max"])
 	#source.stats_current["resource_current"] = update_resource(
 	#var check_this_var = update_resource(
 		#spell_current["resource_cost"],
