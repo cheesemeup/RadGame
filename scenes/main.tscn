@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://oqfu77ry4jv0"]
+[gd_scene load_steps=3 format=3 uid="uid://oqfu77ry4jv0"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_pi1ts"]
 [ext_resource type="Script" path="res://old/Scripts/UI/handle_ui.gd" id="2_2so51"]
-[ext_resource type="PackedScene" uid="uid://bjr7k3cxd6jyj" path="res://scenes/maps/hub.tscn" id="2_8hbw6"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_pi1ts")
@@ -25,8 +24,6 @@ spawn_path = NodePath("..")
 _spawnable_scenes = PackedStringArray("res://scenes/maps/hub.tscn")
 spawn_path = NodePath("..")
 spawn_limit = 1
-
-[node name="hub" parent="maps" instance=ExtResource("2_8hbw6")]
 
 [node name="ui" type="Control" parent="."]
 layout_mode = 3

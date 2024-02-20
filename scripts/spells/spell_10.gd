@@ -9,15 +9,16 @@ func trigger():
 	# get source and target nodes
 	var source = get_parent().get_parent()
 	var target = get_spell_target(source)
-	print("target: ",target)
+	print("source: %s"%source)
+	print("target: %s"%target)
 	# set target to self if there is no target
 	if target == null:
 		print("resetting target to self")
 		target = source
 	# check target legality
-	print("checking legality of target", target)
+	print("checking legality of target: %s"%target)
 	if is_illegal_target(spell_current["targetgroup"],target):
-		print("illegal target: ",spell_current["targetgroup"],target)
+		print("illegal target: %s %s"%[spell_current["targetgroup"],target])
 		return 1
 	# check for cooldown
 	print("checking cd")

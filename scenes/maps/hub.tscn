@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjr7k3cxd6jyj"]
+[gd_scene load_steps=5 format=3 uid="uid://bjr7k3cxd6jyj"]
+
+[ext_resource type="Script" path="res://scripts/maps/hub.gd" id="1_w2cee"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ycfok"]
 size = Vector3(20, 2, 20)
@@ -11,6 +13,7 @@ material = SubResource("StandardMaterial3D_rm8v4")
 size = Vector2(20, 20)
 
 [node name="hub" type="Node3D"]
+script = ExtResource("1_w2cee")
 
 [node name="floor1" type="StaticBody3D" parent="."]
 collision_mask = 0
