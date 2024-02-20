@@ -22,7 +22,6 @@ func initialize_base_spell(spell_id: String):
 		get_parent().signal_gcd.connect(trigger_cd)
 	cd_timer.one_shot = true
 	add_child(cd_timer)
-	print("cd timer added for spell")
 
 ####################################################################################################
 # TARGET
