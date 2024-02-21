@@ -178,7 +178,7 @@
 	"spelltype":"damage",
 	"effecttype":"magic",
 	"value_base":"primary",
-	"value_modifier":20.4,
+	"value_modifier":0.4,
 	"avoidable":0,
 	"can_crit":1,
 	"crit_chance_modifier":0,
