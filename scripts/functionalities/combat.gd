@@ -6,7 +6,7 @@ func combat_event_entrypoint(
 	spell: Dictionary,
 	source: CharacterBody3D,
 	target: CharacterBody3D,
-	value: int=-1
+	value: int = -1
 ):
 	# determine type of event and call appropriate function
 	if spell["spelltype"] == "damage":
@@ -149,7 +149,7 @@ func log_damage(
 	if overkill > 0:
 		overkill_suffix = " (%s overkill)" % overkill
 	print(
-		"%s hits %s with %s for %s%%s."%
+		"%s hits %s with %s for %s%s%s."%
 		[source_name, target_name, spell_name, value, crit_suffix, overkill_suffix]
 	)
 func log_heal(
