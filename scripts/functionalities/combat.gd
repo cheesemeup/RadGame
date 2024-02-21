@@ -16,6 +16,7 @@ func combat_event_entrypoint(
 func value_query(coeff: float, base: int, mod_inc: float, mod_dec: float):
 	# returns the value of a damage or healing spell based on the coefficient, the base value stat,
 	# and the two applicable modifiers. Used for combat events and for snapshotting values.
+	print("coeff:%s base:%s mod_inc:%s mod_dec:%s"%[coeff,base,mod_inc,mod_dec])
 	return int(floor(coeff * base * mod_inc * mod_dec))
 
 ####################################################################################################
