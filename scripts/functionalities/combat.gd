@@ -34,7 +34,7 @@ func combat_event_damage(
 			spell["value_modifier"],
 			source.stats_current[spell["value_base"]],
 			source.stats_current["damage_modifier"][spell["effecttype"]],
-			target.stats_current["damage_taken_modifier"][spell["effecttype"]]
+			target.stats_current["defense_modifier"][spell["effecttype"]]
 		)
 		print("value: %s"%value)
 	# determine avoid
@@ -86,7 +86,6 @@ func combat_event_heal(
 		value = value * (1 + crit * spell["crit_magnitude_modifier"])
 	# apply healing
 	var overheal = apply_heal(value,target)
-	print("overheal: %s"%overheal)
 	# show floating combat text for source via rpc, if source is player
 	if source.is_in_group("player"):
 		# rpc call to player scene, which calls ui function
