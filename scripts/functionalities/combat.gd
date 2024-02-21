@@ -98,9 +98,19 @@ func combat_event_heal(
 		crit,
 		overheal
 	)
-func combat_event_aura():
+func combat_event_dot():
+	# add dot to dot dict of target
 	pass
-	
+func combat_event_absorb():
+	# calculate absorb value
+	# initialize absorb scene
+	# add absorb scene to target
+	# add absorb to absorb dict of target
+	pass
+func combat_event_buff():
+	# add buff to buff dict of target
+	pass
+
 ####################################################################################################
 # CHECKS
 func is_critical(crit_modifier: float, crit_base: float):
