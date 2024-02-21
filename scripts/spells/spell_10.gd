@@ -15,9 +15,7 @@ func trigger():
 	if is_illegal_target(spell_current["targetgroup"], target):
 		return 1
 	# check for cooldown
-	print("checking cd")
 	if is_on_cd():
-		print("spell on cd")
 		return 2
 	# check resource availability
 	print("checking resource")

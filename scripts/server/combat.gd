@@ -48,18 +48,20 @@ func combat_event_damage(
 		crit = is_critical(spell["crit_chance_modifier"], source.stats_current["crit_chance"])
 		value = value * (1 + crit * spell["crit_magnitude_modifier"])
 	# apply damage
-	apply_damage(value,target)
+	var overkill = apply_damage(value,target)
 	# show floating combat test for source via rpc, if source is player
 	if source.is_in_group("player"):
 		#rpc call to player scene, which call ui function
 		pass
 	# write to log
-	#log_damage(
-		#spell["name"],
-		#source.stats_current["unit_name"],
-		#target.stats_current["unit_name"],
-		#value
-	#)
+	log_damage(
+		spell["name"],
+		source.stats_current["unit_name"],
+		target.stats_current["unit_name"],
+		value,
+		crit,
+		overkill
+	)
 func combat_event_heal(
 	spell: Dictionary,
 	source: CharacterBody3D,
@@ -119,11 +121,10 @@ func is_avoid(avoidance: float):
 ####################################################################################################
 # VALUE APPLICATION
 func apply_damage(value: int, target: CharacterBody3D):
+	var overkill = target.stats_current["health_current"]-value
 	target.stats_current["health_current"] = max(0,target.stats_current["health_current"]-value)
+	return overkill
 func apply_heal(value: int, target: CharacterBody3D):
-	print("heal_current + value: %s"%[target.stats_current["health_current"]+value])
-	#print("max health: %s"%target.stats_current["health_max"])
-	#print("diff: %s"%target.stats_current["health_current"]+value - target.stats_current["health_max"])
 	var overheal = target.stats_current["health_current"]+value - target.stats_current["health_max"]
 	target.stats_current["health_current"] = min(
 		target.stats_current["health_current"]+value,
@@ -133,8 +134,24 @@ func apply_heal(value: int, target: CharacterBody3D):
 
 ####################################################################################################
 # LOG MESSAGES
-#func log_damage(spell_name: String, source_name: String , target_name: String, value: int, crit: int, kill: bool):
-	#print("%s hits %s with %s for %s."%[source_name, target_name, spell_name, value])
+func log_damage(
+	spell_name: String,
+	source_name: String,
+	target_name: String,
+	value: int,
+	crit: int,
+	overkill: int
+):
+	var crit_suffix = ""
+	if crit == 1:
+		crit_suffix = " (critical)"
+	var overkill_suffix = ""
+	if overkill > 0:
+		overkill_suffix = " (%s overkill)" % overkill
+	print(
+		"%s hits %s with %s for %s%%s."%
+		[source_name, target_name, spell_name, value, crit_suffix, overkill_suffix]
+	)
 func log_heal(
 	spell_name: String,
 	source_name: String,
@@ -145,11 +162,14 @@ func log_heal(
 ):
 	var crit_suffix = ""
 	if crit == 1:
-		crit_suffix = " (Critical)"
+		crit_suffix = " (critical)"
 	var overheal_suffix = ""
 	if overheal > 0:
 		overheal_suffix = " (%s overheal)" % overheal
-	print("%s heals %s with %s for %s%s%s." % [source_name, target_name, spell_name, value, crit_suffix, overheal_suffix])
+	print(
+		"%s heals %s with %s for %s%s%s."%
+		[source_name, target_name, spell_name, value, crit_suffix, overheal_suffix]
+	)
 func log_avoid(spell_name: String, source_name: String , target_name: String):
 	print("%s avoided %s of %s."%[source_name, spell_name, target_name])
 
