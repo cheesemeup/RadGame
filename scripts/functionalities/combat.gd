@@ -123,7 +123,7 @@ func is_avoid(avoidance: float):
 ####################################################################################################
 # VALUE APPLICATION
 func apply_damage(value: int, target: CharacterBody3D):
-	var overkill = -(value - target.stats_current["health_current"])
+	var overkill = value - target.stats_current["health_current"]
 	target.stats_current["health_current"] = max(0,target.stats_current["health_current"]-value)
 	return overkill
 func apply_heal(value: int, target: CharacterBody3D):
