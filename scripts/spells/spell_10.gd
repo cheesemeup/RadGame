@@ -27,7 +27,7 @@ func trigger():
 		return 3
 	# check range
 	print("checking range")
-	if is_not_in_range(source.position,target.position,spell_current["range"]):
+	if is_not_in_range(source.position,target.position,spell_current["max_range"]):
 		print("not in range")
 		return 4
 	# check line of sight, NOT FUNCTIONAL
