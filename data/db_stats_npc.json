@@ -99,7 +99,7 @@
 	"unit_name":"Test NPC Friendly",
 	"unit_class":"Test NPC",
 	"size":0.6,
-	"spell_list":[3],
+	"spell_list":[4],
 	"speed":10,
 	"health_max":1000,
 	"health_current":1000,
