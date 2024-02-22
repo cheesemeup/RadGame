@@ -7,9 +7,10 @@ func _enter_tree():
 func _ready():
 	# initialize BaseUnit
 	initialize_base_unit("npc","3")
+	set_process(false)
 	if $mpsynchronizer.is_multiplayer_authority():
 		set_process(true)
 
-#func _process(_delta):
-#	if stats_curr["health_current"] == stats_curr["health_max"]:
-#		Combat.event_damage(spells_curr["4"],self,self)
+func _process(_delta):
+	if stats_current["health_current"] == stats_current["health_max"]:
+		$"spell_container/spell_3".trigger()
