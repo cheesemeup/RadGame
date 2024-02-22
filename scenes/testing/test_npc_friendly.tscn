@@ -22,7 +22,7 @@ properties/2/path = NodePath(".:stats_current")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="test_npc_hostile" type="CharacterBody3D" groups=["friendly", "npc"]]
+[node name="test_npc_friendly" type="CharacterBody3D" groups=["friendly", "npc"]]
 collision_layer = 2
 script = ExtResource("1_kqj30")
 
