@@ -13,4 +13,4 @@ func _ready():
 
 func _process(_delta):
 	if stats_current["health_current"] == stats_current["health_max"]:
-		$"spell_container/spell_3".trigger()
+		$"spell_container/spell_4".trigger()
