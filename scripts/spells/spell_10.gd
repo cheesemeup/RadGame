@@ -18,22 +18,16 @@ func trigger():
 	if is_on_cd():
 		return 2
 	# check resource availability
-	print("checking resource")
 	if insufficient_resource(
 		spell_current["resource_cost"],
 		source.stats_current["resource_current"]
 	):
-		print("insufficient resources")
 		return 3
 	# check range
-	print("checking range")
 	if is_not_in_range(source.position,target.position,spell_current["max_range"]):
-		print("not in range")
 		return 4
 	# check line of sight, NOT FUNCTIONAL
-	print("checking line of sight")
 	if is_not_in_line_of_sight(source,target.position):
-		print("not in line of sight")
 		return 5
 	# apply resource cost 
 	source.stats_current["resource_current"] = update_resource(
@@ -45,5 +39,4 @@ func trigger():
 	if spell_current["on_gcd"] == 1:
 		get_parent().send_gcd()
 	# send event to combat script
-	print("triggering event in combat script")
 	Combat.combat_event_entrypoint(spell_current,source,target)

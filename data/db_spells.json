@@ -53,7 +53,7 @@
 	"resource_cost":0,
 	"max_range":40,
 	"cooldown":0,
-	"on_gcd":0,
+	"on_gcd":1,
 	"spelltype":"damage",
 	"effecttype":"physical",
 	"value_base":"primary",
