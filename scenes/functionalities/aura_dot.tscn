@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvlbu16njs1c3"]
+
+[ext_resource type="Script" path="res://scripts/functionalities/aura_dot.gd" id="1_3wf8c"]
+
+[node name="aura_dot" type="Node"]
+script = ExtResource("1_3wf8c")

@@ -17,7 +17,7 @@ func _unhandled_input(event):
 		get_parent().targeting(event.position)
 	# this is a dumbcunt workaround for triggering spells from the actionbar for testing only
 	if event is InputEventKey and event.is_action_pressed("actionbar1_1"):
-		rpc_id(1,"enter_spell_container","10")
+		rpc_id(1,"enter_spell_container","3")
 
 ####################################################################################################
 # MOVEMENT
