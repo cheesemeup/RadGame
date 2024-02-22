@@ -1,4 +1,4 @@
-# Player Test Damage
+# Test NPC Damage Self
 extends BaseSpell
 
 func _ready():
