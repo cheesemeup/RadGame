@@ -25,6 +25,7 @@ func initialize(spell,source,target):
 
 # start timer when ready
 func _ready():
+	print("trying to start a timer here")
 	tick_timer.start()
 
 # reinitialization for overwriting before expiration
