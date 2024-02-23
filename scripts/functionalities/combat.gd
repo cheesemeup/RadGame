@@ -116,14 +116,14 @@ func combat_event_aura(
 	print("initialize")
 	aura_scene.initialize(spell,source,target)
 	# add aura scene to target
-	print("add top target")
-	target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
-		add_child(aura_scene)
-	# add aura to appropriate aura dict of target
-	# debug section
-	print("dot nodes on target")
-	for node in target.get_node("aura_container").get_node("dot_container").get_children():
-		print(node)
+	#print("add to target")
+	#target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
+		#add_child(aura_scene)
+	## add aura to appropriate aura dict of target
+	## debug section
+	#print("dot nodes on target")
+	#for node in target.get_node("aura_container").get_node("dot_container").get_children():
+		#print(node)
 	log_aura(spell["name"],source.stats_current["unit_name"],target.stats_current["unit_name"])
 
 ####################################################################################################
