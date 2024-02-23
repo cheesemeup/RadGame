@@ -7,11 +7,6 @@ var spell_current: Dictionary
 var cd_timer = Timer.new()
 var use_mouseover_target = false
 
-#func _ready():
-	#cd_timer.one_shot = true
-	#add_child(cd_timer)
-	#print("cd timer added for spell")
-
 func initialize_base_spell(spell_id: String):
 	# load spell data from data file
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
@@ -48,9 +43,9 @@ func insufficient_resource(cost: int, resource: int):
 	if cost < resource:
 		return false
 	return true
-func is_not_in_range(source_position: Vector3, target_position: Vector3, range: float):
+func is_not_in_range(source_position: Vector3, target_position: Vector3, max_range: float):
 	# check if the spell is in range
-	if source_position.distance_to(target_position) > range:
+	if source_position.distance_to(target_position) > max_range:
 		return true
 	return false
 func is_not_in_line_of_sight(source: CharacterBody3D, target_position: Vector3):
@@ -64,16 +59,12 @@ func is_not_in_line_of_sight(source: CharacterBody3D, target_position: Vector3):
 ####################################################################################################
 # COOLDOWN
 func trigger_cd(duration: float):
-	print("triggering cd in base class")
 	# check if current cooldown exceeds requested cooldown
 	if cd_timer.time_left > duration:
 		return
 	# start timer
-	print("resetting duration")
 	cd_timer.wait_time = duration
-	print("starting timer")
 	cd_timer.start()
-	print("cd timer started")
 
 ####################################################################################################
 # FUNCTIONALITIES

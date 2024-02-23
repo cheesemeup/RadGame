@@ -1,6 +1,10 @@
 extends Node
 
 ####################################################################################################
+# PRELOAD
+var dot_preload = preload("res://scenes/functionalities/aura_dot.tscn")
+
+####################################################################################################
 # ENTRYPOINTS
 func combat_event_entrypoint(
 	spell: Dictionary,
@@ -14,7 +18,6 @@ func combat_event_entrypoint(
 	if spell["spelltype"] == "heal":
 		combat_event_heal(spell,source,target,value)
 	if spell["spelltype"] == "aura":
-		print("starting aura event")
 		combat_event_aura(spell,source,target,value)
 func value_query(coeff: float, base: int, mod_inc: float, mod_dec: float):
 	# returns the value of a damage or healing spell based on the coefficient, the base value stat,
@@ -106,8 +109,17 @@ func combat_event_aura(
 	value: int
 ):
 	# initialize aura scene
+	var aura_scene
+	if spell["auratype"] == "dot":
+		aura_scene = dot_preload.instantiate()
+	aura_scene.initialize(spell,source,target)
 	# add aura scene to target
+	target.get_node("aura_container").get_node("%s_container"%spell["auratype"])
 	# add aura to appropriate aura dict of target
+	# debug section
+	print("dot nodes on target")
+	for node in target.get_node("aura_container").get_node("dot_container").get_children():
+		print(node)
 	log_aura(spell["name"],source.stats_current["unit_name"],target.stats_current["unit_name"])
 
 ####################################################################################################

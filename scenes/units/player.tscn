@@ -43,10 +43,6 @@ shape = SubResource("CylinderShape3D_16yd3")
 
 [node name="spell_container" parent="." instance=ExtResource("3_1xchh")]
 
-[node name="auras" type="Node" parent="."]
-
-[node name="absorbs" type="Node" parent="."]
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_ha78t")

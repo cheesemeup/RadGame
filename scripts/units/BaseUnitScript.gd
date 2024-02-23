@@ -24,6 +24,9 @@ func initialize_base_unit(unittype: String,UnitID: String):
 	stat_init(unittype,UnitID)
 	# spells
 	spell_container_init(self.stats_current.spell_list)
+	# auras
+	var aura_container = preload("res://scenes/functionalities/aura_container.tscn").instantiate()
+	add_child(aura_container)
 
 func stat_init(unit_type: String,unit_id: String) -> void:
 	# read stats dict from file
