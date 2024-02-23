@@ -6,7 +6,7 @@ var aura_target: CharacterBody3D
 var tickrate: float
 var ticks: float
 var nticks: float = 0
-var tick_timer: Timer
+var tick_timer = Timer.new()
 
 # initialize relevant spell data
 func initialize(spell,source,target):
@@ -18,9 +18,8 @@ func initialize(spell,source,target):
 	tickrate = spell["tickrate"]
 	print("init timer")
 	# initialize timer
-	tick_timer.new()
 	tick_timer.wait_time = tickrate
-	#tick_timer.connect("timeout",tick)
+	tick_timer.connect("timeout",tick)
 	add_child(tick_timer)
 
 # start timer when ready
