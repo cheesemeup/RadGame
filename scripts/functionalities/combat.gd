@@ -134,7 +134,7 @@ func combat_event_aura(
 		return
 	# initialize aura scene
 	var aura_scene
-	if spell["auratype"] == "dot":
+	if spell["auratype"] == "dot" or spell["auratype"] == "hot":
 		aura_scene = dot_preload.instantiate()
 	aura_scene.name = aura_list_name
 	aura_scene.initialize(spell,source,target)
