@@ -10,11 +10,13 @@ var tick_timer: Timer
 
 # initialize relevant spell data
 func initialize(spell,source,target):
+	print("begin init")
 	aura_spell = spell
 	aura_source = source
 	aura_target = target
 	ticks = spell["ticks"]
 	tickrate = spell["tickrate"]
+	print("init timer")
 	# initialize timer
 	tick_timer.new()
 	tick_timer.wait_time = tickrate
