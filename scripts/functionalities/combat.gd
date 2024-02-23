@@ -109,12 +109,16 @@ func combat_event_aura(
 	value: int
 ):
 	# initialize aura scene
+	print("instantiate")
 	var aura_scene
 	if spell["auratype"] == "dot":
 		aura_scene = dot_preload.instantiate()
+	print("initialize")
 	aura_scene.initialize(spell,source,target)
 	# add aura scene to target
-	target.get_node("aura_container").get_node("%s_container"%spell["auratype"])
+	print("add top target")
+	target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
+		add_child(aura_scene)
 	# add aura to appropriate aura dict of target
 	# debug section
 	print("dot nodes on target")
