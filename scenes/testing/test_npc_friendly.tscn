@@ -32,7 +32,7 @@ shape = SubResource("CylinderShape3D_ccd1k")
 
 [node name="spell_container" type="Node" parent="."]
 
-[node name="auras" type="Node" parent="."]
+[node name="dots" type="Node" parent="."]
 
 [node name="absorbs" type="Node" parent="."]
 

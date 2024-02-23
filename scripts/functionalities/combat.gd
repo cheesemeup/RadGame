@@ -13,6 +13,9 @@ func combat_event_entrypoint(
 		combat_event_damage(spell,source,target,value)
 	if spell["spelltype"] == "heal":
 		combat_event_heal(spell,source,target,value)
+	if spell["spelltype"] == "aura":
+		print("starting aura event")
+		combat_event_aura(spell,source,target,value)
 func value_query(coeff: float, base: int, mod_inc: float, mod_dec: float):
 	# returns the value of a damage or healing spell based on the coefficient, the base value stat,
 	# and the two applicable modifiers. Used for combat events and for snapshotting values.
@@ -28,14 +31,12 @@ func combat_event_damage(
 ):
 	# query base value of event if not prescribed
 	if value == -1:
-		print("querying value")
 		value = value_query(
 			spell["value_modifier"],
 			source.stats_current[spell["value_base"]],
 			source.stats_current["damage_modifier"][spell["effecttype"]],
 			target.stats_current["defense_modifier"][spell["effecttype"]]
 		)
-		print("value: %s"%value)
 	# determine avoid
 	if spell["avoidable"] == 1 and is_avoid(target.stats_current["avoidance"]):
 		log_avoid(
@@ -98,20 +99,16 @@ func combat_event_heal(
 		crit,
 		overheal
 	)
-func combat_event_dot():
-	# initialize dot scene
-	# add dot scene to target
-	# add dot to dot dict of target
-	pass
-func combat_event_absorb():
-	# calculate absorb value
-	# initialize absorb scene
-	# add absorb scene to target
-	# add absorb to absorb dict of target
-	pass
-func combat_event_buff():
-	# add buff to buff dict of target
-	pass
+func combat_event_aura(
+	spell: Dictionary,
+	source: CharacterBody3D,
+	target: CharacterBody3D,
+	value: int
+):
+	# initialize aura scene
+	# add aura scene to target
+	# add aura to appropriate aura dict of target
+	log_aura(spell["name"],source.stats_current["unit_name"],target.stats_current["unit_name"])
 
 ####################################################################################################
 # CHECKS
@@ -183,6 +180,8 @@ func log_heal(
 		"%s heals %s with %s for %s%s%s."%
 		[source_name, target_name, spell_name, value, crit_suffix, overheal_suffix]
 	)
+func log_aura(spell_name: String, source_name: String, target_name: String):
+	print("%s applies %s to %s"%[source_name, spell_name, target_name])
 func log_avoid(spell_name: String, source_name: String , target_name: String):
 	print("%s avoided %s of %s."%[source_name, spell_name, target_name])
 
