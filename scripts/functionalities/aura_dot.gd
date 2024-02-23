@@ -10,13 +10,11 @@ var tick_timer = Timer.new()
 
 # initialize relevant spell data
 func initialize(spell,source,target):
-	print("begin init")
 	aura_spell = spell
 	aura_source = source
 	aura_target = target
 	ticks = spell["ticks"]
 	tickrate = spell["tickrate"]
-	print("init timer")
 	# initialize timer
 	tick_timer.wait_time = tickrate
 	tick_timer.connect("timeout",tick)
@@ -24,7 +22,6 @@ func initialize(spell,source,target):
 
 # start timer when ready
 func _ready():
-	print("trying to start a timer here")
 	tick_timer.start()
 
 # reinitialization for overwriting before expiration
@@ -38,7 +35,6 @@ func reinitialize(spell):
 	
 # event tick
 func tick():
-	print("dot tick")
 	Combat.combat_event_entrypoint(aura_spell,aura_source,aura_target)
 	nticks += 1
 	# restart timer if there are ticks left

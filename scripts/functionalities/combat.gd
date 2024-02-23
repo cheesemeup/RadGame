@@ -124,11 +124,8 @@ func combat_event_aura(
 	var aura_list_name = "%s"%spell["name"]
 	if spell["unique"] == 0:
 		aura_list_name = "%s %s"%[aura_list_name,source.stats_current["unit_name"]]
-		print("target.aura_list")
-		print(target.aura_list)
 	if target.aura_list.has(aura_list_name):
-		print("aura already present")
-		# reset aura
+		# reinitialize aura
 		target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
 			get_node(aura_list_name).reinitialize(spell)
 		return
@@ -143,10 +140,6 @@ func combat_event_aura(
 		add_child(aura_scene)
 	# add aura to aura_list of target
 	target.aura_list.append(aura_list_name)
-	# debug section
-	print("dot nodes on target")
-	for node in target.get_node("aura_container").get_node("dot_container").get_children():
-		print(node.name)
 	log_aura(spell["name"],source.stats_current["unit_name"],target.stats_current["unit_name"])
 
 func combat_event_aura_remove(
@@ -160,10 +153,6 @@ func combat_event_aura_remove(
 	target.aura_list.erase(aura_list_name)
 	target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
 		get_node(aura_list_name).queue_free()
-	# debug section
-	print("dot nodes on target")
-	for node in target.get_node("aura_container").get_node("dot_container").get_children():
-		print(node.name)
 	log_aura_remove(spell["name"],source.stats_current["unit_name"],target.stats_current["unit_name"])
 
 ####################################################################################################
