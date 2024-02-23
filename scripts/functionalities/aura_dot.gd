@@ -34,6 +34,7 @@ func reinitialize(spell):
 	nticks = 0
 	ticks = spell["ticks"]
 	tickrate = spell["tickrate"]
+	tick_timer.start()
 	
 # event tick
 func tick():
