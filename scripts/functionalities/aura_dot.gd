@@ -31,6 +31,7 @@ func _ready():
 
 # event tick
 func tick():
+	print("dot tick")
 	Combat.combat_event_entrypoint(aura_spell,aura_source,aura_target)
 	nticks += 1
 	# restart timer if there are ticks left
