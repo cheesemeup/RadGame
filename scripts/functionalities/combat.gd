@@ -17,8 +17,12 @@ func combat_event_entrypoint(
 		combat_event_damage(spell,source,target,value)
 	if spell["spelltype"] == "heal":
 		combat_event_heal(spell,source,target,value)
-	if spell["spelltype"] == "aura":
-		combat_event_aura(spell,source,target,value)
+func combat_event_aura_entrypoint(
+	spell: Dictionary,
+	source: CharacterBody3D,
+	target: CharacterBody3D
+):
+	combat_event_aura(spell,source,target)
 func value_query(coeff: float, base: int, mod_inc: float, mod_dec: float):
 	# returns the value of a damage or healing spell based on the coefficient, the base value stat,
 	# and the two applicable modifiers. Used for combat events and for snapshotting values.
@@ -105,19 +109,18 @@ func combat_event_heal(
 func combat_event_aura(
 	spell: Dictionary,
 	source: CharacterBody3D,
-	target: CharacterBody3D,
-	value: int
+	target: CharacterBody3D
 ):
 	# initialize aura scene
 	print("instantiate")
 	var aura_scene
-	if spell["auratype"] == "dot":
+	if spell["spelltype"] == "dot":
 		aura_scene = dot_preload.instantiate()
 	print("initialize")
 	aura_scene.initialize(spell,source,target)
 	# add aura scene to target
 	print("add to target")
-	target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
+	target.get_node("aura_container").get_node("%s_container"%spell["spelltype"]).\
 		add_child(aura_scene)
 	## add aura to appropriate aura dict of target
 	## debug section
