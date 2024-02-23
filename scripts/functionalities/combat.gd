@@ -17,12 +17,19 @@ func combat_event_entrypoint(
 		combat_event_damage(spell,source,target,value)
 	if spell["spelltype"] == "heal":
 		combat_event_heal(spell,source,target,value)
+
 func combat_event_aura_entrypoint(
 	spell: Dictionary,
 	source: CharacterBody3D,
-	target: CharacterBody3D
+	target: CharacterBody3D,
+	remove: bool = false
 ):
+	# apply and remove aura scenes
+	if remove:
+		combat_event_aura_remove(spell,source,target)
+		return
 	combat_event_aura(spell,source,target)
+
 func value_query(coeff: float, base: int, mod_inc: float, mod_dec: float):
 	# returns the value of a damage or healing spell based on the coefficient, the base value stat,
 	# and the two applicable modifiers. Used for combat events and for snapshotting values.
@@ -72,6 +79,7 @@ func combat_event_damage(
 		crit,
 		overkill
 	)
+
 func combat_event_heal(
 	spell: Dictionary,
 	source: CharacterBody3D,
@@ -106,13 +114,13 @@ func combat_event_heal(
 		crit,
 		overheal
 	)
+
 func combat_event_aura(
 	spell: Dictionary,
 	source: CharacterBody3D,
 	target: CharacterBody3D
 ):
 	# reset aura if already present on target from same source
-	print("check for already present")
 	var aura_list_name = "%s"%spell["name"]
 	if spell["unique"] == 0:
 		aura_list_name = "%s %s"%[aura_list_name,source.stats_current["unit_name"]]
@@ -120,26 +128,37 @@ func combat_event_aura(
 		print("aura already present")
 		# reset aura
 		target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
-		get_node(aura_list_name).reinitialize()
+			get_node(aura_list_name).reinitialize(spell)
 		return
 	# initialize aura scene
-	print("instantiate")
 	var aura_scene
 	if spell["auratype"] == "dot":
 		aura_scene = dot_preload.instantiate()
-	print("initialize")
 	aura_scene.name = aura_list_name
 	aura_scene.initialize(spell,source,target)
 	# add aura scene to target
-	print("add to target")
 	target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
 		add_child(aura_scene)
-	# add aura to appropriate aura dict of target
+	# add aura to aura_list of target
+	source.aura_list.append(aura_list_name)
 	# debug section
 	print("dot nodes on target")
 	for node in target.get_node("aura_container").get_node("dot_container").get_children():
 		print(node.name)
 	log_aura(spell["name"],source.stats_current["unit_name"],target.stats_current["unit_name"])
+
+func combat_event_aura_remove(
+	spell: Dictionary,
+	source: CharacterBody3D,
+	target: CharacterBody3D
+):
+	var aura_list_name = "%s"%spell["name"]
+	if spell["unique"] == 0:
+		aura_list_name = "%s %s"%[aura_list_name,source.stats_current["unit_name"]]
+	target.aura_list.erase(aura_list_name)
+	target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
+		get_node(aura_list_name).queue_free()
+	log_aura_remove(spell["name"],source.stats_current["unit_name"],target.stats_current["unit_name"])
 
 ####################################################################################################
 # CHECKS
@@ -151,6 +170,7 @@ func is_critical(crit_modifier: float, crit_base: float):
 	if p <= crit_base + crit_modifier:
 		return 1
 	return 0
+
 func is_avoid(avoidance: float):
 	var random = RandomNumberGenerator.new()
 	random.randomize()
@@ -165,6 +185,7 @@ func apply_damage(value: int, target: CharacterBody3D):
 	var overkill = value - target.stats_current["health_current"]
 	target.stats_current["health_current"] = max(0,target.stats_current["health_current"]-value)
 	return overkill
+
 func apply_heal(value: int, target: CharacterBody3D):
 	var overheal = target.stats_current["health_current"]+value - target.stats_current["health_max"]
 	target.stats_current["health_current"] = min(
@@ -193,6 +214,7 @@ func log_damage(
 		"%s hits %s with %s for %s%s%s."%
 		[source_name, target_name, spell_name, value, crit_suffix, overkill_suffix]
 	)
+
 func log_heal(
 	spell_name: String,
 	source_name: String,
@@ -211,8 +233,18 @@ func log_heal(
 		"%s heals %s with %s for %s%s%s."%
 		[source_name, target_name, spell_name, value, crit_suffix, overheal_suffix]
 	)
+
 func log_aura(spell_name: String, source_name: String, target_name: String):
 	print("%s applies %s to %s"%[source_name, spell_name, target_name])
+
+func log_aura_remove(source_name: String, spell_name: String, target_name: String):
+	var source_name_poss: String
+	if source_name[-1] == "s":
+		source_name_poss = "%s'"%source_name
+	else:
+		source_name_poss = "%s's"%source_name
+	print("%s application of %s fades on %s."%[source_name_poss, spell_name, target_name])
+
 func log_avoid(spell_name: String, source_name: String , target_name: String):
 	print("%s avoided %s of %s."%[source_name, spell_name, target_name])
 

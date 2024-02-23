@@ -28,9 +28,13 @@ func _ready():
 	tick_timer.start()
 
 # reinitialization for overwriting before expiration
-func reinitialize():
-	pass
-
+func reinitialize(spell):
+	aura_spell = spell
+	tick_timer.stop()
+	nticks = 0
+	ticks = spell["ticks"]
+	tickrate = spell["tickrate"]
+	
 # event tick
 func tick():
 	print("dot tick")
@@ -45,4 +49,4 @@ func tick():
 # removal
 func remove_aura():
 	tick_timer.stop()
-	pass
+	Combat.combat_event_aura_entrypoint(aura_spell,aura_source,aura_target,true)
