@@ -28,6 +28,8 @@ func _ready():
 	tick_timer.start()
 
 # reinitialization for overwriting before expiration
+func reinitialize():
+	pass
 
 # event tick
 func tick():

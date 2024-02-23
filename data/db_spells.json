@@ -113,6 +113,7 @@
 	"crit_magnitude_modifier":1,
 	"ticks":5,
 	"tickrate":1,
+	"unique":0,
   },
 "7":{
 	"name":"Player Test HoT",

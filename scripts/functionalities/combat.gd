@@ -111,22 +111,34 @@ func combat_event_aura(
 	source: CharacterBody3D,
 	target: CharacterBody3D
 ):
+	# reset aura if already present on target from same source
+	print("check for already present")
+	var aura_list_name = "%s"%spell["name"]
+	if spell["unique"] == 0:
+		aura_list_name = "%s %s"%[aura_list_name,source.stats_current["unit_name"]]
+	if target.aura_dict.has(aura_list_name):
+		print("aura already present")
+		# reset aura
+		target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
+		get_node(aura_list_name).reinitialize()
+		return
 	# initialize aura scene
 	print("instantiate")
 	var aura_scene
 	if spell["auratype"] == "dot":
 		aura_scene = dot_preload.instantiate()
 	print("initialize")
+	aura_scene.name = aura_list_name
 	aura_scene.initialize(spell,source,target)
 	# add aura scene to target
 	print("add to target")
 	target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
 		add_child(aura_scene)
-	## add aura to appropriate aura dict of target
-	## debug section
+	# add aura to appropriate aura dict of target
+	# debug section
 	print("dot nodes on target")
 	for node in target.get_node("aura_container").get_node("dot_container").get_children():
-		print(node)
+		print(node.name)
 	log_aura(spell["name"],source.stats_current["unit_name"],target.stats_current["unit_name"])
 
 ####################################################################################################

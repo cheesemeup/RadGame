@@ -7,7 +7,7 @@ class_name BaseUnit
 var stats_base: Dictionary
 var stats_mult
 var stats_add
-var aura_dict: Dictionary
+var aura_list: Array = []
 var absorb_dict: Dictionary
 
 # targeting
