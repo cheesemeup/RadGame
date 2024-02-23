@@ -18,10 +18,10 @@ func initialize(spell,source,target):
 	tickrate = spell["tickrate"]
 	print("init timer")
 	# initialize timer
-	#tick_timer.new()
-	#tick_timer.wait_time = tickrate
-	#tick_timer.connect("timeout",tick)
-	#add_child(tick_timer)
+	tick_timer.new()
+	tick_timer.wait_time = tickrate
+	tick_timer.connect("timeout",tick)
+	add_child(tick_timer)
 
 # start timer when ready
 func _ready():
