@@ -23,6 +23,8 @@ func initialize_base_unit(unittype: String,UnitID: String):
 	# stats
 	stat_init(unittype,UnitID)
 	# spells
+	var spell_container = preload("res://scenes/functionalities/spell_container.tscn").instantiate()
+	add_child(spell_container)
 	spell_container_init(self.stats_current.spell_list)
 	# auras
 	var aura_container = preload("res://scenes/functionalities/aura_container.tscn").instantiate()

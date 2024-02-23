@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dempeiar8tjic"]
+[gd_scene load_steps=7 format=3 uid="uid://dempeiar8tjic"]
 
 [ext_resource type="Script" path="res://scripts/units/player.gd" id="1_8gonl"]
-[ext_resource type="PackedScene" uid="uid://drmxovwynq1fp" path="res://scenes/functionalities/spell_container.tscn" id="3_1xchh"]
 [ext_resource type="Script" path="res://scripts/functionalities/player_input.gd" id="4_lp8kc"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_16yd3"]
@@ -40,8 +39,6 @@ spawn_path = NodePath("..")
 [node name="player_collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_16yd3")
-
-[node name="spell_container" parent="." instance=ExtResource("3_1xchh")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
