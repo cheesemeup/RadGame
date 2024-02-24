@@ -96,7 +96,8 @@ func is_legal_target(target_dict):
 	if target_dict == {}:
 		return false
 	# check if object is in appropriate group
-	if not (target_dict["collider"].is_in_group("npc") or target_dict["collider"].is_in_group("player")):
+	if not (target_dict["collider"].is_in_group("npc") or\
+		target_dict["collider"].is_in_group("player")):
 		return false
 	return true
 @rpc("any_peer")

@@ -3,6 +3,7 @@ extends Node
 ####################################################################################################
 # PRELOAD
 var dot_preload = preload("res://scenes/functionalities/aura_dot.tscn")
+var buff_preload = preload("res://scenes/functionalities/aura_buff.tscn")
 
 ####################################################################################################
 # ENTRYPOINTS
@@ -29,6 +30,12 @@ func combat_event_aura_entrypoint(
 		combat_event_aura_remove(spell,source,target)
 		return
 	combat_event_aura(spell,source,target)
+
+func buff_application(spell: Dictionary, target: CharacterBody3D, remove: bool = false):
+	if remove:
+		remove_buff()
+		return
+	apply_buff()
 
 func value_query(coeff: float, base: int, mod_inc: float, mod_dec: float):
 	# returns the value of a damage or healing spell based on the coefficient, the base value stat,
@@ -133,6 +140,8 @@ func combat_event_aura(
 	var aura_scene
 	if spell["auratype"] == "dot" or spell["auratype"] == "hot":
 		aura_scene = dot_preload.instantiate()
+	elif spell["auratype"] == "buff" or spell["auratype"] == "debuff":
+		aura_scene = buff_preload.instantiate()
 	aura_scene.name = aura_list_name
 	aura_scene.initialize(spell,source,target)
 	# add aura scene to target
@@ -242,6 +251,13 @@ func log_aura_remove(spell_name: String, source_name: String, target_name: Strin
 
 func log_avoid(spell_name: String, source_name: String , target_name: String):
 	print("%s avoided %s of %s."%[source_name, spell_name, target_name])
+
+####################################################################################################
+# STAT MODIFICATION
+func apply_buff():
+	pass
+func remove_buff():
+	pass
 
 #### stat calculations
 ####################################################################################################

@@ -9,7 +9,7 @@ var nticks: float = 0
 var tick_timer = Timer.new()
 
 # initialize relevant spell data
-func initialize(spell,source,target):
+func initialize(spell: Dictionary, source: CharacterBody3D, target: CharacterBody3D):
 	aura_spell = spell
 	aura_source = source
 	aura_target = target
@@ -25,7 +25,7 @@ func _ready():
 	tick_timer.start()
 
 # reinitialization for overwriting before expiration
-func reinitialize(spell):
+func reinitialize(spell: Dictionary):
 	aura_spell = spell
 	tick_timer.stop()
 	nticks = 0
