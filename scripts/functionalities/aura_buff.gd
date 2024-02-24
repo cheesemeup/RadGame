@@ -19,25 +19,18 @@ func initialize(spell: Dictionary ,source: CharacterBody3D, target: CharacterBod
 
 # start timer when ready
 func _ready():
-	stat_calc()
+	Combat.buff_application(aura_spell,aura_source,aura_target)
 	expiration_timer.start()
 
 # reinitialization for overwriting before expiration
 func reinitialize(spell: Dictionary):
 	aura_spell = spell
 	expiration_timer.stop()
-	stat_calc()
+	Combat.buff_application(aura_spell,aura_source,aura_target)
 	expiration_timer.start()
-
-# calculate stats
-func stat_calc(remove: bool = false):
-	# write buff data into stat dicts of target
-	Combat.buff_application(aura_spell, aura_target, remove)
-	# calculate new current stats
-	Combat.stat_calculation(aura_target)
 
 # removal
 func remove_aura():
 	expiration_timer.stop()
 	Combat.combat_event_aura_entrypoint(aura_spell,aura_source,aura_target,true)
-	stat_calc(true)
+	Combat.buff_application(aura_spell,aura_source,aura_target,true)
