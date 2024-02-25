@@ -280,9 +280,13 @@ func remove_buff(spell: Dictionary, source_name: String, target: CharacterBody3D
 		buffname = "%s %s"%[buffname,source_name]
 	for i in range(spell["modifies"].size()):
 		if spell["modify_type"][i] == "add":
+			print("delete from:")
+			print(target.stats_add[spell["modifies"][i]])
 			var result = target.stats_add[spell["modifies"][i]][buffname].erase()
 			print("result of removal of stats_add: %s"%result)
 		elif spell["modify_type"][i] == "mult":
+			print("delete from:")
+			print(target.stats_mult[spell["modifies"][i]])
 			var result = target.stats_mult[spell["modifies"][i]][buffname].erase()
 			print("result of removal of stats_mult: %s"%result)
 	# calculate new current stats from base stats
