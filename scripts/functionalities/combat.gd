@@ -275,9 +275,9 @@ func apply_buff(spell: Dictionary, source_name: String, target: CharacterBody3D)
 func remove_buff(spell: Dictionary, source_name: String, target: CharacterBody3D):
 	# remove buff in appropriate stat dicts
 	var buffname = "%s"%spell["name"]
-	print("removing %s"%buffname)
 	if spell["unique"] == 0:
 		buffname = "%s %s"%[buffname,source_name]
+	print("removing %s"%buffname)
 	for i in range(spell["modifies"].size()):
 		if spell["modify_type"][i] == "add":
 			print("delete from:")
