@@ -290,16 +290,16 @@ func remove_buff(spell: Dictionary, source_name: String, target: CharacterBody3D
 func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array):
 	# calculate the listed stats from base values and add and mult modifiers
 	print("calculating stats")
-	print("stat_add: ")
+	print("stats_add: ")
 	print(target.stats_add)
-	print("stat_mult: ")
+	print("stats_mult: ")
 	print(target.stats_mult)
 	var stat_add: int
 	var stat_mult: float
 	for stat in stat_list:
 		print("calculating %s"%stat)
 		# get total additive and multiplicative modifiers
-		stat_add = 0
+		stat_add = 1
 		stat_mult = 1
 		if target.stats_add.has_key(str(stat)):
 			print("%s present in stats_add"%stat)
