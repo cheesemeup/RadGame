@@ -237,6 +237,7 @@ func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array):
 	# calculate the listed stats from base values and add and mult modifiers
 	var stat_add: int
 	var stat_mult: float
+	var diff: int = 0
 	for stat in stat_list:
 		# get total additive and multiplicative modifiers
 		stat_add = 0
@@ -247,13 +248,38 @@ func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array):
 		if target.stats_mult.has(stat):
 			for value in target.stats_mult[stat].values():
 				stat_mult = stat_mult + value
+		# if stat is health_max or resource_max, get difference to previous value
+		if stat == "health_max" or stat == "resource_max":
+			diff = target.stats_current[stat]
 		# calculate final stat
 		target.stats_current[stat] = (target.stats_base[stat] + stat_add) * stat_mult
+		# calculate difference for health_max and resource_max
+		if stat == "health_max" or stat == "resource_max":
+			diff = target.stats_current[stat] - diff
+		# for increase, also increase current value
+		if diff > 0:
+			if stat == "health_max":
+				target.stats_current["health_current"] += diff
+			if stat == "resource_max":
+				target.stats_current["resource_current"] += diff
+		# for decrease, set current to either itself or new maximum, to not overcap
+		if diff < 0:
+			if stat == "health_max":
+				target.stats_current["health_current"] = min(
+				target.stats_current["health_current"],
+				target.stats_current["health_max"]
+			)
+			if stat == "resource_max":
+				target.stats_current["resource_current"] = min(
+				target.stats_current["resource_current"],
+				target.stats_current["resource_max"]
+			)
 
 func calc_current_from_base_full(target: CharacterBody3D):
 	# calculate the listed stats from base values and add and mult modifiers
 	var stat_add: int
 	var stat_mult: float
+	var diff: int = 0
 	for stat in target.stats_current.keys():
 		# get total additive and multiplicative modifiers
 		stat_add = 0
@@ -264,8 +290,32 @@ func calc_current_from_base_full(target: CharacterBody3D):
 		if target.stats_mult.has(stat):
 			for value in target.stat_mult[stat].values():
 				stat_mult = stat_mult + value
+		# if stat is health_max or resource_max, get difference to previous value
+		if stat == "health_max" or stat == "resource_max":
+			diff = target.stats_current[stat]
 		# calculate final stat
 		target.stats_current[stat] = (target.stats_base[stat] + stat_add) * stat_mult
+		# calculate difference for health_max and resource_max
+		if stat == "health_max" or stat == "resource_max":
+			diff = target.stats_current[stat] - diff
+		# for increase, also increase current value
+		if diff > 0:
+			if stat == "health_max":
+				target.stats_current["health_current"] += diff
+			if stat == "resource_max":
+				target.stats_current["resource_current"] += diff
+		# for decrease, set current to either itself or new maximum, to not overcap
+		if diff < 0:
+			if stat == "health_max":
+				target.stats_current["health_current"] = min(
+				target.stats_current["health_current"],
+				target.stats_current["health_max"]
+			)
+			if stat == "resource_max":
+				target.stats_current["resource_current"] = min(
+				target.stats_current["resource_current"],
+				target.stats_current["resource_max"]
+			)
 
 ####################################################################################################
 # LOG MESSAGES
