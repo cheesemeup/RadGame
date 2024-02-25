@@ -151,6 +151,7 @@
 	"modify_type":["mult","add"],
 	"modify_value":[0.1,500],
 	"duration":5,
+	"unique":0,
   },
 "9":{
 	"name":"Player Test Debuff",
