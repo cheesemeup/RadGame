@@ -304,11 +304,15 @@ func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array):
 		stat_mult = 1
 		if target.stats_add.has(str(stat)):
 			print("%s present in stats_add"%stat)
-			for value in target.stats_add[stat]:
+			for value in target.stats_add[stat].values():
+				print("values in stat_add for %s"%stat)
+				print(value)
 				stat_add = stat_add + value
 		if target.stats_mult.has(stat):
 			print("%s present in stats_mult"%stat)
-			for value in target.stats_mult[stat]:
+			for value in target.stats_mult[stat].values():
+				print("values in stats_mult for %s"%stat)
+				print(value)
 				stat_mult = stat_mult + value
 		# calculate final stat
 		target.stats_current[stat] = (target.stats_base[stat] + stat_add) * stat_mult
@@ -322,10 +326,10 @@ func calc_current_from_base_full(target: CharacterBody3D):
 		stat_add = 0
 		stat_mult = 1
 		if target.stats_add.has(stat):
-			for value in target.stat_add[stat]:
+			for value in target.stat_add[stat].values():
 				stat_add = stat_add + value
 		if target.stats_mult.has(stat):
-			for value in target.stat_mult[stat]:
+			for value in target.stat_mult[stat].values():
 				stat_mult = stat_mult + value
 		# calculate final stat
 		target.stats_current[stat] = (target.stats_base[stat] + stat_add) * stat_mult
