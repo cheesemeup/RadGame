@@ -204,6 +204,70 @@ func apply_heal(value: int, target: CharacterBody3D):
 	return overheal
 
 ####################################################################################################
+# STAT MODIFICATION
+func apply_buff(spell: Dictionary, source_name: String, target: CharacterBody3D):
+	# apply buff in appropriate stat dicts, overwrites old value if already present
+	var buffname = "%s"%spell["name"]
+	if spell["unique"] == 0:
+		buffname = "%s %s"%[buffname,source_name]
+	for i in range(spell["modifies"].size()):
+		if spell["modify_type"][i] == "add":
+			target.stats_add[spell["modifies"][i]][buffname] = spell["modify_value"][i]
+		elif spell["modify_type"][i] == "mult":
+			target.stats_mult[spell["modifies"][i]][buffname] = spell["modify_value"][i]
+	# calculate new current stats from base stats
+	calc_current_from_base_partial(target,spell["modifies"])
+
+func remove_buff(spell: Dictionary, source_name: String, target: CharacterBody3D):
+	# remove buff in appropriate stat dicts
+	var buffname = "%s"%spell["name"]
+	if spell["unique"] == 0:
+		buffname = "%s %s"%[buffname,source_name]
+	for i in range(spell["modifies"].size()):
+		if spell["modify_type"][i] == "add":
+			var result = target.stats_add[spell["modifies"][i]].erase(buffname)
+		elif spell["modify_type"][i] == "mult":
+			var result = target.stats_mult[spell["modifies"][i]].erase(buffname)
+	# calculate new current stats from base stats
+	calc_current_from_base_partial(target,spell["modifies"])
+
+####################################################################################################
+# STAT CALCULATIONS
+func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array):
+	# calculate the listed stats from base values and add and mult modifiers
+	var stat_add: int
+	var stat_mult: float
+	for stat in stat_list:
+		# get total additive and multiplicative modifiers
+		stat_add = 0
+		stat_mult = 1
+		if target.stats_add.has(str(stat)):
+			for value in target.stats_add[stat].values():
+				stat_add = stat_add + value
+		if target.stats_mult.has(stat):
+			for value in target.stats_mult[stat].values():
+				stat_mult = stat_mult + value
+		# calculate final stat
+		target.stats_current[stat] = (target.stats_base[stat] + stat_add) * stat_mult
+
+func calc_current_from_base_full(target: CharacterBody3D):
+	# calculate the listed stats from base values and add and mult modifiers
+	var stat_add: int
+	var stat_mult: float
+	for stat in target.stats_current.keys():
+		# get total additive and multiplicative modifiers
+		stat_add = 0
+		stat_mult = 1
+		if target.stats_add.has(stat):
+			for value in target.stat_add[stat].values():
+				stat_add = stat_add + value
+		if target.stats_mult.has(stat):
+			for value in target.stat_mult[stat].values():
+				stat_mult = stat_mult + value
+		# calculate final stat
+		target.stats_current[stat] = (target.stats_base[stat] + stat_add) * stat_mult
+
+####################################################################################################
 # LOG MESSAGES
 func log_damage(
 	spell_name: String,
@@ -256,90 +320,6 @@ func log_aura_remove(spell_name: String, source_name: String, target_name: Strin
 
 func log_avoid(spell_name: String, source_name: String , target_name: String):
 	print("%s avoided %s of %s."%[source_name, spell_name, target_name])
-
-####################################################################################################
-# STAT MODIFICATION
-func apply_buff(spell: Dictionary, source_name: String, target: CharacterBody3D):
-	# apply buff in appropriate stat dicts, overwrites old value if already present
-	var buffname = "%s"%spell["name"]
-	if spell["unique"] == 0:
-		buffname = "%s %s"%[buffname,source_name]
-	for i in range(spell["modifies"].size()):
-		if spell["modify_type"][i] == "add":
-			target.stats_add[spell["modifies"][i]][buffname] = spell["modify_value"][i]
-		elif spell["modify_type"][i] == "mult":
-			target.stats_mult[spell["modifies"][i]][buffname] = spell["modify_value"][i]
-	# calculate new current stats from base stats
-	calc_current_from_base_partial(target,spell["modifies"])
-
-func remove_buff(spell: Dictionary, source_name: String, target: CharacterBody3D):
-	# remove buff in appropriate stat dicts
-	var buffname = "%s"%spell["name"]
-	if spell["unique"] == 0:
-		buffname = "%s %s"%[buffname,source_name]
-	print("removing %s"%buffname)
-	for i in range(spell["modifies"].size()):
-		if spell["modify_type"][i] == "add":
-			print("delete from:")
-			print(target.stats_add[spell["modifies"][i]])
-			var result = target.stats_add[spell["modifies"][i]].erase(buffname)
-			print("result of removal of stats_add: %s"%result)
-		elif spell["modify_type"][i] == "mult":
-			print("delete from:")
-			print(target.stats_mult[spell["modifies"][i]])
-			var result = target.stats_mult[spell["modifies"][i]].erase(buffname)
-			print("result of removal of stats_mult: %s"%result)
-	# calculate new current stats from base stats
-	calc_current_from_base_partial(target,spell["modifies"])
-
-####################################################################################################
-# STAT CALCULATIONS
-func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array):
-	# calculate the listed stats from base values and add and mult modifiers
-	print("calculating stats")
-	print("stats_add: ")
-	print(target.stats_add)
-	print("stats_mult: ")
-	print(target.stats_mult)
-	var stat_add: int
-	var stat_mult: float
-	for stat in stat_list:
-		print("calculating %s"%stat)
-		print(stat)
-		# get total additive and multiplicative modifiers
-		stat_add = 0
-		stat_mult = 1
-		if target.stats_add.has(str(stat)):
-			print("%s present in stats_add"%stat)
-			for value in target.stats_add[stat].values():
-				print("values in stat_add for %s"%stat)
-				print(value)
-				stat_add = stat_add + value
-		if target.stats_mult.has(stat):
-			print("%s present in stats_mult"%stat)
-			for value in target.stats_mult[stat].values():
-				print("values in stats_mult for %s"%stat)
-				print(value)
-				stat_mult = stat_mult + value
-		# calculate final stat
-		target.stats_current[stat] = (target.stats_base[stat] + stat_add) * stat_mult
-
-func calc_current_from_base_full(target: CharacterBody3D):
-	# calculate the listed stats from base values and add and mult modifiers
-	var stat_add: int
-	var stat_mult: float
-	for stat in target.stats_current.keys():
-		# get total additive and multiplicative modifiers
-		stat_add = 0
-		stat_mult = 1
-		if target.stats_add.has(stat):
-			for value in target.stat_add[stat].values():
-				stat_add = stat_add + value
-		if target.stats_mult.has(stat):
-			for value in target.stat_mult[stat].values():
-				stat_mult = stat_mult + value
-		# calculate final stat
-		target.stats_current[stat] = (target.stats_base[stat] + stat_add) * stat_mult
 
 #### stat calculations
 ####################################################################################################
