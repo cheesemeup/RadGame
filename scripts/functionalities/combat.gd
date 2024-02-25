@@ -266,9 +266,9 @@ func apply_buff(spell: Dictionary, source_name: String, target: CharacterBody3D)
 		buffname = "%s %s"%[buffname,source_name]
 	for i in range(spell["modifies"].size()):
 		if spell["modify_type"][i] == "add":
-			target.stats_add[spell["modifies"][i]]["buffname"] = spell["modify_value"][i]
+			target.stats_add[spell["modifies"][i]][buffname] = spell["modify_value"][i]
 		elif spell["modify_type"][i] == "mult":
-			target.stats_mult[spell["modifies"][i]]["buffname"] = spell["modify_value"][i]
+			target.stats_mult[spell["modifies"][i]][buffname] = spell["modify_value"][i]
 	# calculate new current stats from base stats
 	calc_current_from_base_partial(target,spell["modifies"])
 
@@ -279,9 +279,9 @@ func remove_buff(spell: Dictionary, source_name: String, target: CharacterBody3D
 		buffname = "%s %s"%[buffname,source_name]
 	for i in range(spell["modifies"].size()):
 		if spell["modify_type"][i] == "add":
-			target.stats_add[spell["modifies"][i]]["buffname"].erase()
+			target.stats_add[spell["modifies"][i]][buffname].erase()
 		elif spell["modify_type"][i] == "mult":
-			target.stats_mult[spell["modifies"][i]]["buffname"].erase()
+			target.stats_mult[spell["modifies"][i]][buffname].erase()
 	# calculate new current stats from base stats
 	calc_current_from_base_partial(target,spell["modifies"])
 
@@ -301,12 +301,12 @@ func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array):
 		# get total additive and multiplicative modifiers
 		stat_add = 0
 		stat_mult = 1
-		if target.stats_add.has_key(stat):
-			print("%s present in stat_add"%stat)
+		if target.stats_add.has_key(str(stat)):
+			print("%s present in stats_add"%stat)
 			for value in target.stats_add[stat]:
 				stat_add = stat_add + value
 		if target.stats_mult.has_key(stat):
-			print("%s present in stat_mult"%stat)
+			print("%s present in stats_mult"%stat)
 			for value in target.stats_mult[stat]:
 				stat_mult = stat_mult + value
 		# calculate final stat
