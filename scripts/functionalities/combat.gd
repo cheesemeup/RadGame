@@ -298,14 +298,15 @@ func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array):
 	var stat_mult: float
 	for stat in stat_list:
 		print("calculating %s"%stat)
+		print(stat)
 		# get total additive and multiplicative modifiers
-		stat_add = 1
+		stat_add = 0
 		stat_mult = 1
-		if target.stats_add.has_key(str(stat)):
+		if target.stats_add.has(str(stat)):
 			print("%s present in stats_add"%stat)
 			for value in target.stats_add[stat]:
 				stat_add = stat_add + value
-		if target.stats_mult.has_key(stat):
+		if target.stats_mult.has(stat):
 			print("%s present in stats_mult"%stat)
 			for value in target.stats_mult[stat]:
 				stat_mult = stat_mult + value
@@ -320,10 +321,10 @@ func calc_current_from_base_full(target: CharacterBody3D):
 		# get total additive and multiplicative modifiers
 		stat_add = 0
 		stat_mult = 1
-		if target.stat_add.has_key(stat):
+		if target.stats_add.has(stat):
 			for value in target.stat_add[stat]:
 				stat_add = stat_add + value
-		if target.stat_mult.has_key(stat):
+		if target.stats_mult.has(stat):
 			for value in target.stat_mult[stat]:
 				stat_mult = stat_mult + value
 		# calculate final stat
