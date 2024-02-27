@@ -256,12 +256,6 @@ func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array):
 		# calculate difference for health_max and resource_max
 		if stat == "health_max" or stat == "resource_max":
 			diff = target.stats_current[stat] - diff
-		# for increase, also increase current value
-		if diff > 0:
-			if stat == "health_max":
-				target.stats_current["health_current"] += diff
-			if stat == "resource_max":
-				target.stats_current["resource_current"] += diff
 		# for decrease, set current to either itself or new maximum, to not overcap
 		if diff < 0:
 			if stat == "health_max":
@@ -298,12 +292,6 @@ func calc_current_from_base_full(target: CharacterBody3D):
 		# calculate difference for health_max and resource_max
 		if stat == "health_max" or stat == "resource_max":
 			diff = target.stats_current[stat] - diff
-		# for increase, also increase current value
-		if diff > 0:
-			if stat == "health_max":
-				target.stats_current["health_current"] += diff
-			if stat == "resource_max":
-				target.stats_current["resource_current"] += diff
 		# for decrease, set current to either itself or new maximum, to not overcap
 		if diff < 0:
 			if stat == "health_max":

@@ -1,8 +1,12 @@
 # Player Test Buff
 extends BaseSpell
 
+var spell_heal: Dictionary = {}
+
 func _ready():
 	initialize_base_spell("8")
+	spell_heal["spelltype"] = "heal"
+	spell_heal["can_crit"] = 0
 
 func trigger():
 	# get source and target nodes
@@ -33,3 +37,5 @@ func trigger():
 	# send event to combat script
 	print("sending combat event")
 	Combat.combat_event_aura_entrypoint(spell_current,source,target)
+	# also send heal, to apply to the buffed maximum health to current health, and count as heal
+	Combat.combat_event_entrypoint(spell_heal,source,target,spell_current["modify_value"][1])
