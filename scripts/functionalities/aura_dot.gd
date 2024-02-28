@@ -30,7 +30,7 @@ func reinitialize(spell: Dictionary):
 	tick_timer.stop()
 	nticks = 0
 	ticks = spell["ticks"]
-	tickrate = spell["tickrate"]
+	tick_timer.wait_time = spell["tickrate"]
 	tick_timer.start()
 	
 # event tick
