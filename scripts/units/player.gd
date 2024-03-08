@@ -10,12 +10,14 @@ var playermodel_reference = null
 var speed = 10.0
 const jump_velocity = 4.5
 
-# targeting vars - NEEDS REWORK FOR MULTIPLAYER
+# targeting vars
 var space_state
 #var unit_selectedtarget = null
 #var unit_mouseover_target = null
 #var interactables_in_range = []
 #var current_interact_target = null
+var interactables: Array = []
+var current_interactable = null  # the currently active interactable
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -109,6 +111,39 @@ func set_target(requested_target,parent):
 
 ####################################################################################################
 # INTERACTABLES
+
+func get_nearest_interactable():
+	# get the interactable that is nearest to the player unit
+	var nearest_interactable = interactables[0]
+	# if only one interactable in range, set to that
+	if interactables.size() == 1:
+		nearest_interactable = interactables[0]
+	# sort by range if more than one interactable exists
+	else:
+		var distance = self.global_position.distance_to(nearest_interactable.position)
+		var new_distance = distance
+		for interactable in interactables:
+			# get range to current interactable in loop
+			new_distance = self.global_position.distance_to(interactable.position)
+			# set nearest interactable if closer than previous closest
+			if new_distance < distance:
+				nearest_interactable = interactable
+				distance = new_distance
+	# trigger removal and reapplication of interact prompt if nearest interactable changes
+	if nearest_interactable != current_interactable:
+		if current_interactable != null:
+			hide_interact_prompt(current_interactable.name)
+		show_interact_prompt(nearest_interactable.name)
+	return nearest_interactable
+
+@rpc("authority")
+func show_interact_prompt(interactable_name: String):
+	# rpc that calls interactable object's interact prompt show locally
+	pass
+@rpc("authority")
+func hide_interact_prompt(interactable_name: String):
+	# rpc that calls interactable object's interact prompt hide locally
+	pass
 
 #func _ready():
 #	# TODO: read save file
