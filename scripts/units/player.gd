@@ -107,6 +107,9 @@ func set_target(requested_target,parent):
 	else:
 		selected_target = get_node("/root/main/%s/%s"%[parent,requested_target])
 
+####################################################################################################
+# INTERACTABLES
+
 #func _ready():
 #	# TODO: read save file
 #	input.set_process(false)
