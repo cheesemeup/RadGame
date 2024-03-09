@@ -28,6 +28,8 @@ spawn_limit = 1
 
 [node name="hub" parent="maps" instance=ExtResource("2_8hbw6")]
 
+[node name="interactables" type="Node" parent="."]
+
 [node name="ui" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15

@@ -1,0 +1,46 @@
+{
+  "0":{
+	"unit_name":"Signpost Damage",
+	"unit_class":"Test Interactable",
+	"spell_list":[],
+	"primary":100,
+	"damage_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"defense_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal_taken_modifier":{
+		"physical":1,
+		"magic":1,
+	}
+},
+  "1":{
+	"unit_name":"Signpost Heal",
+	"unit_class":"Test Interactable",
+	"spell_list":[],
+	"primary":100,
+	"damage_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"defense_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal_taken_modifier":{
+		"physical":1,
+		"magic":1,
+	}
+},
+}

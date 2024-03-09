@@ -1,13 +1,11 @@
-extends BaseUnit
+extends BaseInteractable
 
 func _ready():
 	if multiplayer.is_server():
 		ready_server()
 
 func ready_server():
-	initialize_base_unit("npc","0")
-	# set range of spell triggered by interaction to interact radius
-	$spell_container/spell_0.spell_current.range = $interactable/collision_shape.shape.radius
+	initialize_base_interactable("0")
 
 func interaction(body):
 	if not multiplayer.is_server():

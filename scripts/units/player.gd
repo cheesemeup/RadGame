@@ -69,7 +69,6 @@ func post_ready(peer_id):
 
 ####################################################################################################
 # TARGETING
-	# sync target to all peers
 func targeting(event_position):
 	# send a target ray, and check for collision with any object
 	var target_dict = targetray(event_position)
@@ -111,7 +110,6 @@ func set_target(requested_target,parent):
 
 ####################################################################################################
 # INTERACTABLES
-
 func get_nearest_interactable():
 	# get the interactable that is nearest to the player unit
 	var nearest_interactable = interactables[0]
