@@ -16,7 +16,6 @@ func remove_interactable(target: CharacterBody3D):
 	if not target.is_in_group("player"):
 		return
 	target.interactables.erase(self)
-	pass
 
 func trigger(_interactor):
 	# Log interaction in combat script
