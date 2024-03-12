@@ -1,6 +1,7 @@
 extends Node
 
-var PORT = 4545
+var SERVER_PORT_ENV = OS.get_environment("SERVER_PORT")
+var PORT = SERVER_PORT_ENV.to_int() if SERVER_PORT_ENV.is_valid_int() and not SERVER_PORT_ENV.is_empty() else 4545
 
 # run this script if server
 func _ready():

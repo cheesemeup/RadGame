@@ -33,7 +33,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 48
 text = "Join"
 
-[node name="address_entry" type="TextEdit" parent="."]
+[node name="address_entry" type="LineEdit" parent="."]
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.611
@@ -44,8 +44,8 @@ offset_right = 0.959961
 offset_bottom = 0.319946
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 20
 text = "cheese.okinawa"
+metadata/_edit_use_anchors_ = true
 
 [node name="label_address_entry" type="Label" parent="."]
 anchors_preset = -1
@@ -60,6 +60,27 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 18
 text = "Server Address:"
+
+[node name="label_port_entry" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.583
+anchor_right = 0.578
+anchor_bottom = 0.608
+offset_top = 88.36
+offset_right = 124.24
+offset_bottom = 92.36
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 18
+text = "Server Port:"
+
+[node name="port_entry" type="LineEdit" parent="."]
+offset_left = 960.0
+offset_top = 748.0
+offset_right = 1108.0
+offset_bottom = 786.0
+text = "4545"
 
 [connection signal="pressed" from="host_button" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="join_button" to="." method="_on_join_button_pressed"]
