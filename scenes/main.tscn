@@ -31,7 +31,7 @@ spawn_limit = 1
 [node name="interactables" type="Node" parent="."]
 
 [node name="mpspawner_interactables" type="MultiplayerSpawner" parent="interactables"]
-_spawnable_scenes = PackedStringArray("res://Scenes/testing/interact_damage.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/testing/interact_damage.tscn")
 spawn_path = NodePath("..")
 spawn_limit = 1
 
