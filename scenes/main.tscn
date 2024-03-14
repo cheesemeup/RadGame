@@ -30,6 +30,11 @@ spawn_limit = 1
 
 [node name="interactables" type="Node" parent="."]
 
+[node name="mpspawner_interactables" type="MultiplayerSpawner" parent="interactables"]
+_spawnable_scenes = PackedStringArray("res://Scenes/testing/interact_damage.tscn")
+spawn_path = NodePath("../../maps")
+spawn_limit = 1
+
 [node name="ui" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
