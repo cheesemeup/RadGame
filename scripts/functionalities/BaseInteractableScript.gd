@@ -12,8 +12,8 @@ func initialize_base_interactable(unit_id: String):
 	connect_signals()
 
 func connect_signals():
-	$"range/range_shape".connect("area_entered",add_interactable)
-	connect("area_exited",remove_interactable)
+	$range.connect("area_entered",add_interactable)
+	$range.connect("area_exited",remove_interactable)
 
 func add_interactable(target: CharacterBody3D):
 	print("add")
