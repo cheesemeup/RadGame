@@ -1,7 +1,7 @@
 extends BaseUnit
 
 func _enter_tree():
-	# only have server process
+	# set authority
 	$mpsynchronizer.set_multiplayer_authority(1)
 
 func _ready():

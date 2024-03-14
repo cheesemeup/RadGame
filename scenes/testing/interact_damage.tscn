@@ -1,7 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bswgqikmxejv3"]
 
 [ext_resource type="Script" path="res://scripts/testing/interact_damage.gd" id="1_7tgrq"]
-[ext_resource type="PackedScene" uid="uid://c6gu4pl7to5fs" path="res://scenes/functionalities/interactable.tscn" id="1_lwm3x"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_goaoj"]
 top_radius = 0.15
@@ -20,6 +19,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sxctu"]
+radius = 3.0
 
 [node name="interact_damage" type="CharacterBody3D"]
 script = ExtResource("1_7tgrq")
@@ -45,13 +47,6 @@ visible = false
 pixel_size = 0.01
 text = "Interact [E]"
 
-[node name="interactable" parent="." instance=ExtResource("1_lwm3x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-collision_layer = 0
-collision_mask = 2
-
-[node name="auras" type="Node" parent="."]
-
 [node name="collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_hq05e")
@@ -59,4 +54,9 @@ shape = SubResource("CylinderShape3D_hq05e")
 [node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_py0g7")
 
-[editable path="interactable"]
+[node name="range" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="range_shape" type="CollisionShape3D" parent="range"]
+shape = SubResource("SphereShape3D_sxctu")
