@@ -12,6 +12,9 @@ size = Vector3(1.4, 0.7, 0.3)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hq05e"]
 radius = 0.2
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_sxctu"]
+radius = 3.0
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_py0g7"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
@@ -19,9 +22,6 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_sxctu"]
-radius = 3.0
 
 [node name="interact_damage" type="CharacterBody3D"]
 script = ExtResource("1_7tgrq")
@@ -51,12 +51,12 @@ text = "Interact [E]"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_hq05e")
 
-[node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_py0g7")
-
 [node name="range" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="range_shape" type="CollisionShape3D" parent="range"]
 shape = SubResource("SphereShape3D_sxctu")
+
+[node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_py0g7")

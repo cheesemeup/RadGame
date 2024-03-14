@@ -7,10 +7,10 @@ func _enter_tree():
 func _ready():
 	# initialize BaseInteractable
 	initialize_base_interactable("0")
-	$"range/range_shape".shape.radius = 2
-	set_process(false)
-	if $mpsynchronizer.is_multiplayer_authority():
-		set_process(true)
+	$"range/range_shape".shape.radius = 3
+	#set_process(false)
+	#if $mpsynchronizer.is_multiplayer_authority():
+		#set_process(true)
 
 #func ready_server():
 	#initialize_base_interactable("0")
