@@ -25,6 +25,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 ####################################################################################################
 # FRAME
 func _physics_process(delta):
+	print(interactables)
 	handle_movement(delta)
 	# section that is only relevant for specific player
 	if not input.is_multiplayer_authority():
