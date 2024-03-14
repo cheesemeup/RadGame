@@ -25,12 +25,15 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 ####################################################################################################
 # FRAME
 func _physics_process(delta):
-	print(interactables)
 	handle_movement(delta)
 	# section that is only relevant for specific player
 	if not input.is_multiplayer_authority():
 		return
+	# space state for targeting
 	space_state = get_world_3d().direct_space_state
+	# get nearest interactable
+	current_interactable = get_nearest_interactable()
+	print(current_interactable)
 
 ####################################################################################################
 # SPAWNING
@@ -113,12 +116,12 @@ func set_target(requested_target,parent):
 # INTERACTABLES
 func get_nearest_interactable():
 	# get the interactable that is nearest to the player unit
-	var nearest_interactable = interactables[0]
+	var nearest_interactable = null
 	# if only one interactable in range, set to that
 	if interactables.size() == 1:
 		nearest_interactable = interactables[0]
-	# sort by range if more than one interactable exists
-	else:
+	# get closest if more than one interactable exists
+	elif interactables.size() > 1:
 		var distance = self.global_position.distance_to(nearest_interactable.position)
 		var new_distance = distance
 		for interactable in interactables:
@@ -132,7 +135,8 @@ func get_nearest_interactable():
 	if nearest_interactable != current_interactable:
 		if current_interactable != null:
 			hide_interact_prompt(current_interactable.name)
-		show_interact_prompt(nearest_interactable.name)
+		if nearest_interactable != null:
+			show_interact_prompt(nearest_interactable.name)
 	return nearest_interactable
 
 @rpc("authority")
