@@ -12,9 +12,6 @@ func initialize_base_interactable(unit_id: String):
 	connect_signals()
 
 func connect_signals():
-	# only connect for server
-	if not $mpsynchronizer.is_multiplayer_authority():
-		return
 	$range.connect("body_entered",add_interactable)
 	$range.connect("body_exited",remove_interactable)
 
@@ -25,7 +22,6 @@ func add_interactable(target: CharacterBody3D):
 	target.interactables.append(self)
 
 func remove_interactable(target: CharacterBody3D):
-	print("remove")
 	# delete interactable from player's interactable list
 	if not target.is_in_group("player"):
 		return

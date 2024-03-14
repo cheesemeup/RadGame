@@ -5,7 +5,9 @@ func _enter_tree():
 	$mpsynchronizer.set_multiplayer_authority(1)
 
 func _ready():
-	# initialize BaseInteractable
+	# initialize BaseInteractable on server
+	if not $mpsynchronizer.is_multiplayer_authority():
+		return
 	initialize_base_interactable("0")
 	$"range/range_shape".shape.radius = 3
 	#set_process(false)
