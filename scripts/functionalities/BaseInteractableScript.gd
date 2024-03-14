@@ -16,12 +16,14 @@ func connect_signals():
 	$range.connect("body_exited",remove_interactable)
 
 func add_interactable(target: CharacterBody3D):
+	print("add")
 	# append interactable to player's interactable list
 	if not target.is_in_group("player"):
 		return
 	target.interactables.append(self)
 
 func remove_interactable(target: CharacterBody3D):
+	print("remove")
 	# delete interactable from player's interactable list
 	if not target.is_in_group("player"):
 		return
