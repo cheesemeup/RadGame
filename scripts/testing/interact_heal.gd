@@ -1,20 +1,25 @@
-extends BaseUnit
+extends BaseInteractable
 
-var stats_base: Dictionary
-@export var stats_curr: Dictionary
-var spells_base: Dictionary
-@export var spells_curr: Dictionary
+func _enter_tree():
+	# set authority
+	$mpsynchronizer.set_multiplayer_authority(1)
 
 func _ready():
-	# load stats and spells
-	var file = "res://data/db_stats_npc.json"
-	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
-	stats_base = json_dict["1"]
-	stats_curr = stats_base
-	file = "res://data/db_spells.json"
-	json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
-	spells_base["0"] = json_dict["1"]
-	spells_curr = spells_base
+	# initialize BaseInteractable on server
+	if not $mpsynchronizer.is_multiplayer_authority():
+		return
+	initialize_base_interactable("1")
+	$"range/range_shape".shape.radius = 3
+	#set_process(false)
+	#if $mpsynchronizer.is_multiplayer_authority():
+		#set_process(true)
 
-func interaction(body):
-	Combat.event_heal(spells_curr["0"],self,body)
+#func ready_server():
+	#initialize_base_interactable("0")
+
+#func interaction(body):
+	#if not multiplayer.is_server():
+		#return
+	## source and target are flipped here, because the source of the interaction
+	## (the player) turns into the target of the spell
+	#$spell_container/spell_0.trigger(self,body)
