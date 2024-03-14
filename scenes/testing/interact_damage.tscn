@@ -15,7 +15,6 @@ radius = 0.2
 
 [node name="interact_damage" type="CharacterBody3D"]
 script = ExtResource("1_7tgrq")
-stats_current = null
 
 [node name="pole" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
