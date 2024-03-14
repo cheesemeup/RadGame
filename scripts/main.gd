@@ -18,8 +18,8 @@ func _ready():
 		test_npc.position = Vector3(-3,0,-6)
 		$/root/main/npcs.add_child(test_npc,true)
 		var test_signpost_damage = preload("res://scenes/testing/interact_damage.tscn").instantiate()
-		test_signpost_damage.position = Vector3(-3,0,-6)
 		$/root/main/interactables.add_child(test_signpost_damage,true)
+		test_signpost_damage.position = Vector3(-3,0,-6)
 		return
 	Autoload.main_reference = self
 	# load main menu for players
