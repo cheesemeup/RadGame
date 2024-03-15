@@ -33,7 +33,7 @@ func _physics_process(delta):
 	space_state = get_world_3d().direct_space_state
 	# get nearest interactable
 	current_interactable = get_nearest_interactable()
-	print(current_interactable)
+	print("current interactable: %s"%current_interactable)
 
 ####################################################################################################
 # SPAWNING
