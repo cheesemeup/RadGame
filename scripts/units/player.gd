@@ -27,15 +27,15 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _physics_process(delta):
 	# movement
 	handle_movement(delta)
-	# get nearest interactable
-	current_interactable = get_nearest_interactable()
-	if $mpsynchronizer.is_multiplayer_authority():
-		print("current interactable: %s"%current_interactable)
-	# section that is only relevant for specific player
-	if not input.is_multiplayer_authority():
+	# player only section
+	if input.is_multiplayer_authority():
+		# space state for targeting
+		space_state = get_world_3d().direct_space_state
 		return
-	# space state for targeting
-	space_state = get_world_3d().direct_space_state
+	# server only section
+	if $mpsynchronizer.is_multiplayer_authority():
+		# get nearest interactable
+		current_interactable = get_nearest_interactable()
 
 ####################################################################################################
 # SPAWNING
