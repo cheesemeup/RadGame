@@ -46,4 +46,4 @@ func enter_spell_container(spell_id: String):
 @rpc("authority")
 func request_interaction():
 	print("interaction requested")
-	$"..".nearest_interactable.trigger(get_parent())
+	get_parent().nearest_interactable.trigger(get_parent())
