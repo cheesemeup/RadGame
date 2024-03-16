@@ -19,6 +19,7 @@ func trigger(interactor):
 	# write interaction to log
 	Combat.log_interact(interactor.stats_current["unit_name"],self.stats_current["unit_name"])
 	# send spell to combat script
+	print("sending combat event")
 	Combat.combat_event_entrypoint(spell, self, interactor)
 
 #func ready_server():
