@@ -12,6 +12,7 @@
 		"physical":1,
 		"magic":1,
 	},
+	"interact_range":3,
 },
   "1":{
 	"unit_name":"Signpost Heal",
@@ -26,5 +27,6 @@
 		"physical":1,
 		"magic":1,
 	},
+	"interact_range":3,
 },
 }
