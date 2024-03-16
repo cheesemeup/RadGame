@@ -359,6 +359,9 @@ func log_aura_remove(spell_name: String, source_name: String, target_name: Strin
 func log_avoid(spell_name: String, source_name: String , target_name: String):
 	print("%s avoided %s of %s."%[source_name, spell_name, target_name])
 
+func log_interact(source_name: String, target_name: String):
+	print("%s interacts with %s"%[source_name, target_name])
+
 #### stat calculations
 ####################################################################################################
 ## calculate all stats when changing class or talents, should only be done outside of combat
