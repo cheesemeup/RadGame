@@ -2,13 +2,13 @@ extends Node
 
 class_name BaseInteractable
 
-var stats_base
+var stats_current
 
 func initialize_base_interactable(unit_id: String):
 	# read stats dict from file
 	var file = "res://data/db_stats_interactable.json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
-	stats_base = json_dict[unit_id]
+	stats_current = json_dict[unit_id]
 	connect_signals()
 
 func connect_signals():

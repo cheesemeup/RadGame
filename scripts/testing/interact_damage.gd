@@ -13,7 +13,7 @@ func _ready():
 	initialize_base_interactable("0")
 	$"range/range_shape".shape.radius = 3
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
-	spell = json_dict[stats_base["spell_list"][0]]
+	spell = json_dict[stats_current["spell_list"][0]]
 
 func trigger(interactor):
 	# write interaction to log
