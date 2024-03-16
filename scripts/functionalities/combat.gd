@@ -51,7 +51,7 @@ func value_query(coeff: float, base: int, mod_inc: float, mod_dec: float):
 # COMBAT EVENTS
 func combat_event_damage(
 	spell: Dictionary,
-	source: CharacterBody3D,
+	source,
 	target: CharacterBody3D,
 	value: int
 ):
