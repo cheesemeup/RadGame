@@ -136,19 +136,21 @@ func get_nearest_interactable():
 	# trigger removal and reapplication of interact prompt if nearest interactable changes
 	if nearest_interactable != current_interactable:
 		if current_interactable != null:
-			hide_interact_prompt(current_interactable.name)
+			rpc_id(int(self.name),"hide_interact_prompt",current_interactable.name)
 		if nearest_interactable != null:
-			show_interact_prompt(nearest_interactable.name)
+			rpc_id(int(self.name),"show_interact_prompt",nearest_interactable.name)
 	return nearest_interactable
 
 @rpc("authority")
 func show_interact_prompt(interactable_name: String):
-	# rpc that calls interactable object's interact prompt show locally
-	pass
+	# rpc that makes interact prompt visible locally
+	$"/root/main/interactables".get_node(interactable_name).\
+	get_node("interact_prompt").visible = true
 @rpc("authority")
 func hide_interact_prompt(interactable_name: String):
-	# rpc that calls interactable object's interact prompt hide locally
-	pass
+	# rpc that makes interact prmpt invisible locally
+	$"/root/main/interactables".get_node(interactable_name).\
+	get_node("interact_prompt").visible = false
 
 #func _ready():
 #	# TODO: read save file

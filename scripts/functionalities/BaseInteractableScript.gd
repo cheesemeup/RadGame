@@ -9,12 +9,10 @@ func initialize_base_interactable(unit_id: String):
 	var file = "res://data/db_stats_interactable.json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	stats_current = json_dict[unit_id]
-	# spell container for interactables
+	# spell container
 	var spell_container = preload("res://scenes/functionalities/spell_container.tscn").instantiate()
 	add_child(spell_container)
-	print("child nodes of interact_damage:")
-	for child in get_children():
-		print(child)
+	# add spells to container
 	for spell in stats_current["spell_list"]:
 		var spell_scene = load("res://scenes/spells/spell_%s.tscn" % spell)
 		spell_scene = spell_scene.instantiate()
@@ -43,6 +41,5 @@ func remove_interactable(target: CharacterBody3D):
 	target.interactables.erase(self)
 
 func trigger(_interactor):
-	# Log interaction in combat script
 	# If no override is present in specific interactable, print message
 	print("Trigger has not been overriden!")
