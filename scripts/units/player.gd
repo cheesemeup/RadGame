@@ -146,7 +146,8 @@ func get_nearest_interactable():
 func show_interact_prompt(interactable_name: String):
 	# rpc that makes interact prompt visible locally
 	$"/root/main/interactables".get_node(interactable_name).\
-	get_node("interact_prompt").text = "Interact [E]"
+	get_node("interact_prompt").text = "Interact [%s]"%\
+		InputMap.action_get_events("interact")[0].as_text()
 	$"/root/main/interactables".get_node(interactable_name).\
 	get_node("interact_prompt").visible = true
 @rpc("authority")
