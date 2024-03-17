@@ -135,7 +135,7 @@ func get_nearest_interactable():
 				distance = new_distance
 	# trigger removal and reapplication of interact prompt if nearest interactable changes
 	if nearest_interactable != current_interactable:
-		print("interact prompt change for %s"%int(self.name))
+		print("interact prompt change for %s"%name.to_int())
 		if current_interactable != null:
 			rpc_id(int(self.name),"hide_interact_prompt",current_interactable.name)
 		if nearest_interactable != null:
