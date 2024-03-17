@@ -1,6 +1,6 @@
 {
   "0":{
-	"spell_name":"Signpost Damage",
+	"name":"Signpost Damage",
 	"targetgroup":"friendly",
 	"resource_cost":0,
 	"max_range":40,
@@ -16,7 +16,7 @@
 	"crit_magnitude_modifier":1,
   },
   "1":{
-	"spell_name":"Signpost Heal",
+	"name":"Signpost Heal",
 	"targetgroup":"friendly",
 	"resource_cost":0,
 	"max_range":40,
