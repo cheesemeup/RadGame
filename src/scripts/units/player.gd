@@ -136,22 +136,21 @@ func get_nearest_interactable():
 	# trigger removal and reapplication of interact prompt if nearest interactable changes
 	if nearest_interactable != current_interactable:
 		if current_interactable != null:
+			print("rpc hide interact prompt")
 			rpc_id(name.to_int(),"hide_interact_prompt",current_interactable.name)
 		if nearest_interactable != null:
+			print("rpc show interact prompt")
 			rpc_id(name.to_int(),"show_interact_prompt",nearest_interactable.name)
 	return nearest_interactable
 
 @rpc("authority")
 func show_interact_prompt(interactable_name: String):
 	# rpc that makes interact prompt visible locally
-	#$"/root/main/interactables".get_node(interactable_name).\
-	#get_node("interact_prompt").text = "Interact [%s]"%\
-		#InputMap.action_get_events("interact")[0].as_text()
 	$"/root/main/interactables".get_node(interactable_name).\
 	get_node("interact_prompt").visible = true
 @rpc("authority")
 func hide_interact_prompt(interactable_name: String):
-	# rpc that makes interact prmpt invisible locally
+	# rpc that makes interact prompt invisible locally
 	$"/root/main/interactables".get_node(interactable_name).\
 	get_node("interact_prompt").visible = false
 
