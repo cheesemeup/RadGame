@@ -135,7 +135,6 @@ func get_nearest_interactable():
 				distance = new_distance
 	# trigger removal and reapplication of interact prompt if nearest interactable changes
 	if nearest_interactable != current_interactable:
-		#print("interact prompt change for %s"%name.to_int())
 		if current_interactable != null:
 			rpc_id(name.to_int(),"hide_interact_prompt",current_interactable.name)
 		if nearest_interactable != null:
@@ -145,13 +144,11 @@ func get_nearest_interactable():
 @rpc("authority")
 func show_interact_prompt(interactable_name: String):
 	# rpc that makes interact prompt visible locally
-	print("show prompt")
 	$"/root/main/interactables".get_node(interactable_name).\
 	get_node("interact_prompt").visible = true
 @rpc("authority")
 func hide_interact_prompt(interactable_name: String):
 	# rpc that makes interact prmpt invisible locally
-	print("hide prompt")
 	$"/root/main/interactables".get_node(interactable_name).\
 	get_node("interact_prompt").visible = false
 

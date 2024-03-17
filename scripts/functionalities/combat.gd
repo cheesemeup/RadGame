@@ -83,7 +83,6 @@ func combat_event_damage(
 		#rpc call to player scene, which call ui function
 		pass
 	# write to log
-	print("gonnae print log")
 	log_damage(
 		spell["name"],
 		source.stats_current["unit_name"],
@@ -316,7 +315,6 @@ func log_damage(
 	crit: int,
 	overkill: int
 ):
-	print("log damage")
 	var crit_suffix = ""
 	if crit == 1:
 		crit_suffix = " (critical)"
