@@ -1,7 +1,5 @@
 extends BaseInteractable
 
-var spell
-
 func _enter_tree():
 	# set authority
 	$mpsynchronizer.set_multiplayer_authority(1)
@@ -11,16 +9,13 @@ func _ready():
 	if not $mpsynchronizer.is_multiplayer_authority():
 		return
 	initialize_base_interactable("0")
-	$"range/range_shape".shape.radius = 3
-	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
-	spell = json_dict[stats_current["spell_list"][0]]
 
 func trigger(interactor):
 	# write interaction to log
 	Combat.log_interact(interactor.stats_current["unit_name"],self.stats_current["unit_name"])
-	# send spell to combat script
-	print("sending combat event")
-	Combat.combat_event_entrypoint(spell, interactor, interactor)
+	# trigger spell
+	print("triggering spell")
+	$"spell_interactable/spell_0".trigger(interactor)
 
 #func ready_server():
 	#initialize_base_interactable("0")
