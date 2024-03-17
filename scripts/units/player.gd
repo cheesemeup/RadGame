@@ -141,7 +141,7 @@ func get_nearest_interactable():
 		if nearest_interactable != null:
 			rpc_id(name.to_int(),"show_interact_prompt",nearest_interactable.name)
 	return nearest_interactable
-		
+
 @rpc("authority")
 func show_interact_prompt(interactable_name: String):
 	# rpc that makes interact prompt visible locally

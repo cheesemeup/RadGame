@@ -5,10 +5,17 @@ func _enter_tree():
 	$mpsynchronizer.set_multiplayer_authority(1)
 
 func _ready():
-	# initialize BaseInteractable on server
 	if not $mpsynchronizer.is_multiplayer_authority():
+		# create interact prompt text locally for all peers
+		$interact_prompt.text = create_prompt_text()
 		return
+	# initialize BaseInteractable on server
 	initialize_base_interactable("0")
+
+func create_prompt_text():
+	# Create the text for the interaction prompt, trimming (Physical)
+	var hotkey = InputMap.action_get_events("interact")[0].as_text()
+	return "Interact [%s]"%hotkey.trim_suffix(" (Physical)")
 
 func trigger(interactor):
 	# write interaction to log
