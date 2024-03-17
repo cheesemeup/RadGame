@@ -1,20 +1,19 @@
-extends BaseUnit
+extends BaseInteractable
 
-#var stats_base: Dictionary
-#@export var stats_curr: Dictionary
-#var spells_base: Dictionary
-#@export var spells_curr: Dictionary
-#
-#func _ready():
-	## load stats and spells
-	#var file = "res://data/db_stats_npc.json"
-	#var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
-	#stats_base = json_dict["1"]
-	#stats_curr = stats_base
-	#file = "res://data/db_spells.json"
-	#json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
-	#spells_base["0"] = json_dict["1"]
-	#spells_curr = spells_base
-#
-#func interaction(body):
-	#Combat.event_heal(spells_curr["0"],self,body)
+func _enter_tree():
+	# set authority
+	$mpsynchronizer.set_multiplayer_authority(1)
+
+func _ready():
+	if not $mpsynchronizer.is_multiplayer_authority():
+		# create interact prompt text locally for all peers
+		$interact_prompt.text = create_prompt_text()
+		return
+	# initialize BaseInteractable on server
+	initialize_base_interactable("1")
+
+func trigger(interactor):
+	# write interaction to log
+	Combat.log_interact(interactor.stats_current["unit_name"],self.stats_current["unit_name"])
+	# trigger spell ID 1
+	$"spell_container/spell_1".trigger(interactor)
