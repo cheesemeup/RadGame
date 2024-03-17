@@ -17,7 +17,7 @@
   "1":{
 	"unit_name":"Signpost Heal",
 	"unit_class":"Test Interactable",
-	"spell_list":[1],
+	"spell_list":[],
 	"primary":100,
 	"damage_modifier":{
 		"physical":1,

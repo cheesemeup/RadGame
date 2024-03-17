@@ -10,9 +10,7 @@ func initialize_base_interactable(unit_id: String):
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	stats_current = json_dict[unit_id]
 	# spell container for interactables
-	var spell_container = preload(
-		"res://scenes/functionalities/spells_interactable.tscn"
-		).instantiate()
+	var spell_container = preload("res://scenes/functionalities/spell_container.tscn").instantiate()
 	add_child(spell_container)
 	print("child nodes of interact_damage:")
 	for child in get_children():
@@ -20,7 +18,7 @@ func initialize_base_interactable(unit_id: String):
 	for spell in stats_current["spell_list"]:
 		var spell_scene = load("res://scenes/spells/spell_%s.tscn" % spell)
 		spell_scene = spell_scene.instantiate()
-		$spells_interactable.add_child(spell_scene)
+		$spell_container.add_child(spell_scene)
 	# connect enter and exit signals
 	connect_signals()
 	# set interact radius
