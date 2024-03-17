@@ -13,7 +13,6 @@ func combat_event_entrypoint(
 	target: CharacterBody3D,
 	value: int = -1
 ):
-	print("entrypoint")
 	# determine type of event and call appropriate function
 	if spell["spelltype"] == "damage":
 		combat_event_damage(spell,source,target,value)
@@ -56,7 +55,6 @@ func combat_event_damage(
 	target: CharacterBody3D,
 	value: int
 ):
-	print("damage")
 	# query base value of event if not prescribed
 	if value == -1:
 		value = value_query(
@@ -85,6 +83,7 @@ func combat_event_damage(
 		#rpc call to player scene, which call ui function
 		pass
 	# write to log
+	print("gonnae print log")
 	log_damage(
 		spell["name"],
 		source.stats_current["unit_name"],
@@ -317,6 +316,7 @@ func log_damage(
 	crit: int,
 	overkill: int
 ):
+	print("log damage")
 	var crit_suffix = ""
 	if crit == 1:
 		crit_suffix = " (critical)"
