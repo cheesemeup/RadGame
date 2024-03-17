@@ -136,7 +136,7 @@ func get_nearest_interactable():
 	# trigger removal and reapplication of interact prompt if nearest interactable changes
 	if nearest_interactable != current_interactable:
 		if current_interactable != null:
-			print("%s"%InputMap.action_get_events("Interact"))
+			print(InputMap.action_get_events("Interact"))
 			rpc_id(name.to_int(),"hide_interact_prompt",current_interactable.name)
 		if nearest_interactable != null:
 			rpc_id(name.to_int(),"show_interact_prompt",nearest_interactable.name)
