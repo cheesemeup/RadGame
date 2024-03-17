@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dohktoymlhhka"]
+[gd_scene load_steps=7 format=3 uid="uid://dohktoymlhhka"]
 
 [ext_resource type="Script" path="res://scripts/testing/interact_heal.gd" id="1_byb1g"]
-[ext_resource type="PackedScene" uid="uid://c6gu4pl7to5fs" path="res://scenes/functionalities/interactable.tscn" id="2_gcbjf"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_goaoj"]
 top_radius = 0.15
@@ -12,6 +11,17 @@ size = Vector3(1.4, 0.7, 0.3)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0lwsj"]
 radius = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0tpjt"]
+radius = 3.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jyoa8"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="interact_heal" type="CharacterBody3D"]
 script = ExtResource("1_byb1g")
@@ -37,13 +47,16 @@ visible = false
 pixel_size = 0.01
 text = "Interact [E]"
 
-[node name="interactable" parent="." instance=ExtResource("2_gcbjf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-collision_layer = 0
-collision_mask = 2
-
-[node name="auras" type="Node" parent="."]
-
 [node name="collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_0lwsj")
+
+[node name="range" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="range_shape" type="CollisionShape3D" parent="range"]
+shape = SubResource("SphereShape3D_0tpjt")
+
+[node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_jyoa8")

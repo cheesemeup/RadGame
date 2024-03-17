@@ -10,12 +10,14 @@ var playermodel_reference = null
 var speed = 10.0
 const jump_velocity = 4.5
 
-# targeting vars - NEEDS REWORK FOR MULTIPLAYER
+# targeting vars
 var space_state
 #var unit_selectedtarget = null
 #var unit_mouseover_target = null
 #var interactables_in_range = []
 #var current_interact_target = null
+var interactables: Array = []
+var current_interactable = null  # the currently active interactable
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -23,11 +25,17 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 ####################################################################################################
 # FRAME
 func _physics_process(delta):
+	# movement
 	handle_movement(delta)
-	# section that is only relevant for specific player
-	if not input.is_multiplayer_authority():
+	# player only section
+	if input.is_multiplayer_authority():
+		# space state for targeting
+		space_state = get_world_3d().direct_space_state
 		return
-	space_state = get_world_3d().direct_space_state
+	# server only section
+	if $mpsynchronizer.is_multiplayer_authority():
+		# get nearest interactable
+		current_interactable = get_nearest_interactable()
 
 ####################################################################################################
 # SPAWNING
@@ -67,7 +75,6 @@ func post_ready(peer_id):
 
 ####################################################################################################
 # TARGETING
-	# sync target to all peers
 func targeting(event_position):
 	# send a target ray, and check for collision with any object
 	var target_dict = targetray(event_position)
@@ -106,6 +113,47 @@ func set_target(requested_target,parent):
 		selected_target = null
 	else:
 		selected_target = get_node("/root/main/%s/%s"%[parent,requested_target])
+
+####################################################################################################
+# INTERACTABLES
+func get_nearest_interactable():
+	# get the interactable that is nearest to the player unit
+	var nearest_interactable = null
+	# if only one interactable in range, set to that
+	if interactables.size() == 1:
+		nearest_interactable = interactables[0]
+	# get closest if more than one interactable exists
+	elif interactables.size() > 1:
+		var distance = self.global_position.distance_to(nearest_interactable.position)
+		var new_distance = distance
+		for interactable in interactables:
+			# get range to current interactable in loop
+			new_distance = self.global_position.distance_to(interactable.position)
+			# set nearest interactable if closer than previous closest
+			if new_distance < distance:
+				nearest_interactable = interactable
+				distance = new_distance
+	# trigger removal and reapplication of interact prompt if nearest interactable changes
+	if nearest_interactable != current_interactable:
+		if current_interactable != null:
+			rpc_id(name.to_int(),"hide_interact_prompt",current_interactable.name)
+		if nearest_interactable != null:
+			rpc_id(name.to_int(),"show_interact_prompt",nearest_interactable.name)
+	return nearest_interactable
+
+@rpc("authority")
+func show_interact_prompt(interactable_name: String):
+	# rpc that makes interact prompt visible locally
+	#$"/root/main/interactables".get_node(interactable_name).\
+	#get_node("interact_prompt").text = "Interact [%s]"%\
+		#InputMap.action_get_events("interact")[0].as_text()
+	$"/root/main/interactables".get_node(interactable_name).\
+	get_node("interact_prompt").visible = true
+@rpc("authority")
+func hide_interact_prompt(interactable_name: String):
+	# rpc that makes interact prmpt invisible locally
+	$"/root/main/interactables".get_node(interactable_name).\
+	get_node("interact_prompt").visible = false
 
 #func _ready():
 #	# TODO: read save file

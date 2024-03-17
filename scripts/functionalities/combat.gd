@@ -9,7 +9,7 @@ var buff_preload = preload("res://scenes/functionalities/aura_buff.tscn")
 # ENTRYPOINTS
 func combat_event_entrypoint(
 	spell: Dictionary,
-	source: CharacterBody3D,
+	source,
 	target: CharacterBody3D,
 	value: int = -1
 ):
@@ -51,7 +51,7 @@ func value_query(coeff: float, base: int, mod_inc: float, mod_dec: float):
 # COMBAT EVENTS
 func combat_event_damage(
 	spell: Dictionary,
-	source: CharacterBody3D,
+	source,
 	target: CharacterBody3D,
 	value: int
 ):
@@ -225,9 +225,9 @@ func remove_buff(spell: Dictionary, source_name: String, target: CharacterBody3D
 		buffname = "%s %s"%[buffname,source_name]
 	for i in range(spell["modifies"].size()):
 		if spell["modify_type"][i] == "add":
-			var result = target.stats_add[spell["modifies"][i]].erase(buffname)
+			target.stats_add[spell["modifies"][i]].erase(buffname)
 		elif spell["modify_type"][i] == "mult":
-			var result = target.stats_mult[spell["modifies"][i]].erase(buffname)
+			target.stats_mult[spell["modifies"][i]].erase(buffname)
 	# calculate new current stats from base stats
 	calc_current_from_base_partial(target,spell["modifies"])
 
@@ -358,6 +358,9 @@ func log_aura_remove(spell_name: String, source_name: String, target_name: Strin
 
 func log_avoid(spell_name: String, source_name: String , target_name: String):
 	print("%s avoided %s of %s."%[source_name, spell_name, target_name])
+
+func log_interact(source_name: String, target_name: String):
+	print("%s interacts with %s"%[source_name, target_name])
 
 #### stat calculations
 ####################################################################################################

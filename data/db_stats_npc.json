@@ -1,6 +1,6 @@
 {
   "0":{
-	"unit_name":"Signpost Damage",
+	"unit_name":"Signpost Damage Defunct",
 	"unit_class":"Test Interactable",
 	"size":0.6,
 	"spell_list":[],
@@ -32,7 +32,7 @@
 	}
 },
   "1":{
-	"unit_name":"Signpost Heal",
+	"unit_name":"Signpost Heal Defunct",
 	"unit_class":"Test Interactable",
 	"size":0.6,
 	"spell_list":[],
