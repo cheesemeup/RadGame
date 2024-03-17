@@ -10,7 +10,6 @@ func initialize_base_interactable(unit_id: String):
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	stats_current = json_dict[unit_id]
 	# spell container for interactables
-	print("add interactable spell container")
 	var spell_container = preload(
 		"res://scenes/functionalities/spells_interactable.tscn"
 		).instantiate()
