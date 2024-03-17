@@ -15,6 +15,9 @@ func initialize_base_interactable(unit_id: String):
 		"res://scenes/functionalities/spells_interactable.tscn"
 		).instantiate()
 	add_child(spell_container)
+	print("child nodes of interact_damage:")
+	for child in get_children():
+		print(child)
 	for spell in stats_current["spell_list"]:
 		var spell_scene = load("res://scenes/spells/spell_%s.tscn" % spell)
 		spell_scene = spell_scene.instantiate()
