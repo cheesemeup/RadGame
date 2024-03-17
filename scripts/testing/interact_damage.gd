@@ -12,11 +12,6 @@ func _ready():
 	# initialize BaseInteractable on server
 	initialize_base_interactable("0")
 
-func create_prompt_text():
-	# Create the text for the interaction prompt, trimming (Physical)
-	var hotkey = InputMap.action_get_events("interact")[0].as_text()
-	return "Interact [%s]"%hotkey.trim_suffix(" (Physical)")
-
 func trigger(interactor):
 	# write interaction to log
 	Combat.log_interact(interactor.stats_current["unit_name"],self.stats_current["unit_name"])
