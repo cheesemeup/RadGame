@@ -28,27 +28,27 @@ func get_spell_target(source: CharacterBody3D):
 
 ####################################################################################################
 # CHECKS
-func is_illegal_target(valid_group: String, target: CharacterBody3D):
+func is_illegal_target(valid_group: String, target: CharacterBody3D) -> bool:
 	# check if the target is in a valid target group for the spell
 	if target.is_in_group(valid_group):
 		return false
 	return true
-func is_on_cd():
+func is_on_cd() -> bool:
 	# check if the spell is on cooldown
 	if cd_timer.time_left > 0:
 		return true
 	return false
-func insufficient_resource(cost: int, resource: int):
+func insufficient_resource(cost: int, resource: int) -> bool:
 	# check if there are sufficient resources to cast the spell
 	if cost < resource:
 		return false
 	return true
-func is_not_in_range(source_position: Vector3, target_position: Vector3, max_range: float):
+func is_not_in_range(source_position: Vector3, target_position: Vector3, max_range: float) -> bool:
 	# check if the spell is in range
 	if source_position.distance_to(target_position) > max_range:
 		return true
 	return false
-func is_not_in_line_of_sight(source: CharacterBody3D, target_position: Vector3):
+func is_not_in_line_of_sight(source: CharacterBody3D, target_position: Vector3) -> bool:
 	# check if the target is in line of sight of the source
 	# cast a ray that uses the collision layer for terrain (layer 1)
 	var query = PhysicsRayQueryParameters3D.create(source.position,target_position)
@@ -68,9 +68,6 @@ func trigger_cd(duration: float):
 
 ####################################################################################################
 # FUNCTIONALITIES
-#func update_resource():
-	#print("updating resource")
-	#print("updating resource finished")
-func update_resource(cost: int, current_resource: int, current_resource_max: int):
+func update_resource(cost: int, current_resource: int, current_resource_max: int) -> int:
 	# update the new current resource value of the source after the spell cost is applied
 	return clamp(current_resource-cost, 0, current_resource_max)

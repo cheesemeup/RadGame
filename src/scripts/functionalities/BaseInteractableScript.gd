@@ -38,7 +38,7 @@ func remove_interactable(target: CharacterBody3D):
 		return
 	target.interactables.erase(self)
 
-func create_prompt_text():
+func create_prompt_text() -> String:
 	# Create the text for the interaction prompt, trimming (Physical)
 	var hotkey = InputMap.action_get_events("interact")[0].as_text()
 	return "Interact [%s]"%hotkey.trim_suffix(" (Physical)")
