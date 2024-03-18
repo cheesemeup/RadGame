@@ -6,7 +6,6 @@ var aura_source: CharacterBody3D
 var aura_target: CharacterBody3D
 var expiration_timer = Timer.new()
 
-# initialize relevant spell data
 func initialize(spell,source,target):
 	aura_source = source
 	aura_target = target
@@ -23,7 +22,6 @@ func initialize(spell,source,target):
 	expiration_timer.connect("timeout",remove_absorb)
 	add_child(expiration_timer)
 
-# start timer when ready
 func _ready():
 	# start timer
 	expiration_timer.start()
@@ -60,7 +58,6 @@ func sort_absorbs():
 	# update absorb array
 	$"../../..".absorb_array = updated_absorbs
 
-# removal
 func remove_absorb():
 	# set remaining absorb value to zero to prevent unintended absorb while removing
 	remaining_value = 0
