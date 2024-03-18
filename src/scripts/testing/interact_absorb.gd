@@ -16,5 +16,5 @@ func trigger(interactor):
 	# write interaction to log
 	Combat.log_interact(interactor.stats_current["unit_name"],self.stats_current["unit_name"])
 	# trigger spell ID 15
+	print($spell_container.get_children())
 	$"spell_container/spell_15".trigger(interactor)
-		
