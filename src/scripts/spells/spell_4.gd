@@ -1,15 +1,10 @@
-extends Node
-
-# NOT FUNCTIONAL
-
 # Test NPC Damage Self
-var spell_base : Dictionary
-var spell_curr : Dictionary
+extends BaseSpell
 
 func _ready():
-	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
-	spell_base = json_dict["4"]
-	spell_curr = spell_base.duplicate(true)
+	initialize_base_spell("4")
 
 func trigger():
-	get_parent().get_parent().send_combat_event(spell_curr)
+	# checks not necessary for this spell, as it is free, off gcd, and cast on self
+	var source = get_parent().get_parent()
+	Combat.combat_event_entrypoint(spell_current,source,source)

@@ -1,17 +1,19 @@
-extends BaseUnit
+extends BaseInteractable
+
+func _enter_tree():
+	# set authority
+	$mpsynchronizer.set_multiplayer_authority(1)
 
 func _ready():
-	if multiplayer.is_server():
-		ready_server()
-
-func ready_server():
-	initialize_base_unit("npc","0")
-	# set range of spell triggered by interaction to interact radius
-	$spell_container/spell_0.spell_current.range = $interactable/collision_shape.shape.radius
-
-func interaction(body):
-	if not multiplayer.is_server():
+	if not $mpsynchronizer.is_multiplayer_authority():
+		# create interact prompt text locally for all peers
+		$interact_prompt.text = create_prompt_text()
 		return
-	# source and target are flipped here, because the source of the interaction
-	# (the player) turns into the target of the spell
-	$spell_container/spell_0.trigger(self,body)
+	# initialize BaseInteractable on server
+	initialize_base_interactable("0")
+
+func trigger(interactor):
+	# write interaction to log
+	Combat.log_interact(interactor.stats_current["unit_name"],self.stats_current["unit_name"])
+	# trigger spell ID 0
+	$"spell_container/spell_0".trigger(interactor)

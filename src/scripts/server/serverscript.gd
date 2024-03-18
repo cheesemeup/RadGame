@@ -17,13 +17,11 @@ func _ready():
 	if server_uid != 1:
 		print("ERROR: SERVER_UID NOT 1")
 	print("server started on port %d" % PORT)
-	# MOVE THIS TO MAIN
 	# such that main script handles actual loading of maps
 	# load hub map scene
-	Autoload.current_map_path = "res://scenes/maps/hub.tscn"
-	var new_map_load = load(Autoload.current_map_path)
-	var map_instance = new_map_load.instantiate()
-	add_child(map_instance)
+	#Autoload.current_map_path = "res://scenes/maps/hub.tscn"
+	#var hub_map_instance = preload("res://scenes/maps/hub.tscn").instantiate
+	#$/root/main/maps.add_child(hub_map_instance)
 	print("hub map loaded")
 
 ###############################################################
@@ -52,41 +50,3 @@ func _ready():
 #		return 4
 #	# interact
 #	target.interaction(target)
-###############################################################
-### COMBAT
-###############################################################
-#func request_combat_event_targeted(source,target,spell):
-#	# check resource
-#	if source.stats.stats_current.resource_current < spell.resource_cost:
-#		return 2
-#	# check target legality
-#	if target == null:
-#		return 3
-#	var valid_group = false
-#	for group in spell.targetgroup:
-#		if target.is_in_group(group):
-#			valid_group = true
-#	if not valid_group:
-#		return 3
-#	# check range
-#	if source.global_transform.origin.distance_to(target.global_transform.origin) > \
-#		spell.range:
-#		return 4
-#	# on success, trigger cd on source
-#	var result = Combat.combat_event_unprescribed(source,target,spell)
-#	return result
-
-#func request_combat_event_aoe():
-#	# check resource
-#
-#	# create target area
-#
-#	# check target legality
-#
-#	# on success, trigger cd on source
-#
-#	# fire spell on all targets
-#	pass
-#
-#func request_combat_tick_event():
-#	pass

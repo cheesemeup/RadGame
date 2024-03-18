@@ -5,34 +5,41 @@ class_name BaseUnit
 # combat
 @export var stats_current: Dictionary
 var stats_base: Dictionary
-var stats_mult
-var stats_add
-var aura_dict: Dictionary
-var absorb_dict: Dictionary
+var stats_mult: Dictionary
+var stats_add: Dictionary
+var aura_list: Array = []
+var absorb_array: Array = []
 
 # targeting
-var target = null
+var target = null  # for unitframes, only local
+var selected_target = null  # for targeting with spells
+var mouseover_target = null  # for targeting with spells
 
 # state
 var is_dead: bool = false
 var is_moving: bool = false
 
-func initialize_base_unit(unittype: String,UnitID: String):
+func initialize_base_unit(unittype: String, unit_id: String):
 	# stats
-	stat_init(unittype,UnitID)
+	stat_init(unittype,unit_id)
 	# spells
+	var spell_container = preload("res://scenes/functionalities/spell_container.tscn").instantiate()
+	add_child(spell_container)
 	spell_container_init(self.stats_current.spell_list)
+	# auras
+	var aura_container = preload("res://scenes/functionalities/aura_container.tscn").instantiate()
+	add_child(aura_container)
 
-func stat_init(unit_type: String,unit_id: String) -> void:
+func stat_init(unit_type: String, unit_id: String) -> void:
 	# read stats dict from file
 	var file = "res://data/db_stats_"+unit_type+".json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	stats_base = json_dict[unit_id]
-	stats_current = stats_base.duplicate()
+	stats_current = stats_base.duplicate(true)
 	stats_mult = initialize_statmult()
 	stats_add = initialize_statadd()
 
-func initialize_statmult():
+func initialize_statmult() -> Dictionary:
 	var stat_mult = {}
 	stat_mult["size"] = {}
 	stat_mult["speed"] = {}
@@ -53,7 +60,7 @@ func initialize_statmult():
 	stat_mult["heal_taken_modifier"]["physical"] = {}
 	stat_mult["heal_taken_modifier"]["magic"] = {}
 	return stat_mult
-func initialize_statadd():
+func initialize_statadd() -> Dictionary:
 	var stat_add = {}
 	stat_add["health_max"] = {}
 	stat_add["resource_max"] = {}
@@ -62,7 +69,7 @@ func initialize_statadd():
 	stat_add["crit_chance"] = {}
 	return stat_add
 
-func spell_container_init(spell_list):
+func spell_container_init(spell_list: Array):
 	# remove previous spells
 	for spell in $spell_container.get_children():
 		spell.queue_free()

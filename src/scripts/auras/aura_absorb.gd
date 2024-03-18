@@ -5,7 +5,7 @@ var exp_timer = Timer.new()
 var absorb_source : String
 var spellname : String
 
-# general aura scene for dots, hots, buffs and debuffs
+# general aura scene for absorbs
 func initialize(spell,source,target):
 	# add to absorb dict on target
 	target.absorb_dict["%s %s"%[source.stats_curr["name"],spell["name"]]] = self

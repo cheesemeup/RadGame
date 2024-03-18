@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b8doagbnafuqi"]
+
+[node name="aura_container" type="Node"]
+
+[node name="dot_container" type="Node" parent="."]
+
+[node name="hot_container" type="Node" parent="."]
+
+[node name="buff_container" type="Node" parent="."]
+
+[node name="debuff_container" type="Node" parent="."]
+
+[node name="absorb_container" type="Node" parent="."]

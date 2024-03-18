@@ -10,10 +10,10 @@ func _ready():
 		$interact_prompt.text = create_prompt_text()
 		return
 	# initialize BaseInteractable on server
-	initialize_base_interactable("1")
+	initialize_base_interactable("2")
 
 func trigger(interactor):
 	# write interaction to log
 	Combat.log_interact(interactor.stats_current["unit_name"],self.stats_current["unit_name"])
-	# trigger spell ID 1
-	$"spell_container/spell_1".trigger(interactor)
+	# trigger spell ID 15
+	$"spell_container/spell_15".trigger(interactor)

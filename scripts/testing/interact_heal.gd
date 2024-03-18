@@ -17,3 +17,4 @@ func trigger(interactor):
 	Combat.log_interact(interactor.stats_current["unit_name"],self.stats_current["unit_name"])
 	# trigger spell ID 1
 	$"spell_container/spell_1".trigger(interactor)
+

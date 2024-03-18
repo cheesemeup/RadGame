@@ -1,28 +1,30 @@
-extends Node
-
 # Player Test Heal
-var spell_base : Dictionary
-var spell_curr : Dictionary
+extends BaseSpell
 
 func _ready():
-	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
-	spell_base = json_dict["5"]
-	spell_curr = spell_base.duplicate(true)
+	initialize_base_spell("5")
 
 func trigger():
-	# check resource cost
-	if get_parent().get_parent().stats_curr["resource_current"] < spell_curr["resource_cost"]:
-		print("insufficient resources")
-		return
-	# check target
-	var spell_target = get_parent().get_parent().get_spell_target(spell_curr)
-	if typeof(spell_target) == TYPE_STRING and spell_target == "no_legal_target":
-		print("no legal target")
-		return
+	# get source and target nodes
+	var source = get_parent().get_parent()
+	var target = get_spell_target(source)
+	# set target to self if there is no target
+	if target == null:
+		target = source
+	# check target legality
+	if is_illegal_target(spell_current["targetgroup"], target):
+		return 1
+	# check for cooldown
+	if is_on_cd():
+		return 2
 	# check range
-	# apply resource cost
-	get_parent().get_parent().stats_curr["resource_current"] -= spell_curr["resource_cost"]
+	if is_not_in_range(source.position,target.position,spell_current["max_range"]):
+		return 4
+	# check line of sight, NOT FUNCTIONAL
+	if is_not_in_line_of_sight(source,target.position):
+		return 5
 	# send gcd
-	get_parent().send_gcd()
-	# fire spell
-	Combat.event_heal(spell_curr,get_parent().get_parent(),spell_target)
+	if spell_current["on_gcd"] == 1:
+		get_parent().send_gcd()
+	# send event to combat script
+	Combat.combat_event_entrypoint(spell_current,source,target)

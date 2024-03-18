@@ -1,6 +1,6 @@
 {
   "0":{
-	"unit_name":"Signpost Damage",
+	"unit_name":"Signpost Damage Defunct",
 	"unit_class":"Test Interactable",
 	"size":0.6,
 	"spell_list":[],
@@ -32,7 +32,7 @@
 	}
 },
   "1":{
-	"unit_name":"Signpost Heal",
+	"unit_name":"Signpost Heal Defunct",
 	"unit_class":"Test Interactable",
 	"size":0.6,
 	"spell_list":[],
@@ -67,10 +67,10 @@
 	"unit_name":"Test NPC Hostile",
 	"unit_class":"Test NPC",
 	"size":0.6,
-	"spell_list":[],
+	"spell_list":[2],
 	"speed":10,
 	"health_max":1000,
-	"health_current":1000,
+	"health_current":400,
 	"resource_type":"none",
 	"resource_max":100,
 	"resource_current":50,
@@ -99,7 +99,7 @@
 	"unit_name":"Test NPC Friendly",
 	"unit_class":"Test NPC",
 	"size":0.6,
-	"spell_list":[],
+	"spell_list":[4],
 	"speed":10,
 	"health_max":1000,
 	"health_current":1000,

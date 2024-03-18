@@ -1,4 +1,5 @@
 # RadGame
+Documentation of RadGame can be found on https://wiki.shiny.space/shelves/radgame
 
 ## Development
 
