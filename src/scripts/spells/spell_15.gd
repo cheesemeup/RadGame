@@ -1,4 +1,4 @@
-# Signpost Heal
+# Signpost Absorb
 extends BaseSpell
 
 func _ready():
