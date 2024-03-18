@@ -219,9 +219,8 @@ func apply_absorb(
 ):
 	# loop through absorbs
 	var absorb: Node
-	var remove: bool = false
+	var remove: Array = []
 	for absorb_entry in target.absorb_array:
-		print(absorb_entry)
 		absorb = target.get_node("aura_container").get_node("absorb_container").\
 			get_node(absorb_entry[1])
 		# compare absorb value to remaining damage value
@@ -229,7 +228,7 @@ func apply_absorb(
 		if value >= absorb.remaining_value:
 			absorbed_value = absorb.remaining_value
 			absorb.remaining_value = 0
-			remove = true
+			remove.append(absorb)
 		else:
 			absorbed_value = value
 			absorb.remaining_value -= value
@@ -242,14 +241,13 @@ func apply_absorb(
 			absorb.aura_spell["name"],
 			absorb.aura_source.stats_current["unit_name"]
 		)
-		# remove absorb if depleted
-		if remove:
-			#absorb.remove_absorb()
-			remove = false
 		# adjust remaining damage value
 		value -= absorbed_value
 		if value == 0:
 			break
+	# remove depleted absorbs outside of the iteration
+	for scene in remove:
+		scene.remove_absorb()
 	return value
 
 func apply_heal(value: int, target: CharacterBody3D):
