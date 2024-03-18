@@ -153,6 +153,7 @@ func combat_event_aura(
 		# reset aura
 		target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
 			get_node(aura_list_name).reinitialize(spell)
+		log_aura(spell["name"],source.stats_current["unit_name"],target.stats_current["unit_name"])
 		return
 	# initialize aura scene
 	var aura_scene
