@@ -8,6 +8,7 @@ var expiration_timer = Timer.new()
 
 # initialize relevant spell data
 func initialization(spell,source,target):
+	print("initializing absorb %s"%spell["name"])
 	aura_source = source
 	aura_target = target
 	aura_spell = spell
@@ -25,6 +26,7 @@ func initialization(spell,source,target):
 
 # start timer when ready
 func _ready():
+	print("ready %s"%aura_spell["name"])
 	# start timer
 	expiration_timer.start()
 	# sort absorbs by increasing time remaining
@@ -47,6 +49,7 @@ func reinitialization(spell):
 	sort_absorbs()
 
 func sort_absorbs():
+	print("sort absorbs")
 	# sort absorbs by increasing time remaining, also adds new absrbs to the array
 	var updated_absorbs = []
 	# get absorbs and remaining times
