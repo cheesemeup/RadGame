@@ -56,7 +56,7 @@ func sort_absorbs():
 	for child in $"..".get_children():
 		updated_absorbs.append([
 			child.expiration_timer.get_time_left(),
-			child.name
+			str(child.name)
 		])
 	# sort
 	updated_absorbs.sort_custom(func(a,b): return a[0] < b[0])
