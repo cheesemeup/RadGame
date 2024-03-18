@@ -219,16 +219,15 @@ func apply_absorb(
 ):
 	# loop through absorbs
 	var absorb: Node
-	print(target.absorb_array)
+	var remove: bool = false
 	for absorb_entry in target.absorb_array:
-		print(absorb_entry)
 		absorb = target.get_node("aura_container").get_node("absorb_container").\
 			get_node(absorb_entry[1])
-		# compare absorb value to damage value
+		# compare absorb value to remaining damage value
 		var absorbed_value: int
 		if value >= absorb.remaining_value:
 			absorbed_value = absorb.remaining_value
-			absorb.remove_absorb()
+			remove = true
 		else:
 			absorbed_value = value
 			absorb.remaining_value -= value
@@ -241,7 +240,11 @@ func apply_absorb(
 			absorb.aura_spell["name"],
 			absorb.aura_source.stats_current["unit_name"]
 		)
-		# adjust value
+		# remove absorb if depleted
+		if remove:
+			absorb.remove_absorb()
+			remove = false
+		# adjust remaining damage value
 		value -= absorbed_value
 		if value == 0:
 			break
