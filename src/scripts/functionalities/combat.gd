@@ -221,6 +221,7 @@ func apply_absorb(
 	var absorb: Node
 	print(target.absorb_array)
 	for absorb_entry in target.absorb_array:
+		print(absorb_entry)
 		absorb = target.get_node("aura_container").get_node("absorb_container").\
 			get_node(absorb_entry[1])
 		# compare absorb value to damage value
