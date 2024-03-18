@@ -194,6 +194,7 @@
 	"can_crit":0,
 	"crit_chance_modifier":0,
 	"crit_magnitude_modifier":1,
+	"duration":10,
 	"unique":1,
 	},
 "12":{
