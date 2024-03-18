@@ -7,15 +7,13 @@ var playermodel_reference = null
 
 # speed cannot be read from stats directly, so the speed var needs to be updated
 # when speed changes
-var speed = 10.0
-const jump_velocity = 4.5
+var speed: float = 10.0
+const jump_velocity: float = 4.5
 
 # targeting vars
 var space_state
 #var unit_selectedtarget = null
 #var unit_mouseover_target = null
-#var interactables_in_range = []
-#var current_interact_target = null
 var interactables: Array = []
 var current_interactable = null  # the currently active interactable
 
@@ -24,7 +22,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 ####################################################################################################
 # FRAME
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	# movement
 	handle_movement(delta)
 	# player only section
@@ -42,7 +40,7 @@ func _physics_process(delta):
 func _enter_tree():
 	$player_input.set_multiplayer_authority(str(name).to_int())
 
-func pre_ready(peer_id):
+func pre_ready(peer_id: int):
 	name = str(peer_id)
 	# initialize stats for all peers
 	initialize_base_unit("player","0")
@@ -61,7 +59,7 @@ func call_set_input_process():
 	input.set_process(true)
 	input.set_process_unhandled_input(true)
 
-func post_ready(peer_id):
+func post_ready(peer_id: int):
 	# some things should be done after _ready is finished
 	# add player camera node for authority only
 	rpc_id(peer_id,"add_player_camera")
@@ -75,7 +73,7 @@ func post_ready(peer_id):
 
 ####################################################################################################
 # TARGETING
-func targeting(event_position):
+func targeting(event_position: Vector3) -> void:
 	# send a target ray, and check for collision with any object
 	var target_dict = targetray(event_position)
 	# check if collision is with a legal target, else set target to null
@@ -90,7 +88,7 @@ func targeting(event_position):
 	$"/root/main/ui/unitframe_target".target_reference = target
 	UIHandler.show_targetframe()
 
-func targetray(event_position):
+func targetray(event_position: Vector3) -> Dictionary:
 	# only the controlling player can do this, as the camera is required
 	var origin = $"camera_rotation/camera_arm/player_camera"
 	var from = origin.project_ray_origin(event_position)
@@ -98,7 +96,7 @@ func targetray(event_position):
 	var query = PhysicsRayQueryParameters3D.create(from,to)
 	var target_dict = space_state.intersect_ray(query)
 	return target_dict
-func is_legal_target(target_dict):
+func is_legal_target(target_dict: Dictionary) -> bool:
 	# check if there is an object
 	if target_dict == {}:
 		return false
