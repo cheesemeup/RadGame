@@ -4,6 +4,7 @@ extends Node
 # PRELOAD
 var dot_preload = preload("res://scenes/functionalities/aura_dot.tscn")
 var buff_preload = preload("res://scenes/functionalities/aura_buff.tscn")
+var absorb_preload = preload("res://scenes/functionalities/aura_absorb.tscn")
 
 ####################################################################################################
 # ENTRYPOINTS
@@ -25,6 +26,7 @@ func combat_event_aura_entrypoint(
 	target: CharacterBody3D,
 	remove: bool = false
 ):
+	print("enter combat event")
 	# apply and remove aura scenes
 	if remove:
 		combat_event_aura_remove(spell,source,target)
@@ -141,26 +143,34 @@ func combat_event_aura(
 	source: CharacterBody3D,
 	target: CharacterBody3D
 ):
+	print("comabt_event_aura")
 	# reset aura if already present on target from same source
 	var aura_list_name = "%s"%spell["name"]
 	if spell["unique"] == 0:
 		aura_list_name = "%s %s"%[aura_list_name,source.stats_current["unit_name"]]
+	print("aura list name generated")
 	if target.aura_list.has(aura_list_name):
 		# reset aura
 		target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
 			get_node(aura_list_name).reinitialize(spell)
 		return
+	print("aura not present")
 	# initialize aura scene
 	var aura_scene
 	if spell["auratype"] == "dot" or spell["auratype"] == "hot":
 		aura_scene = dot_preload.instantiate()
 	elif spell["auratype"] == "buff" or spell["auratype"] == "debuff":
 		aura_scene = buff_preload.instantiate()
+	elif spell["auratype"] == "absorb":
+		aura_scene = absorb_preload.instantiate()
+	print("scene isntantiated")
 	aura_scene.name = aura_list_name
 	aura_scene.initialize(spell,source,target)
+	print("aura scene initialized")
 	# add aura scene to target
 	target.get_node("aura_container").get_node("%s_container"%spell["auratype"]).\
 		add_child(aura_scene)
+	print("aura added")
 	# add aura to aura_list of target
 	target.aura_list.append(aura_list_name)
 	log_aura(spell["name"],source.stats_current["unit_name"],target.stats_current["unit_name"])
