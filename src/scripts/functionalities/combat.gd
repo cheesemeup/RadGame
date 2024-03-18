@@ -381,21 +381,19 @@ func log_absorb(
 	absorb_name: String,
 	absorb_source: String
 ):
-	print("absorb log")
 	var source_name_poss: String
 	if source_name[-1] == "s":
 		source_name_poss = "%s'"%source_name
 	else:
 		source_name_poss = "%s's"%source_name
-	print("%s absorbs %s %s for %s with %s of %s"%[
+	print("%s absorbs %s damage of %s %s with %s of %s"%[
 		target_name,
+		absorb_value,
 		source_name_poss,
 		spell_name,
-		absorb_value,
 		absorb_name,
 		absorb_source
 	])
-	pass
 
 func log_heal(
 	spell_name: String,
