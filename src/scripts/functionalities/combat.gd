@@ -242,13 +242,13 @@ func apply_absorb(
 			absorb.aura_source.stats_current["unit_name"]
 		)
 		# remove absorb if depleted
-		if remove:
-			absorb.remove_absorb()
-			remove = false
+		#if remove:
+			#absorb.remove_absorb()
+			#remove = false
 		# adjust remaining damage value
 		value -= absorbed_value
-		#if value == 0:
-			#break
+		if value == 0:
+			break
 	return value
 
 func apply_heal(value: int, target: CharacterBody3D):
