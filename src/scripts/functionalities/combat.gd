@@ -218,7 +218,10 @@ func apply_absorb(
 	target_name: String
 ):
 	# loop through absorbs
-	for absorb in target.get_node("aura_container").get_node("absorb_container").get_children():
+	var absorb: Node
+	for absorb_entry in target.absorb_array:
+		absorb = target.get_node("aura_container").get_node("absorb_container").\
+			get_node(absorb_entry[1])
 		# compare absorb value to damage value
 		var absorbed_value: int
 		if value >= absorb.remaining_value:

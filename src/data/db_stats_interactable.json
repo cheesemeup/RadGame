@@ -29,4 +29,19 @@
 	},
 	"interact_range":3,
 },
+  "2":{
+	"unit_name":"Signpost Absorb",
+	"unit_class":"Test Interactable",
+	"spell_list":[15],
+	"primary":100,
+	"damage_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"interact_range":3,
+},
 }

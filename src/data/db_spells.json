@@ -190,7 +190,7 @@
 	"auratype":"absorb",
 	"effecttype":"magic",
 	"value_base":"primary",
-	"value_modifier":6,
+	"value_modifier":1.5,
 	"can_crit":0,
 	"crit_chance_modifier":0,
 	"crit_magnitude_modifier":1,
@@ -243,4 +243,18 @@
 	"duration":4,
 	"casttime":0,
 },
+"15":{
+	"name":"Signpost Absorb",
+	"targetgroup":"friendly",
+	"resource_cost":-5,
+	"cooldown":60,
+	"on_gcd":0,
+	"auratype":"absorb",
+	"effecttype":"magic",
+	"value_base":"primary",
+	"value_modifier":1.5,
+	"can_crit":0,
+	"duration":60,
+	"unique":0
+  },
 }
