@@ -86,6 +86,9 @@ func combat_event_damage(
 			source.stats_current["unit_name"],
 			target.stats_current["unit_name"]
 		)
+	# return if damage is fully absorbed
+	if value == 0:
+		return
 	# apply remaining damage
 	var overkill = apply_damage(value,target)
 	# show floating combat test for source via rpc, if source is player
@@ -231,7 +234,7 @@ func apply_absorb(
 			target_name,
 			absorbed_value,
 			absorb.aura_spell["name"],
-			absorb.aura_source
+			absorb.aura_source.stats_current["unit_name"]
 		)
 		# adjust value
 		value -= absorbed_value
@@ -378,6 +381,7 @@ func log_absorb(
 	absorb_name: String,
 	absorb_source: String
 ):
+	print("absorb log")
 	var source_name_poss: String
 	if source_name[-1] == "s":
 		source_name_poss = "%s'"%source_name
