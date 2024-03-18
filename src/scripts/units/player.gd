@@ -44,6 +44,7 @@ func pre_ready(peer_id: int):
 	name = str(peer_id)
 	# initialize stats for all peers
 	initialize_base_unit("player","0")
+	# load player model
 
 @rpc("authority")
 func add_player_camera():
