@@ -221,6 +221,7 @@ func apply_absorb(
 	var absorb: Node
 	var remove: bool = false
 	for absorb_entry in target.absorb_array:
+		print(absorb_entry)
 		absorb = target.get_node("aura_container").get_node("absorb_container").\
 			get_node(absorb_entry[1])
 		# compare absorb value to remaining damage value
@@ -246,8 +247,8 @@ func apply_absorb(
 			remove = false
 		# adjust remaining damage value
 		value -= absorbed_value
-		if value == 0:
-			break
+		#if value == 0:
+			#break
 	return value
 
 func apply_heal(value: int, target: CharacterBody3D):
