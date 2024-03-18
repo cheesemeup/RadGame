@@ -76,7 +76,16 @@ func combat_event_damage(
 	if spell["can_crit"] == 1:
 		crit = is_critical(spell["crit_chance_modifier"], source.stats_current["crit_chance"])
 		value = value * (1 + crit * spell["crit_magnitude_modifier"])
-	# apply damage
+	# go through absorbs
+	if not target.get_node("aura_container").get_node("absorb_container").get_children() == []:
+		value = apply_absorb(
+			value,
+			target,
+			spell["name"],
+			source.stats_current["unit_name"],
+			target.stats_current["unit_name"]
+		)
+	# apply remaining damage
 	var overkill = apply_damage(value,target)
 	# show floating combat test for source via rpc, if source is player
 	if source.is_in_group("player"):
@@ -194,6 +203,38 @@ func apply_damage(value: int, target: CharacterBody3D):
 	var overkill = value - target.stats_current["health_current"]
 	target.stats_current["health_current"] = max(0,target.stats_current["health_current"]-value)
 	return overkill
+
+func apply_absorb(
+	value: int,
+	target: CharacterBody3D,
+	spell_name: String,
+	source_name: String,
+	target_name: String
+):
+	# loop through absorbs
+	for absorb in target.get_node("aura_container").get_node("absorb_container").get_children():
+		# compare absorb value to damage value
+		var absorbed_value: int
+		if value >= absorb.remaining_value:
+			absorbed_value = absorb.remaining_value
+			absorb.remove_absorb()
+		else:
+			absorbed_value = value
+			absorb.remaining_value -= value
+		# write to log
+		log_absorb(
+			spell_name,
+			source_name,
+			target_name,
+			absorbed_value,
+			absorb.aura_spell["name"],
+			absorb.aura_source
+		)
+		# adjust value
+		value -= absorbed_value
+		if value == 0:
+			break
+	return value
 
 func apply_heal(value: int, target: CharacterBody3D):
 	var overheal = target.stats_current["health_current"]+value - target.stats_current["health_max"]
@@ -325,6 +366,29 @@ func log_damage(
 		"%s hits %s with %s for %s%s%s."%
 		[source_name, target_name, spell_name, value, crit_suffix, overkill_suffix]
 	)
+
+func log_absorb(
+	spell_name: String,
+	source_name: String,
+	target_name: String,
+	absorb_value: int,
+	absorb_name: String,
+	absorb_source: String
+):
+	var source_name_poss: String
+	if source_name[-1] == "s":
+		source_name_poss = "%s'"%source_name
+	else:
+		source_name_poss = "%s's"%source_name
+	print("%s absorbs %s %s for %s with %s of %s"%[
+		target_name,
+		source_name_poss,
+		spell_name,
+		absorb_value,
+		absorb_name,
+		absorb_source
+	])
+	pass
 
 func log_heal(
 	spell_name: String,

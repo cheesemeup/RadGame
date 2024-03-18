@@ -8,7 +8,7 @@ var stats_base: Dictionary
 var stats_mult
 var stats_add
 var aura_list: Array = []
-var absorb_dict: Dictionary
+var absorb_array: Array = []
 
 # targeting
 var target = null  # for unitframes, only local

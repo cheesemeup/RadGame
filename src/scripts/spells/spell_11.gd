@@ -1,59 +1,29 @@
-extends Node
-
 # Abyssal Shell
-var spell_base : Dictionary
-var spell_curr : Dictionary
-var cd_timer = Timer.new()
-var on_cd = false
-var actionbar = []
+extends BaseSpell
 
 func _ready():
-	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
-	spell_base = json_dict["11"]
-	spell_curr = spell_base.duplicate(true)
-	cd_timer.one_shot = true
-	cd_timer.connect("timeout",set_ready.bind())
-	add_child(cd_timer)
+	initialize_base_spell("11")
 
 func trigger():
-	var sourcenode = get_parent().get_parent()
-	# check cooldown
-	if on_cd:
-		print("on cooldown")
-		return
-	# check resource cost
-	if sourcenode.stats_curr["resource_current"] < spell_curr["resource_cost"]:
-		print("insufficient resources")
-		return
-	# apply resource cost
-	sourcenode.stats_curr["resource_current"] = min(sourcenode.stats_curr["resource_current"]-spell_curr["resource_cost"],sourcenode.stats_curr["resource_max"])
-	# fire spell
-	Combat.event_absorb(spell_curr,sourcenode,sourcenode)
-	# cooldown
-	trigger_cd(spell_curr["cooldown"])
-
-func trigger_cd(duration):
-	# start timer
-	cd_timer.wait_time = duration
-	cd_timer.start()
-	on_cd = true
-	# start cd swipe
-	for ab in actionbar:
-		ab.start_cd(duration)
-
-func set_ready():
-	on_cd = false
-	for ab in actionbar:
-		ab.end_cd()
-
-# role swap effects
-func swap_tank():
-	spell_curr["cooldown"] = 60
-func swap_heal():
-	spell_curr["cooldown"] = 120
-func swap_meleedps():
-	spell_curr["cooldown"] = 120
-func swap_rangedps():
-	spell_curr["cooldown"] = 120
-
-# talent effects  
+	# get source and target nodes
+	var source = get_parent().get_parent()
+	# check for cooldown
+	if is_on_cd():
+		return 2
+	# check resource availability
+	if insufficient_resource(
+		spell_current["resource_cost"],
+		source.stats_current["resource_current"]
+	):
+		return 3
+	# apply resource cost 
+	source.stats_current["resource_current"] = update_resource(
+		spell_current["resource_cost"],
+		source.stats_current["resource_current"],
+		source.stats_current["resource_max"]
+	)
+	# send gcd
+	if spell_current["on_gcd"] == 1:
+		get_parent().send_gcd()
+	# send event to combat script
+	Combat.combat_event_entrypoint(spell_current,source,source)

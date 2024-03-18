@@ -10,6 +10,7 @@ var expiration_timer = Timer.new()
 func initialization(spell,source,target):
 	aura_source = source
 	aura_target = target
+	aura_spell = spell
 	# get absorb amount
 	remaining_value = Combat.value_query(
 		spell["value_modifier"],
@@ -19,12 +20,15 @@ func initialization(spell,source,target):
 	)
 	# initialize timer
 	expiration_timer.wait_time = aura_spell["duration"]
-	expiration_timer.connect("timeout",remove_aura)
+	expiration_timer.connect("timeout",remove_absorb)
 	add_child(expiration_timer)
 
 # start timer when ready
 func _ready():
+	# start timer
 	expiration_timer.start()
+	# sort absorbs by increasing time remaining
+	sort_absorbs()
 
 func reinitialization(spell):
 	# stop timer
@@ -39,9 +43,34 @@ func reinitialization(spell):
 	# start timer
 	expiration_timer.wait_time = spell["duration"]
 	expiration_timer.start()
+	# sort absorbs by increasing time remaining
+	sort_absorbs()
 
-	# removal
-func remove_aura():
+func sort_absorbs():
+	# sort absorbs by increasing time remaining, also adds new absrbs to the array
+	var updated_absorbs = []
+	# get absorbs and remaining times
+	for child in $"..".get_children():
+		updated_absorbs.append([
+			child.expiration_timer.get_time_left(),
+			child.name
+		])
+	# sort
+	updated_absorbs.sort_custom(func(a,b): return a[0] < b[0])
+	# update absorb array
+	$"../../..".absorb_array = updated_absorbs
+
+# removal
+func remove_absorb():
 	print("remaining value of absorb is %s"%remaining_value)
+	# set remaining absorb value to zero to prevent unintended absorb while removing
 	remaining_value = 0
+	# get index to be removed
+	var remove_index: int
+	for i in range($"../../../".absorb_array.size()):
+		if $"../../../".absorb_array[i][1] == name:
+			remove_index = i
+	# remove outside of iteration
+	$"../../../".absorb_array.remove_at(remove_index)
+	# remove scene via combat script
 	Combat.combat_event_aura_entrypoint(aura_spell,aura_source,aura_target,true)
