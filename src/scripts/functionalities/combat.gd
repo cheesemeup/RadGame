@@ -10,7 +10,7 @@ var absorb_preload = preload("res://scenes/functionalities/aura_absorb.tscn")
 # ENTRYPOINTS
 func combat_event_entrypoint(
 	spell: Dictionary,
-	source,
+	source: CharacterBody3D,
 	target: CharacterBody3D,
 	value: int = -1
 ):
@@ -43,7 +43,7 @@ func buff_application(
 		return
 	apply_buff(spell,source.stats_current["unit_name"],target)
 
-func value_query(coeff: float, base: int, mod_inc: float, mod_dec: float):
+func value_query(coeff: float, base: int, mod_inc: float, mod_dec: float) -> int:
 	# returns the value of a damage or healing spell based on the coefficient, the base value stat,
 	# and the two applicable modifiers. Used for combat events and for snapshotting values.
 	return int(floor(coeff * base * mod_inc * mod_dec))
@@ -93,7 +93,7 @@ func combat_event_damage(
 	var overkill = apply_damage(value,target)
 	# show floating combat test for source via rpc, if source is player
 	if source.is_in_group("player"):
-		#rpc call to player scene, which call ui function
+		#rpc call to player scene, which calls ui function
 		pass
 	# write to log
 	log_damage(
@@ -186,7 +186,7 @@ func combat_event_aura_remove(
 
 ####################################################################################################
 # CHECKS
-func is_critical(crit_modifier: float, crit_base: float):
+func is_critical(crit_modifier: float, crit_base: float) -> int:
 	# get random number
 	var random = RandomNumberGenerator.new()
 	random.randomize()
@@ -195,7 +195,7 @@ func is_critical(crit_modifier: float, crit_base: float):
 		return 1
 	return 0
 
-func is_avoid(avoidance: float):
+func is_avoid(avoidance: float) -> bool:
 	var random = RandomNumberGenerator.new()
 	random.randomize()
 	var p: float = randf()
@@ -205,7 +205,7 @@ func is_avoid(avoidance: float):
 
 ####################################################################################################
 # VALUE APPLICATION
-func apply_damage(value: int, target: CharacterBody3D):
+func apply_damage(value: int, target: CharacterBody3D) -> int:
 	var overkill = value - target.stats_current["health_current"]
 	target.stats_current["health_current"] = max(0,target.stats_current["health_current"]-value)
 	return overkill
@@ -216,7 +216,7 @@ func apply_absorb(
 	spell_name: String,
 	source_name: String,
 	target_name: String
-):
+) -> int:
 	# loop through absorbs
 	var absorb: Node
 	var remove: Array = []
@@ -250,7 +250,7 @@ func apply_absorb(
 		scene.remove_absorb()
 	return value
 
-func apply_heal(value: int, target: CharacterBody3D):
+func apply_heal(value: int, target: CharacterBody3D) -> int:
 	var overheal = target.stats_current["health_current"]+value - target.stats_current["health_max"]
 	target.stats_current["health_current"] = min(
 		target.stats_current["health_current"]+value,
