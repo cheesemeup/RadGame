@@ -15,5 +15,6 @@ func _ready():
 func trigger(interactor):
 	# write interaction to log
 	Combat.log_interact(interactor.stats_current["unit_name"],self.stats_current["unit_name"])
-	# trigger spell ID 2
-	$"spell_container/spell_2".trigger(interactor)
+	# trigger spell ID 15
+	$"spell_container/spell_15".trigger(interactor)
+		
