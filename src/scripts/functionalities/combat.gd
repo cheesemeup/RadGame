@@ -228,6 +228,7 @@ func apply_absorb(
 		var absorbed_value: int
 		if value >= absorb.remaining_value:
 			absorbed_value = absorb.remaining_value
+			absorb.remaining_value = 0
 			remove = true
 		else:
 			absorbed_value = value
@@ -242,9 +243,9 @@ func apply_absorb(
 			absorb.aura_source.stats_current["unit_name"]
 		)
 		# remove absorb if depleted
-		#if remove:
+		if remove:
 			#absorb.remove_absorb()
-			#remove = false
+			remove = false
 		# adjust remaining damage value
 		value -= absorbed_value
 		if value == 0:
