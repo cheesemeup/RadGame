@@ -73,7 +73,7 @@ func post_ready(peer_id: int):
 
 ####################################################################################################
 # TARGETING
-func targeting(event_position: Vector3) -> void:
+func targeting(event_position: Vector2) -> void:
 	# send a target ray, and check for collision with any object
 	var target_dict = targetray(event_position)
 	# check if collision is with a legal target, else set target to null
@@ -88,7 +88,7 @@ func targeting(event_position: Vector3) -> void:
 	$"/root/main/ui/unitframe_target".target_reference = target
 	UIHandler.show_targetframe()
 
-func targetray(event_position: Vector3) -> Dictionary:
+func targetray(event_position: Vector2) -> Dictionary:
 	# only the controlling player can do this, as the camera is required
 	var origin = $"camera_rotation/camera_arm/player_camera"
 	var from = origin.project_ray_origin(event_position)
