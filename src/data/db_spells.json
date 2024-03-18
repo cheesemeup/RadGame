@@ -184,7 +184,7 @@
 	"name":"Abyssal Shell",
 	"icon":"",
 	"targetgroup":"friendly",
-	"resource_cost":40,
+	"resource_cost":-5,
 	"cooldown":60,
 	"on_gcd":0,
 	"auratype":"absorb",
