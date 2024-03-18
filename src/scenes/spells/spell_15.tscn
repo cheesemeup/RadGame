@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://scripts/spells/spell_15.gd" id="1_fyd5q"]
 
-[node name="spell_14" type="Node"]
+[node name="spell_15" type="Node"]
 script = ExtResource("1_fyd5q")
