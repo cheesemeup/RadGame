@@ -7,7 +7,7 @@ var aura_target: CharacterBody3D
 var expiration_timer = Timer.new()
 
 # initialize relevant spell data
-func initialization(spell,source,target):
+func initialize(spell,source,target):
 	print("initializing absorb %s"%spell["name"])
 	aura_source = source
 	aura_target = target
