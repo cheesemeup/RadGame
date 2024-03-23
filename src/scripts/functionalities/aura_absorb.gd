@@ -28,7 +28,9 @@ func _ready():
 	# sort absorbs by increasing time remaining
 	sort_absorbs()
 
-func reinitialization(spell):
+func reinitialize(spell):
+	# update spell data
+	aura_spell = spell
 	# stop timer
 	expiration_timer.stop()
 	# reset to new absorb amount
@@ -38,7 +40,7 @@ func reinitialization(spell):
 		aura_source.stats_current["heal_modifier"][spell["effecttype"]],
 		aura_target.stats_current["heal_taken_modifier"][spell["effecttype"]]
 	)
-	# start timer
+	# update duration and restart timer
 	expiration_timer.wait_time = spell["duration"]
 	expiration_timer.start()
 	# sort absorbs by increasing time remaining

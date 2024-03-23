@@ -26,10 +26,14 @@ func _ready():
 
 # reinitialization for overwriting before expiration
 func reinitialize(spell: Dictionary):
+	# update spell data
 	aura_spell = spell
+	# stop timer
 	tick_timer.stop()
+	# reset ticks and total number of ticks
 	nticks = 0
 	ticks = spell["ticks"]
+	# update tick rate and restart timer
 	tick_timer.wait_time = spell["tickrate"]
 	tick_timer.start()
 	

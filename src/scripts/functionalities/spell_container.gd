@@ -11,8 +11,7 @@ func spell_entrypoint(spell_id: String):
 	var spell_node = get_node_or_null(node_name)
 	if spell_node == null:
 		return 1  # spell not known
-	# trigger spell
-	print("triggering ",spell_id)
+	# trigger spell	
 	spell_node.trigger()
 
 # apply role swap changes

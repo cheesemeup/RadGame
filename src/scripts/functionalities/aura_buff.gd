@@ -24,13 +24,19 @@ func _ready():
 
 # reinitialization for overwriting before expiration
 func reinitialize(spell: Dictionary):
+	# update spell data
 	aura_spell = spell
+	# stop timer
 	expiration_timer.stop()
+	# reapply buff, overwriting old buff with new values
 	Combat.buff_application(aura_spell,aura_source,aura_target)
+	# update duration and restart timer
+	duration = spell["duration"]
+	expiration_timer.wait_time = duration
 	expiration_timer.start()
 
 # removal
 func remove_aura():
 	expiration_timer.stop()
-	Combat.combat_event_aura_entrypoint(aura_spell,aura_source,aura_target,true)
 	Combat.buff_application(aura_spell,aura_source,aura_target,true)
+	Combat.combat_event_aura_entrypoint(aura_spell,aura_source,aura_target,true)
