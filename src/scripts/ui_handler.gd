@@ -25,10 +25,14 @@ var targetframe_res_h = 25  # height
 
 ####################################################################################################
 # MENUS
-func load_mainmenu():
-	var mainmenu = preload("res://scenes/ui/mainmenu.tscn")
-	mainmenu = mainmenu.instantiate()
-	add_child(mainmenu)
+var main_menu: Node
+func load_main_menu() -> void:
+	var main_menu_scene = preload("res://main_menu/main_menu.tscn")
+	main_menu = main_menu_scene.instantiate()
+	add_child(main_menu)
+
+func hide_main_menu() -> void:
+	main_menu.hide()
 
 
 ####################################################################################################

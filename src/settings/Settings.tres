@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Settings" load_steps=2 format=3 uid="uid://drw8i4emulvj2"]
+
+[ext_resource type="Script" path="res://settings/Settings.gd" id="1_r2aye"]
+
+[resource]
+resource_name = "Settings"
+script = ExtResource("1_r2aye")
