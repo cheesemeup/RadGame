@@ -150,12 +150,6 @@ func hide_interact_prompt(interactable_name: String):
 	$"/root/main/interactables".get_node(interactable_name).\
 	get_node("interact_prompt").visible = false
 
-#func _ready():
-#	# TODO: read save file
-#	input.set_process(false)
-#	if not multiplayer.is_server():
-#		return
-
 #func _input(event):
 #	if not synchronizer.is_multiplayer_authority():
 #		return
@@ -164,14 +158,6 @@ func hide_interact_prompt(interactable_name: String):
 #	if event.is_action_pressed("interact"):
 #		if current_interact_target != null:
 #			current_interact_target.interaction_start(self.name)
-
-#func _unhandled_input(event):
-#	#targeting
-#	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-#		print("re-implement targeting ray in player_input script")
-##		# targeting ray
-##		var result = targetray(event.position)
-##		targeting(result)
 
 #func _process(_delta):
 #	# resource regen

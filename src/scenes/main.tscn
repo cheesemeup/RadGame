@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://oqfu77ry4jv0"]
+[gd_scene load_steps=5 format=3 uid="uid://oqfu77ry4jv0"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_pi1ts"]
 [ext_resource type="Script" path="res://old/Scripts/UI/handle_ui.gd" id="2_2so51"]
 [ext_resource type="PackedScene" uid="uid://bjr7k3cxd6jyj" path="res://scenes/maps/hub.tscn" id="2_8hbw6"]
+[ext_resource type="Script" path="res://scripts/maps.gd" id="2_uk3bh"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_pi1ts")
@@ -20,9 +21,10 @@ _spawnable_scenes = PackedStringArray("res://scenes/testing/test_npc_hostile.tsc
 spawn_path = NodePath("..")
 
 [node name="maps" type="Node" parent="."]
+script = ExtResource("2_uk3bh")
 
 [node name="mpspawner_maps" type="MultiplayerSpawner" parent="maps"]
-_spawnable_scenes = PackedStringArray("res://scenes/maps/hub.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/maps/hub.tscn", "res://scenes/maps/tutorial_area.tscn")
 spawn_path = NodePath("..")
 spawn_limit = 1
 
