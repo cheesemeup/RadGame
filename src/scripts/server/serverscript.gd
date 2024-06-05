@@ -40,22 +40,22 @@ func map_swap(map_name: String):
 		print(player)
 		if not player.is_in_group("player"):
 			continue
-		rpc("disable_player",player)
+		#rpc("disable_player",player)
 	
 	# unload current active map
 	if get_node_or_null(^"/root/main/maps/active_map"):
 		# remove npcs
-		for npc in $/root/main/maps.get_node("active_map").get_node("npcs")\
-			.get_children():
-				if not npc.is_in_group("npc"):
-					continue
-				npc.queue_free()
-		# remove interactables
-		for interactable in $/root/main/maps.get_node("active_map")\
-			.get_node("interactables").get_children():
-				if not interactable.is_in_group("interactable"):
-					continue
-				interactable.queue_free()
+		#for npc in $/root/main/maps.get_node("active_map").get_node("npcs")\
+			#.get_children():
+				#if not npc.is_in_group("npc"):
+					#continue
+				#npc.queue_free()
+		## remove interactables
+		#for interactable in $/root/main/maps.get_node("active_map")\
+			#.get_node("interactables").get_children():
+				#if not interactable.is_in_group("interactable"):
+					#continue
+				#interactable.queue_free()
 		# remove map
 		$/root/main/maps.get_node("active_map").queue_free()
 	# load, instantiate, add and initialize new map
@@ -69,20 +69,20 @@ func map_swap(map_name: String):
 	for player in $/root/main/players.get_children():
 		if not player.is_in_group("player"):
 			continue
-		rpc("enable_player",player)
+		#rpc("enable_player",player)
 
 
-@rpc("authority","call_local")
-func disable_player(player: CharacterBody3D):
-	player.set_physics_process(false)
-	# process only to be handles locally for the player
-	if not player.get_node("player_input").is_multiplayer_authority():
-		return
-	player.get_node("player_input").set_process(false)
-@rpc("authority","call_local")
-func enable_player(player: CharacterBody3D):
-	player.set_physics_process(true)
-	# process only to be handles locally for the player
-	if not player.get_node("player_input").is_multiplayer_authority():
-		return
-	player.get_node("player_input").set_process(true)
+#@rpc("authority","call_local")
+#func disable_player(player: CharacterBody3D):
+	#player.set_physics_process(false)
+	## process only to be handles locally for the player
+	#if not player.get_node("player_input").is_multiplayer_authority():
+		#return
+	#player.get_node("player_input").set_process(false)
+#@rpc("authority","call_local")
+#func enable_player(player: CharacterBody3D):
+	#player.set_physics_process(true)
+	## process only to be handles locally for the player
+	#if not player.get_node("player_input").is_multiplayer_authority():
+		#return
+	#player.get_node("player_input").set_process(true)
