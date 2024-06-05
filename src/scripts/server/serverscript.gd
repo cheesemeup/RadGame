@@ -60,7 +60,10 @@ func map_swap(map_name: String):
 			.get_node("interactables").get_children():
 				if not interactable.is_in_group("interactable"):
 					continue
+				print("free range_shape")
 				interactable.get_node("range").get_node("range_shape").queue_free()
+				print("free range")
+				interactable.get_node("range").queue_free()
 		# remove map
 		#$/root/main/maps.get_node("active_map").queue_free()
 	# load, instantiate, add and initialize new map
