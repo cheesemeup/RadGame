@@ -28,3 +28,6 @@ func init_interactables():
 	test_signpost = preload("res://scenes/testing/interact_absorb.tscn").instantiate()
 	test_signpost.position = Vector3(6,0,-6)
 	$interactables.add_child(test_signpost,true)
+	test_signpost = preload("res://scenes/testing/interact_to_tutorialarea.tscn").instantiate()
+	test_signpost.position = Vector3(9,0,-6)
+	$interactables.add_child(test_signpost,true)
