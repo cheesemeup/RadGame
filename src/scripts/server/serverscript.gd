@@ -21,8 +21,8 @@ func start_serverscript():
 	References.current_map_path = "res://scenes/maps/hub.tscn"
 	var hub_map_instance = load(References.current_map_path).instantiate()
 	hub_map_instance.name = "active_map"
-	hub_map_instance.initialize()
 	$/root/main/maps.add_child(hub_map_instance)
+	hub_map_instance.initialize()
 	print("hub map ready")
 	
 	# connect join and leave signals
