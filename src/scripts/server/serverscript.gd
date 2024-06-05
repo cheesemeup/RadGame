@@ -51,16 +51,17 @@ func map_swap(map_name: String):
 					continue
 				npc.queue_free()
 		# remove all interactables from players and from map
-		for player in $/root/main/players.get_children():
-			if not player.is_in_group("player"):
-				continue
-			player.interactables = []
-			player.current_interactable = null
+		#for player in $/root/main/players.get_children():
+			#if not player.is_in_group("player"):
+				#continue
+			#player.interactables = []
+			#player.current_interactable = null
 		for interactable in $/root/main/maps.get_node("active_map")\
 			.get_node("interactables").get_children():
 				if not interactable.is_in_group("interactable"):
 					continue
-				interactable.disconnect_signals()
+				interactable.get_node("range").get_node("range_shape")\
+					.shape.radius = 0
 				interactable.queue_free()
 		# remove map
 		#$/root/main/maps.get_node("active_map").queue_free()

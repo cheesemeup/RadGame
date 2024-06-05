@@ -45,7 +45,6 @@ func spawn_player(peer_id: int):
 		return
 	var new_player = preload("res://scenes/units/player.tscn").instantiate()
 	new_player.pre_ready(peer_id)
-	#new_player.get_node("player_input").set_process(false)
 	$players.add_child(new_player,true)
 	new_player.post_ready(peer_id)
 
