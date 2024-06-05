@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjr7k3cxd6jyj"]
+[gd_scene load_steps=5 format=3 uid="uid://bjr7k3cxd6jyj"]
 
 [ext_resource type="Script" path="res://scripts/maps/hub.gd" id="1_w2cee"]
-[ext_resource type="PackedScene" uid="uid://bwb3fec0xq1vu" path="res://scenes/testing/interact_to_tutorialarea.tscn" id="2_4qvnm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ycfok"]
 size = Vector3(20, 2, 20)
@@ -15,9 +14,6 @@ size = Vector2(20, 20)
 
 [node name="hub" type="Node3D"]
 script = ExtResource("1_w2cee")
-
-[node name="interact_test" parent="." instance=ExtResource("2_4qvnm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -8)
 
 [node name="floor1" type="StaticBody3D" parent="."]
 collision_mask = 0
@@ -59,6 +55,6 @@ spawn_path = NodePath("..")
 [node name="interactables" type="Node" parent="."]
 
 [node name="mpspawner_interactables" type="MultiplayerSpawner" parent="interactables"]
-_spawnable_scenes = PackedStringArray("res://scenes/testing/interact_damage.tscn", "res://scenes/testing/interact_heal.tscn", "res://scenes/testing/interact_absorb.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/testing/interact_damage.tscn", "res://scenes/testing/interact_heal.tscn", "res://scenes/testing/interact_absorb.tscn", "res://scenes/testing/interact_to_tutorialarea.tscn")
 spawn_path = NodePath("..")
 spawn_limit = 1
