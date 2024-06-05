@@ -148,13 +148,11 @@ func get_nearest_interactable():
 
 @rpc("authority")
 func show_interact_prompt(interactable_name: String):
-	print("interactable show: %s"%interactable_name)
 	# rpc that makes interact prompt visible locally
 	$/root/main/maps/active_map/interactables.get_node(interactable_name).\
 	get_node("interact_prompt").visible = true
 @rpc("authority")
 func hide_interact_prompt(interactable_name: String):
-	print("interactable hide: %s"%interactable_name)
 	# rpc that makes interact prompt invisible locally
 	$/root/main/maps/active_map/interactables.get_node(interactable_name).\
 	get_node("interact_prompt").visible = false

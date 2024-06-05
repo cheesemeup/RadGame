@@ -56,6 +56,7 @@ func map_swap(map_name: String):
 				if not interactable.is_in_group("interactable"):
 					continue
 				for player in $/root/main/players.get_children():
+					print("removing %s from %s"%[interactable.name,player.name])
 					interactable.remove_interactable(player)
 				interactable.queue_free()
 		# remove map
