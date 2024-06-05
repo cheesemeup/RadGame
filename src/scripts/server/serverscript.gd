@@ -30,7 +30,7 @@ func start_serverscript():
 ###############################################################
 func map_swap(map_name: String):
 	# disable physics and control for players
-	for player in $/root/players.get_children():
+	for player in $/root/main/players.get_children():
 		if not player.is_in_group("player"):
 			continue
 		rpc("disable_player",player)
