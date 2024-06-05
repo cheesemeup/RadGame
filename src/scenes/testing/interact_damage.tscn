@@ -23,7 +23,7 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="interact_damage" type="CharacterBody3D"]
+[node name="interact_damage" type="CharacterBody3D" groups=["interactable"]]
 script = ExtResource("1_7tgrq")
 
 [node name="pole" type="MeshInstance3D" parent="."]

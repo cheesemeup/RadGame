@@ -43,6 +43,19 @@ func map_swap(map_name: String):
 	
 	# unload current active map
 	if get_node_or_null(^"/root/main/maps/active_map"):
+		# remove npcs
+		for npc in $/root/main/maps.get_node("active_map").get_node("npcs")\
+			.get_children():
+				if not npc.is_in_group("npc"):
+					continue
+				npc.queue_free()
+		# remove interactables
+		for interactable in $/root/main/maps.get_node("active_map")\
+			.get_node("interactables").get_children():
+				if not interactable.is_in_group("interactable"):
+					continue
+				interactable.queue_free()
+		# remove map
 		$/root/main/maps.get_node("active_map").queue_free()
 	# load, instantiate, add and initialize new map
 	References.current_map_path = "res://scenes/maps/%s" % map_name
@@ -59,7 +72,7 @@ func map_swap(map_name: String):
 
 
 @rpc("authority","call_local")
-func disable_player(player: CharacterBody3D):
+func disable_player(player):#: CharacterBody3D):
 	player.set_physics_process(false)
 	# process only to be handles locally for the player
 	if not player.get_node("player_input").is_multiplayer_authority():
