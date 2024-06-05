@@ -4,25 +4,29 @@ var SERVER_PORT_ENV = OS.get_environment("SERVER_PORT")
 var PORT = SERVER_PORT_ENV.to_int() if SERVER_PORT_ENV.is_valid_int() and not SERVER_PORT_ENV.is_empty() else 4545
 
 # run this script if server
-func _ready():
-	if not OS.has_feature("dedicated_server"):
-		return
+func start_serverscript():
 	print("serverscript started")
+	
 	# start server
 	multiplayer.multiplayer_peer = null
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_server(PORT)
 	multiplayer.multiplayer_peer = peer
-	var server_uid = multiplayer.get_unique_id()
+	var server_uid: int = multiplayer.get_unique_id()
 	if server_uid != 1:
 		print("ERROR: SERVER_UID NOT 1")
 	print("server started on port %d" % PORT)
-	# such that main script handles actual loading of maps
+	
 	# load hub map scene
-	#Autoload.current_map_path = "res://scenes/maps/hub.tscn"
-	#var hub_map_instance = preload("res://scenes/maps/hub.tscn").instantiate
-	#$/root/main/maps.add_child(hub_map_instance)
-	print("hub map loaded")
+	References.current_map_path = "res://scenes/maps/hub.tscn"
+	var hub_map_instance = load(References.current_map_path).instantiate()
+	hub_map_instance.name = "active_map"
+	hub_map_instance.initialize()
+	$/root/main/maps.add_child(hub_map_instance)
+	print("hub map ready")
+	
+	# connect join and leave signals
+	References.main_reference.server_join_connect()
 
 ###############################################################
 ### MAP SWAPPING

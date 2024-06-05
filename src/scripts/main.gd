@@ -5,42 +5,18 @@ var PORT = 4545
 
 func _ready():
 	print("start main")
+	References.main_reference = self
+	# dedicated server script, or continue as player with main menu
 	if OS.has_feature("dedicated_server"):
-		multiplayer.peer_connected.connect(spawn_player)
-		multiplayer.peer_disconnected.connect(remove_player)
-		# spawn test npcs, replace this with actual map init later on
-		var test_npc = preload("res://scenes/testing/test_npc_hostile.tscn").instantiate()
-		test_npc.set_process(false)
-		test_npc.position = Vector3(-6,0,-6)
-		$/root/main/npcs.add_child(test_npc,true)
-		test_npc = preload("res://scenes/testing/test_npc_friendly.tscn").instantiate()
-		test_npc.set_process(false)
-		test_npc.position = Vector3(-3,0,-6)
-		$/root/main/npcs.add_child(test_npc,true)
-		var test_signpost = preload("res://scenes/testing/interact_damage.tscn").instantiate()
-		test_signpost.position = Vector3(0,0,-6)
-		$/root/main/interactables.add_child(test_signpost,true)
-		test_signpost = preload("res://scenes/testing/interact_heal.tscn").instantiate()
-		test_signpost.position = Vector3(3,0,-6)
-		$/root/main/interactables.add_child(test_signpost,true)
-		test_signpost = preload("res://scenes/testing/interact_absorb.tscn").instantiate()
-		test_signpost.position = Vector3(6,0,-6)
-		$/root/main/interactables.add_child(test_signpost,true)
+		Serverscript.start_serverscript()
 		return
-	Autoload.main_reference = self
-	# load main menu for players
 	UIHandler.load_mainmenu()
 
-#func start_server():
-#	# start server
-#	multiplayer.multiplayer_peer = null
-#	var peer = ENetMultiplayerPeer.new()
-#	peer.create_server(PORT)
-#	multiplayer.multiplayer_peer = peer
-#	var server_uid = multiplayer.get_unique_id()
-#	if server_uid != 1:
-#		print("ERROR: SERVER_UID NOT 1")
-	# load hub map scene
+
+func server_join_connect():
+	multiplayer.peer_connected.connect(spawn_player)
+	multiplayer.peer_disconnected.connect(remove_player)
+
 
 #func start_hosting():
 #	# delete any multiplayer peer that might exist:
@@ -55,6 +31,7 @@ func _ready():
 #	current_map_reply("hub.tscn")
 #	initialize_persistent_ui()
 
+
 func start_joining(server_address: String, port: int = PORT):
 	print("starting join on port %d" % port)
 	multiplayer.multiplayer_peer = null
@@ -62,6 +39,7 @@ func start_joining(server_address: String, port: int = PORT):
 	peer.create_client(server_address, port)
 	multiplayer.multiplayer_peer = peer
  
+
 func spawn_player(peer_id: int):
 	if not multiplayer.is_server():
 		return
@@ -76,6 +54,7 @@ func remove_player(peer_id: int):
 	var player = get_node_or_null("players/"+str(peer_id))
 	if multiplayer.is_server() and player:
 		player.queue_free()
+
 
 ##############################################################################################################################
 # Map loading and unloading

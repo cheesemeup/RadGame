@@ -49,3 +49,16 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.814116, 0.580703, 0, -0.580703, 0.814116, -0.00597382, 4.23391, 5.67833)
+
+[node name="npcs" type="Node" parent="."]
+
+[node name="mpspawner_npc" type="MultiplayerSpawner" parent="npcs"]
+_spawnable_scenes = PackedStringArray("res://scenes/testing/test_npc_hostile.tscn", "res://scenes/testing/test_npc_friendly.tscn")
+spawn_path = NodePath("..")
+
+[node name="interactables" type="Node" parent="."]
+
+[node name="mpspawner_interactables" type="MultiplayerSpawner" parent="interactables"]
+_spawnable_scenes = PackedStringArray("res://scenes/testing/interact_damage.tscn", "res://scenes/testing/interact_heal.tscn", "res://scenes/testing/interact_absorb.tscn")
+spawn_path = NodePath("..")
+spawn_limit = 1

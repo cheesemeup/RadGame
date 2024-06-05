@@ -52,7 +52,7 @@ func add_player_camera():
 @rpc("authority")
 func load_ui_initial():
 	# set player reference before initializing the unitframes
-	Autoload.player_reference = self
+	References.player_reference = self
 	UIHandler.load_unitframes()
 @rpc("authority")
 func call_set_input_process():
@@ -68,7 +68,7 @@ func post_ready(peer_id: int):
 #	# activate input _process for authority
 	rpc_id(peer_id,"call_set_input_process")
 	if input.is_multiplayer_authority():
-		Autoload.player_reference = self
+		References.player_reference = self
 	print("player %s ready" % name)
 
 ####################################################################################################
