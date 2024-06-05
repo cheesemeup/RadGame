@@ -40,7 +40,7 @@ func map_swap(map_name: String):
 		print(player)
 		if not player.is_in_group("player"):
 			continue
-		rpc("disable_player",player)
+		rpc("disable_player",player.name)
 	
 	# unload current active map
 	if get_node_or_null(^"/root/main/maps/active_map"):
@@ -73,8 +73,11 @@ func map_swap(map_name: String):
 
 
 @rpc("authority","call_local")
-func disable_player(player: CharacterBody3D):
-	pass
+func disable_player(player: String):
+	var player_node = $/root/main/players.get_node(player)
+	player_node.set_physics_process(false)
+	if not player_node.get_node("player_input").is_multiplayer_authority():
+		return
 	#player.set_physics_process(false)
 	# process only to be handles locally for the player
 	#if not player.get_node("player_input").is_multiplayer_authority():
