@@ -62,8 +62,10 @@ func map_swap(map_name: String):
 					continue
 				print("free range_shape")
 				interactable.get_node("range").get_node("range_shape").queue_free()
-				#print("free range")
-				#interactable.get_node("range").queue_free()
+				print("free range")
+				interactable.get_node("range").queue_free()
+			# freeing the range node causes an issue, where the tree_entered signal
+			# of the player node (for some reason) is not disconnected, as it is never connected
 		# remove map
 		#$/root/main/maps.get_node("active_map").queue_free()
 	# load, instantiate, add and initialize new map
