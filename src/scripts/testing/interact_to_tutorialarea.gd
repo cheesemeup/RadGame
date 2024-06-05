@@ -18,9 +18,4 @@ func trigger(interactor):
 	# write interaction to log
 	Combat.log_interact(interactor.stats_current["unit_name"],self.stats_current["unit_name"])
 	# trigger map swap
-	rpc_id(1,"request_map_swap","tutorial_area.tscn")
-
-
-@rpc("any_peer")
-func request_map_swap(map_name: String):
-	Serverscript.request_map_swap(map_name)
+	Serverscript.request_map_swap("tutorial_area.tscn")
