@@ -35,15 +35,31 @@ func _physics_process(delta) -> void:
 		# get nearest interactable
 		current_interactable = get_nearest_interactable()
 
+
 ####################################################################################################
 # SPAWNING
 func _enter_tree():
 	$player_input.set_multiplayer_authority(str(name).to_int())
 
+
 func pre_ready(peer_id: int):
 	name = str(peer_id)
 	# initialize stats for all peers
 	initialize_base_unit("player","0")
+
+
+func post_ready(peer_id: int):
+	# some things should be done after _ready is finished
+	# add player camera node for authority only
+	rpc_id(peer_id,"add_player_camera")
+	# add UI elements
+	rpc_id(peer_id,"load_ui_initial")
+#	# activate input _process for authority
+	rpc_id(peer_id,"call_set_input_process")
+	if input.is_multiplayer_authority():
+		References.player_reference = self
+	print("player %s ready" % name)
+
 
 @rpc("authority")
 func add_player_camera():
@@ -59,17 +75,6 @@ func call_set_input_process():
 	input.set_process(true)
 	input.set_process_unhandled_input(true)
 
-func post_ready(peer_id: int):
-	# some things should be done after _ready is finished
-	# add player camera node for authority only
-	rpc_id(peer_id,"add_player_camera")
-	# add UI elements
-	rpc_id(peer_id,"load_ui_initial")
-#	# activate input _process for authority
-	rpc_id(peer_id,"call_set_input_process")
-	if input.is_multiplayer_authority():
-		References.player_reference = self
-	print("player %s ready" % name)
 
 ####################################################################################################
 # TARGETING
@@ -87,6 +92,7 @@ func targeting(event_position: Vector2) -> void:
 	rpc_id(1,"set_target",target_dict["collider"].name,target_dict["collider"].get_parent().name)
 	$"/root/main/ui/unitframe_target".target_reference = target
 	UIHandler.show_targetframe()
+
 
 func targetray(event_position: Vector2) -> Dictionary:
 	# only the controlling player can do this, as the camera is required
@@ -138,6 +144,7 @@ func get_nearest_interactable():
 		if nearest_interactable != null:
 			rpc_id(name.to_int(),"show_interact_prompt",nearest_interactable.name)
 	return nearest_interactable
+
 
 @rpc("authority")
 func show_interact_prompt(interactable_name: String):

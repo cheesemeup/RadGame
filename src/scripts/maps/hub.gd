@@ -7,7 +7,7 @@ func initialize():
 
 
 func init_npcs():
-	# spawn test npcs
+	# spawn npcs
 	var test_npc = preload("res://scenes/testing/test_npc_hostile.tscn").instantiate()
 	test_npc.set_process(false)
 	test_npc.position = Vector3(-6,0,-6)
