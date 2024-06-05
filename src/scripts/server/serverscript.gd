@@ -69,7 +69,7 @@ func map_swap(map_name: String):
 	for player in $/root/main/players.get_children():
 		if not player.is_in_group("player"):
 			continue
-		rpc("enable_player",player)
+		rpc("enable_player",player.name)
 
 
 @rpc("authority","call_local")
@@ -78,16 +78,12 @@ func disable_player(player: String):
 	player_node.set_physics_process(false)
 	if not player_node.get_node("player_input").is_multiplayer_authority():
 		return
-	#player.set_physics_process(false)
-	# process only to be handles locally for the player
-	#if not player.get_node("player_input").is_multiplayer_authority():
-		#return
-	#player.get_node("player_input").set_process(false)
+	player_node.get_node("player_input").set_process(false)
 @rpc("authority","call_local")
-func enable_player(player: CharacterBody3D):
-	pass
-	#player.set_physics_process(true)
-	# process only to be handles locally for the player
-	#if not player.get_node("player_input").is_multiplayer_authority():
-		#return
-	#player.get_node("player_input").set_process(true)
+func enable_player(player: String):
+	return
+	var player_node = $/root/main/players.get_node(player)
+	player_node.set_physics_process(false)
+	if not player_node.get_node("player_input").is_multiplayer_authority():
+		return
+	player_node.get_node("player_input").set_process(false)
