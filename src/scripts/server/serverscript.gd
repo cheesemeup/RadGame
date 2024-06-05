@@ -74,14 +74,16 @@ func map_swap(map_name: String):
 
 @rpc("authority","call_local")
 func disable_player(player: CharacterBody3D):
-	player.set_physics_process(false)
+	pass
+	#player.set_physics_process(false)
 	# process only to be handles locally for the player
 	#if not player.get_node("player_input").is_multiplayer_authority():
 		#return
 	#player.get_node("player_input").set_process(false)
 @rpc("authority","call_local")
 func enable_player(player: CharacterBody3D):
-	player.set_physics_process(true)
+	pass
+	#player.set_physics_process(true)
 	# process only to be handles locally for the player
 	#if not player.get_node("player_input").is_multiplayer_authority():
 		#return
