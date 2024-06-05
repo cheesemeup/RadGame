@@ -50,15 +50,17 @@ func map_swap(map_name: String):
 				if not npc.is_in_group("npc"):
 					continue
 				npc.queue_free()
-		# remove interactables from players and from scene
+		# remove all interactables from players and from map
+		for player in $/root/main/players.get_children():
+			if not player.is_in_group("player"):
+				continue
+			player.interactables = []
+			player.current_interactable = null
 		for interactable in $/root/main/maps.get_node("active_map")\
 			.get_node("interactables").get_children():
 				if not interactable.is_in_group("interactable"):
 					continue
-				for player in $/root/main/players.get_children():
-					print("removing %s from %s"%[interactable.name,player.name])
-					interactable.remove_interactable(player)
-				interactable.queue_free()
+				#interactable.queue_free()
 		# remove map
 		#$/root/main/maps.get_node("active_map").queue_free()
 	# load, instantiate, add and initialize new map
