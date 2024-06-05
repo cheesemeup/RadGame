@@ -44,4 +44,8 @@
 	},
 	"interact_range":3,
 },
+  "3":{
+	"unit_name":"Signpost Tutorial Teleport",
+	"unit_class":"Test Interactable",
+},
 }

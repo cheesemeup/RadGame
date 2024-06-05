@@ -48,7 +48,7 @@ func map_swap(map_name: String):
 	References.current_map_path = "res://scenes/maps/%s" % map_name
 	var map_instance = load(References.current_map_path).instantiate()
 	map_instance.name = "active_map"
-	$/root/main/maps.add_child(map_instance)
+	$/root/main/maps.add_child(map_instance,true)
 	map_instance.initialize()
 	
 	# enable physics for players
