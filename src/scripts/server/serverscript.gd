@@ -81,7 +81,6 @@ func disable_player(player: String):
 	player_node.get_node("player_input").set_process(false)
 @rpc("authority","call_local")
 func enable_player(player: String):
-	return
 	var player_node = $/root/main/players.get_node(player)
 	player_node.set_physics_process(false)
 	if not player_node.get_node("player_input").is_multiplayer_authority():
