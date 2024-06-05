@@ -6,6 +6,7 @@ func _ready():
 	player_reference = References.player_reference
 	$"hpbar_value/unitname".text = player_reference.stats_current["unit_name"]
 
+
 func _process(_delta):
 	# update health bar
 	$hpbar_value.value = 100 * player_reference.stats_current.health_current / player_reference.stats_current.health_max

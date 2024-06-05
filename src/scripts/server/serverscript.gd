@@ -28,6 +28,12 @@ func start_serverscript():
 ###############################################################
 ### MAP SWAPPING
 ###############################################################
+func request_map_swap(map_name: String):
+	# ask player readiness, to be implemented with UI elements
+	# perform map swap if all players are ready
+	map_swap(map_name)
+
+
 func map_swap(map_name: String):
 	# disable physics and control for players
 	for player in $/root/main/players.get_children():
