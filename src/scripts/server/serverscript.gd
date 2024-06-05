@@ -43,13 +43,13 @@ func map_swap(map_name: String):
 		rpc("disable_player",player.name)
 	
 	# unload current active map
-	#if get_node_or_null(^"/root/main/maps/active_map"):
+	if get_node_or_null(^"/root/main/maps/active_map"):
 		# remove npcs
-		#for npc in $/root/main/maps.get_node("active_map").get_node("npcs")\
-			#.get_children():
-				#if not npc.is_in_group("npc"):
-					#continue
-				#npc.queue_free()
+		for npc in $/root/main/maps.get_node("active_map").get_node("npcs")\
+			.get_children():
+				if not npc.is_in_group("npc"):
+					continue
+				npc.queue_free()
 		## remove interactables
 		#for interactable in $/root/main/maps.get_node("active_map")\
 			#.get_node("interactables").get_children():
