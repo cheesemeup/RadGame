@@ -45,7 +45,7 @@ func map_swap(map_name: String):
 	map_instance.initialize()
 	
 	# enable physics for players
-	for player in $/root/players.get_children():
+	for player in $/root/main/players.get_children():
 		if not player.is_in_group("player"):
 			continue
 		rpc("enable_player",player)
