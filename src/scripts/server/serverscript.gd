@@ -37,6 +37,7 @@ func request_map_swap(map_name: String):
 func map_swap(map_name: String):
 	# disable physics and control for players
 	for player in $/root/main/players.get_children():
+		print(player)
 		if not player.is_in_group("player"):
 			continue
 		rpc("disable_player",player)
@@ -72,7 +73,7 @@ func map_swap(map_name: String):
 
 
 @rpc("authority","call_local")
-func disable_player(player):#: CharacterBody3D):
+func disable_player(player: CharacterBody3D):
 	player.set_physics_process(false)
 	# process only to be handles locally for the player
 	if not player.get_node("player_input").is_multiplayer_authority():
