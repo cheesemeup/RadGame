@@ -50,12 +50,12 @@ func map_swap(map_name: String):
 				if not npc.is_in_group("npc"):
 					continue
 				npc.queue_free()
-		## remove interactables
-		#for interactable in $/root/main/maps.get_node("active_map")\
-			#.get_node("interactables").get_children():
-				#if not interactable.is_in_group("interactable"):
-					#continue
-				#interactable.queue_free()
+		# remove interactables
+		for interactable in $/root/main/maps.get_node("active_map")\
+			.get_node("interactables").get_children():
+				if not interactable.is_in_group("interactable"):
+					continue
+				interactable.queue_free()
 		# remove map
 		#$/root/main/maps.get_node("active_map").queue_free()
 	# load, instantiate, add and initialize new map
