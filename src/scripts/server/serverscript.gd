@@ -50,11 +50,13 @@ func map_swap(map_name: String):
 				if not npc.is_in_group("npc"):
 					continue
 				npc.queue_free()
-		# remove interactables
+		# remove interactables from players and from scene
 		for interactable in $/root/main/maps.get_node("active_map")\
 			.get_node("interactables").get_children():
 				if not interactable.is_in_group("interactable"):
 					continue
+				for player in $/root/main/players.get_children():
+					interactable.remove_interactable(player)
 				interactable.queue_free()
 		# remove map
 		#$/root/main/maps.get_node("active_map").queue_free()
@@ -73,12 +75,22 @@ func map_swap(map_name: String):
 
 
 @rpc("authority","call_local")
+func remove_interactable(interactable: String):
+	var interactable_node = $/root/main/maps/active_map/interactables\
+		.get_node(interactable)
+	for player in $/root/main/players.get_children():
+		interactable_node.remove_interactable(player)
+
+
+@rpc("authority","call_local")
 func disable_player(player: String):
 	var player_node = $/root/main/players.get_node(player)
 	player_node.set_physics_process(false)
 	if not player_node.get_node("player_input").is_multiplayer_authority():
 		return
 	player_node.get_node("player_input").set_process(false)
+
+
 @rpc("authority","call_local")
 func enable_player(player: String):
 	var player_node = $/root/main/players.get_node(player)
