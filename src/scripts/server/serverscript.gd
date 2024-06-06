@@ -44,30 +44,31 @@ func map_swap(map_name: String):
 	
 	# unload current active map
 	if get_node_or_null(^"/root/main/maps/active_map"):
-		# remove npcs
-		for npc in $/root/main/maps.get_node("active_map").get_node("npcs")\
-			.get_children():
-				if not npc.is_in_group("npc"):
-					continue
-				npc.queue_free()
+		$/root/main/maps.get_node("active_map").queue_free()
+		## remove npcs
+		#for npc in $/root/main/maps.get_node("active_map").get_node("npcs")\
+			#.get_children():
+				#if not npc.is_in_group("npc"):
+					#continue
+				#npc.queue_free()
 		# remove all interactables from players and from map
+			#for interactable in $/root/main/maps.get_node("active_map")\
+				#.get_node("interactables").get_children():
+					#if not interactable.is_in_group("interactable"):
+						#continue
+					#interactable.manual_body_exited(player)
+					#interactable.position = $/root/main/maps.get_node("active_map")\
+						#.interactable_despawn_position
+					#interactable.queue_free()
+			# freeing the range node causes an issue, where the tree_entered signal
+			# of the player node (for some reason) is not disconnected, as it is never connected
+		# remove unloaded interactables from players
 		for player in $/root/main/players.get_children():
 			if not player.is_in_group("player"):
 				continue
-			#player.interactables = []
-			#player.current_interactable = null
-			for interactable in $/root/main/maps.get_node("active_map")\
-				.get_node("interactables").get_children():
-					if not interactable.is_in_group("interactable"):
-						continue
-					interactable.manual_body_exited(player)
-					interactable.position = $/root/main/maps.get_node("active_map")\
-						.interactable_despawn_position
-					interactable.queue_free()
-			# freeing the range node causes an issue, where the tree_entered signal
-			# of the player node (for some reason) is not disconnected, as it is never connected
-		# remove map
-		#$/root/main/maps.get_node("active_map").queue_free()
+			player.interactables = []
+			player.current_interactable = null
+	
 	# load, instantiate, add and initialize new map
 	References.current_map_path = "res://scenes/maps/%s" % map_name
 	var map_instance = load(References.current_map_path).instantiate()
