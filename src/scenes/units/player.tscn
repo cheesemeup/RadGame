@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dempeiar8tjic"]
+[gd_scene load_steps=8 format=3 uid="uid://dempeiar8tjic"]
 
 [ext_resource type="Script" path="res://scripts/units/player.gd" id="1_8gonl"]
 [ext_resource type="Script" path="res://scripts/functionalities/player_input.gd" id="4_lp8kc"]
@@ -6,7 +6,11 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_16yd3"]
 radius = 0.6
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ld3t1"]
+albedo_color = Color(1, 0, 1, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ha78t"]
+material = SubResource("StandardMaterial3D_ld3t1")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rfg56"]
 properties/0/path = NodePath(".:position")
