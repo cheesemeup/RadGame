@@ -79,6 +79,7 @@ func map_swap(map_name: String):
 		if not player.is_in_group("player"):
 			continue
 		rpc("enable_player",player.name)
+		print("interactables in list: ",player.interactables)
 
 
 @rpc("authority","call_local")
@@ -105,5 +106,3 @@ func enable_player(player: String):
 	if not player_node.get_node("player_input").is_multiplayer_authority():
 		return
 	player_node.get_node("player_input").set_process(true)
-	print("player interactables:")
-	print(player_node.interactables)
