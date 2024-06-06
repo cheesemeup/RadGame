@@ -52,14 +52,14 @@ func map_swap(map_name: String):
 					#continue
 				#npc.queue_free()
 		# remove all interactables from players and from map
-			#for interactable in $/root/main/maps.get_node("active_map")\
-				#.get_node("interactables").get_children():
-					#if not interactable.is_in_group("interactable"):
-						#continue
+		for interactable in $/root/main/maps.get_node("active_map")\
+			.get_node("interactables").get_children():
+				if not interactable.is_in_group("interactable"):
+					continue
 					#interactable.manual_body_exited(player)
 					#interactable.position = $/root/main/maps.get_node("active_map")\
 						#.interactable_despawn_position
-					#interactable.queue_free()
+				interactable.queue_free()
 			# freeing the range node causes an issue, where the tree_entered signal
 			# of the player node (for some reason) is not disconnected, as it is never connected
 		# remove unloaded interactables from players
