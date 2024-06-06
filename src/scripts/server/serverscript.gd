@@ -63,7 +63,7 @@ func map_swap(map_name: String):
 	$/root/main/maps.add_child(map_instance,true)
 	map_instance.initialize()
 	
-	# enable physics for players
+	# enable physics and control for players
 	for player in $/root/main/players.get_children():
 		if not player.is_in_group("player"):
 			continue
