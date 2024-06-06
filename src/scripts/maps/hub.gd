@@ -19,6 +19,7 @@ func init_npcs():
 
 
 func init_interactables():
+	interactable_despawn_position = Vector3(0,-10,0)
 	var test_signpost = preload("res://scenes/testing/interact_damage.tscn").instantiate()
 	test_signpost.position = Vector3(0,0,-6)
 	$interactables.add_child(test_signpost,true)

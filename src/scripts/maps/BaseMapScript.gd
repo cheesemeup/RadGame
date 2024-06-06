@@ -4,6 +4,7 @@ class_name BaseMap
 
 var current_spawn_position: Vector3
 var initial_spawn_position: Vector3
+var interactable_despawn_position: Vector3
 
 func _initialize():
 	# print warning if initialization has not been overridden
