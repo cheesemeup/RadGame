@@ -29,6 +29,10 @@ func connect_signals():
 	$range.connect("body_exited",remove_interactable)
 
 
+func manual_body_exited(player: CharacterBody3D):
+	$range.body_exited.emit(player)
+
+
 func add_interactable(target: CharacterBody3D):
 	# append interactable to player's interactable list
 	if not target.is_in_group("player"):
