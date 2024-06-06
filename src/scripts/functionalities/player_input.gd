@@ -4,12 +4,15 @@ extends MultiplayerSynchronizer
 @export var jumping:= false
 var space_state
 
+
 func _ready():
 	set_process(false)
 	set_process_unhandled_input(false)
 
+
 func _process(_delta):
 	movement_direction()
+
 
 func _unhandled_input(event):
 	# if event is leftclick pressed, send target ray
@@ -21,11 +24,14 @@ func _unhandled_input(event):
 	if event is InputEventKey and event.is_action_pressed("interact"):
 		rpc_id(1,"request_interaction")
 
+
 ####################################################################################################
 # MOVEMENT
 @rpc("call_local")
 func jump():
 	jumping = true
+
+
 func movement_direction():
 	# unrotated direction from input
 	var direction_ur = Input.get_vector("move_left","move_right","move_forward","move_back")
@@ -37,11 +43,13 @@ func movement_direction():
 	if Input.is_action_just_pressed("jump"):
 		jump.rpc()
 
+
 ####################################################################################################
 # SPELLS
 @rpc("authority")
 func enter_spell_container(spell_id: String):
 	$"../spell_container".spell_entrypoint(spell_id)
+
 
 @rpc("authority")
 func request_interaction():

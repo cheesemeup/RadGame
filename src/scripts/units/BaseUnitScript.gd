@@ -19,6 +19,7 @@ var mouseover_target = null  # for targeting with spells
 var is_dead: bool = false
 var is_moving: bool = false
 
+
 func initialize_base_unit(unittype: String, unit_id: String):
 	# stats
 	stat_init(unittype,unit_id)
@@ -30,6 +31,7 @@ func initialize_base_unit(unittype: String, unit_id: String):
 	var aura_container = preload("res://scenes/functionalities/aura_container.tscn").instantiate()
 	add_child(aura_container)
 
+
 func stat_init(unit_type: String, unit_id: String) -> void:
 	# read stats dict from file
 	var file = "res://data/db_stats_"+unit_type+".json"
@@ -38,6 +40,7 @@ func stat_init(unit_type: String, unit_id: String) -> void:
 	stats_current = stats_base.duplicate(true)
 	stats_mult = initialize_statmult()
 	stats_add = initialize_statadd()
+
 
 func initialize_statmult() -> Dictionary:
 	var stat_mult = {}
@@ -60,6 +63,8 @@ func initialize_statmult() -> Dictionary:
 	stat_mult["heal_taken_modifier"]["physical"] = {}
 	stat_mult["heal_taken_modifier"]["magic"] = {}
 	return stat_mult
+
+
 func initialize_statadd() -> Dictionary:
 	var stat_add = {}
 	stat_add["health_max"] = {}
@@ -68,6 +73,7 @@ func initialize_statadd() -> Dictionary:
 	stat_add["avoidance"] = {}
 	stat_add["crit_chance"] = {}
 	return stat_add
+
 
 func spell_container_init(spell_list: Array):
 	# remove previous spells

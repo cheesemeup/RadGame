@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciiyg5m2kd3ov"]
+[gd_scene load_steps=7 format=3 uid="uid://bwb3fec0xq1vu"]
 
-[ext_resource type="Script" path="res://scripts/testing/interact_absorb.gd" id="1_a4rjl"]
+[ext_resource type="Script" path="res://scripts/testing/interact_to_tutorialarea.gd" id="1_1cvre"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_goaoj"]
 top_radius = 0.15
@@ -23,8 +23,8 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="interact_absorb" type="CharacterBody3D" groups=["interactable"]]
-script = ExtResource("1_a4rjl")
+[node name="interact_teleport_to_tutorialarea" type="CharacterBody3D" groups=["interactable"]]
+script = ExtResource("1_1cvre")
 
 [node name="pole" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -39,7 +39,7 @@ skeleton = NodePath("")
 [node name="sign_text" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0.16)
 pixel_size = 0.01
-text = "Absorb"
+text = "Port"
 
 [node name="interact_prompt" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)

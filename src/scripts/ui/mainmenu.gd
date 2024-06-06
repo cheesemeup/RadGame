@@ -7,6 +7,6 @@ extends CanvasLayer
 	
 
 func _on_join_button_pressed():
-	Autoload.main_reference.start_joining($address_entry.text, $port_entry.text.to_int())
+	References.main_reference.start_joining($address_entry.text, $port_entry.text.to_int())
 	self.queue_free()
 	

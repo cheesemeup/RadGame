@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 
 [autoload]
 
-Autoload="*res://scripts/autoload.gd"
+References="*res://scripts/references.gd"
 Combat="*res://scripts/functionalities/combat.gd"
 Serverscript="*res://scripts/server/serverscript.gd"
 UIHandler="*res://scripts/ui_handler.gd"

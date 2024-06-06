@@ -3,8 +3,9 @@ extends Control
 var player_reference = null
 
 func _ready():
-	player_reference = Autoload.player_reference
+	player_reference = References.player_reference
 	$"hpbar_value/unitname".text = player_reference.stats_current["unit_name"]
+
 
 func _process(_delta):
 	# update health bar

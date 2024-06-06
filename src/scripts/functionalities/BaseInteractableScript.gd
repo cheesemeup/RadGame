@@ -4,6 +4,7 @@ class_name BaseInteractable
 
 var stats_current
 
+
 func initialize_base_interactable(unit_id: String):
 	# read stats dict from file
 	var file = "res://data/db_stats_interactable.json"
@@ -22,9 +23,15 @@ func initialize_base_interactable(unit_id: String):
 	# set interact radius
 	$"range/range_shape".shape.radius = stats_current["interact_range"]
 
+
 func connect_signals():
 	$range.connect("body_entered",add_interactable)
 	$range.connect("body_exited",remove_interactable)
+
+
+func manual_body_exited(player: CharacterBody3D):
+	$range.body_exited.emit(player)
+
 
 func add_interactable(target: CharacterBody3D):
 	# append interactable to player's interactable list
@@ -32,16 +39,19 @@ func add_interactable(target: CharacterBody3D):
 		return
 	target.interactables.append(self)
 
+
 func remove_interactable(target: CharacterBody3D):
 	# delete interactable from player's interactable list
 	if not target.is_in_group("player"):
 		return
 	target.interactables.erase(self)
 
+
 func create_prompt_text() -> String:
 	# Create the text for the interaction prompt, trimming (Physical)
 	var hotkey = InputMap.action_get_events("interact")[0].as_text()
 	return "Interact [%s]"%hotkey.trim_suffix(" (Physical)")
+
 
 func trigger(_interactor):
 	# If no override is present in specific interactable, print message
