@@ -11,6 +11,9 @@ func _ready():
 		Serverscript.start_serverscript()
 		return
 	UIHandler.load_main_menu()
+	# apply game settings on startup
+	var settings = GameSettings.load_or_get_defaults()
+	settings.apply(get_tree().root)
 
 
 func server_join_connect():
