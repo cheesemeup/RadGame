@@ -20,7 +20,4 @@ transform = Transform3D(1, 0, 0, 0, 0.814116, 0.580703, 0, -0.580703, 0.814116, 
 [node name="tutorial_area" parent="." instance=ExtResource("2_cpf64")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7, 0)
 
-[node name="tutorialmap_terrain" parent="tutorial_area/tutorialmap_terrain" index="0"]
-collision_mask = 0
-
 [editable path="tutorial_area"]
