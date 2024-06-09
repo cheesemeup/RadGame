@@ -1,12 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2qwhx3ctwu1k"]
+[gd_scene load_steps=17 format=3 uid="uid://c2qwhx3ctwu1k"]
 
 [ext_resource type="Script" path="res://scripts/maps/tutorial_area.gd" id="1_k2wyx"]
 [ext_resource type="Shader" path="res://maps/RGBTerrainMixer.gdshader" id="2_r64j5"]
-[ext_resource type="Texture2D" uid="uid://cr7rlc4wo1h1l" path="res://assets/mud/1/1_diffuseOriginal.bmp" id="3_h4qvg"]
+[ext_resource type="Texture2D" uid="uid://cr7rlc4wo1h1l" path="res://assets/textures/mud/1/1_diffuseOriginal.bmp" id="3_h4qvg"]
 [ext_resource type="Texture2D" uid="uid://dwqfu61083hey" path="res://assets/textures/root/5/5_diffuseOriginal.bmp" id="4_pdfmi"]
 [ext_resource type="Texture2D" uid="uid://besakpg8cl2v0" path="res://assets/textures/swamp/1/1_diffuseOriginal.bmp" id="5_qo48p"]
 [ext_resource type="Texture2D" uid="uid://ihwacv8yl0xl" path="res://maps/tutorial_area_RGB.png" id="6_lrcu6"]
 [ext_resource type="Texture2D" uid="uid://dmbchco324rmr" path="res://assets/textures/ground/2/2_diffuseOriginal.bmp" id="7_ku3q5"]
+
+[sub_resource type="Environment" id="Environment_luk7f"]
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0168
+volumetric_fog_albedo = Color(0.639216, 1, 0.737255, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fx7sc"]
 render_priority = 0
@@ -95,6 +100,9 @@ data = PackedVector3Array(27.4677, 9.48831, -22.9106, 29.8879, 10.0795, -24.9365
 [node name="tutorial_area" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.55429, 3.32148, -3.73683)
 script = ExtResource("1_k2wyx")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_luk7f")
 
 [node name="spawnlocation" type="Marker3D" parent="."]
 
