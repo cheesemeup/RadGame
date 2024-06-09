@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cob3806fy7u0a"
-path="res://.godot/imported/1_smoothness.bmp-e2b005bece987a315c27aba28b32bc4e.ctex"
+uid="uid://dysis1wp1gee1"
+path="res://.godot/imported/1_metallic.bmp-763322cdee37319bcb936114c14656c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/mud/1/1_smoothness.bmp"
-dest_files=["res://.godot/imported/1_smoothness.bmp-e2b005bece987a315c27aba28b32bc4e.ctex"]
+source_file="res://assets/mud/1/1_metallic.bmp"
+dest_files=["res://.godot/imported/1_metallic.bmp-763322cdee37319bcb936114c14656c8.ctex"]
 
 [params]
 

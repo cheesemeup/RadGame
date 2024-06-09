@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/maps/tutorial_area.gd" id="1_k2wyx"]
 [ext_resource type="Shader" path="res://maps/RGBTerrainMixer.gdshader" id="2_r64j5"]
-[ext_resource type="Texture2D" uid="uid://cr7rlc4wo1h1l" path="res://assets/textures/mud/1/1_diffuseOriginal.bmp" id="3_h4qvg"]
+[ext_resource type="Texture2D" uid="uid://cr7rlc4wo1h1l" path="res://assets/mud/1/1_diffuseOriginal.bmp" id="3_h4qvg"]
 [ext_resource type="Texture2D" uid="uid://dwqfu61083hey" path="res://assets/textures/root/5/5_diffuseOriginal.bmp" id="4_pdfmi"]
 [ext_resource type="Texture2D" uid="uid://besakpg8cl2v0" path="res://assets/textures/swamp/1/1_diffuseOriginal.bmp" id="5_qo48p"]
 [ext_resource type="Texture2D" uid="uid://ihwacv8yl0xl" path="res://maps/tutorial_area_RGB.png" id="6_lrcu6"]

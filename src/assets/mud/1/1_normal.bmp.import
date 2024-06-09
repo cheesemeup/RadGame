@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dysis1wp1gee1"
-path="res://.godot/imported/1_metallic.bmp-3860c7f65ed49ff4c19be267ad72e5d2.ctex"
+uid="uid://deuxk3ke7cbbh"
+path="res://.godot/imported/1_normal.bmp-ae8b786d8dc7f28e31ae5a5e6f36cc14.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/mud/1/1_metallic.bmp"
-dest_files=["res://.godot/imported/1_metallic.bmp-3860c7f65ed49ff4c19be267ad72e5d2.ctex"]
+source_file="res://assets/mud/1/1_normal.bmp"
+dest_files=["res://.godot/imported/1_normal.bmp-ae8b786d8dc7f28e31ae5a5e6f36cc14.ctex"]
 
 [params]
 

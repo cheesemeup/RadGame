@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ihwacv8yl0xl"
-path.s3tc="res://.godot/imported/tutorial_area_RGB.png-93d62f06401166010396d1e701d4546e.s3tc.ctex"
+path="res://.godot/imported/tutorial_area_RGB.png-93d62f06401166010396d1e701d4546e.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://maps/tutorial_area_RGB.png"
-dest_files=["res://.godot/imported/tutorial_area_RGB.png-93d62f06401166010396d1e701d4546e.s3tc.ctex"]
+dest_files=["res://.godot/imported/tutorial_area_RGB.png-93d62f06401166010396d1e701d4546e.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
