@@ -6,18 +6,21 @@ uniform sampler2D source_texture_red : source_color;
 uniform sampler2D source_texture_green : source_color;
 uniform sampler2D source_texture_blue : source_color;
 
-uniform float uv_size : hint_range(0.01, 10.0, 0.01) = 1.0;
+uniform float uv_size1 : hint_range(0.01, 10.0, 0.01) = 1.0;
+uniform float uv_size2 : hint_range(0.01, 10.0, 0.01) = 1.0;
+uniform float uv_size3 : hint_range(0.01, 10.0, 0.01) = 1.0;
+uniform float uv_size4 : hint_range(0.01, 10.0, 0.01) = 1.0;
 
 void fragment() {
 
-vec2 UV_Scaled = UV * uv_size;
+//vec2 UV_Scaled = UV * uv_size;
 
 // texture_rgbmask UV is not scaled.
 vec3 texture_rgbmask= texture(source_texture_mask, UV).rgb; 
-vec3 texture_black 	= texture(source_texture_black, UV_Scaled).rgb;
-vec3 texture_red 	= texture(source_texture_red, UV_Scaled).rgb;
-vec3 texture_green 	= texture(source_texture_green, UV_Scaled).rgb;
-vec3 texture_blue 	= texture(source_texture_blue, UV_Scaled).rgb;
+vec3 texture_black 	= texture(source_texture_black, UV * uv_size1).rgb;
+vec3 texture_red 	= texture(source_texture_red, UV * uv_size2).rgb;
+vec3 texture_green 	= texture(source_texture_green, UV * uv_size3).rgb;
+vec3 texture_blue 	= texture(source_texture_blue, UV * uv_size4).rgb;
 
 float summed_texture_channels = (
 	texture_rgbmask.r + 

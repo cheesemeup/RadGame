@@ -11,7 +11,10 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fx7sc"]
 render_priority = 0
 shader = ExtResource("2_r64j5")
-shader_parameter/uv_size = 2.5
+shader_parameter/uv_size1 = 6.0
+shader_parameter/uv_size2 = 9.19
+shader_parameter/uv_size3 = 10.0
+shader_parameter/uv_size4 = 9.55
 shader_parameter/source_texture_mask = ExtResource("6_lrcu6")
 shader_parameter/source_texture_black = ExtResource("3_h4qvg")
 shader_parameter/source_texture_red = ExtResource("7_ku3q5")
