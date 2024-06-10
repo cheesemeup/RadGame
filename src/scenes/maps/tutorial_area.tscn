@@ -2,29 +2,28 @@
 
 [ext_resource type="Script" path="res://scripts/maps/tutorial_area.gd" id="1_k2wyx"]
 [ext_resource type="Shader" path="res://maps/RGBTerrainMixer.gdshader" id="2_r64j5"]
-[ext_resource type="Texture2D" uid="uid://cr7rlc4wo1h1l" path="res://assets/textures/mud/1/1_diffuseOriginal.bmp" id="3_h4qvg"]
-[ext_resource type="Texture2D" uid="uid://dwqfu61083hey" path="res://assets/textures/root/5/5_diffuseOriginal.bmp" id="4_pdfmi"]
-[ext_resource type="Texture2D" uid="uid://besakpg8cl2v0" path="res://assets/textures/swamp/1/1_diffuseOriginal.bmp" id="5_qo48p"]
+[ext_resource type="Texture2D" uid="uid://c3eh5mkkq850x" path="res://assets/textures/terrain/Texture_7_Diffuse.png" id="3_y3ju1"]
+[ext_resource type="Texture2D" uid="uid://cmvahnx0gdkp2" path="res://assets/textures/terrain/Texture_13_Diffuse.png" id="4_lcvwn"]
+[ext_resource type="Texture2D" uid="uid://bv08082px8i0g" path="res://assets/textures/terrain/Texture_15_Diffuse.png" id="5_74gtt"]
 [ext_resource type="Texture2D" uid="uid://ihwacv8yl0xl" path="res://maps/tutorial_area_RGB.png" id="6_lrcu6"]
-[ext_resource type="Texture2D" uid="uid://dmbchco324rmr" path="res://assets/textures/ground/2/2_diffuseOriginal.bmp" id="7_ku3q5"]
+[ext_resource type="Texture2D" uid="uid://cm8iag1jsep7m" path="res://assets/textures/terrain/Texture_8_Diffuse.png" id="7_1bf63"]
 
 [sub_resource type="Environment" id="Environment_luk7f"]
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0168
+volumetric_fog_density = 0.0132
 volumetric_fog_albedo = Color(0.639216, 1, 0.737255, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fx7sc"]
 render_priority = 0
 shader = ExtResource("2_r64j5")
-shader_parameter/uv_size1 = 6.0
-shader_parameter/uv_size2 = 9.19
-shader_parameter/uv_size3 = 10.0
-shader_parameter/uv_size4 = 9.55
+shader_parameter/uv_size1 = 2.45
+shader_parameter/uv_size2 = 10.0
+shader_parameter/uv_size3 = 5.27
+shader_parameter/uv_size4 = 5.31
 shader_parameter/source_texture_mask = ExtResource("6_lrcu6")
-shader_parameter/source_texture_black = ExtResource("3_h4qvg")
-shader_parameter/source_texture_red = ExtResource("7_ku3q5")
-shader_parameter/source_texture_green = ExtResource("5_qo48p")
-shader_parameter/source_texture_blue = ExtResource("4_pdfmi")
+shader_parameter/source_texture_black = ExtResource("3_y3ju1")
+shader_parameter/source_texture_red = ExtResource("7_1bf63")
+shader_parameter/source_texture_green = ExtResource("5_74gtt")
+shader_parameter/source_texture_blue = ExtResource("4_lcvwn")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_odw6s"]
 
