@@ -45,7 +45,7 @@ func movement_direction():
 
 
 ####################################################################################################
-# SPELLS
+# SPELLS AND INTERACTIONS
 @rpc("authority")
 func enter_spell_container(spell_id: String):
 	$"../spell_container".spell_entrypoint(spell_id)

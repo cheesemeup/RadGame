@@ -46,6 +46,7 @@ func pre_ready(peer_id: int):
 	name = str(peer_id)
 	# initialize stats for all peers
 	initialize_base_unit("player","0")
+	# load player model
 
 
 func post_ready(peer_id: int):
