@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://2kqjj01xjr8k"]
+
+[ext_resource type="Script" path="res://scripts/units/tutorialboss_dps.gd" id="1_l78i4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fyuuj"]
+radius = 1.0
+height = 4.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_enjne"]
+height = 4.0
+radius = 1.0
+
+[node name="tutorialboss_dps" type="CharacterBody3D"]
+collision_layer = 0
+script = ExtResource("1_l78i4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("CapsuleMesh_fyuuj")
+
+[node name="unit_collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CylinderShape3D_enjne")
