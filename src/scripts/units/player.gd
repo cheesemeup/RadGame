@@ -36,7 +36,7 @@ func _physics_process(delta) -> void:
 		current_interactable = get_nearest_interactable()
 
 
-####################################################################################################
+###############################################################################
 # SPAWNING
 func _enter_tree():
 	$player_input.set_multiplayer_authority(str(name).to_int())
