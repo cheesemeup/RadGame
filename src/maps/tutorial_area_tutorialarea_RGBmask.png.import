@@ -2,20 +2,22 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ihwacv8yl0xl"
-path="res://.godot/imported/tutorial_area_RGB.png-93d62f06401166010396d1e701d4546e.ctex"
+uid="uid://b20viqmorby0g"
+path.s3tc="res://.godot/imported/tutorial_area_tutorialarea_RGBmask.png-34162038977bc8cfeb99ca2895c9ad20.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://maps/tutorial_area_RGB.png"
-dest_files=["res://.godot/imported/tutorial_area_RGB.png-93d62f06401166010396d1e701d4546e.ctex"]
+source_file="res://maps/tutorial_area_tutorialarea_RGBmask.png"
+dest_files=["res://.godot/imported/tutorial_area_tutorialarea_RGBmask.png-34162038977bc8cfeb99ca2895c9ad20.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
