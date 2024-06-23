@@ -70,7 +70,7 @@ func map_swap(map_name: String):
 	for player in $/root/main/players.get_children():
 		if not player.is_in_group("player"):
 			continue
-		player.translation = map_instance.initial_spawn_position
+		player.global_position = map_instance.initial_spawn_position
 		rpc("enable_player",player.name)
 
 
