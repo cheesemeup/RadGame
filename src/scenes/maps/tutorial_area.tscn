@@ -1,8 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2qwhx3ctwu1k"]
+[gd_scene load_steps=13 format=3 uid="uid://c2qwhx3ctwu1k"]
 
 [ext_resource type="Script" path="res://scripts/maps/tutorial_area.gd" id="1_k2wyx"]
 [ext_resource type="Shader" path="res://terrain/terrain_RGB.gdshader" id="2_dlh6n"]
 [ext_resource type="Texture2D" uid="uid://cyao0nb06n5ma" path="res://terrain/tutorial_area_RGBmask.png" id="3_26xxt"]
+[ext_resource type="Texture2D" uid="uid://bo08rat0eip7u" path="res://assets/textures/Texture_7_Diffuse.png" id="3_oasmg"]
+[ext_resource type="Texture2D" uid="uid://b83hfsd8k4prf" path="res://assets/textures/Texture_13_Diffuse.png" id="4_75x8i"]
+[ext_resource type="Texture2D" uid="uid://b3252w2t03oro" path="res://assets/textures/Texture_15_Diffuse.png" id="5_3bnf3"]
+[ext_resource type="Texture2D" uid="uid://cqamnnwm3hlhj" path="res://assets/textures/Texture_8_Diffuse.png" id="7_b8uq3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vwcwh"]
 render_priority = 0
@@ -12,6 +16,10 @@ shader_parameter/uv_size2 = 1.0
 shader_parameter/uv_size3 = 1.0
 shader_parameter/uv_size4 = 1.0
 shader_parameter/source_texture_mask = ExtResource("3_26xxt")
+shader_parameter/source_texture_black = ExtResource("3_oasmg")
+shader_parameter/source_texture_red = ExtResource("7_b8uq3")
+shader_parameter/source_texture_green = ExtResource("5_3bnf3")
+shader_parameter/source_texture_blue = ExtResource("4_75x8i")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3c2i5"]
 
