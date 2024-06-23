@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c2qwhx3ctwu1k"]
+[gd_scene load_steps=15 format=3 uid="uid://c2qwhx3ctwu1k"]
 
 [ext_resource type="Script" path="res://scripts/maps/tutorial_area.gd" id="1_k2wyx"]
 [ext_resource type="Shader" path="res://terrain/terrain_RGB.gdshader" id="2_hfoof"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://b3252w2t03oro" path="res://assets/textures/Texture_15_Diffuse.png" id="5_pwmdo"]
 [ext_resource type="Texture2D" uid="uid://bmyoc3wd6433o" path="res://terrain/tutorial_area_tutorial_area_RGBmask.png" id="6_0s6y4"]
 [ext_resource type="Texture2D" uid="uid://cqamnnwm3hlhj" path="res://assets/textures/Texture_8_Diffuse.png" id="7_gw78f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gt7n0"]
+size = Vector3(1, 10, 14)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qdsmr"]
 render_priority = 0
@@ -67,10 +70,14 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 
 
 [node name="interactable_container" type="Node" parent="."]
 
-[node name="trees" type="Node3D" parent="."]
+[node name="collisionwalls" type="Node3D" parent="."]
 
-[node name="tree_single_B_1" parent="trees" instance=ExtResource("2_ol3rj")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 2, -6, -35)
+[node name="StaticBody3D" type="StaticBody3D" parent="collisionwalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -39)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collisionwalls/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.04832, 0, 0)
+shape = SubResource("BoxShape3D_gt7n0")
 
 [node name="tutorial_area" type="Node3D" parent="."]
 
@@ -84,3 +91,32 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="tutorial_area/tutorialarea_terrain/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_4ujjw")
+
+[node name="trees" type="Node3D" parent="."]
+
+[node name="tree_single_B_1" parent="trees" instance=ExtResource("2_ol3rj")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 2, -6, -35)
+
+[node name="tree_single_B_2" parent="trees" instance=ExtResource("2_ol3rj")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 2, -6, -43.1413)
+
+[node name="tree_single_B_3" parent="trees" instance=ExtResource("2_ol3rj")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 8.00598, -6, -38.966)
+
+[node name="tree_single_B_4" parent="trees" instance=ExtResource("2_ol3rj")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 14.3715, -5.95206, -42.3999)
+
+[node name="tree_single_B_5" parent="trees" instance=ExtResource("2_ol3rj")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 12.5163, -5.95206, -35.0295)
+
+[node name="tree_single_B_6" parent="trees" instance=ExtResource("2_ol3rj")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 20.7454, -5.95206, -38.4462)
+
+[node name="tree_single_B_7" parent="trees" instance=ExtResource("2_ol3rj")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 28.1022, -5.95206, -40.8617)
+
+[node name="tree_single_B_8" parent="trees" instance=ExtResource("2_ol3rj")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 34.0934, -5.95206, -34.3672)
+
+[node name="tree_single_B_9" parent="trees" instance=ExtResource("2_ol3rj")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 26.5817, -5.95206, -33.685)
