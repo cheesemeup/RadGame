@@ -36,12 +36,11 @@ func request_map_swap(map_name: String):
 
 func map_swap(map_name: String):
 	# rpc configs to make sure the server also calls these functions
-	rpc_config("disable_player",{"call_local"=true})
-	rpc_config("enable_player",{"call_local"=true})
+	#rpc_config("disable_player",{"call_local"=true})
+	#rpc_config("enable_player",{"call_local"=true})
 	
 	# disable physics and control for players
 	for player in $/root/main/players.get_children():
-		print(player)
 		if not player.is_in_group("player"):
 			continue
 		rpc("disable_player",player.name)
@@ -71,9 +70,8 @@ func map_swap(map_name: String):
 	for player in $/root/main/players.get_children():
 		if not player.is_in_group("player"):
 			continue
-		player.translate = map_instance.initial_spawn_position
+		player.translation = map_instance.initial_spawn_position
 		rpc("enable_player",player.name)
-		print("interactables in list: ",player.interactables)
 
 
 @rpc("authority","call_local")

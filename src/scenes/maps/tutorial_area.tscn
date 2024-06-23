@@ -70,7 +70,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 
 [node name="trees" type="Node3D" parent="."]
 
 [node name="tree_single_B_1" parent="trees" instance=ExtResource("2_ol3rj")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 2, -4, -35)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 2, -6, -35)
 
 [node name="tutorial_area" type="Node3D" parent="."]
 
