@@ -35,6 +35,10 @@ func request_map_swap(map_name: String):
 
 
 func map_swap(map_name: String):
+	# rpc configs to make sure the server also calls these functions
+	rpc_config("disable_player",{"call_local"=true})
+	rpc_config("enable_player",{"call_local"=true})
+	
 	# disable physics and control for players
 	for player in $/root/main/players.get_children():
 		print(player)
