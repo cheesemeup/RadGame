@@ -24,7 +24,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 # FRAME
 func _physics_process(delta) -> void:
 	# movement
-	print(is_on_floor())
 	handle_movement(delta)
 	# player only section
 	if input.is_multiplayer_authority():
