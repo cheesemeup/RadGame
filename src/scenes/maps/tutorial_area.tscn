@@ -5,15 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://c3eh5mkkq850x" path="res://assets/textures/terrain/Texture_7_Diffuse.png" id="3_k5mcn"]
 [ext_resource type="Texture2D" uid="uid://cmvahnx0gdkp2" path="res://assets/textures/terrain/Texture_13_Diffuse.png" id="4_a60p2"]
 [ext_resource type="Texture2D" uid="uid://bv08082px8i0g" path="res://assets/textures/terrain/Texture_15_Diffuse.png" id="5_1iekq"]
+[ext_resource type="Texture2D" uid="uid://cbj7ldua3ga1f" path="res://maps/tutorial_area_RGBmask.png" id="6_taq2t"]
 [ext_resource type="Texture2D" uid="uid://cm8iag1jsep7m" path="res://assets/textures/terrain/Texture_8_Diffuse.png" id="7_ers33"]
 [ext_resource type="PackedScene" uid="uid://cco1ewsy8a1gl" path="res://assets/environment/tree_single_B.gltf" id="7_p2ire"]
 
 [sub_resource type="Environment" id="Environment_luk7f"]
 volumetric_fog_density = 0.0132
 volumetric_fog_albedo = Color(0.639216, 1, 0.737255, 1)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qc441"]
-load_path = "res://.godot/imported/tutorialarea_RGBmask.png-cc16075706cbf0997ad5fc4a6f19a613.s3tc.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yty8q"]
 render_priority = 0
@@ -22,7 +20,7 @@ shader_parameter/uv_size1 = 6.86
 shader_parameter/uv_size2 = 7.08
 shader_parameter/uv_size3 = 8.51
 shader_parameter/uv_size4 = 10.0
-shader_parameter/source_texture_mask = SubResource("CompressedTexture2D_qc441")
+shader_parameter/source_texture_mask = ExtResource("6_taq2t")
 shader_parameter/source_texture_black = ExtResource("3_k5mcn")
 shader_parameter/source_texture_red = ExtResource("7_ers33")
 shader_parameter/source_texture_green = ExtResource("5_1iekq")
