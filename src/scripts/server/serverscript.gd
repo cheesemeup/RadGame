@@ -71,7 +71,7 @@ func map_swap(map_name: String):
 	for player in $/root/main/players.get_children():
 		if not player.is_in_group("player"):
 			continue
-		rpc("enable_player",player.name, map_instance.initial_spawn_location)
+		rpc("enable_player",player.name, map_instance.initial_spawn_position)
 		print("interactables in list: ",player.interactables)
 
 
