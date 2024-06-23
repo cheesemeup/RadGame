@@ -164,3 +164,6 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 37.2307, 0.775009, -33.1529)
 
 [node name="tree24" parent="trees" instance=ExtResource("7_p2ire")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 40.8473, 0.775009, -33.8201)
+
+[node name="tree25" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1, 0)
