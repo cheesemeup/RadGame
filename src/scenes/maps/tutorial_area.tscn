@@ -1,16 +1,19 @@
-[gd_scene load_steps=14 format=3 uid="uid://c2qwhx3ctwu1k"]
+[gd_scene load_steps=15 format=3 uid="uid://c2qwhx3ctwu1k"]
 
 [ext_resource type="Script" path="res://scripts/maps/tutorial_area.gd" id="1_k2wyx"]
 [ext_resource type="Shader" path="res://maps/RGBTerrainMixer.gdshader" id="2_8wclt"]
 [ext_resource type="Texture2D" uid="uid://c3eh5mkkq850x" path="res://assets/textures/terrain/Texture_7_Diffuse.png" id="3_k5mcn"]
 [ext_resource type="Texture2D" uid="uid://cmvahnx0gdkp2" path="res://assets/textures/terrain/Texture_13_Diffuse.png" id="4_a60p2"]
 [ext_resource type="Texture2D" uid="uid://bv08082px8i0g" path="res://assets/textures/terrain/Texture_15_Diffuse.png" id="5_1iekq"]
-[ext_resource type="Texture2D" uid="uid://b20viqmorby0g" path="res://maps/tutorial_area_tutorialarea_RGBmask.png" id="6_3hpkd"]
 [ext_resource type="Texture2D" uid="uid://cm8iag1jsep7m" path="res://assets/textures/terrain/Texture_8_Diffuse.png" id="7_ers33"]
+[ext_resource type="PackedScene" uid="uid://cco1ewsy8a1gl" path="res://assets/environment/tree_single_B.gltf" id="7_p2ire"]
 
 [sub_resource type="Environment" id="Environment_luk7f"]
 volumetric_fog_density = 0.0132
 volumetric_fog_albedo = Color(0.639216, 1, 0.737255, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qc441"]
+load_path = "res://.godot/imported/tutorialarea_RGBmask.png-cc16075706cbf0997ad5fc4a6f19a613.s3tc.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yty8q"]
 render_priority = 0
@@ -19,7 +22,7 @@ shader_parameter/uv_size1 = 6.86
 shader_parameter/uv_size2 = 7.08
 shader_parameter/uv_size3 = 8.51
 shader_parameter/uv_size4 = 10.0
-shader_parameter/source_texture_mask = ExtResource("6_3hpkd")
+shader_parameter/source_texture_mask = SubResource("CompressedTexture2D_qc441")
 shader_parameter/source_texture_black = ExtResource("3_k5mcn")
 shader_parameter/source_texture_red = ExtResource("7_ers33")
 shader_parameter/source_texture_green = ExtResource("5_1iekq")
@@ -82,9 +85,82 @@ transform = Transform3D(1, 0, 0, 0, 0.814116, 0.580703, 0, -0.580703, 0.814116, 
 [node name="tutorialarea_mesh" type="MeshInstance3D" parent="tutorialarea_terrain"]
 material_override = SubResource("ShaderMaterial_yty8q")
 mesh = SubResource("ArrayMesh_xcmw2")
-skeleton = NodePath("")
 
 [node name="tutorialarea_staticbody" type="StaticBody3D" parent="tutorialarea_terrain/tutorialarea_mesh"]
 
 [node name="tutorialarea_collision" type="CollisionShape3D" parent="tutorialarea_terrain/tutorialarea_mesh/tutorialarea_staticbody"]
 shape = SubResource("ConcavePolygonShape3D_s01js")
+
+[node name="trees" type="Node3D" parent="."]
+
+[node name="tree1" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 10.0007, -2.38419e-07, -33)
+
+[node name="tree2" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 10.0039, -0.407797, -38.5862)
+
+[node name="tree3" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 8.79729, -0.407797, -35.6377)
+
+[node name="tree4" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 7.86226, -0.183026, -42.1442)
+
+[node name="tree5" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 11.7323, 0.775009, -42.8072)
+
+[node name="tree6" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 14.3538, 0.775009, -37.1993)
+
+[node name="tree7" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 26.0734, 0.775009, -37.1993)
+
+[node name="tree8" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15.6949, 0.649889, -41.2109)
+
+[node name="tree9" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 14.7563, 0.775009, -33.5402)
+
+[node name="tree10" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 19.8082, 0.775009, -43.2167)
+
+[node name="tree11" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 18.8706, 0.775009, -38.936)
+
+[node name="tree12" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 17.8507, 0.775009, -35.4072)
+
+[node name="tree13" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 20.7996, 0.775009, -33.5714)
+
+[node name="tree14" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 22.6358, 0.775009, -41.1932)
+
+[node name="tree15" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 22.44, 0.775009, -37.6509)
+
+[node name="tree16" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 25.9545, 0.775009, -33.2828)
+
+[node name="tree17" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 29.6797, 0.775009, -34.0493)
+
+[node name="tree18" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30.0738, 0.775009, -39.6003)
+
+[node name="tree19" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 33.1652, 0.775009, -37.1993)
+
+[node name="tree20" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 33.6455, 0.775009, -33.6117)
+
+[node name="tree21" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 34.0859, 0.775009, -41.5186)
+
+[node name="tree22" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 38.8974, 0.775009, -37.0946)
+
+[node name="tree23" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 37.2307, 0.775009, -33.1529)
+
+[node name="tree24" parent="trees" instance=ExtResource("7_p2ire")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 40.8473, 0.775009, -33.8201)
