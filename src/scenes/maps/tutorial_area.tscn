@@ -1,6 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2qwhx3ctwu1k"]
+[gd_scene load_steps=9 format=3 uid="uid://c2qwhx3ctwu1k"]
 
 [ext_resource type="Script" path="res://scripts/maps/tutorial_area.gd" id="1_k2wyx"]
+[ext_resource type="Shader" path="res://terrain/terrain_RGB.gdshader" id="2_dlh6n"]
+[ext_resource type="Texture2D" uid="uid://cyao0nb06n5ma" path="res://terrain/tutorial_area_RGBmask.png" id="3_26xxt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwcwh"]
+render_priority = 0
+shader = ExtResource("2_dlh6n")
+shader_parameter/uv_size1 = 1.0
+shader_parameter/uv_size2 = 1.0
+shader_parameter/uv_size3 = 1.0
+shader_parameter/uv_size4 = 1.0
+shader_parameter/source_texture_mask = ExtResource("3_26xxt")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3c2i5"]
 
@@ -50,6 +61,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 
 [node name="tutorial_area" type="Node3D" parent="."]
 
 [node name="tutorialarea_terrain2" type="MeshInstance3D" parent="tutorial_area"]
+material_override = SubResource("ShaderMaterial_vwcwh")
 mesh = SubResource("ArrayMesh_2ensx")
 skeleton = NodePath("")
 
