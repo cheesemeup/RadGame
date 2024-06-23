@@ -71,8 +71,7 @@ func map_swap(map_name: String):
 	for player in $/root/main/players.get_children():
 		if not player.is_in_group("player"):
 			continue
-		player.translate = map_instance.initial_spawn_position
-		rpc("enable_player",player.name)
+		rpc("enable_player",player.name, map_instance.initial_spawn_location)
 		print("interactables in list: ",player.interactables)
 
 
@@ -94,8 +93,9 @@ func disable_player(player: String):
 
 
 @rpc("authority","call_local")
-func enable_player(player: String):
+func enable_player(player: String, spawn_position: Vector3):
 	var player_node = $/root/main/players.get_node(player)
+	player_node.translate = spawn_position
 	player_node.set_physics_process(true)
 	if not player_node.get_node("player_input").is_multiplayer_authority():
 		return
