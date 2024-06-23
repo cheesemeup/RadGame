@@ -77,3 +77,5 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="tutorial_area/tutorialarea_terrain2/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_7qegj")
+
+[node name="trees" type="Node3D" parent="."]
