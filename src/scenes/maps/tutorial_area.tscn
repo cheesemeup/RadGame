@@ -11,10 +11,10 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vwcwh"]
 render_priority = 0
 shader = ExtResource("2_dlh6n")
-shader_parameter/uv_size1 = 1.0
-shader_parameter/uv_size2 = 1.0
-shader_parameter/uv_size3 = 1.0
-shader_parameter/uv_size4 = 1.0
+shader_parameter/uv_size1 = 5.96
+shader_parameter/uv_size2 = 6.79
+shader_parameter/uv_size3 = 10.0
+shader_parameter/uv_size4 = 10.0
 shader_parameter/source_texture_mask = ExtResource("3_26xxt")
 shader_parameter/source_texture_black = ExtResource("3_oasmg")
 shader_parameter/source_texture_red = ExtResource("7_b8uq3")
