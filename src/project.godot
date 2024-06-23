@@ -20,7 +20,6 @@ References="*res://scripts/references.gd"
 Combat="*res://scripts/functionalities/combat.gd"
 Serverscript="*res://scripts/server/serverscript.gd"
 UIHandler="*res://scripts/ui_handler.gd"
-SimpleGrass="*res://addons/simplegrasstextured/singleton.tscn"
 
 [display]
 
