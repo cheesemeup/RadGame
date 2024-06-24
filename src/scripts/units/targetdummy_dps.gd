@@ -6,7 +6,7 @@ func _enter_tree():
 
 func _ready() -> void:
 	# initialize BaseUnit
-	initialize_base_unit("npc","3")
+	initialize_base_unit("npc","4")
 	set_process(false)
 	if $mpsynchronizer.is_multiplayer_authority():
 		set_process(true)
