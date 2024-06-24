@@ -11,6 +11,6 @@ func _ready():
 	if $mpsynchronizer.is_multiplayer_authority():
 		set_process(true)
 
-func _process(_delta):
-	if stats_current["health_current"] == stats_current["health_max"]:
-		$"spell_container/spell_4".trigger()
+#func _process(_delta):
+	#if stats_current["health_current"] == stats_current["health_max"]:
+		#$"spell_container/spell_4".trigger()

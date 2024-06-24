@@ -67,7 +67,7 @@
 	"name":"Test NPC Damage Self",
 	"targetgroup":"friendly",
 	"resource_cost":0,
-	"max_range":40,
+	"max_range":0,
 	"cooldown":0,
 	"on_gcd":0,
 	"spelltype":"damage",
