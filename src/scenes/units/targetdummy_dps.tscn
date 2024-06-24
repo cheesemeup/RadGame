@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://o2teonckm3yt"]
+
+[ext_resource type="Script" path="res://scripts/units/targetdummy_dps.gd" id="1_8vh5f"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ejv2q"]
+radius = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdpww"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1s5y5"]
+material = SubResource("StandardMaterial3D_vdpww")
+
+[node name="targetdummy_dps" type="CharacterBody3D"]
+script = ExtResource("1_8vh5f")
+
+[node name="unit_collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_ejv2q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_1s5y5")
