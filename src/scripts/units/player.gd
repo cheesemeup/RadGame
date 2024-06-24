@@ -89,7 +89,13 @@ func targeting(event_position: Vector2) -> void:
 		UIHandler.hide_targetframe()
 		return
 	target = target_dict["collider"]
-	rpc_id(1,"set_target",target_dict["collider"].name,target_dict["collider"].get_parent().name)
+	rpc_id(
+		1,
+		"set_target",
+		target_dict["collider"].name,
+		target_dict["collider"].get_parent().name,
+		target_dict["collider"].is_in_group("player")
+		)
 	$"/root/main/ui/unitframe_target".target_reference = target
 	UIHandler.show_targetframe()
 
@@ -116,9 +122,11 @@ func is_legal_target(target_dict: Dictionary) -> bool:
 
 
 @rpc("any_peer")
-func set_target(requested_target,parent):
+func set_target(requested_target: String, parent: String, is_player: bool):
 	if requested_target == null:
 		selected_target = null
+	elif is_player:
+		selected_target = get_node("/root/main/%s/%s"%[parent,requested_target])
 	else:
 		selected_target = get_node("/root/main/maps/active_map/%s/%s"%[parent,requested_target])
 
