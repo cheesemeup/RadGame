@@ -120,7 +120,7 @@ func set_target(requested_target,parent):
 	if requested_target == null:
 		selected_target = null
 	else:
-		selected_target = get_node("/root/main/%s/%s"%[parent,requested_target])
+		selected_target = get_node("/root/main/maps/active_map/%s/%s"%[parent,requested_target])
 
 
 ####################################################################################################
