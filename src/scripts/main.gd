@@ -10,7 +10,10 @@ func _ready():
 	if OS.has_feature("dedicated_server"):
 		Serverscript.start_serverscript()
 		return
-	UIHandler.load_mainmenu()
+	UIHandler.load_main_menu()
+	# apply game settings on startup
+	var settings = GameSettings.load_or_get_defaults()
+	settings.apply(get_tree().root)
 
 
 func server_join_connect():
@@ -34,6 +37,7 @@ func server_join_connect():
 
 func start_joining(server_address: String, port: int = PORT):
 	print("starting join on port %d" % port)
+	UIHandler.hide_main_menu()
 	multiplayer.multiplayer_peer = null
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(server_address, port)

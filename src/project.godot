@@ -13,6 +13,7 @@ config_version=5
 config/name="RadGame"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=200
 
 [autoload]
 
@@ -26,7 +27,7 @@ UIHandler="*res://scripts/ui_handler.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="viewport"
-window/stretch/aspect="ignore"
+window/stretch/aspect="expand"
 
 [input]
 
