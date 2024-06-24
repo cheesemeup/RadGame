@@ -12,9 +12,7 @@ func _ready():
 		return
 	UIHandler.load_main_menu()
 	# apply game settings on startup
-	var settings = GameSettings.load_or_get_defaults()
-	settings.apply(get_tree().root)
-
+	SettingsManager.apply_settings(get_tree().root)
 
 func server_join_connect():
 	multiplayer.peer_connected.connect(spawn_player)
