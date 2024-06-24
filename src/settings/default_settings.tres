@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Settings" load_steps=8 format=3 uid="uid://dmgst53vva0fl"]
+
+[ext_resource type="Script" path="res://settings/gameplay_settings.gd" id="1_32n6d"]
+[ext_resource type="Script" path="res://settings/settings.gd" id="1_ct4yt"]
+[ext_resource type="Script" path="res://settings/input_settings.gd" id="2_i818s"]
+[ext_resource type="Script" path="res://settings/video_settings.gd" id="2_jmurn"]
+
+[sub_resource type="Resource" id="Resource_wf3b3"]
+script = ExtResource("1_32n6d")
+show_player_health = false
+
+[sub_resource type="Resource" id="Resource_lxmcw"]
+script = ExtResource("2_i818s")
+input_event_map = {}
+
+[sub_resource type="Resource" id="Resource_u5x1l"]
+script = ExtResource("2_jmurn")
+resolution = Vector2i(1920, 1080)
+vsync = false
+fullscreen = false
+
+[resource]
+script = ExtResource("1_ct4yt")
+video_settings = SubResource("Resource_u5x1l")
+input_settings = SubResource("Resource_lxmcw")
+gameplay_settings = SubResource("Resource_wf3b3")

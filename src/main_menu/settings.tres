@@ -1,6 +1,0 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://puatqdket2g2"]
-
-[ext_resource type="Script" path="res://main_menu/settings.gd" id="1_lmnge"]
-
-[resource]
-script = ExtResource("1_lmnge")

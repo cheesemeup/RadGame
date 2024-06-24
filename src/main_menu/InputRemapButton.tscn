@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1qtpnwnamepe"]
+
+[ext_resource type="Script" path="res://main_menu/input_remap_button.gd" id="1_5ybjq"]
+
+[node name="InputRemapButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_horizontal = 10
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+script = ExtResource("1_5ybjq")

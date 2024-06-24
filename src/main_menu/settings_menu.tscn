@@ -21,46 +21,75 @@ layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Settings"
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_right = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="VideoLabel" type="Label" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Video"
+
+[node name="VideoSettingsGridContainer" type="GridContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/VideoSettingsGridContainer"]
 layout_mode = 2
 text = "Resolution"
 
-[node name="resolution_options" type="OptionButton" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="resolution_options" type="OptionButton" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/VideoSettingsGridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/VideoSettingsGridContainer"]
 layout_mode = 2
 text = "VSync"
 
-[node name="vsync_checkbox" type="CheckBox" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="vsync_checkbox" type="CheckBox" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/VideoSettingsGridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Label3" type="Label" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/VideoSettingsGridContainer"]
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="fullscreen_checkbox" type="CheckBox" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="fullscreen_checkbox" type="CheckBox" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/VideoSettingsGridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
+[node name="ControlsLabel" type="Label" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Controls"
+
+[node name="ControlsGridContainer" type="GridContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+columns = 2
+
 [node name="apply_settings_button" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 disabled = true
 text = "apply"
 
 [node name="ApplySettingsDialog" type="MarginContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 16
@@ -77,6 +106,7 @@ layout_mode = 2
 text = "keep settings?"
 
 [node name="ApplySettingsTimerRemaining" type="Label" parent="VBoxContainer/ApplySettingsDialog/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "20s"
 
@@ -86,24 +116,27 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
 
 [node name="ApplyCancelButton" type="Button" parent="VBoxContainer/ApplySettingsDialog/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "cancel"
 
 [node name="ApplyConfirmButton" type="Button" parent="VBoxContainer/ApplySettingsDialog/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "keep"
 
 [node name="ApplySettingsTimer" type="Timer" parent="VBoxContainer/ApplySettingsDialog/HBoxContainer"]
+unique_name_in_owner = true
 wait_time = 10.0
 one_shot = true
 
-[connection signal="item_selected" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/resolution_options" to="." method="_on_resolution_options_item_selected"]
-[connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/vsync_checkbox" to="." method="_on_vsync_checkbox_toggled"]
-[connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/fullscreen_checkbox" to="." method="_on_fullscreen_checkbox_toggled"]
+[connection signal="item_selected" from="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/VideoSettingsGridContainer/resolution_options" to="." method="_on_resolution_options_item_selected"]
+[connection signal="toggled" from="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/VideoSettingsGridContainer/vsync_checkbox" to="." method="_on_vsync_checkbox_toggled"]
+[connection signal="toggled" from="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/VideoSettingsGridContainer/fullscreen_checkbox" to="." method="_on_fullscreen_checkbox_toggled"]
 [connection signal="pressed" from="VBoxContainer/apply_settings_button" to="." method="_on_apply_settings_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ApplySettingsDialog/HBoxContainer/ApplyCancelButton" to="." method="_on_apply_cancel_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ApplySettingsDialog/HBoxContainer/ApplyConfirmButton" to="." method="_on_apply_confirm_button_pressed"]
