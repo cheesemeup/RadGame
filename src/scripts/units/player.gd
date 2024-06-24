@@ -34,6 +34,7 @@ func _physics_process(delta) -> void:
 	if $mpsynchronizer.is_multiplayer_authority():
 		# get nearest interactable
 		current_interactable = get_nearest_interactable()
+		print(current_interactable)
 
 
 ####################################################################################################
