@@ -1100,6 +1100,9 @@ mesh = SubResource("BoxMesh_r14ld")
 _spawnable_scenes = PackedStringArray("res://scenes/units/targetdummy_dps.tscn")
 spawn_path = NodePath("..")
 
+[node name="targetdummy_dps" parent="npcs" instance=ExtResource("12_w8tbo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -5, 27)
+
 [node name="targetdummy_dps2" parent="npcs" instance=ExtResource("12_w8tbo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, -5, 26)
 

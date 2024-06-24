@@ -5,6 +5,7 @@ var targetdummy_dps = preload("res://scenes/units/targetdummy_dps.tscn")
 func initialize():
 	print("initializing tutorial area")
 	initial_spawn_position = Vector3(0,-5,-30)
+	init_npcs()
 
 
 func init_npcs():
