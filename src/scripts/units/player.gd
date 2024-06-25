@@ -89,6 +89,7 @@ func targeting(event_position: Vector2) -> void:
 		UIHandler.hide_targetframe()
 		return
 	target = target_dict["collider"]
+	print($/root/main/maps/active_map/npcs.get_children())
 	rpc_id(
 		1,
 		"set_target",
@@ -123,7 +124,6 @@ func is_legal_target(target_dict: Dictionary) -> bool:
 
 @rpc("any_peer")
 func set_target(requested_target: String, parent: String, is_player: bool):
-	print($/root/main/maps/active_map/npcs.get_children())
 	if requested_target == null:
 		selected_target = null
 	elif is_player:
