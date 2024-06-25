@@ -12,5 +12,5 @@ func _ready() -> void:
 		set_process(true)
 
 func _process(_delta: float) -> void:
-	if stats_current["health_current"] <= stats_current["health_max"]:
+	if stats_current["health_current"] == stats_current["health_max"]:
 		$"spell_container/spell_4".trigger()
