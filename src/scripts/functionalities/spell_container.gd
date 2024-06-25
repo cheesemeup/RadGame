@@ -13,7 +13,8 @@ func spell_entrypoint(spell_id: String):
 		return 1  # spell not known
 	# trigger spell
 	print("triggering ",spell_id)
-	spell_node.trigger()
+	var result = spell_node.trigger()
+	print(result)
 
 # apply role swap changes
 
