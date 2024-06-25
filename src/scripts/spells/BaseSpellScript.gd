@@ -46,14 +46,6 @@ func is_on_cd() -> bool:
 
 func insufficient_resource(cost: int, resource: int) -> bool:
 	# check if there are sufficient resources to cast the spell
-	print("cost: %s"%cost)
-	print("resource: %s"%resource)
-	var val: bool
-	if 20 < 20:
-		val = true
-	else:
-		val = false
-	print("20 < 20 is: %s"%val)
 	if cost <= resource:
 		return false
 	return true
