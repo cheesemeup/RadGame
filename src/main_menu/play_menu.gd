@@ -8,7 +8,9 @@ signal start_host
 
 func _on_host_button_pressed():
 	print("starting host")
-	#Autoload.main_reference.start_hosting()
+	References.main_reference.start_hosting(
+		port_entry.text.to_int()
+	)
 
 func _on_join_button_pressed():
 	References.main_reference.start_joining(

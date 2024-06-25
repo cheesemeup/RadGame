@@ -25,6 +25,7 @@ func start_serverscript():
 	# connect join and leave signals
 	References.main_reference.server_join_connect()
 
+
 ###############################################################
 ### MAP SWAPPING
 ###############################################################
