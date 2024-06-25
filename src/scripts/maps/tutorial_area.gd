@@ -19,12 +19,13 @@ func init_npcs():
 		Vector3(-33,-5,24),
 		Vector3(-29,-5,24)
 	]
+	print("calling spawn_dummygroup")
 	spawn_dummygroup(targetdummy_dps,spawn_position)
 
 
-func spawn_dummygroup(dummy_preload: PackedScene, spawn_location: Array[Vector3]):
-	for i in spawn_location.size():
+func spawn_dummygroup(dummy_preload: PackedScene, spawn_position: Array[Vector3]):
+	for i in spawn_position.size():
 		print("spawning dummy %s"%i)
 		var dummy_instance = dummy_preload.instantiate()
-		dummy_instance.position = spawn_location[i]
+		dummy_instance.position = spawn_position[i]
 		$npcs.add_child(dummy_instance,true)
