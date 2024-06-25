@@ -18,6 +18,7 @@ func _ready():
 func trigger():
 	print("spell 12 triggered")
 	var sourcenode = get_parent().get_parent()
+	print("sourcenode set")
 	# check cooldown
 	if on_cd:
 		print("on cooldown")
@@ -36,8 +37,10 @@ func trigger():
 		print("out of range")
 		return
 	# apply resource cost
+	print("apply cost")
 	sourcenode.stats_curr["resource_current"] = min(sourcenode.stats_curr["resource_current"]-spell_curr["resource_cost"],sourcenode.stats_curr["resource_max"])
 	# send gcd
+	print("send gcd")
 	get_parent().send_gcd
 	# fire spell
 	print("firing spell")
