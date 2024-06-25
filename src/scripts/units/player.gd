@@ -89,7 +89,7 @@ func targeting(event_position: Vector2) -> void:
 		UIHandler.hide_targetframe()
 		return
 	target = target_dict["collider"]
-	print($/root/main/maps/active_map/npcs.get_children())
+	print($/root/main/maps.get_children())
 	rpc_id(
 		1,
 		"set_target",
