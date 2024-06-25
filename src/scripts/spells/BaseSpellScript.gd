@@ -7,7 +7,7 @@ var spell_current: Dictionary
 var cd_timer = Timer.new()
 var use_mouseover_target = false
 
-func initialize_base_spell(spell_id: String):
+func initialize_base_spell(spell_id: String) -> void:
 	# load spell data from data file
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
 	spell_base = json_dict[spell_id]
@@ -21,7 +21,7 @@ func initialize_base_spell(spell_id: String):
 
 ####################################################################################################
 # TARGET
-func get_spell_target(source: CharacterBody3D):
+func get_spell_target(source: CharacterBody3D) -> CharacterBody3D:
 	# return either selected or mouseovered target, depending on setting
 	if use_mouseover_target:
 		return source.mouseover_target
@@ -69,7 +69,7 @@ func is_not_in_line_of_sight(source: CharacterBody3D, target_position: Vector3) 
 
 ####################################################################################################
 # COOLDOWN
-func trigger_cd(duration: float):
+func trigger_cd(duration: float) -> void:
 	# check if current cooldown exceeds requested cooldown
 	if cd_timer.time_left > duration:
 		return

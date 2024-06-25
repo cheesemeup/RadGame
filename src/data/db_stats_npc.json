@@ -126,5 +126,101 @@
 		"physical":1,
 		"magic":1,
 	}
+},
+"4":{
+	"unit_name":"Targetdummy DPS",
+	"unit_class":"Dummy",
+	"size":0.6,
+	"spell_list":[2],
+	"speed":0,
+	"health_max":100000,
+	"health_current":25001,
+	"resource_type":"none",
+	"resource_max":100,
+	"resource_current":100,
+	"resource_regen":0,
+	"primary":100,
+	"avoidance":0,
+	"crit_chance":0,
+	"damage_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"defense_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal_taken_modifier":{
+		"physical":1,
+		"magic":1,
+	}
+},
+"5":{
+	"unit_name":"Targetdummy Heal",
+	"unit_class":"Dummy",
+	"size":0.6,
+	"spell_list":[4],
+	"speed":0,
+	"health_max":100000,
+	"health_current":99999,
+	"resource_type":"none",
+	"resource_max":100,
+	"resource_current":100,
+	"resource_regen":0,
+	"primary":100,
+	"avoidance":0,
+	"crit_chance":0,
+	"damage_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"defense_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal_taken_modifier":{
+		"physical":1,
+		"magic":1,
+	}
+},
+"6":{
+	"unit_name":"Targetdummy Tank",
+	"unit_class":"Dummy",
+	"size":0.6,
+	"spell_list":[2],
+	"speed":0,
+	"health_max":100000,
+	"health_current":25001,
+	"resource_type":"none",
+	"resource_max":100,
+	"resource_current":100,
+	"resource_regen":0,
+	"primary":100,
+	"avoidance":0,
+	"crit_chance":0,
+	"damage_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"defense_modifier":{
+		"physical":1,
+		"magic":1,
+	},
+	"heal_taken_modifier":{
+		"physical":1,
+		"magic":1,
+	}
 }
 }

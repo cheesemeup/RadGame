@@ -12,5 +12,5 @@ func _ready():
 		set_process(true)
 
 func _process(_delta):
-	if stats_current["health_current"] == stats_current["health_max"]:
+	if stats_current["health_current"] == stats_current["health_max"] * 0.75:
 		$"spell_container/spell_4".trigger()

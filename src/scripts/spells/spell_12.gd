@@ -1,68 +1,42 @@
-extends Node
-
-# Mending Waters
-var spell_base : Dictionary
-var spell_curr : Dictionary
-var cd_timer = Timer.new()
-var on_cd = false
-var actionbar = []
+# Mending Water
+extends BaseSpell
 
 func _ready():
-	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
-	spell_base = json_dict["12"]
-	spell_curr = spell_base.duplicate(true)
-	cd_timer.one_shot = true
-	cd_timer.connect("timeout",set_ready.bind())
-	add_child(cd_timer)
+	initialize_base_spell("12")
 
 func trigger():
-	var sourcenode = get_parent().get_parent()
-	# check cooldown
-	if on_cd:
-		print("on cooldown")
-		return
-	# check resource cost
-	if sourcenode.stats_curr["resource_current"] < spell_curr["resource_cost"]:
-		print("insufficient resources")
-		return
-	# check target
-	var spell_target = sourcenode.get_spell_target(spell_curr)
-	if typeof(spell_target) == TYPE_STRING and spell_target == "no_legal_target":
-		print("no legal target")
-		return
+	# get source and target nodes
+	var source = get_parent().get_parent()
+	var target = get_spell_target(source)
+	# set target to self if there is no target
+	if target == null:
+		target = source
+	# check target legality
+	if is_illegal_target(spell_current["targetgroup"], target):
+		return 1
+	# check for cooldown
+	if is_on_cd():
+		return 2
+	# check resource availability
+	if insufficient_resource(
+		spell_current["resource_cost"],
+		source.stats_current["resource_current"]
+	):
+		return 3
 	# check range
-	if sourcenode.global_transform.origin.distance_to(spell_target.global_transform.origin) - spell_target.stats_curr["size"] > spell_curr["range"]:
-		print("out of range")
-		return
-	# apply resource cost
-	sourcenode.stats_curr["resource_current"] = min(sourcenode.stats_curr["resource_current"]-spell_curr["resource_cost"],sourcenode.stats_curr["resource_max"])
+	if is_not_in_range(source.position,target.position,spell_current["max_range"]):
+		return 4
+	# check line of sight, NOT FUNCTIONAL
+	if is_not_in_line_of_sight(source,target.position):
+		return 5
+	# apply resource cost 
+	source.stats_current["resource_current"] = update_resource(
+		spell_current["resource_cost"],
+		source.stats_current["resource_current"],
+		source.stats_current["resource_max"]
+	)
 	# send gcd
-	get_parent().send_gcd
-	# fire spell
-	Combat.event_heal(spell_curr,sourcenode,spell_target)
-
-func trigger_cd(duration):
-	# start timer
-	cd_timer.wait_time = duration
-	cd_timer.start()
-	on_cd = true
-	# start cd swipe
-	for ab in actionbar:
-		ab.start_cd(duration)
-
-func set_ready():
-	on_cd = false
-	for ab in actionbar:
-		ab.end_cd()
-
-# role swap effects
-func swap_tank():
-	pass
-func swap_heal():
-	pass
-func swap_meleedps():
-	pass
-func swap_rangedps():
-	pass
-	
-# talent effects  
+	if spell_current["on_gcd"] == 1:
+		get_parent().send_gcd()
+	# send event to combat script
+	Combat.combat_event_entrypoint(spell_current,source,target)

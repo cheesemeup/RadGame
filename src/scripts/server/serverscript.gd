@@ -35,9 +35,9 @@ func request_map_swap(map_name: String):
 
 
 func map_swap(map_name: String):
+	print("changing map to %s"%map_name)
 	# disable physics and control for players
 	for player in $/root/main/players.get_children():
-		print(player)
 		if not player.is_in_group("player"):
 			continue
 		rpc("disable_player",player.name)
@@ -48,7 +48,7 @@ func map_swap(map_name: String):
 		# easily be circumvented. unloading interactables attempts to
 		# disconnect the tree_entered signal of players within range, even
 		# though this signal has never been connected
-		$/root/main/maps.get_node("active_map").queue_free()
+		$/root/main/maps.get_node("active_map").free()
 		# remove unloaded interactables from players
 		for player in $/root/main/players.get_children():
 			if not player.is_in_group("player"):
@@ -67,8 +67,8 @@ func map_swap(map_name: String):
 	for player in $/root/main/players.get_children():
 		if not player.is_in_group("player"):
 			continue
+		player.global_position = map_instance.initial_spawn_position
 		rpc("enable_player",player.name)
-		print("interactables in list: ",player.interactables)
 
 
 @rpc("authority","call_local")
