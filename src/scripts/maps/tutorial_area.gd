@@ -38,14 +38,14 @@ func init_npcs() -> void:
 	# tank dummies
 	print("spawn tank dummies")
 	spawn_position = [
-		Vector3(-32,-5,-8),
-		Vector3(-30,-5,-21),
-		Vector3(-34,-5,-21),
-		Vector3(-32,-5,-23),
-		Vector3(-30,-5,-25),
-		Vector3(-34,-5,-25),
+		Vector3(-32,-5,-25),
+		Vector3(-30,-5,-38),
+		Vector3(-34,-5,-38),
+		Vector3(-32,-5,-40),
+		Vector3(-30,-5,-42),
+		Vector3(-34,-5,-42),
 	]
-	spawn_dummygroup(targetdummy_heal,spawn_position)
+	spawn_dummygroup(targetdummy_tank,spawn_position)
 
 
 func spawn_dummygroup(dummy_preload: PackedScene, spawn_position: Array):
