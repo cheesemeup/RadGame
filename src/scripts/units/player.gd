@@ -29,7 +29,6 @@ func _physics_process(delta) -> void:
 	if input.is_multiplayer_authority():
 		# space state for targeting
 		space_state = get_world_3d().direct_space_state
-		return
 	# server only section
 	if $mpsynchronizer.is_multiplayer_authority():
 		# get nearest interactable
@@ -141,6 +140,7 @@ func get_nearest_interactable():
 		nearest_interactable = interactables[0]
 	# get closest if more than one interactable exists
 	elif interactables.size() > 1:
+		nearest_interactable = interactables[0]
 		var distance = self.global_position.distance_to(nearest_interactable.position)
 		var new_distance = distance
 		for interactable in interactables:
