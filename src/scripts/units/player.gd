@@ -123,6 +123,7 @@ func is_legal_target(target_dict: Dictionary) -> bool:
 
 @rpc("any_peer")
 func set_target(requested_target: String, parent: String, is_player: bool):
+	print($/root/main/maps/active_map/npcs.get_children())
 	if requested_target == null:
 		selected_target = null
 	elif is_player:
