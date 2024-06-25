@@ -20,19 +20,23 @@ func trigger():
 	var sourcenode = get_parent().get_parent()
 	print("sourcenode set")
 	# check cooldown
+	print("checking cd")
 	if on_cd:
 		print("on cooldown")
 		return
 	# check resource cost
+	print("checking resource sufficiency")
 	if sourcenode.stats_curr["resource_current"] < spell_curr["resource_cost"]:
 		print("insufficient resources")
 		return
 	# check target
+	print("check target")
 	var spell_target = sourcenode.get_spell_target(spell_curr)
 	if typeof(spell_target) == TYPE_STRING and spell_target == "no_legal_target":
 		print("no legal target")
 		return
 	# check range
+	print("check range")
 	if sourcenode.global_transform.origin.distance_to(spell_target.global_transform.origin) - spell_target.stats_curr["size"] > spell_curr["range"]:
 		print("out of range")
 		return
