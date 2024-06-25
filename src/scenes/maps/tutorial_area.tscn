@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c2qwhx3ctwu1k"]
+[gd_scene load_steps=27 format=3 uid="uid://c2qwhx3ctwu1k"]
 
 [ext_resource type="Script" path="res://scripts/maps/tutorial_area.gd" id="1_k2wyx"]
 [ext_resource type="Shader" path="res://terrain/terrain_RGB.gdshader" id="2_hfoof"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://cqamnnwm3hlhj" path="res://assets/textures/Texture_8_Diffuse.png" id="7_gw78f"]
 [ext_resource type="Texture2D" uid="uid://2g3ix37vy2qk" path="res://assets/textures/walls/lynocs_stonewall_5/5_diffuseOriginal.bmp" id="9_cb8gf"]
 [ext_resource type="Texture2D" uid="uid://gnvaidevc6y8" path="res://assets/textures/walls/lynocs_stonewall_5/5_height.bmp" id="10_nd174"]
-[ext_resource type="PackedScene" uid="uid://o2teonckm3yt" path="res://scenes/units/targetdummy_dps.tscn" id="12_w8tbo"]
 [ext_resource type="Texture2D" uid="uid://c3spn50saro4v" path="res://assets/textures/walls/lynocs_stonewall_5/5_normal.bmp" id="12_y3ovg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o3obn"]
@@ -1099,18 +1098,3 @@ mesh = SubResource("BoxMesh_r14ld")
 [node name="mpspawner_npc" type="MultiplayerSpawner" parent="npcs"]
 _spawnable_scenes = PackedStringArray("res://scenes/units/targetdummy_dps.tscn")
 spawn_path = NodePath("..")
-
-[node name="targetdummy_dps2" parent="npcs" instance=ExtResource("12_w8tbo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, -5, 26)
-
-[node name="targetdummy_dps3" parent="npcs" instance=ExtResource("12_w8tbo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33, -5, 28)
-
-[node name="targetdummy_dps4" parent="npcs" instance=ExtResource("12_w8tbo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, -5, 28)
-
-[node name="targetdummy_dps5" parent="npcs" instance=ExtResource("12_w8tbo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33, -5, 24)
-
-[node name="targetdummy_dps6" parent="npcs" instance=ExtResource("12_w8tbo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, -5, 24)
