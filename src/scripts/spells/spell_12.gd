@@ -25,7 +25,7 @@ func trigger():
 		print("on cooldown")
 		return
 	# check resource cost
-	print("checking resource sufficiency")
+	#print("checking resource sufficiency")
 	#if sourcenode.stats_curr["resource_current"] < spell_curr["resource_cost"]:
 		#print("insufficient resources")
 		#return
@@ -36,10 +36,10 @@ func trigger():
 		print("no legal target")
 		return
 	# check range
-	print("check range")
-	if sourcenode.global_transform.origin.distance_to(spell_target.global_transform.origin) - spell_target.stats_curr["size"] > spell_curr["range"]:
-		print("out of range")
-		return
+	#print("check range")
+	#if sourcenode.global_transform.origin.distance_to(spell_target.global_transform.origin) - spell_target.stats_curr["size"] > spell_curr["range"]:
+		#print("out of range")
+		#return
 	# apply resource cost
 	print("apply cost")
 	sourcenode.stats_curr["resource_current"] = min(sourcenode.stats_curr["resource_current"]-spell_curr["resource_cost"],sourcenode.stats_curr["resource_max"])
