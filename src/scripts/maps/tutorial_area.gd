@@ -24,6 +24,7 @@ func init_npcs():
 
 func spawn_dummygroup(dummy_preload: PackedScene, spawn_location: Array[Vector3]):
 	for i in spawn_location.size():
+		print("spawning dummy %s"%i)
 		var dummy_instance = dummy_preload.instantiate()
 		dummy_instance.position = spawn_location[i]
 		$npcs.add_child(dummy_instance,true)
