@@ -10,18 +10,20 @@ func initialize():
 
 func init_npcs():
 	# npcs must be spawned via code to ensure forced readable names
-	var dummy_instance = targetdummy_dps.instantiate()
-	dummy_instance.position = Vector3(-8,-5,27)
-	$npcs.add_child(dummy_instance,true)
-	# targetdummies dps multitarget
+	# dps dummies
 	var spawn_position = [
+		Vector3(-8,-5,27),
 		Vector3(-31,-5,26),
 		Vector3(-33,-5,28),
 		Vector3(-29,-5,28),
 		Vector3(-33,-5,24),
 		Vector3(-29,-5,24)
 	]
-	for i in range(5):
-		dummy_instance = targetdummy_dps.instantiate()
-		dummy_instance.position = spawn_position[i]
+	spawn_dummygroup(targetdummy_dps,spawn_position)
+
+
+func spawn_dummygroup(dummy_preload: PackedScene, spawn_location: Array[Vector3]):
+	for i in spawn_location.size():
+		var dummy_instance = dummy_preload.instantiate()
+		dummy_instance.position = spawn_location[i]
 		$npcs.add_child(dummy_instance,true)
