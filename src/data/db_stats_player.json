@@ -3,7 +3,7 @@
 	"unit_name":"Cheeseplease",
 	"unit_class":"Guiding Voices",
 	"size":0.6,
-	"spell_list":[10],
+	"spell_list":[12],
 	"speed":10,
 	"health_max":1500,
 	"health_current":1500,
