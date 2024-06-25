@@ -40,6 +40,7 @@ func trigger():
 	# send gcd
 	get_parent().send_gcd
 	# fire spell
+	print("firing spell")
 	Combat.event_heal(spell_curr,sourcenode,spell_target)
 
 func trigger_cd(duration):
