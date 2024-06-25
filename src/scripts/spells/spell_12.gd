@@ -26,9 +26,9 @@ func trigger():
 		return
 	# check resource cost
 	print("checking resource sufficiency")
-	if sourcenode.stats_curr["resource_current"] < spell_curr["resource_cost"]:
-		print("insufficient resources")
-		return
+	#if sourcenode.stats_curr["resource_current"] < spell_curr["resource_cost"]:
+		#print("insufficient resources")
+		#return
 	# check target
 	print("check target")
 	var spell_target = sourcenode.get_spell_target(spell_curr)
