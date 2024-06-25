@@ -14,6 +14,7 @@ func initialize() -> void:
 func init_npcs() -> void:
 	# npcs must be spawned via code to ensure forced readable names
 	# dps dummies
+	print("spawn dps dummies")
 	var spawn_position = [
 		Vector3(-8,-5,26),
 		Vector3(-31,-5,26),
@@ -24,6 +25,7 @@ func init_npcs() -> void:
 	]
 	spawn_dummygroup(targetdummy_dps,spawn_position)
 	# heal dummies
+	print("spawn heal dummies")
 	spawn_position = [
 		Vector3(-32,-5,12),
 		Vector3(-30,-5,-1),
@@ -34,6 +36,7 @@ func init_npcs() -> void:
 	]
 	spawn_dummygroup(targetdummy_heal,spawn_position)
 	# tank dummies
+	print("spawn tank dummies")
 	spawn_position = [
 		Vector3(-32,-5,-8),
 		Vector3(-30,-5,-21),
