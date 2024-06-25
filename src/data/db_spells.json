@@ -201,7 +201,7 @@
 	"name":"Mending Water",
 	"icon":"mendingwater",
 	"targetgroup":"friendly",
-	"resource_cost":-20,
+	"resource_cost":20,
 	"max_range":40,
 	"cooldown":0,
 	"on_gcd":1,
