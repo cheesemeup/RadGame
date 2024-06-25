@@ -16,6 +16,7 @@ func _ready():
 	add_child(cd_timer)
 
 func trigger():
+	print("spell 12 triggered")
 	var sourcenode = get_parent().get_parent()
 	# check cooldown
 	if on_cd:

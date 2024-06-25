@@ -84,7 +84,7 @@ func targeting(event_position: Vector2) -> void:
 	# check if collision is with a legal target, else set target to null
 	if not is_legal_target(target_dict):
 		target = null
-		rpc_id(1,"set_target","",null)
+		rpc_id(1,"set_target","","")
 		$"/root/main/ui/unitframe_target".target_reference = target
 		UIHandler.hide_targetframe()
 		return
