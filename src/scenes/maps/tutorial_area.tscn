@@ -1096,5 +1096,8 @@ mesh = SubResource("BoxMesh_r14ld")
 [node name="npcs" type="Node" parent="."]
 
 [node name="mpspawner_npc" type="MultiplayerSpawner" parent="npcs"]
-_spawnable_scenes = PackedStringArray("res://scenes/units/targetdummy_dps.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/units/targetdummy_dps.tscn", "res://scenes/units/tutorial_area/targetdummy_heal.tscn", "res://scenes/units/tutorial_area/targetdummy_tank.tscn")
 spawn_path = NodePath("..")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, -5, 12)

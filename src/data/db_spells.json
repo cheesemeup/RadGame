@@ -73,7 +73,7 @@
 	"spelltype":"damage",
 	"effecttype":"magic",
 	"value_base":"health_max",
-	"value_modifier":0.3,
+	"value_modifier":0.5,
 	"avoidable":0,
 	"can_crit":0,
 	"crit_chance_modifier":0,

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpyjdmdh07anq"]
+
+[ext_resource type="Script" path="res://scripts/units/tutorial_area/targetdummy_heal.gd" id="1_l28iq"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ejv2q"]
+radius = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdpww"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1s5y5"]
+material = SubResource("StandardMaterial3D_vdpww")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rmxe8"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:stats_current")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="targetdummy_heal" type="CharacterBody3D" groups=["hostile", "npc"]]
+collision_layer = 2
+script = ExtResource("1_l28iq")
+
+[node name="unit_collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_ejv2q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_1s5y5")
+
+[node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_rmxe8")

@@ -1,12 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://o2teonckm3yt"]
+[gd_scene load_steps=6 format=3 uid="uid://cfsil3otxdl0x"]
 
-[ext_resource type="Script" path="res://scripts/units/targetdummy_dps.gd" id="1_8vh5f"]
+[ext_resource type="Script" path="res://scripts/units/tutorial_area/targetdummy_tank.gd" id="1_hdjpt"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ejv2q"]
 radius = 0.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdpww"]
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(0, 0, 1, 0)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1s5y5"]
 material = SubResource("StandardMaterial3D_vdpww")
@@ -22,9 +22,9 @@ properties/2/path = NodePath(".:stats_current")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="targetdummy_dps" type="CharacterBody3D" groups=["hostile", "npc"]]
+[node name="targetdummy_heal" type="CharacterBody3D" groups=["hostile", "npc"]]
 collision_layer = 2
-script = ExtResource("1_8vh5f")
+script = ExtResource("1_hdjpt")
 
 [node name="unit_collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
