@@ -23,7 +23,7 @@ func init_npcs():
 	spawn_dummygroup(targetdummy_dps,spawn_position)
 
 
-func spawn_dummygroup(dummy_preload, spawn_position: Array[Vector3]):
+func spawn_dummygroup(dummy_preload, spawn_position: Array):
 	print("spawn_position.size is %s"%spawn_position.size())
 	for i in spawn_position.size():
 		print("spawning dummy %s"%i)
