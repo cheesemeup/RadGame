@@ -18,7 +18,7 @@ func _ready():
 func trigger():
 	print("spell 12 triggered")
 	var sourcenode = get_parent().get_parent()
-	print("sourcenode set")
+	print("sourcenode set to %s"%sourcenode)
 	# check cooldown
 	print("checking cd")
 	if on_cd:

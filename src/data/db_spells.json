@@ -200,7 +200,7 @@
 "12":{
 	"name":"Mending Waters",
 	"icon":"mendingwaters",
-	"resource_cost":0,
+	"resource_cost":20,
 	"cooldown":0,
 	"on_gcd":1,
 	"max_range":40,

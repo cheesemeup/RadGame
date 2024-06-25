@@ -9,7 +9,7 @@
 	"health_current":1500,
 	"resource_type":"none",
 	"resource_max":100,
-	"resource_current":0,
+	"resource_current":40,
 	"resource_regen":0,
 	"primary":100,
 	"avoidance":0.1,
