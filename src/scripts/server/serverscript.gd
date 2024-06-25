@@ -48,7 +48,8 @@ func map_swap(map_name: String):
 		# easily be circumvented. unloading interactables attempts to
 		# disconnect the tree_entered signal of players within range, even
 		# though this signal has never been connected
-		$/root/main/maps.get_node("active_map").queue_free()
+		$/root/main/maps.get_node("active_map").name = "old_map"
+		$/root/main/maps.get_node("old_map").queue_free()
 		# remove unloaded interactables from players
 		for player in $/root/main/players.get_children():
 			if not player.is_in_group("player"):
