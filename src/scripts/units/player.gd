@@ -84,7 +84,7 @@ func targeting(event_position: Vector2) -> void:
 	# check if collision is with a legal target, else set target to null
 	if not is_legal_target(target_dict):
 		target = null
-		rpc_id(1,"set_target",null,null)
+		rpc_id(1,"set_target","",null)
 		$"/root/main/ui/unitframe_target".target_reference = target
 		UIHandler.hide_targetframe()
 		return
@@ -123,7 +123,7 @@ func is_legal_target(target_dict: Dictionary) -> bool:
 
 @rpc("any_peer")
 func set_target(requested_target: String, parent: String, is_player: bool = false):
-	if requested_target == null:
+	if requested_target == "":
 		selected_target = null
 	elif is_player:
 		selected_target = get_node("/root/main/%s/%s"%[parent,requested_target])
