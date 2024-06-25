@@ -61,16 +61,16 @@ func post_ready(peer_id: int):
 	print("player %s ready" % name)
 
 
-@rpc("authority")
+@rpc("authority","call_local")
 func add_player_camera():
 	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
 	$camera_rotation/camera_arm/player_camera.current = true
-@rpc("authority")
+@rpc("authority","call_local")
 func load_ui_initial():
 	# set player reference before initializing the unitframes
 	References.player_reference = self
 	UIHandler.load_unitframes()
-@rpc("authority")
+@rpc("authority","call_local")
 func call_set_input_process():
 	input.set_process(true)
 	input.set_process_unhandled_input(true)
@@ -121,7 +121,7 @@ func is_legal_target(target_dict: Dictionary) -> bool:
 	return true
 
 
-@rpc("any_peer")
+@rpc("any_peer","call_local")
 func set_target(requested_target: String, parent: String, is_player: bool = false):
 	if requested_target == "":
 		selected_target = null
@@ -159,14 +159,14 @@ func get_nearest_interactable():
 	return nearest_interactable
 
 
-@rpc("authority")
+@rpc("authority","call_local")
 func show_interact_prompt(interactable_name: String):
 	# rpc that makes interact prompt visible locally
 	$/root/main/maps/active_map/interactables.get_node(interactable_name).\
 	get_node("interact_prompt").visible = true
 
 
-@rpc("authority")
+@rpc("authority","call_local")
 func hide_interact_prompt(interactable_name: String):
 	# rpc that makes interact prompt invisible locally
 	$/root/main/maps/active_map/interactables.get_node(interactable_name).\

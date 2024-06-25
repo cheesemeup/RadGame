@@ -26,7 +26,7 @@ func interaction_start(bodyname):
 	# request interaction on server
 	rpc_id(1,"request_interaction",bodyname)
 
-@rpc("any_peer","call_remote")
+@rpc("any_peer","call_local")
 func request_interaction(bodyname):
 	if not multiplayer.is_server():
 		return

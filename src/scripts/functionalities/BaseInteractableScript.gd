@@ -37,7 +37,9 @@ func add_interactable(target: CharacterBody3D):
 	# append interactable to player's interactable list
 	if not target.is_in_group("player"):
 		return
+	print("adding interactable")
 	target.interactables.append(self)
+	print(target.interactables)
 
 
 func remove_interactable(target: CharacterBody3D):

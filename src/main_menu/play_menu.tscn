@@ -38,7 +38,7 @@ text = "Server Address:"
 [node name="address_entry" type="LineEdit" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "cheese.okinawa"
+text = "127.0.0.1"
 metadata/_edit_use_anchors_ = true
 
 [node name="label_port_entry" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer"]
@@ -59,7 +59,6 @@ text = "Join"
 [node name="host_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-disabled = true
 text = "Host"
 
 [connection signal="pressed" from="VBoxContainer/join_button" to="." method="_on_join_button_pressed"]

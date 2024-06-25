@@ -46,11 +46,11 @@ func movement_direction():
 
 ####################################################################################################
 # SPELLS
-@rpc("authority")
+@rpc("authority","call_local")
 func enter_spell_container(spell_id: String):
 	$"../spell_container".spell_entrypoint(spell_id)
 
 
-@rpc("authority")
+@rpc("authority","call_local")
 func request_interaction():
 	get_parent().current_interactable.trigger(get_parent())

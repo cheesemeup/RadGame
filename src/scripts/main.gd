@@ -19,18 +19,14 @@ func server_join_connect():
 	multiplayer.peer_disconnected.connect(remove_player)
 
 
-#func start_hosting():
-#	# delete any multiplayer peer that might exist:
-#	multiplayer.multiplayer_peer = null
-#	# create new peer and set its host, then tell our multiplayer API to use it:
-#	var peer = ENetMultiplayerPeer.new()
-#	peer.create_server(PORT)
-#	multiplayer.multiplayer_peer = peer
-#	# get our multiplayer UID (as server this should always be "1" in Godot 4)
-#	var player_uid = multiplayer.get_unique_id()
-#	spawn_player(player_uid)
-#	current_map_reply("hub.tscn")
-#	initialize_persistent_ui()
+func start_hosting(port: int = PORT):
+	print("starting host on port %d" % port)
+	UIHandler.hide_main_menu()
+	# start server script
+	Serverscript.start_serverscript()
+	# create player for host, but as peer so rpc calls work
+	UIHandler.hide_main_menu()
+	spawn_player(1)
 
 
 func start_joining(server_address: String, port: int = PORT):
@@ -57,44 +53,6 @@ func remove_player(peer_id: int):
 	if multiplayer.is_server() and player:
 		player.queue_free()
 
-
-##############################################################################################################################
-# Map loading and unloading
-# when spawning, join map that host is on
-#func load_map_on_spawn():
-#	rpc_id(1,"current_map_query",multiplayer.get_unique_id())
-#@rpc("any_peer")
-#func current_map_query(peer_id):
-#	rpc_id(peer_id,"current_map_reply",Autoload.current_map_path)
-#@rpc("authority")
-#func current_map_reply(reply):
-#	var new_map_load = load("res://scenes/maps/"+reply)
-#	var map_instance = new_map_load.instantiate()
-#	Autoload.current_map_reference = map_instance
-#	add_child(map_instance)
-#	Autoload.current_map_path = reply
-
-#func swap_map_init(new_map):
-#	# if only one player, load map
-#	if get_tree().get_nodes_in_group("playergroup").size() == 1:
-#		swap_map(new_map)
-#	# show popup to all players to accept map change
-#	# change map if all players agree
-#	swap_map(new_map)
-#
-#
-#@rpc("call_local")
-#func swap_map(new_map):
-#	if Autoload.current_map_reference != null:
-#		Autoload.current_map_reference.queue_free()
-#	var new_map_load = load(new_map)
-#	var map_instance = new_map_load.instantiate()
-#	Autoload.current_map_reference = map_instance
-#	add_child(map_instance)
-#	# get spawn location on loaded map
-#	var spawnlocation = Autoload.current_map_reference.get_node("spawnlocation").position
-#	Autoload.player_reference.set_position(spawnlocation)
-	
 
 ##############################################################################################################################
 # exit game (in minecraft)
