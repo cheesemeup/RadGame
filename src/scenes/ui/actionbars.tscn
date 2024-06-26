@@ -1,0 +1,326 @@
+[gd_scene load_steps=4 format=3 uid="uid://cot6jf7lgaml"]
+
+[ext_resource type="Script" path="res://scripts/ui/actionbars.gd" id="1_rkmjw"]
+[ext_resource type="Script" path="res://scripts/ui/actionbar_slot.gd" id="2_s5cps"]
+
+[sub_resource type="Shortcut" id="Shortcut_cwcgn"]
+
+[node name="actionbars" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 788.0
+offset_top = 800.0
+offset_right = 788.0
+offset_bottom = 800.0
+script = ExtResource("1_rkmjw")
+
+[node name="actionbar1" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/h_separation = -8
+theme_override_constants/v_separation = -8
+columns = 6
+
+[node name="actionbar1_1" type="Button" parent="actionbar1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+shortcut = SubResource("Shortcut_cwcgn")
+flat = true
+expand_icon = true
+script = ExtResource("2_s5cps")
+
+[node name="hotkey" type="Label" parent="actionbar1/actionbar1_1"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 68.0
+offset_bottom = 23.0
+
+[node name="actionbar1_2" type="Button" parent="actionbar1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 0
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar1/actionbar1_2"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar1_3" type="Button" parent="actionbar1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar1/actionbar1_3"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar1_4" type="Button" parent="actionbar1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar1/actionbar1_4"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar1_5" type="Button" parent="actionbar1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar1/actionbar1_5"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar1_6" type="Button" parent="actionbar1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar1/actionbar1_6"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar1_7" type="Button" parent="actionbar1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar1/actionbar1_7"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar1_8" type="Button" parent="actionbar1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar1/actionbar1_8"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar1_9" type="Button" parent="actionbar1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar1/actionbar1_9"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar1_10" type="Button" parent="actionbar1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar1/actionbar1_10"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar1_11" type="Button" parent="actionbar1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar1/actionbar1_11"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar1_12" type="Button" parent="actionbar1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar1/actionbar1_12"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar2" type="GridContainer" parent="."]
+layout_mode = 2
+offset_top = 112.0
+offset_right = 344.0
+offset_bottom = 232.0
+theme_override_constants/h_separation = -8
+theme_override_constants/v_separation = -8
+columns = 6
+
+[node name="actionbar2_1" type="Button" parent="actionbar2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar2/actionbar2_1"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar2_2" type="Button" parent="actionbar2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar2/actionbar2_2"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar2_3" type="Button" parent="actionbar2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar2/actionbar2_3"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar2_4" type="Button" parent="actionbar2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar2/actionbar2_4"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar2_5" type="Button" parent="actionbar2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar2/actionbar2_5"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar2_6" type="Button" parent="actionbar2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar2/actionbar2_6"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar2_7" type="Button" parent="actionbar2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar2/actionbar2_7"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar2_8" type="Button" parent="actionbar2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar2/actionbar2_8"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar2_9" type="Button" parent="actionbar2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar2/actionbar2_9"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar2_10" type="Button" parent="actionbar2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar2/actionbar2_10"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar2_11" type="Button" parent="actionbar2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar2/actionbar2_11"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[node name="actionbar2_12" type="Button" parent="actionbar2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+flat = true
+expand_icon = true
+
+[node name="hotkey" type="Label" parent="actionbar2/actionbar2_12"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 62.0
+offset_bottom = 23.0
+
+[connection signal="pressed" from="actionbar1/actionbar1_1" to="actionbar1/actionbar1_1" method="_on_pressed"]

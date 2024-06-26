@@ -68,7 +68,7 @@ func add_player_camera():
 func load_ui_initial():
 	# set player reference before initializing the unitframes
 	References.player_reference = self
-	UIHandler.load_unitframes()
+	UIHandler.init_ui()
 @rpc("authority","call_local")
 func call_set_input_process():
 	input.set_process(true)
