@@ -3,7 +3,7 @@ extends MultiplayerSynchronizer
 @export var direction:= Vector2()
 @export var jumping:= false
 var space_state
-
+var ground_target_circle_reference = null
 
 func _ready():
 	set_process(false)
@@ -12,15 +12,22 @@ func _ready():
 
 func _process(_delta):
 	movement_direction()
+	if get_parent().is_ground_targeting["state"]:
+		ground_target_func(get_viewport().get_mouse_position())
 
 
 func _unhandled_input(event):
 	# if event is leftclick pressed, send target ray
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-		get_parent().targeting(event.position)
+		if get_parent().is_ground_targeting["state"]:
+			print("clicked for ground effect")
+			rpc_id(1,"enter_spell_ground_effect", get_parent().is_ground_targeting["spell_id"],\
+					 get_parent().targetray(get_viewport().get_mouse_position()).position )
+		else:
+			get_parent().targeting(event.position)
 	## this is a dumbcunt workaround for triggering spells from the actionbar for testing only
 	if event is InputEventKey and event.is_action_pressed("actionbar1_1"):
-		rpc_id(1,"enter_spell_container","12")
+		rpc_id(1,"enter_spell_container","16")
 	if event is InputEventKey and event.is_action_pressed("interact"):
 		rpc_id(1,"request_interaction")
 
@@ -50,7 +57,29 @@ func movement_direction():
 func enter_spell_container(spell_id: String):
 	$"../spell_container".spell_entrypoint(spell_id)
 
+@rpc("authority","call_local")
+func enter_spell_ground_effect(spell_id: String, position: Vector3):
+	print("rpc with id: " + spell_id + " and pos " + str(position))
+	get_parent().is_ground_targeting["state"] = false
+	$"../spell_container".ground_effect_entrypoint(spell_id, position)
+
 
 @rpc("authority","call_local")
 func request_interaction():
 	get_parent().current_interactable.trigger(get_parent())
+
+### 
+# TARGETING CIRCLE
+
+func ground_target_func(mouse_position: Vector2):
+	# create the targeting circle if needed
+	if ground_target_circle_reference == null:
+		var circle = preload("res://scenes/functionalities/visual_ground_target_circle.tscn")
+		var instance = circle.instantiate()
+		add_child(instance)
+		ground_target_circle_reference = instance
+	var hits = get_parent().targetray(mouse_position)
+	# todo: remove circle if no hit/invalid hit
+	if hits != {}:
+		ground_target_circle_reference.global_position = hits.position
+	

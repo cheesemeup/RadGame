@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0u2wq0lrbv4q"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uyntl"]
+height = 0.002
+
+[node name="VisualGroundTargetCircle" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_uyntl")

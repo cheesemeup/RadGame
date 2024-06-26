@@ -2,6 +2,14 @@ extends CharacterBody3D
 
 class_name BaseUnit
 
+#state
+@export var is_ground_targeting: Dictionary = {
+	"state": false,
+	"spell_id": null,
+	}
+@export var is_dead: bool = false
+@export var is_moving: bool = false
+
 # combat
 @export var stats_current: Dictionary
 var stats_base: Dictionary
@@ -14,10 +22,6 @@ var absorb_array: Array = []
 var target = null  # for unitframes, only local
 var selected_target = null  # for targeting with spells
 var mouseover_target = null  # for targeting with spells
-
-# state
-var is_dead: bool = false
-var is_moving: bool = false
 
 
 func initialize_base_unit(unittype: String, unit_id: String):

@@ -257,4 +257,21 @@
 	"duration":60,
 	"unique":0
   },
+"16":{
+	"name":"test-groundtarget-aoe",
+	"targetgroup":"hostile",
+	"resource_cost":5,
+	"cooldown":1,
+	"on_gcd":0,
+	"spelltype":"damage",
+	"effecttype":"magic",
+	"value_base":"primary",
+	"value_modifier":1,
+	"avoidable":0,
+	"can_crit":1,
+	"crit_chance_modifier":10,
+	"crit_magnitue_modifier":1.5,
+	"radius":20,
+	"particles":"test-particles",
+	},
 }

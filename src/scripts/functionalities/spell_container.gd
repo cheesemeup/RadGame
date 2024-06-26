@@ -15,6 +15,20 @@ func spell_entrypoint(spell_id: String):
 	#print("triggering ",spell_id)
 	spell_node.trigger()
 
+# ENTRYPOINT to place ground effect
+func ground_effect_entrypoint(spell_id: String, position: Vector3):
+	# determine whether spell is present in container
+	var node_name = "spell_"+spell_id
+	var spell_node = get_node_or_null(node_name)
+	if spell_node == null:
+		print("spell not found")
+		return 1  # spell not known
+	# trigger ground effect
+	print("triggering ground effect")
+	spell_node.ground_effect(position)
+
+
+
 # apply role swap changes
 
 # apply talent changes

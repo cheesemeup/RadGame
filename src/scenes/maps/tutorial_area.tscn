@@ -1218,3 +1218,9 @@ spawn_path = NodePath("..")
 [node name="water" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 14)
 mesh = SubResource("BoxMesh_llgo7")
+
+[node name="ground_effects" type="Node" parent="."]
+
+[node name="mpspawner_ground_effect" type="MultiplayerSpawner" parent="ground_effects"]
+_spawnable_scenes = PackedStringArray("res://scenes/functionalities/spell_ground_effect.tscn")
+spawn_path = NodePath("..")
