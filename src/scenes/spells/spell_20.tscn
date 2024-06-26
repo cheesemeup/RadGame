@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://jlreedmay6cd"]
 
-[ext_resource type="Script" path="res://scripts/spells/spell_20.gd" id="1_tnk1t"]
+
+[ext_resource type="Script" path="res://scripts/spells/spell_16.gd" id="1_tnk1t"]
 
 [node name="spell_16" type="Node"]
 script = ExtResource("1_tnk1t")
-
