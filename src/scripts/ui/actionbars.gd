@@ -9,8 +9,9 @@ func initialize() -> void:
 	actions = get_actionbar_actions()
 	set_text()
 	# initialize all slots with spell id and spell icon
-	# silly workaround, make persistent hotkey settings later
+	# silly workaround, make persistent spell map later
 	spell_map["1_1"] = ["10", "fingersoffrost"]
+	#spell_map["1_2"] = ["12", "mendingwaters"]
 	for key in spell_map.keys():
 		get_node(NodePath("actionbar%s"%key[0])).\
 			get_node(NodePath("actionbar%s"%key)).init(spell_map[key])
@@ -29,6 +30,8 @@ func set_text() -> void:
 	# set button.text to primary event of action
 	var actionbar: NodePath
 	for action in actions:
+		if InputMap.action_get_events(action) == []:
+			continue
 		actionbar = "./%s"%action.left(10)
 		get_node(NodePath(actionbar)).get_node(NodePath(action)).\
 			get_node(NodePath("hotkey")).text = \

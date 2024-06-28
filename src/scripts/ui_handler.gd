@@ -115,4 +115,3 @@ func init_actionbars():
 	actionbars = preload("res://scenes/ui/actionbars.tscn").instantiate()
 	actionbars.initialize()
 	$/root/main/ui.add_child(actionbars)
-	pass
