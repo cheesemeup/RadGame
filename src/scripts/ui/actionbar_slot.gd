@@ -15,9 +15,6 @@ func init(spell_info: Array):
 
 
 func _on_pressed():
-	rpc_id(1,"send_spell_request")
-
-
-@rpc("any_peer","call_local")
-func send_spell_request():
-	References.player_reference.get_node("player_input").enter_spell_container(spell_id)
+	# the rpc call to fire the spell is sent from player_input, as the server does not load
+	# the actionbar ui elements of players, and using player_input is somewhat intuitive
+	References.player_reference.get_node("player_input").request_enter_spell_container(spell_id)

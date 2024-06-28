@@ -43,6 +43,10 @@ func movement_direction():
 
 ####################################################################################################
 # SPELLS
+func request_enter_spell_container(spell_id: String):
+	rpc_id(1,"enter_spell_container",spell_id)
+
+
 @rpc("authority","call_local")
 func enter_spell_container(spell_id: String):
 	print("spell requested: %s"%spell_id)
