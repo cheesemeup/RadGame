@@ -61,8 +61,8 @@ func combat_event_damage(
 		value = value_query(
 			spell["value_modifier"],
 			source.stats_current[spell["value_base"]],
-			source.stats_current["damage_modifier"][spell["effecttype"]],
-			target.stats_current["defense_modifier"][spell["effecttype"]]
+			source.stats_current["damage_modifier_%s"%spell["effecttype"]],
+			target.stats_current["defense_modifier_%s"%spell["effecttype"]]
 		)
 	# determine avoid
 	if spell["avoidable"] == 1 and is_avoid(target.stats_current["avoidance"]):
@@ -116,8 +116,8 @@ func combat_event_heal(
 		value = value_query(
 			spell["value_modifier"],
 			source.stats_current[spell["value_base"]],
-			source.stats_current["heal_modifier"][spell["effecttype"]],
-			target.stats_current["heal_taken_modifier"][spell["effecttype"]]
+			source.stats_current["heal_modifier_%s"%spell["effecttype"]],
+			target.stats_current["heal_taken_modifier_%s"%spell["effecttype"]]
 		)
 	# determine critical hit
 	var crit = 0
@@ -326,7 +326,7 @@ func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array):
 			)
 
 func calc_current_from_base_full(target: CharacterBody3D):
-	# calculate the listed stats from base values and add and mult modifiers
+	# calculate all stats from base values and add and mult modifiers
 	var stat_add: int
 	var stat_mult: float
 	var diff: int = 0
