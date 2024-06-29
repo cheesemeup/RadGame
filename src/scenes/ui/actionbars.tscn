@@ -21,7 +21,9 @@ columns = 6
 
 [node name="actionbar2" type="GridContainer" parent="."]
 layout_mode = 2
-offset_top = 112.0
-offset_right = 344.0
-offset_bottom = 232.0
+offset_top = 100.0
+offset_right = 40.0
+offset_bottom = 140.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 columns = 6

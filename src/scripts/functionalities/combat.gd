@@ -13,7 +13,7 @@ func combat_event_entrypoint(
 	source: CharacterBody3D,
 	target: CharacterBody3D,
 	value: int = -1
-):
+) -> void:
 	# determine type of event and call appropriate function
 	if spell["spelltype"] == "damage":
 		combat_event_damage(spell,source,target,value)
@@ -25,7 +25,7 @@ func combat_event_aura_entrypoint(
 	source: CharacterBody3D,
 	target: CharacterBody3D,
 	remove: bool = false
-):
+) -> void:
 	# apply and remove aura scenes
 	if remove:
 		combat_event_aura_remove(spell,source,target)
@@ -37,7 +37,7 @@ func buff_application(
 	source: CharacterBody3D,
 	target: CharacterBody3D,
 	remove: bool = false
-):
+) -> void:
 	if remove:
 		remove_buff(spell,source.stats_current["unit_name"],target)
 		return
@@ -55,7 +55,7 @@ func combat_event_damage(
 	source,
 	target: CharacterBody3D,
 	value: int
-):
+) -> void:
 	# query base value of event if not prescribed
 	if value == -1:
 		value = value_query(
@@ -110,7 +110,7 @@ func combat_event_heal(
 	source: CharacterBody3D,
 	target: CharacterBody3D,
 	value: int
-):
+) -> void:
 	# query base value of event if not prescribed
 	if value == -1:
 		value = value_query(
@@ -144,7 +144,7 @@ func combat_event_aura(
 	spell: Dictionary,
 	source: CharacterBody3D,
 	target: CharacterBody3D
-):
+) -> void:
 	# reset aura if already present on target from same source
 	var aura_list_name = "%s"%spell["name"]
 	if spell["unique"] == 0:
@@ -176,7 +176,7 @@ func combat_event_aura_remove(
 	spell: Dictionary,
 	source: CharacterBody3D,
 	target: CharacterBody3D
-):
+) -> void:
 	var aura_list_name = "%s"%spell["name"]
 	if spell["unique"] == 0:
 		aura_list_name = "%s %s"%[aura_list_name,source.stats_current["unit_name"]]
@@ -261,7 +261,7 @@ func apply_heal(value: int, target: CharacterBody3D) -> int:
 
 ####################################################################################################
 # STAT MODIFICATION
-func apply_buff(spell: Dictionary, source_name: String, target: CharacterBody3D):
+func apply_buff(spell: Dictionary, source_name: String, target: CharacterBody3D) -> void:
 	# apply buff in appropriate stat dicts, overwrites old value if already present
 	var buffname = "%s"%spell["name"]
 	if spell["unique"] == 0:
@@ -274,7 +274,7 @@ func apply_buff(spell: Dictionary, source_name: String, target: CharacterBody3D)
 	# calculate new current stats from base stats
 	calc_current_from_base_partial(target,spell["modifies"])
 
-func remove_buff(spell: Dictionary, source_name: String, target: CharacterBody3D):
+func remove_buff(spell: Dictionary, source_name: String, target: CharacterBody3D) -> void:
 	# remove buff in appropriate stat dicts
 	var buffname = "%s"%spell["name"]
 	if spell["unique"] == 0:
@@ -289,7 +289,7 @@ func remove_buff(spell: Dictionary, source_name: String, target: CharacterBody3D
 
 ####################################################################################################
 # STAT CALCULATIONS
-func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array):
+func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array) -> void:
 	# calculate the listed stats from base values and add and mult modifiers
 	var stat_add: int
 	var stat_mult: float
@@ -325,7 +325,7 @@ func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array):
 				target.stats_current["resource_max"]
 			)
 
-func calc_current_from_base_full(target: CharacterBody3D):
+func calc_current_from_base_full(target: CharacterBody3D) -> void:
 	# calculate all stats from base values and add and mult modifiers
 	var stat_add: int
 	var stat_mult: float
@@ -370,7 +370,7 @@ func log_damage(
 	value: int,
 	crit: int,
 	overkill: int
-):
+) -> void:
 	var crit_suffix = ""
 	if crit == 1:
 		crit_suffix = " (critical)"
@@ -389,7 +389,7 @@ func log_absorb(
 	absorb_value: int,
 	absorb_name: String,
 	absorb_source: String
-):
+) -> void:
 	var source_name_poss: String
 	if source_name[-1] == "s":
 		source_name_poss = "%s'"%source_name
@@ -411,7 +411,7 @@ func log_heal(
 	value: int,
 	crit: int,
 	overheal: int
-):
+) -> void:
 	var crit_suffix = ""
 	if crit == 1:
 		crit_suffix = " (critical)"
@@ -423,10 +423,10 @@ func log_heal(
 		[source_name, target_name, spell_name, value, crit_suffix, overheal_suffix]
 	)
 
-func log_aura(spell_name: String, source_name: String, target_name: String):
+func log_aura(spell_name: String, source_name: String, target_name: String) -> void:
 	print("%s applies %s to %s"%[source_name, spell_name, target_name])
 
-func log_aura_remove(spell_name: String, source_name: String, target_name: String):
+func log_aura_remove(spell_name: String, source_name: String, target_name: String) -> void:
 	var source_name_poss: String
 	if source_name[-1] == "s":
 		source_name_poss = "%s'"%source_name
@@ -434,71 +434,8 @@ func log_aura_remove(spell_name: String, source_name: String, target_name: Strin
 		source_name_poss = "%s's"%source_name
 	print("%s application of %s fades on %s."%[source_name_poss, spell_name, target_name])
 
-func log_avoid(spell_name: String, source_name: String , target_name: String):
+func log_avoid(spell_name: String, source_name: String , target_name: String) -> void:
 	print("%s avoided %s of %s."%[source_name, spell_name, target_name])
 
-func log_interact(source_name: String, target_name: String):
+func log_interact(source_name: String, target_name: String) -> void:
 	print("%s interacts with %s"%[source_name, target_name])
-
-#### stat calculations
-####################################################################################################
-## calculate all stats when changing class or talents, should only be done outside of combat
-#func stat_calculation_full(body):
-	## loop through all stats
-	#for statkey in body.stats_curr:
-		## skip if current health or resource
-		#if statkey in ["health_current","resource_current"]:
-			#continue
-		## call single stat calculation
-		#single_stat_calculation(body,statkey)
-#
-## change single stat when buff or debuff is applied
-#func single_stat_calculation(body,statkey):
-	#var stat_add : int = 0
-	#var stat_mult : float = 1.
-	## get additive and multiplicative modifiers
-	#if body.stats_base["stat_add"].has(statkey):
-		#for value in body.stats_base["stat_add"][statkey].keys():
-			#stat_add = stat_add + body.stats_base["stat_add"][statkey][value]
-	#if body.stats_base["stat_mult"].has(statkey):
-		#for value in body.stats_base["stat_mult"][statkey].keys():
-			#stat_mult = stat_mult * body.stats_base["stat_mult"][statkey][value]
-	## apply to current stats
-	#body.stats_curr[statkey] = (body.stats_base[statkey] + stat_add) * stat_mult
-	## adjust current health and resource if above maximum
-	#if statkey == "health_max" and body.stats_curr["health_current"] > body.stats_curr["health_max"]:
-		#body.stats_curr["health_current"] = body.stats_curr["health_max"]
-	#if statkey == "resource_max" and body.stats_curr["resource_current"] > body.stats_curr["resource_max"]:
-		#body.stats_curr["resource_current"] = body.stats_curr["resource_max"]
-#
-#### write to log
-####################################################################################################
-#func write_to_log_damage(spell,source,target,is_crit,value):
-	#var ending : String = "."
-	#if is_crit:
-		#ending = " (critical)."
-	#print("%s hits %s with %s for %.f %s damage%s"%\
-		#[source.stats_curr["unit_name"],target.stats_curr["unit_name"],\
-		 #spell["name"],value,spell["damagetype"],ending])
-#func write_to_log_absorb(spell,source,target,absorb,is_crit,value):
-	#var ending : String = "."
-	#if is_crit:
-		#ending = " (critical)."
-	#print("%s of %s absorbs %.f damage of %s used on %s by %s%s"%\
-		#[absorb.spellname,absorb.absorb_source,value,spell["name"],\
-		#target.stats_curr["name"],source.stats_curr["name"],ending])
-#func write_to_log_heal(spell,source,target,is_crit,value):
-	#var ending : String = "."
-	#if is_crit:
-		#ending = " (critical)."
-	#print("%s heals %s with %s for %.f %s healing%s"%\
-		#[source.stats_curr["unit_name"],target.stats_curr["unit_name"],\
-		 #spell["name"],value,spell["healtype"],ending])
-#func write_to_log_avoid(spell,source,target):
-	#print("%s has avoided %s from %s."%[target.stats_curr["unit_name"],spell["name"],source.stats_curr["unit_name"]])
-#func write_to_log_aura(spell,source,target):
-	#print("%s applies %s to %s"%[source.stats_curr["unit_name"],spell["name"],target.stats_curr["unit_name"]])
-#func write_to_log_aura_reapply(spell,source,target):
-	#print("%s reapplies %s to %s"%[source.stats_curr["unit_name"],spell["name"],target.stats_curr["unit_name"]])
-#func write_to_log_aura_fade(spell,source,target):
-	#print("%s's %s faded from %s"%[source.stats_curr["unit_name"],spell["name"],target.stats_curr["unit_name"]])

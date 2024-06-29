@@ -22,6 +22,11 @@ func initialize() -> void:
 	spell_map["1_3"] = "11"
 	spell_map["1_4"] = "13"
 	spell_map["1_5"] = "14"
+	spell_map["2_1"] = "10"
+	spell_map["2_2"] = "12"
+	spell_map["2_3"] = "11"
+	spell_map["2_4"] = "13"
+	spell_map["2_5"] = "14"
 	for key in spell_map.keys():
 		get_node(NodePath("actionbar%s"%key[0])).\
 			get_node(NodePath("actionbar%s"%key)).init(spell_map[key])

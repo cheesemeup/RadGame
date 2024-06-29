@@ -12,8 +12,6 @@ func init(spell_id: String) -> void:
 	slot_spell_id = spell_id
 	slot_spell_reference = References.player_reference.get_node("spell_container").\
 		get_node("spell_%s"%slot_spell_id)
-	print("spell reference: %s"%"spell_%s"%slot_spell_id)
-	print(slot_spell_reference)
 	set_icon()
 	set_hotkey()
 	pressed.connect(_on_pressed)
