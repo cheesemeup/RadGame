@@ -39,7 +39,6 @@ func set_hotkey() -> void:
 func _on_pressed() -> void:
 	# the rpc call to fire the spell is sent from player_input, as the server does not load
 	# the actionbar ui elements of players, and using player_input is somewhat intuitive
-	print("sending request from %s for spell %s"%[name,slot_spell_id])
 	References.player_reference.get_node("player_input").\
 		request_enter_spell_container(slot_spell_id)
 

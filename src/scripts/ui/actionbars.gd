@@ -6,14 +6,12 @@ var spell_map: Dictionary
 
 func initialize() -> void:
 	# add actionbar slots to actionbars
-	for i in range(1,2):
+	for i in range(1,3):
 		for j in range(1,13):
 			var slot = actionbar_slot.instantiate()
 			slot.name = "actionbar%s_%s"%[i,j]
 			slot.set_process(false)
 			get_node("actionbar%s"%i).add_child(slot)
-	print("actionbar1: ",$actionbar1.get_children())
-	print("actionbar2: ",$actionbar2.get_children())
 	# get all actionbar InputMap actions and set text to primary event
 	actions = get_actionbar_actions()
 	set_text()
@@ -40,14 +38,12 @@ func get_actionbar_actions() -> Array:
 
 func set_text() -> void:
 	# set button.text to primary event of action
-	var actionbar: NodePath
 	for action in actions:
 		if InputMap.action_get_events(action) == []:
 			continue
-		#actionbar = "./%s"%action.left(10)
-		#get_node(NodePath(actionbar)).get_node(NodePath(action)).\
-			#get_node(NodePath("hotkey")).text = \
-			#gen_text(InputMap.action_get_events(action)[0].as_text())
+		get_node(NodePath("%s"%action.left(10))).get_node(NodePath(action)).\
+			get_node(NodePath("hotkey")).text = \
+			gen_text(InputMap.action_get_events(action)[0].as_text())
 
 
 func gen_text(text: String) -> String:
