@@ -25,5 +25,7 @@ func trigger():
 	# send gcd
 	if spell_current["on_gcd"] == 1:
 		get_parent().send_gcd()
+	# apply cd
+	trigger_cd(spell_current["cooldown"])
 	# send event to combat script
 	Combat.combat_event_aura_entrypoint(spell_current,source,source)

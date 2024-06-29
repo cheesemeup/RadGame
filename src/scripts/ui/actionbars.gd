@@ -10,6 +10,7 @@ func initialize() -> void:
 		for j in range(1,13):
 			var slot = actionbar_slot.instantiate()
 			slot.name = "actionbar%s_%s"%[i,j]
+			slot.set_process(false)
 			get_node("actionbar%s"%i).add_child(slot)
 	print("actionbar1: ",$actionbar1.get_children())
 	print("actionbar2: ",$actionbar2.get_children())

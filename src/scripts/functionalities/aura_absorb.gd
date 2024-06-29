@@ -14,8 +14,8 @@ func initialize(spell,source,target):
 	remaining_value = Combat.value_query(
 		spell["value_modifier"],
 		source.stats_current[spell["value_base"]],
-		source.stats_current["heal_modifier"][spell["effecttype"]],
-		target.stats_current["heal_taken_modifier"][spell["effecttype"]]
+		source.stats_current["heal_modifier_%s"%spell["effecttype"]],
+		target.stats_current["heal_taken_modifier_%s"%spell["effecttype"]]
 	)
 	# initialize timer
 	expiration_timer.wait_time = aura_spell["duration"]
@@ -35,8 +35,8 @@ func reinitialization(spell):
 	remaining_value = Combat.value_query(
 		spell["value_modifier"],
 		aura_source.stats_current[spell["value_base"]],
-		aura_source.stats_current["heal_modifier"][spell["effecttype"]],
-		aura_target.stats_current["heal_taken_modifier"][spell["effecttype"]]
+		aura_source.stats_current["heal_modifier_%s"%spell["effecttype"]],
+		aura_target.stats_current["heal_taken_modifier_%s"%spell["effecttype"]]
 	)
 	# start timer
 	expiration_timer.wait_time = spell["duration"]
