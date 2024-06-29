@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dmrcy6mmkf5ef"
-path="res://.godot/imported/mendingwaters.png-0883b7202520de48e809d5b4382e97d8.ctex"
+path="res://.godot/imported/mendingwater.png-2ecac857d62c467539e778b20432d0ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spell_icons/mendingwaters.png"
-dest_files=["res://.godot/imported/mendingwaters.png-0883b7202520de48e809d5b4382e97d8.ctex"]
+source_file="res://assets/spell_icons/mendingwater.png"
+dest_files=["res://.godot/imported/mendingwater.png-2ecac857d62c467539e778b20432d0ad.ctex"]
 
 [params]
 

@@ -1,20 +1,34 @@
 extends Button
 
-var spell_id: String
-var spell_icon: String
+var slot_spell_id: String
 
 
-func init(spell_info: Array):
-	spell_id = spell_info[0]
-	spell_icon = spell_info[1]
+func init(spell_id: String):
+	slot_spell_id = spell_id
+	set_icon()
+	set_hotkey()
+	pressed.connect(_on_pressed)
+
+
+func set_icon():
+	var spell_icon = References.player_reference.get_node("spell_container").\
+		get_node("spell_%s"%slot_spell_id).spell_current["icon"]
 	var imagepath = "res://assets/spell_icons/%s.png"%spell_icon
 	var image = Image.load_from_file(imagepath)
 	var texture = ImageTexture.create_from_image(image)
 	icon = texture
+
+
+func set_hotkey():
+	print("setting hotkey for %s to %s"%[name,InputMap.action_get_events(name)])
+	shortcut = Shortcut.new()
 	shortcut.events = InputMap.action_get_events(name)
+	print("hotkey for %s is set as %s"%[name,shortcut.events])
 
 
 func _on_pressed():
 	# the rpc call to fire the spell is sent from player_input, as the server does not load
 	# the actionbar ui elements of players, and using player_input is somewhat intuitive
-	References.player_reference.get_node("player_input").request_enter_spell_container(spell_id)
+	print("sending request from %s for spell %s"%[name,slot_spell_id])
+	References.player_reference.get_node("player_input").\
+		request_enter_spell_container(slot_spell_id)

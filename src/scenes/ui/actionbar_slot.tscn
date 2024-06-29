@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgyurfksh6e6v"]
+
+[ext_resource type="Script" path="res://scripts/ui/actionbar_slot.gd" id="1_hg6fw"]
+
+[node name="actionbar_slot" type="Button"]
+custom_minimum_size = Vector2(64, 64)
+shortcut_feedback = false
+expand_icon = true
+script = ExtResource("1_hg6fw")
+
+[node name="hotkey" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 68.0
+offset_bottom = 23.0
