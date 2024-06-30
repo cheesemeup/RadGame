@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bltiropmoiif5"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s03p1"]
+[gd_scene format=3 uid="uid://bltiropmoiif5"]
 
 [node name="CharacterMenu" type="PanelContainer"]
 anchors_preset = 15
@@ -8,22 +6,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_s03p1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="title" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-theme_type_variation = &"HeaderLarge"
-text = "Character"
-
-[node name="Panel" type="PanelContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="VBoxContainer/Panel"]
+[node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 text = "coming soon..."

@@ -108,7 +108,6 @@ func update_input_settings() -> void:
 	for action in SettingsManager.get_input_settings().get_game_actions():
 		var label = Label.new()
 		label.text = action
-		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		var button = INPUT_REMAP_BUTTON.instantiate()
 		button.action = action
 		button.input_event = SettingsManager.get_input_settings().get_input_event(action)
