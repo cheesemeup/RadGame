@@ -49,6 +49,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="SubMenuButtons" type="VBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer/MainMenu"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="quit_button" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer/MainMenu"]
@@ -56,13 +57,7 @@ layout_mode = 2
 text = "Quit"
 
 [node name="SubMenus" type="VBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-
-[node name="back_button" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "back"
 
 [connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/MainMenu/quit_button" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/back_button" to="." method="_on_back_button_pressed"]
