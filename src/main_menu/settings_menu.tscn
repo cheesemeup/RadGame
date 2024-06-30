@@ -39,6 +39,7 @@ text = "Video"
 
 [node name="VideoSettingsGridContainer" type="GridContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/h_separation = 32
 columns = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/VideoSettingsGridContainer"]
@@ -75,6 +76,7 @@ text = "Controls"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_constants/h_separation = 32
 columns = 2
 
 [node name="apply_settings_button" type="Button" parent="VBoxContainer"]
