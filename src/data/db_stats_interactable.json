@@ -4,14 +4,10 @@
 	"unit_class":"Test Interactable",
 	"spell_list":[0],
 	"primary":100,
-	"damage_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_modifier":{
-		"physical":1,
-		"magic":1,
-	},
+	"damage_modifier_physical":1,
+	"damage_modifier_magic":1,
+	"heal_modifier_physical":1,
+	"heal_modifier_magic":1,
 	"interact_range":3,
 },
   "1":{
@@ -19,14 +15,10 @@
 	"unit_class":"Test Interactable",
 	"spell_list":[1],
 	"primary":100,
-	"damage_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_modifier":{
-		"physical":1,
-		"magic":1,
-	},
+	"damage_modifier_physical":1,
+	"damage_modifier_magic":1,
+	"heal_modifier_physical":1,
+	"heal_modifier_magic":1,
 	"interact_range":3,
 },
   "2":{
@@ -34,14 +26,10 @@
 	"unit_class":"Test Interactable",
 	"spell_list":[15],
 	"primary":100,
-	"damage_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_modifier":{
-		"physical":1,
-		"magic":1,
-	},
+	"damage_modifier_physical":1,
+	"damage_modifier_magic":1,
+	"heal_modifier_physical":1,
+	"heal_modifier_magic":1,
 	"interact_range":3,
 },
   "3":{

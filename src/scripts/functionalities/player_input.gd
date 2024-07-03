@@ -28,9 +28,6 @@ func _unhandled_input(event):
 	## this is a dumbcunt workaround for triggering spells from the actionbar for testing only
 	if event is InputEventKey and event.is_action_pressed("actionbar1_1"):
 		rpc_id(1,"enter_spell_container","16")
-	if event is InputEventKey and event.is_action_pressed("interact"):
-		rpc_id(1,"request_interaction")
-
 
 ####################################################################################################
 # MOVEMENT
@@ -53,8 +50,13 @@ func movement_direction():
 
 ####################################################################################################
 # SPELLS
+func request_enter_spell_container(spell_id: String):
+	rpc_id(1,"enter_spell_container",spell_id)
+
+
 @rpc("authority","call_local")
 func enter_spell_container(spell_id: String):
+	print("spell requested: %s"%spell_id)
 	$"../spell_container".spell_entrypoint(spell_id)
 
 @rpc("authority","call_local")

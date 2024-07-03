@@ -27,8 +27,9 @@ func trigger():
 	if is_not_in_range(source.position,target.position,spell_current["max_range"]):
 		return 4
 	# check line of sight, NOT FUNCTIONAL
-	if is_not_in_line_of_sight(source,target.position):
-		return 5
+	#if is_not_in_line_of_sight(source,target.position):
+		#print("not in los")
+		#return 5
 	# apply resource cost 
 	source.stats_current["resource_current"] = update_resource(
 		spell_current["resource_cost"],

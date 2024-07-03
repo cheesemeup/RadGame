@@ -54,3 +54,8 @@ replication_config = SubResource("SceneReplicationConfig_rfg56")
 [node name="player_input" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_kjxoy")
 script = ExtResource("4_lp8kc")
+
+[node name="cd_timers" type="Node" parent="."]
+
+[node name="cd_timer_spawner" type="MultiplayerSpawner" parent="cd_timers"]
+spawn_path = NodePath("..")

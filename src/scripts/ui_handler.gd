@@ -23,6 +23,16 @@ var targetframe_res_y = 865  # y position
 var targetframe_res_w = 220  # width
 var targetframe_res_h = 25  # height
 
+# actionbars
+var actionbars
+
+
+####################################################################################################
+# INIT
+func init_ui():
+	init_unitframes()
+	init_actionbars()
+
 ####################################################################################################
 # MENUS
 var main_menu: Node
@@ -37,7 +47,7 @@ func hide_main_menu() -> void:
 
 ####################################################################################################
 # UNITFRAMES
-func load_unitframes():
+func init_unitframes():
 	initialize_playerframe()
 	initialize_targetframe()
 
@@ -97,3 +107,11 @@ func hide_targetframe():
 	# disable processing health and resource information
 	targetframe.set_process(false)
 	targetframe.visible = false
+
+
+####################################################################################################
+# ACTIONBARS
+func init_actionbars():
+	actionbars = preload("res://scenes/ui/actionbars.tscn").instantiate()
+	actionbars.initialize()
+	$/root/main/ui.add_child(actionbars)
