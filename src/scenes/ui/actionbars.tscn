@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://cot6jf7lgaml"]
+
+[ext_resource type="Script" path="res://scripts/ui/actionbars.gd" id="1_rkmjw"]
+
+[node name="actionbars" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 788.0
+offset_top = 800.0
+offset_right = 788.0
+offset_bottom = 800.0
+script = ExtResource("1_rkmjw")
+
+[node name="actionbar1" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 6
+
+[node name="actionbar2" type="GridContainer" parent="."]
+layout_mode = 2
+offset_top = 100.0
+offset_right = 40.0
+offset_bottom = 140.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 6

@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgyurfksh6e6v"]
+
+[ext_resource type="Script" path="res://scripts/ui/actionbar_slot.gd" id="1_hg6fw"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fxq3l"]
+size = Vector2(60, 60)
+
+[node name="actionbar_slot" type="Button"]
+custom_minimum_size = Vector2(50, 50)
+offset_right = 50.0
+offset_bottom = 50.0
+shortcut_feedback = false
+expand_icon = true
+script = ExtResource("1_hg6fw")
+
+[node name="hotkey" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 68.0
+offset_bottom = 23.0
+
+[node name="cooldown_swipe" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+max_value = 1.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("PlaceholderTexture2D_fxq3l")
+tint_progress = Color(0, 0, 0, 0.788235)

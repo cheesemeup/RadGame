@@ -50,18 +50,14 @@ func initialize_statmult() -> Dictionary:
 	stat_mult["health_max"] = {}
 	stat_mult["resource_max"] = {}
 	stat_mult["primary"] = {}
-	stat_mult["damage_modifier"] = {}
-	stat_mult["damage_modifier"]["physical"] = {}
-	stat_mult["damage_modifier"]["magic"] = {}
-	stat_mult["heal_modifier"] = {}
-	stat_mult["heal_modifier"]["physical"] = {}
-	stat_mult["heal_modifier"]["magic"] = {}
-	stat_mult["defense_modifier"] = {}
-	stat_mult["defense_modifier"]["physical"] = {}
-	stat_mult["defense_modifier"]["magic"] = {}
-	stat_mult["heal_taken_modifier"] = {}
-	stat_mult["heal_taken_modifier"]["physical"] = {}
-	stat_mult["heal_taken_modifier"]["magic"] = {}
+	stat_mult["damage_modifier_physical"] = {}
+	stat_mult["damage_modifier_magic"] = {}
+	stat_mult["heal_modifier_physical"] = {}
+	stat_mult["heal_modifier_magic"] = {}
+	stat_mult["defense_modifier_physical"] = {}
+	stat_mult["defense_modifier_magic"] = {}
+	stat_mult["heal_taken_modifier_physical"] = {}
+	stat_mult["heal_taken_modifier_magic"] = {}
 	return stat_mult
 
 

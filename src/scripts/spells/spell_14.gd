@@ -1,56 +1,31 @@
-extends Node
-
-# Deep Current
-var spell_base : Dictionary
-var spell_curr : Dictionary
-var cd_timer = Timer.new()
-var on_cd = false
-var actionbar = []
+# Succumb
+extends BaseSpell
 
 func _ready():
-	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
-	spell_base = json_dict["14"]
-	spell_curr = spell_base.duplicate(true)
-	cd_timer.one_shot = true
-	cd_timer.connect("timeout",set_ready.bind())
-	add_child(cd_timer)
+	initialize_base_spell("14")
 
 func trigger():
-	var sourcenode = get_parent().get_parent()
-	# check cooldown
-	if on_cd:
-		print("on cooldown")
-		return
-	# apply aura
-	Combat.event_aura_general(spell_curr,sourcenode,sourcenode)
-	# cooldown
-	trigger_cd(spell_curr["cooldown"])
-	# start cd swipe
-	for ab in actionbar:
-		ab.start_cd(spell_curr["cooldown"])
-
-func trigger_cd(duration):
-	# start timer
-	cd_timer.wait_time = duration
-	cd_timer.start()
-	on_cd = true
-	# start cd swipe
-	for ab in actionbar:
-		ab.start_cd(duration)
-
-func set_ready():
-	on_cd = false
-	for ab in actionbar:
-		ab.end_cd()
-
-# role swap effects
-func swap_tank():
-	pass
-func swap_heal():
-	pass
-func swap_meleedps():
-	pass
-func swap_rangedps():
-	pass
-	
-# talent effects  
+	# get source and target nodes
+	var source = get_parent().get_parent()
+	# check for cooldown
+	if is_on_cd():
+		return 2
+	# check resource availability
+	if insufficient_resource(
+		spell_current["resource_cost"],
+		source.stats_current["resource_current"]
+	):
+		return 3
+	# apply resource cost 
+	source.stats_current["resource_current"] = update_resource(
+		spell_current["resource_cost"],
+		source.stats_current["resource_current"],
+		source.stats_current["resource_max"]
+	)
+	# send gcd
+	if spell_current["on_gcd"] == 1:
+		get_parent().send_gcd()
+	# apply cd
+	trigger_cd(spell_current["cooldown"])
+	# send event to combat script
+	Combat.combat_event_aura_entrypoint(spell_current,source,source)

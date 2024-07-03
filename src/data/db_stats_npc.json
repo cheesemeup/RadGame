@@ -14,22 +14,14 @@
 	"primary":100,
 	"avoidance":0.1,
 	"crit_chance":0.7,
-	"damage_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"defense_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_taken_modifier":{
-		"physical":1,
-		"magic":1,
-	}
+	"damage_modifier_physical":1,
+	"damage_modifier_magic":1,
+	"heal_modifier_physical":1,
+	"heal_modifier_magic":1,
+	"defense_modifier_physical":1,
+	"defense_modifier_magic":1,
+	"heal_taken_modifier_physical":1,
+	"heal_taken_modifier_magic":1
 },
   "1":{
 	"unit_name":"Signpost Heal Defunct",
@@ -46,22 +38,14 @@
 	"primary":100,
 	"avoidance":0.1,
 	"crit_chance":0.7,
-	"damage_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"defense_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_taken_modifier":{
-		"physical":1,
-		"magic":1,
-	}
+	"damage_modifier_physical":1,
+	"damage_modifier_magic":1,
+	"heal_modifier_physical":1,
+	"heal_modifier_magic":1,
+	"defense_modifier_physical":1,
+	"defense_modifier_magic":1,
+	"heal_taken_modifier_physical":1,
+	"heal_taken_modifier_magic":1
 },
 "2":{
 	"unit_name":"Test NPC Hostile",
@@ -78,22 +62,14 @@
 	"primary":100,
 	"avoidance":0,
 	"crit_chance":0,
-	"damage_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"defense_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_taken_modifier":{
-		"physical":1,
-		"magic":1,
-	}
+	"damage_modifier_physical":1,
+	"damage_modifier_magic":1,
+	"heal_modifier_physical":1,
+	"heal_modifier_magic":1,
+	"defense_modifier_physical":1,
+	"defense_modifier_magic":1,
+	"heal_taken_modifier_physical":1,
+	"heal_taken_modifier_magic":1
 },
 "3":{
 	"unit_name":"Test NPC Friendly",
@@ -110,22 +86,14 @@
 	"primary":100,
 	"avoidance":0,
 	"crit_chance":0,
-	"damage_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"defense_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_taken_modifier":{
-		"physical":1,
-		"magic":1,
-	}
+	"damage_modifier_physical":1,
+	"damage_modifier_magic":1,
+	"heal_modifier_physical":1,
+	"heal_modifier_magic":1,
+	"defense_modifier_physical":1,
+	"defense_modifier_magic":1,
+	"heal_taken_modifier_physical":1,
+	"heal_taken_modifier_magic":1
 },
 "4":{
 	"unit_name":"Targetdummy DPS",
@@ -142,22 +110,14 @@
 	"primary":100,
 	"avoidance":0,
 	"crit_chance":0,
-	"damage_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"defense_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_taken_modifier":{
-		"physical":1,
-		"magic":1,
-	}
+	"damage_modifier_physical":1,
+	"damage_modifier_magic":1,
+	"heal_modifier_physical":1,
+	"heal_modifier_magic":1,
+	"defense_modifier_physical":1,
+	"defense_modifier_magic":1,
+	"heal_taken_modifier_physical":1,
+	"heal_taken_modifier_magic":1
 },
 "5":{
 	"unit_name":"Targetdummy Heal",
@@ -174,22 +134,14 @@
 	"primary":100,
 	"avoidance":0,
 	"crit_chance":0,
-	"damage_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"defense_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_taken_modifier":{
-		"physical":1,
-		"magic":1,
-	}
+	"damage_modifier_physical":1,
+	"damage_modifier_magic":1,
+	"heal_modifier_physical":1,
+	"heal_modifier_magic":1,
+	"defense_modifier_physical":1,
+	"defense_modifier_magic":1,
+	"heal_taken_modifier_physical":1,
+	"heal_taken_modifier_magic":1
 },
 "6":{
 	"unit_name":"Targetdummy Tank",
@@ -206,21 +158,13 @@
 	"primary":100,
 	"avoidance":0,
 	"crit_chance":0,
-	"damage_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"defense_modifier":{
-		"physical":1,
-		"magic":1,
-	},
-	"heal_taken_modifier":{
-		"physical":1,
-		"magic":1,
-	}
+	"damage_modifier_physical":1,
+	"damage_modifier_magic":1,
+	"heal_modifier_physical":1,
+	"heal_modifier_magic":1,
+	"defense_modifier_physical":1,
+	"defense_modifier_magic":1,
+	"heal_taken_modifier_physical":1,
+	"heal_taken_modifier_magic":1
 }
 }
