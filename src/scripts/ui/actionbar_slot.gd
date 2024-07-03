@@ -1,26 +1,21 @@
 extends Button
 
 var slot_spell_id: String
-var slot_spell_reference: Node
 
 
 func _process(_delta: float) -> void:
 	cooldown_swipe()
 
 
-func init(spell_id: String) -> void:
-	slot_spell_id = spell_id
-	slot_spell_reference = References.player_reference.get_node("spell_container").\
-		get_node("spell_%s"%slot_spell_id)
-	set_icon()
+func init(spell_info: Array) -> void:
+	slot_spell_id = spell_info[0]
+	set_icon(spell_info[1])
 	set_hotkey()
 	pressed.connect(_on_pressed)
 	set_process(true)
 
 
-func set_icon() -> void:
-	var spell_icon = References.player_reference.get_node("spell_container").\
-		get_node("spell_%s"%slot_spell_id).spell_current["icon"]
+func set_icon(spell_icon) -> void:
 	var imagepath = "res://assets/spell_icons/%s.png"%spell_icon
 	var image = Image.load_from_file(imagepath)
 	var texture = ImageTexture.create_from_image(image)
@@ -42,11 +37,4 @@ func _on_pressed() -> void:
 
 
 func cooldown_swipe() -> void:
-	# set swipe position if on cd
-	# return if no spell is set to this slot
-	if slot_spell_reference == null:
-		return
-	if slot_spell_reference.is_on_cd():
-		# cooldown swipe is inverse, i.e. goes from 1 to 0
-			$cooldown_swipe.value = slot_spell_reference.cd_timer.time_left / \
-				slot_spell_reference.cd_timer.wait_time
+	pass

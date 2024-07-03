@@ -55,8 +55,8 @@ func post_ready(peer_id: int):
 	rpc_id(peer_id,"load_ui_initial")
 #	# activate input _process for authority
 	rpc_id(peer_id,"call_set_input_process")
-	if input.is_multiplayer_authority():
-		References.player_reference = self
+	#if input.is_multiplayer_authority():
+		#References.player_reference = self
 	print("player %s ready" % name)
 
 

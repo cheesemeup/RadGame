@@ -17,16 +17,16 @@ func initialize() -> void:
 	set_text()
 	# initialize all slots with spell id and spell icon
 	# silly workaround, make persistent spell map later
-	spell_map["1_1"] = "10"
-	spell_map["1_2"] = "12"
-	spell_map["1_3"] = "11"
-	spell_map["1_4"] = "13"
-	spell_map["1_5"] = "14"
-	spell_map["2_1"] = "10"
-	spell_map["2_2"] = "12"
-	spell_map["2_3"] = "11"
-	spell_map["2_4"] = "13"
-	spell_map["2_5"] = "14"
+	spell_map["1_1"] = ["10","fingersoffrost"]
+	spell_map["1_2"] = ["12","mendingwater"]
+	spell_map["1_3"] = ["11","abyssalshell"]
+	spell_map["1_4"] = ["13","deepcurrent"]
+	spell_map["1_5"] = ["14","succumb"]
+	spell_map["2_1"] = ["10","fingersoffrost"]
+	spell_map["2_2"] = ["12","mendingwater"]
+	spell_map["2_3"] = ["11","abyssalshell"]
+	spell_map["2_4"] = ["13","deepcurrent"]
+	spell_map["2_5"] = ["14","succumb"]
 	for key in spell_map.keys():
 		get_node(NodePath("actionbar%s"%key[0])).\
 			get_node(NodePath("actionbar%s"%key)).init(spell_map[key])
