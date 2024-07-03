@@ -49,6 +49,10 @@ func pre_ready(peer_id: int):
 
 func post_ready(peer_id: int):
 	# some things should be done after _ready is finished
+	# load spell_map from file
+	rpc_id(peer_id,"load_spell_map")
+	# generate cd timer
+	rpc_id(peer_id,"generate_cd_timers")
 	# add player camera node for authority only
 	rpc_id(peer_id,"add_player_camera")
 	# add UI elements
@@ -60,6 +64,12 @@ func post_ready(peer_id: int):
 	print("player %s ready" % name)
 
 
+@rpc("authority","call_local")
+func load_spell_map():
+	pass
+@rpc("authority","call_local")
+func generate_cd_timers():
+	pass
 @rpc("authority","call_local")
 func add_player_camera():
 	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
