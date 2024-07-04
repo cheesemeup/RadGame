@@ -20,6 +20,9 @@ var current_interactable = null  # the currently active interactable
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+# spells
+var spell_map: Dictionary
+
 ####################################################################################################
 # FRAME
 func _physics_process(delta) -> void:
@@ -49,36 +52,50 @@ func pre_ready(peer_id: int):
 
 func post_ready(peer_id: int):
 	# some things should be done after _ready is finished
+	# add UI elements
+	rpc_id(peer_id,"load_ui_initial")
 	# load spell_map from file
 	rpc_id(peer_id,"load_spell_map")
 	# generate cd timer
 	rpc_id(peer_id,"generate_cd_timers")
+	# initialize actionbar slots
+	rpc_id(peer_id,"initialize_actionbar_slots")
 	# add player camera node for authority only
 	rpc_id(peer_id,"add_player_camera")
-	# add UI elements
-	rpc_id(peer_id,"load_ui_initial")
 #	# activate input _process for authority
 	rpc_id(peer_id,"call_set_input_process")
-	#if input.is_multiplayer_authority():
-		#References.player_reference = self
 	print("player %s ready" % name)
 
 
-@rpc("authority","call_local")
-func load_spell_map():
-	pass
-@rpc("authority","call_local")
-func generate_cd_timers():
-	pass
-@rpc("authority","call_local")
-func add_player_camera():
-	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
-	$camera_rotation/camera_arm/player_camera.current = true
 @rpc("authority","call_local")
 func load_ui_initial():
 	# set player reference before initializing the unitframes
 	References.player_reference = self
 	UIHandler.init_ui()
+@rpc("authority","call_local")
+func load_spell_map():
+	# this is a temporary workaround, and spell_map should be made persistent in a file
+	# in the future, with every class/role combination having a separate map to make sure
+	# that swapping classes and roles is smooth
+	spell_map["10"] = ["fingersoffrost",["1_1","2_1"]]
+	spell_map["11"] = ["abyssalshell",["1_3","2_3"]]
+	spell_map["12"] = ["mendingwater",["1_2","2_2"]]
+	spell_map["13"] = ["deepcurrent",["1_4","2_4"]]
+	spell_map["14"] = ["succumb",["1_5","2_5"]]
+@rpc("authority","call_local")
+func generate_cd_timers():
+	pass
+@rpc("authority","call_local")
+func initialize_actionbar_slots():
+	var actionbars = References.player_ui_main_reference.get_node("actionbars")
+	for key in spell_map.keys():
+		for slot in spell_map[key][1]:
+			actionbars.get_node("actionbar%s"%slot[0]).get_node("actionbar%s"%slot).\
+				init([key,spell_map[key][0]])
+@rpc("authority","call_local")
+func add_player_camera():
+	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
+	$camera_rotation/camera_arm/player_camera.current = true
 @rpc("authority","call_local")
 func call_set_input_process():
 	input.set_process(true)

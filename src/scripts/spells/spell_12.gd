@@ -13,7 +13,7 @@ func trigger():
 		target = source
 	# check target legality
 	if is_illegal_target(spell_current["targetgroup"], target):
-		return 1
+		target = source
 	# check for cooldown
 	if is_on_cd():
 		return 2

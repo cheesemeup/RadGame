@@ -2,7 +2,6 @@ extends Control
 
 var actionbar_slot = preload("res://scenes/ui/actionbar_slot.tscn")
 var actions: Array
-var spell_map: Dictionary
 
 func initialize() -> void:
 	# add actionbar slots to actionbars
@@ -15,21 +14,14 @@ func initialize() -> void:
 	# get all actionbar InputMap actions and set text to primary event
 	actions = get_actionbar_actions()
 	set_text()
-	# initialize all slots with spell id and spell icon
-	# silly workaround, make persistent spell map later
-	spell_map["1_1"] = ["10","fingersoffrost"]
-	spell_map["1_2"] = ["12","mendingwater"]
-	spell_map["1_3"] = ["11","abyssalshell"]
-	spell_map["1_4"] = ["13","deepcurrent"]
-	spell_map["1_5"] = ["14","succumb"]
-	spell_map["2_1"] = ["10","fingersoffrost"]
-	spell_map["2_2"] = ["12","mendingwater"]
-	spell_map["2_3"] = ["11","abyssalshell"]
-	spell_map["2_4"] = ["13","deepcurrent"]
-	spell_map["2_5"] = ["14","succumb"]
-	for key in spell_map.keys():
-		get_node(NodePath("actionbar%s"%key[0])).\
-			get_node(NodePath("actionbar%s"%key)).init(spell_map[key])
+	## initialize all slots with spell id and spell icon
+	#for key in spell_map.keys():
+		#get_node(NodePath("actionbar%s"%key[0])).\
+			#get_node(NodePath("actionbar%s"%key)).init(spell_map[key])
+
+
+func init_slots(spell_map: Dictionary):
+	pass
 
 
 func get_actionbar_actions() -> Array:
