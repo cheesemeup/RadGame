@@ -56,10 +56,10 @@ func post_ready(peer_id: int):
 	rpc_id(peer_id,"load_ui_initial")
 	# load spell_map from file
 	rpc_id(peer_id,"load_spell_map")
-	# generate cd timer
-	rpc_id(peer_id,"generate_cd_timers")
 	# initialize actionbar slots
 	rpc_id(peer_id,"initialize_actionbar_slots")
+	# add cd_timers on server
+	add_cd_timers()
 	# add player camera node for authority only
 	rpc_id(peer_id,"add_player_camera")
 #	# activate input _process for authority
@@ -83,15 +83,21 @@ func load_spell_map():
 	spell_map["13"] = ["deepcurrent",["1_4","2_4"]]
 	spell_map["14"] = ["succumb",["1_5","2_5"]]
 @rpc("authority","call_local")
-func generate_cd_timers():
-	pass
-@rpc("authority","call_local")
 func initialize_actionbar_slots():
 	var actionbars = References.player_ui_main_reference.get_node("actionbars")
 	for key in spell_map.keys():
 		for slot in spell_map[key][1]:
 			actionbars.get_node("actionbar%s"%slot[0]).get_node("actionbar%s"%slot).\
 				init([key,spell_map[key][0]])
+func add_cd_timers():
+	# add cd timers here, instead of before being added, to properly enable synchronization
+	var cd_timer_scene = preload("res://scenes/functionalities/cd_timer.tscn")
+	var timer: Timer
+	for spell in get_node("spell_container").get_children():
+		timer = cd_timer_scene.instantiate()
+		timer.name = "cd_timer_%s"%spell.name
+		timer.one_shot = false
+		get_node("cd_timers").add_child(timer)
 @rpc("authority","call_local")
 func add_player_camera():
 	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())

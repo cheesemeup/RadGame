@@ -4,7 +4,7 @@ var actionbar_slot = preload("res://scenes/ui/actionbar_slot.tscn")
 var actions: Array
 
 func initialize() -> void:
-	# add actionbar slots to actionbars
+	# add actionbar slots to actionbars, linked later from player scene in post_ready
 	for i in range(1,3):
 		for j in range(1,13):
 			var slot = actionbar_slot.instantiate()
@@ -14,14 +14,6 @@ func initialize() -> void:
 	# get all actionbar InputMap actions and set text to primary event
 	actions = get_actionbar_actions()
 	set_text()
-	## initialize all slots with spell id and spell icon
-	#for key in spell_map.keys():
-		#get_node(NodePath("actionbar%s"%key[0])).\
-			#get_node(NodePath("actionbar%s"%key)).init(spell_map[key])
-
-
-func init_slots(spell_map: Dictionary):
-	pass
 
 
 func get_actionbar_actions() -> Array:

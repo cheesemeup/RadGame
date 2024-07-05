@@ -23,10 +23,8 @@ func set_icon(spell_icon) -> void:
 
 
 func set_hotkey() -> void:
-	print("setting hotkey for %s to %s"%[name,InputMap.action_get_events(name)])
 	shortcut = Shortcut.new()
 	shortcut.events = InputMap.action_get_events(name)
-	print("hotkey for %s is set as %s"%[name,shortcut.events])
 
 
 func _on_pressed() -> void:
