@@ -2,7 +2,6 @@ extends Node
 
 
 func relay_cd_timer(spell_id: String, full_duration: float, duration: float):
-	print(get_parent().name)
 	rpc_id(get_parent().name.to_int(),"start_cd_timer",spell_id,full_duration,duration)
 
 
