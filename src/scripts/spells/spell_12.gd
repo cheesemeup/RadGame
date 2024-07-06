@@ -40,3 +40,4 @@ func trigger():
 		get_parent().send_gcd()
 	# send event to combat script
 	Combat.combat_event_entrypoint(spell_current,source,target)
+	return 0

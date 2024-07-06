@@ -6,8 +6,11 @@ var spell_base: Dictionary
 var spell_current: Dictionary
 var cd_timer = Timer.new()
 var use_mouseover_target = false
+var full_duration: float  # full duration of the cooldown, not necessarily equal to timer wait_time
+var spell_id_string: String
 
 func initialize_base_spell(spell_id: String) -> void:
+	spell_id_string = spell_id
 	# load spell data from data file
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
 	spell_base = json_dict[spell_id]
@@ -69,13 +72,22 @@ func is_not_in_line_of_sight(source: CharacterBody3D, target_position: Vector3) 
 
 ####################################################################################################
 # COOLDOWN
-func trigger_cd(duration: float) -> void:
+func trigger_cd(duration: float, is_gcd: bool = false) -> void:
 	# check if current cooldown exceeds requested cooldown
 	if cd_timer.time_left > duration:
 		return
 	# start timer
 	cd_timer.wait_time = duration
 	cd_timer.start()
+	# start timer in player actionbars
+	if not get_parent().get_parent().is_in_group("player"):
+		return
+	if is_gcd:
+		full_duration = get_parent().gcd_timer
+	else:
+		full_duration = spell_current["cooldown"]
+	get_parent().get_parent().get_node("cd_timer_container").\
+		relay_cd_timer(spell_id_string,full_duration,duration)
 
 
 ####################################################################################################

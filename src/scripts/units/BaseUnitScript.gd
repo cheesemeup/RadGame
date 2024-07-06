@@ -30,10 +30,6 @@ func initialize_base_unit(unittype: String, unit_id: String):
 	# auras
 	var aura_container = preload("res://scenes/functionalities/aura_container.tscn").instantiate()
 	add_child(aura_container)
-	# generate cd timers for players for use with actionbars
-	# these are not the actual serverside timers
-	#if unittype == "player":
-		#cd_timers_init()
 
 
 func stat_init(unit_type: String, unit_id: String) -> void:
