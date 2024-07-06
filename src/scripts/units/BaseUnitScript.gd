@@ -84,3 +84,14 @@ func spell_container_init(spell_list: Array):
 		var spell_scene = load("res://scenes/spells/spell_%s.tscn" % spell)
 		spell_scene = spell_scene.instantiate()
 		$spell_container.add_child(spell_scene)
+
+
+func cd_timers_init():
+	var cd_timer_scene = preload("res://scenes/functionalities/cd_timer.tscn")
+	var timer: Timer
+	for spell in get_node("spell_container").get_children():
+		timer = cd_timer_scene.instantiate()
+		timer.name = "cd_timer_%s"%spell.name
+		timer.one_shot = false
+		get_node("cd_timers").add_child(timer)
+	print(get_node("cd_timers").get_children())

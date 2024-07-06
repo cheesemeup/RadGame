@@ -29,3 +29,4 @@ func trigger():
 	trigger_cd(spell_current["cooldown"])
 	# send event to combat script
 	Combat.combat_event_aura_entrypoint(spell_current,source,source)
+	return 0

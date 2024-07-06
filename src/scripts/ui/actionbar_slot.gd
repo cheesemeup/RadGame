@@ -1,9 +1,12 @@
 extends Button
 
-var slot_spell_id: String
+var slot_spell_id: String = ""
+var spell_cd_timer: Timer
 
 
 func _process(_delta: float) -> void:
+	if slot_spell_id == "":
+		return
 	cooldown_swipe()
 
 
@@ -12,7 +15,8 @@ func init(spell_info: Array) -> void:
 	set_icon(spell_info[1])
 	set_hotkey()
 	pressed.connect(_on_pressed)
-	set_process(true)
+	spell_cd_timer = References.player_reference.get_node("cd_timer_container").\
+		get_node("cd_timer_spell_%s"%slot_spell_id)
 
 
 func set_icon(spell_icon) -> void:
@@ -23,10 +27,8 @@ func set_icon(spell_icon) -> void:
 
 
 func set_hotkey() -> void:
-	print("setting hotkey for %s to %s"%[name,InputMap.action_get_events(name)])
 	shortcut = Shortcut.new()
 	shortcut.events = InputMap.action_get_events(name)
-	print("hotkey for %s is set as %s"%[name,shortcut.events])
 
 
 func _on_pressed() -> void:
@@ -37,4 +39,6 @@ func _on_pressed() -> void:
 
 
 func cooldown_swipe() -> void:
-	pass
+	if spell_cd_timer.is_stopped():
+		return
+	$cooldown_swipe.value = spell_cd_timer.time_left / spell_cd_timer.cd_full_duration

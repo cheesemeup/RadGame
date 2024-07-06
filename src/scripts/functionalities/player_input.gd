@@ -56,7 +56,6 @@ func request_enter_spell_container(spell_id: String):
 
 @rpc("authority","call_local")
 func enter_spell_container(spell_id: String):
-	print("spell requested: %s"%spell_id)
 	$"../spell_container".spell_entrypoint(spell_id)
 
 @rpc("authority","call_local")

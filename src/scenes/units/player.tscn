@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dempeiar8tjic"]
+[gd_scene load_steps=8 format=3 uid="uid://dempeiar8tjic"]
 
 [ext_resource type="Script" path="res://scripts/units/player.gd" id="1_8gonl"]
+[ext_resource type="Script" path="res://scripts/functionalities/cd_timer_container.gd" id="3_ise05"]
 [ext_resource type="Script" path="res://scripts/functionalities/player_input.gd" id="4_lp8kc"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_16yd3"]
@@ -55,7 +56,5 @@ replication_config = SubResource("SceneReplicationConfig_rfg56")
 replication_config = SubResource("SceneReplicationConfig_kjxoy")
 script = ExtResource("4_lp8kc")
 
-[node name="cd_timers" type="Node" parent="."]
-
-[node name="cd_timer_spawner" type="MultiplayerSpawner" parent="cd_timers"]
-spawn_path = NodePath("..")
+[node name="cd_timer_container" type="Node" parent="."]
+script = ExtResource("3_ise05")

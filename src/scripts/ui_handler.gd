@@ -30,6 +30,7 @@ var actionbars
 ####################################################################################################
 # INIT
 func init_ui():
+	References.player_ui_main_reference = $/root/main/ui
 	init_unitframes()
 	init_actionbars()
 
@@ -57,7 +58,7 @@ func initialize_playerframe():
 	playerframe = preload("res://scenes/ui/unitframe_player.tscn")
 	playerframe = playerframe.instantiate()
 	set_playerframe_position()
-	$"/root/main/ui".add_child(playerframe)
+	References.player_ui_main_reference.add_child(playerframe)
 
 
 func set_playerframe_position():
@@ -78,7 +79,7 @@ func initialize_targetframe():
 	targetframe = preload("res://scenes/ui/unitframe_target.tscn")
 	targetframe = targetframe.instantiate()
 	set_targetframe_position()
-	$"/root/main/ui".add_child(targetframe)
+	References.player_ui_main_reference.add_child(targetframe)
 
 
 func set_targetframe_position():
@@ -114,4 +115,4 @@ func hide_targetframe():
 func init_actionbars():
 	actionbars = preload("res://scenes/ui/actionbars.tscn").instantiate()
 	actionbars.initialize()
-	$/root/main/ui.add_child(actionbars)
+	References.player_ui_main_reference.add_child(actionbars)
