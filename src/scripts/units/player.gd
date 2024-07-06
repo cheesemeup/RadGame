@@ -9,6 +9,7 @@ var playermodel_reference = null
 # when speed changes
 var speed: float = 10.0
 const jump_velocity: float = 4.5
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # targeting vars
 var space_state
@@ -17,8 +18,9 @@ var space_state
 var interactables: Array = []
 var current_interactable = null  # the currently active interactable
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+# spells
+var spell_map: Dictionary
+
 
 ####################################################################################################
 # FRAME
@@ -37,40 +39,85 @@ func _physics_process(delta) -> void:
 
 ####################################################################################################
 # SPAWNING
-func _enter_tree():
+func _enter_tree() -> void:
 	$player_input.set_multiplayer_authority(str(name).to_int())
 
 
-func pre_ready(peer_id: int):
+func pre_ready(peer_id: int) -> void:
 	name = str(peer_id)
 	# initialize stats for all peers
 	initialize_base_unit("player","0")
 
 
-func post_ready(peer_id: int):
+func post_ready(peer_id: int) -> void:
 	# some things should be done after _ready is finished
-	# add player camera node for authority only
-	rpc_id(peer_id,"add_player_camera")
-	# add UI elements
-	rpc_id(peer_id,"load_ui_initial")
-#	# activate input _process for authority
-	rpc_id(peer_id,"call_set_input_process")
-	#if input.is_multiplayer_authority():
-		#References.player_reference = self
-	print("player %s ready" % name)
+	rpc_id(peer_id,"peer_post_ready")
+	#rpc_id(peer_id,"add_cd_timers")
+	#rpc_id(peer_id,"load_ui_initial")
+	## load spell_map from file
+	#rpc_id(peer_id,"load_spell_map")
+	#rpc_id(peer_id,"initialize_actionbar_slots")
+	#rpc_id(peer_id,"add_player_camera")
+	#rpc_id(peer_id,"call_set_input_process")
+	print("player %s ready"%name)
 
 
 @rpc("authority","call_local")
-func add_player_camera():
-	add_child(load("res://scenes/functionalities/player_camera.tscn").instantiate())
-	$camera_rotation/camera_arm/player_camera.current = true
-@rpc("authority","call_local")
-func load_ui_initial():
-	# set player reference before initializing the unitframes
+func peer_post_ready():
 	References.player_reference = self
+	add_cd_timers()
+	load_ui_initial()
+	load_spell_map()
+	initialize_actionbar_slots()
+	add_player_camera()
+	call_set_input_process()
+
+
+#@rpc("authority","call_local")
+func add_cd_timers() -> void:
+	var cd_timer_scene = preload("res://scenes/functionalities/cd_timer.tscn")
+	var timer: Timer
+	for spell in stats_current["spell_list"]:
+		timer = cd_timer_scene.instantiate()
+		timer.name = "cd_timer_spell_%s"%spell
+		timer.one_shot = true
+		get_node("cd_timer_container").add_child(timer,true)
+
+
+#@rpc("authority","call_local")
+func load_ui_initial() -> void:
 	UIHandler.init_ui()
-@rpc("authority","call_local")
-func call_set_input_process():
+
+
+#@rpc("authority","call_local")
+func load_spell_map() -> void:
+	# this is a temporary workaround, and spell_map should be made persistent in a file
+	# in the future, with every class/role combination having a separate map to make sure
+	# that swapping classes and roles is smooth
+	spell_map["10"] = ["fingersoffrost",["1_1","2_1"]]
+	spell_map["11"] = ["abyssalshell",["1_3","2_3"]]
+	spell_map["12"] = ["mendingwater",["1_2","2_2"]]
+	spell_map["13"] = ["deepcurrent",["1_4","2_4"]]
+	spell_map["14"] = ["succumb",["1_5","2_5"]]
+
+
+#@rpc("authority","call_local")
+func initialize_actionbar_slots() -> void:
+	var actionbars = References.player_ui_main_reference.get_node("actionbars")
+	for key in spell_map.keys():
+		for slot in spell_map[key][1]:
+			actionbars.get_node("actionbar%s"%slot[0]).get_node("actionbar%s"%slot).\
+				init([key,spell_map[key][0]])
+
+
+#@rpc("authority","call_local")
+func add_player_camera() -> void:
+	add_child(preload("res://scenes/functionalities/player_camera.tscn").instantiate())
+	$camera_rotation/camera_arm/player_camera.current = true
+
+
+#@rpc("authority","call_local")
+func call_set_input_process() -> void:
 	input.set_process(true)
 	input.set_process_unhandled_input(true)
 
@@ -121,7 +168,7 @@ func is_legal_target(target_dict: Dictionary) -> bool:
 
 
 @rpc("any_peer","call_local")
-func set_target(requested_target: String, parent: String, is_player: bool = false):
+func set_target(requested_target: String, parent: String, is_player: bool = false) -> void:
 	if requested_target == "":
 		selected_target = null
 	elif is_player:
@@ -132,7 +179,7 @@ func set_target(requested_target: String, parent: String, is_player: bool = fals
 
 ####################################################################################################
 # INTERACTABLES
-func get_nearest_interactable():
+func get_nearest_interactable() -> Node:
 	# get the interactable that is nearest to the player unit
 	var nearest_interactable = null
 	# if only one interactable in range, set to that
@@ -160,20 +207,20 @@ func get_nearest_interactable():
 
 
 @rpc("authority","call_local")
-func show_interact_prompt(interactable_name: String):
+func show_interact_prompt(interactable_name: String) -> void:
 	# rpc that makes interact prompt visible locally
 	$/root/main/maps/active_map/interactables.get_node(interactable_name).\
 	get_node("interact_prompt").visible = true
 
 
 @rpc("authority","call_local")
-func hide_interact_prompt(interactable_name: String):
+func hide_interact_prompt(interactable_name: String) -> void:
 	# rpc that makes interact prompt invisible locally
 	$/root/main/maps/active_map/interactables.get_node(interactable_name).\
 	get_node("interact_prompt").visible = false
 
 
-func handle_movement(delta):
+func handle_movement(delta: float) -> void:
 	# jumping
 	if input.jumping and is_on_floor():
 		velocity.y = jump_velocity

@@ -4,7 +4,7 @@ extends BaseSpell
 func _ready():
 	initialize_base_spell("10")
 
-func trigger():
+func trigger() -> int:
 	# get source and target nodes
 	var source = get_parent().get_parent()
 	var target = get_spell_target(source)
@@ -41,3 +41,4 @@ func trigger():
 		get_parent().send_gcd()
 	# send event to combat script
 	Combat.combat_event_entrypoint(spell_current,source,target)
+	return 0
