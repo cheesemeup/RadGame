@@ -32,9 +32,10 @@ func _physics_process(delta) -> void:
 		# space state for targeting
 		space_state = get_world_3d().direct_space_state
 	# server only section
-	if $mpsynchronizer.is_multiplayer_authority():
-		# get nearest interactable
-		current_interactable = get_nearest_interactable()
+	if not $mpsynchronizer.is_multiplayer_authority():
+		return
+	# get nearest interactable
+	current_interactable = get_nearest_interactable()
 
 
 ####################################################################################################
@@ -47,6 +48,9 @@ func pre_ready(peer_id: int) -> void:
 	name = str(peer_id)
 	# initialize stats for all peers
 	initialize_base_unit("player","0")
+
+
+func _ready():
 	# load model
 	swap_model(model)
 
@@ -54,13 +58,8 @@ func pre_ready(peer_id: int) -> void:
 func post_ready(peer_id: int) -> void:
 	# some things should be done after _ready is finished
 	rpc_id(peer_id,"peer_post_ready")
-	#rpc_id(peer_id,"add_cd_timers")
-	#rpc_id(peer_id,"load_ui_initial")
-	## load spell_map from file
-	#rpc_id(peer_id,"load_spell_map")
-	#rpc_id(peer_id,"initialize_actionbar_slots")
-	#rpc_id(peer_id,"add_player_camera")
-	#rpc_id(peer_id,"call_set_input_process")
+	# load model
+	swap_model(model)
 	print("player %s ready"%name)
 
 
@@ -237,3 +236,12 @@ func handle_movement(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()
+	# set movement state on server
+	if not $mpsynchronizer.is_multiplayer_authority():
+		return
+	if velocity == Vector3(0,0,0):
+		if is_moving:
+			is_moving = false
+	else:
+		if not is_moving:
+			is_moving = true

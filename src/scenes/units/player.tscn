@@ -20,6 +20,9 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath(".:selected_target")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath(".:model")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kjxoy"]
 properties/0/path = NodePath("player_input:direction")
@@ -29,14 +32,8 @@ properties/0/replication_mode = 1
 [node name="player" type="CharacterBody3D" groups=["friendly", "player"]]
 collision_layer = 2
 script = ExtResource("1_8gonl")
-stats_current = null
 
 [node name="pivot" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-
-[node name="mpspawner" type="MultiplayerSpawner" parent="pivot"]
-_spawnable_scenes = PackedStringArray("res://assets/playermodels/Necromancer.glb")
-spawn_path = NodePath("..")
 
 [node name="player_collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

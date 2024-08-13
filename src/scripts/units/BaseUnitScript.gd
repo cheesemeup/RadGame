@@ -15,15 +15,12 @@ var target = null  # for unitframes, only local
 var selected_target = null  # for targeting with spells
 var mouseover_target = null  # for targeting with spells
 
-# state
-var is_dead: bool = false
-var is_moving: bool = false
 
 # model
-var model: String
+@export var model: String
 
 
-func initialize_base_unit(unittype: String, unit_id: String):
+func initialize_base_unit(unittype: String, unit_id: String) -> void:
 	# stats
 	stat_init(unittype,unit_id)
 	# spells
@@ -78,7 +75,7 @@ func initialize_statadd() -> Dictionary:
 	return stat_add
 
 
-func spell_container_init(spell_list: Array):
+func spell_container_init(spell_list: Array) -> void:
 	# remove previous spells
 	for spell in $spell_container.get_children():
 		spell.queue_free()
@@ -89,7 +86,7 @@ func spell_container_init(spell_list: Array):
 		$spell_container.add_child(spell_scene)
 
 
-func cd_timers_init():
+func cd_timers_init() -> void:
 	var cd_timer_scene = preload("res://scenes/functionalities/cd_timer.tscn")
 	var timer: Timer
 	for spell in get_node("spell_container").get_children():
@@ -97,15 +94,46 @@ func cd_timers_init():
 		timer.name = "cd_timer_%s"%spell.name
 		timer.one_shot = false
 		get_node("cd_timers").add_child(timer)
-	print(get_node("cd_timers").get_children())
 
 
 ################################################################################
 # MODELS AND ANIMATIONS
-func swap_model(model_name):
+func swap_model(model_name: String) -> void:
 	# unload previous model if it exists
 	for node in $pivot.get_children():
 		node.free()
 	# load new model
-	var model_scene = load("res://assets/playermodels/%s.glb"%model_name).instantiate()
+	var model_scene = load("res://scenes/models/%s.tscn"%model_name).instantiate()
 	$pivot.add_child(model_scene)
+	play_animation("Idle")
+
+
+func play_animation(animation_name: String) -> void:
+	# check if another animation with priority is playing
+	print("playing animation %s"%animation_name)
+	$pivot.get_child(0).get_node("AnimationPlayer").play(animation_name)
+	pass
+
+
+################################################################################
+# STATES
+@export var is_moving: bool = false:
+	set(new_value):
+		print("setting is_moving to %s"%new_value)
+		is_moving = new_value
+		if new_value:
+			#is_casting = false
+			play_animation("Running_A")
+		else:
+			play_animation("Idle")
+
+
+@export var is_dead: bool = false:
+	set(new_value):
+		if new_value:
+			is_moving = false
+			is_casting = false
+			target = null
+
+
+@export var is_casting: bool = false
