@@ -19,6 +19,9 @@ var mouseover_target = null  # for targeting with spells
 var is_dead: bool = false
 var is_moving: bool = false
 
+# model
+var model: String
+
 
 func initialize_base_unit(unittype: String, unit_id: String):
 	# stats
@@ -37,6 +40,10 @@ func stat_init(unit_type: String, unit_id: String) -> void:
 	var file = "res://data/db_stats_"+unit_type+".json"
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
 	stats_base = json_dict[unit_id]
+	# extract base model information
+	model = stats_base["model"]
+	stats_base.erase("model")
+	# create duplicate for current stats
 	stats_current = stats_base.duplicate(true)
 	stats_mult = initialize_statmult()
 	stats_add = initialize_statadd()
@@ -91,3 +98,14 @@ func cd_timers_init():
 		timer.one_shot = false
 		get_node("cd_timers").add_child(timer)
 	print(get_node("cd_timers").get_children())
+
+
+################################################################################
+# MODELS AND ANIMATIONS
+func swap_model(model_name):
+	# unload previous model if it exists
+	for node in $pivot.get_children():
+		node.free()
+	# load new model
+	var model_scene = load("res://assets/playermodels/%s.glb"%model_name).instantiate()
+	$pivot.add_child(model_scene)
