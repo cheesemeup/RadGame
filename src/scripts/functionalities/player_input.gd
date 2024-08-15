@@ -24,6 +24,14 @@ func _unhandled_input(event):
 
 ####################################################################################################
 # MOVEMENT
+@rpc("any_peer")
+func set_strafing(strafing_left: bool, strafing_right: bool) -> void:
+	if not get_parent().is_strafing_left == strafing_left:
+		get_parent().is_strafing_left = strafing_left
+	if not get_parent().is_strafing_right == strafing_right:
+		get_parent().is_strafing_right = strafing_right
+
+
 @rpc("call_local")
 func jump():
 	jumping = true
@@ -32,6 +40,14 @@ func jump():
 func movement_direction():
 	# unrotated direction from input
 	var direction_ur = Input.get_vector("move_left","move_right","move_forward","move_back")
+	# set strafing
+	var strafing_left = true
+	var strafing_right = true
+	if direction_ur.y > 0:
+		strafing_left = false
+	if direction_ur.y < 0:
+		strafing_right = false
+	rpc_id(1,"set_strafing",strafing_left,strafing_right)
 	# rotate input according to camera orientation
 	direction = Vector2(cos(-$"../camera_rotation".rotation.y)*direction_ur.x -\
 						sin(-$"../camera_rotation".rotation.y)*direction_ur.y, \

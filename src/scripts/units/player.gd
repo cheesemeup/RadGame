@@ -26,7 +26,8 @@ var spell_map: Dictionary
 # FRAME
 func _physics_process(delta) -> void:
 	# movement
-	handle_movement(delta)
+	if not is_dead:
+		handle_movement(delta)
 	# player only section
 	if input.is_multiplayer_authority():
 		# space state for targeting
@@ -52,14 +53,12 @@ func pre_ready(peer_id: int) -> void:
 
 func _ready():
 	# load model
-	swap_model(model)
+	set_model(model)
 
 
 func post_ready(peer_id: int) -> void:
 	# some things should be done after _ready is finished
 	rpc_id(peer_id,"peer_post_ready")
-	# load model
-	swap_model(model)
 	print("player %s ready"%name)
 
 
@@ -74,7 +73,6 @@ func peer_post_ready():
 	call_set_input_process()
 
 
-#@rpc("authority","call_local")
 func add_cd_timers() -> void:
 	var cd_timer_scene = preload("res://scenes/functionalities/cd_timer.tscn")
 	var timer: Timer
@@ -85,12 +83,10 @@ func add_cd_timers() -> void:
 		get_node("cd_timer_container").add_child(timer,true)
 
 
-#@rpc("authority","call_local")
 func load_ui_initial() -> void:
 	UIHandler.init_ui()
 
 
-#@rpc("authority","call_local")
 func load_spell_map() -> void:
 	# this is a temporary workaround, and spell_map should be made persistent in a file
 	# in the future, with every class/role combination having a separate map to make sure
@@ -102,7 +98,6 @@ func load_spell_map() -> void:
 	spell_map["14"] = ["succumb",["1_5","2_5"]]
 
 
-#@rpc("authority","call_local")
 func initialize_actionbar_slots() -> void:
 	var actionbars = References.player_ui_main_reference.get_node("actionbars")
 	for key in spell_map.keys():
@@ -111,13 +106,11 @@ func initialize_actionbar_slots() -> void:
 				init([key,spell_map[key][0]])
 
 
-#@rpc("authority","call_local")
 func add_player_camera() -> void:
 	add_child(preload("res://scenes/functionalities/player_camera.tscn").instantiate())
 	$camera_rotation/camera_arm/player_camera.current = true
 
 
-#@rpc("authority","call_local")
 func call_set_input_process() -> void:
 	input.set_process(true)
 	input.set_process_unhandled_input(true)
@@ -221,6 +214,8 @@ func hide_interact_prompt(interactable_name: String) -> void:
 	get_node("interact_prompt").visible = false
 
 
+################################################################################
+# MOVEMENT
 func handle_movement(delta: float) -> void:
 	# jumping
 	if input.jumping and is_on_floor():
@@ -236,6 +231,8 @@ func handle_movement(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()
+	# set orientation of player
+	set_orientation(direction)
 	# set movement state on server
 	if not $mpsynchronizer.is_multiplayer_authority():
 		return
@@ -245,3 +242,8 @@ func handle_movement(delta: float) -> void:
 	else:
 		if not is_moving:
 			is_moving = true
+
+
+func set_orientation(direction: Vector3) -> void:
+	
+	pass

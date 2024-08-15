@@ -98,7 +98,7 @@ func cd_timers_init() -> void:
 
 ################################################################################
 # MODELS AND ANIMATIONS
-func swap_model(model_name: String) -> void:
+func set_model(model_name: String) -> void:
 	# unload previous model if it exists
 	for node in $pivot.get_children():
 		node.free()
@@ -119,7 +119,6 @@ func play_animation(animation_name: String) -> void:
 # STATES
 @export var is_moving: bool = false:
 	set(new_value):
-		print("setting is_moving to %s"%new_value)
 		is_moving = new_value
 		if new_value:
 			#is_casting = false
@@ -128,12 +127,19 @@ func play_animation(animation_name: String) -> void:
 			play_animation("Idle")
 
 
+@export var is_strafing: bool = false
+
+
 @export var is_dead: bool = false:
 	set(new_value):
+		is_dead = new_value
 		if new_value:
+			# combat log message
+			Combat.log_death(self.name)
 			is_moving = false
 			is_casting = false
 			target = null
+			play_animation("Death_A")
 
 
 @export var is_casting: bool = false
