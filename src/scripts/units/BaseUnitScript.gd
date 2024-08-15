@@ -115,20 +115,35 @@ func play_animation(animation_name: String) -> void:
 	pass
 
 
+func determine_movement_animation():
+	if not is_moving:
+		play_animation("Idle")
+		return
+	if is_strafing_left:
+		play_animation("Running_Strafe_Left")
+	elif is_strafing_right:
+		play_animation("Running_Strafe_Right")
+	else:
+		play_animation("Running_A")
+	# backpedaling to be implemented
+
+
 ################################################################################
 # STATES
 @export var is_moving: bool = false:
 	set(new_value):
 		is_moving = new_value
-		if new_value:
-			#is_casting = false
-			play_animation("Running_A")
-		else:
-			play_animation("Idle")
+		determine_movement_animation()
 
 
-@export var is_strafing: bool = false
-
+@export var is_strafing_left: bool = false:
+	set(new_value):
+		is_strafing_left = new_value
+		determine_movement_animation()
+@export var is_strafing_right: bool = false:
+	set(new_value):
+		is_strafing_right = new_value
+		determine_movement_animation()
 
 @export var is_dead: bool = false:
 	set(new_value):

@@ -245,5 +245,7 @@ func handle_movement(delta: float) -> void:
 
 
 func set_orientation(direction: Vector3) -> void:
-	
-	pass
+	if is_strafing_left:
+		pass
+	if is_strafing_right:
+		pass

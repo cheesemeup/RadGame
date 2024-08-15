@@ -22,9 +22,10 @@ func _unhandled_input(event):
 	if event is InputEventKey and event.is_action_pressed("interact"):
 		rpc_id(1,"request_interaction")
 
+
 ####################################################################################################
 # MOVEMENT
-@rpc("any_peer")
+@rpc("any_peer","call_local")
 func set_strafing(strafing_left: bool, strafing_right: bool) -> void:
 	if not get_parent().is_strafing_left == strafing_left:
 		get_parent().is_strafing_left = strafing_left
@@ -41,12 +42,12 @@ func movement_direction():
 	# unrotated direction from input
 	var direction_ur = Input.get_vector("move_left","move_right","move_forward","move_back")
 	# set strafing
-	var strafing_left = true
-	var strafing_right = true
-	if direction_ur.y > 0:
-		strafing_left = false
-	if direction_ur.y < 0:
-		strafing_right = false
+	var strafing_left = false
+	var strafing_right = false
+	if direction_ur.x < 0:
+		strafing_left = true
+	if direction_ur.x > 0:
+		strafing_right = true
 	rpc_id(1,"set_strafing",strafing_left,strafing_right)
 	# rotate input according to camera orientation
 	direction = Vector2(cos(-$"../camera_rotation".rotation.y)*direction_ur.x -\
