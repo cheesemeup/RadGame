@@ -178,4 +178,9 @@ func determine_movement_animation():
 			play_animation("Death_A")
 
 
-@export var is_casting: bool = false
+@export var is_casting: bool = false:
+	set(new_value):
+		is_casting = new_value
+		if new_value:
+			# possibly add log message for very detailed logging
+			play_animation("Casting")

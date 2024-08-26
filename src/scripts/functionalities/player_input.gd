@@ -38,6 +38,7 @@ func set_strafing(strafing_left: bool, strafing_right: bool) -> void:
 
 @rpc("any_peer","call_local")
 func set_backpedaling(backwards: bool) -> void:
+	# do not allow backpedaling if player is dead
 	if get_parent().is_dead:
 		return
 	if not get_parent().is_backpedaling == backwards:
