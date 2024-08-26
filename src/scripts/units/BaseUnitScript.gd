@@ -3,6 +3,7 @@ extends CharacterBody3D
 class_name BaseUnit
 
 # combat
+var speed: float 
 @export var stats_current: Dictionary
 var stats_base: Dictionary
 var stats_mult: Dictionary
@@ -44,6 +45,8 @@ func stat_init(unit_type: String, unit_id: String) -> void:
 	stats_current = stats_base.duplicate(true)
 	stats_mult = initialize_statmult()
 	stats_add = initialize_statadd()
+	# set speed
+	speed = stats_current["speed"]
 
 
 func initialize_statmult() -> Dictionary:
@@ -109,23 +112,28 @@ func set_model(model_name: String) -> void:
 
 
 func play_animation(animation_name: String) -> void:
-	# check if another animation with priority is playing
-	print("playing animation %s"%animation_name)
 	$pivot.get_child(0).get_node("AnimationPlayer").play(animation_name)
-	pass
+
+
+func queue_animation(animation_name: String) -> void:
+	$pivot.get_child(0).get_node("AnimationPlayer").queue(animation_name)
 
 
 func determine_movement_animation():
+	# only play movement animation if on ground, jump idle is already queued when jumping
+	if not is_on_floor():
+		return
 	if not is_moving:
 		play_animation("Idle")
 		return
-	if is_strafing_left:
+	if is_backpedaling:
+		play_animation("Walking_Backwards")
+	elif is_strafing_left:
 		play_animation("Running_Strafe_Left")
 	elif is_strafing_right:
 		play_animation("Running_Strafe_Right")
 	else:
 		play_animation("Running_A")
-	# backpedaling to be implemented
 
 
 ################################################################################
@@ -144,6 +152,17 @@ func determine_movement_animation():
 	set(new_value):
 		is_strafing_right = new_value
 		determine_movement_animation()
+@export var is_backpedaling: bool = false:
+	set(new_value):
+		is_backpedaling = new_value
+		determine_movement_animation()
+		if new_value:
+			# reduce movement speed
+			speed = stats_current["speed"] / 2
+		else:
+			# restore movement speed
+			speed = stats_current["speed"]
+
 
 @export var is_dead: bool = false:
 	set(new_value):
@@ -153,6 +172,8 @@ func determine_movement_animation():
 			Combat.log_death(self.name)
 			is_moving = false
 			is_casting = false
+			is_strafing_left = false
+			is_strafing_right = false
 			target = null
 			play_animation("Death_A")
 

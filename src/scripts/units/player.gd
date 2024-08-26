@@ -7,7 +7,7 @@ var playermodel_reference = null
 
 # speed cannot be read from stats directly, so the speed var needs to be updated
 # when speed changes
-var speed: float = 10.0
+#var speed: float = 10.0
 const jump_velocity: float = 4.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -231,8 +231,6 @@ func handle_movement(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()
-	# set orientation of player
-	set_orientation(direction)
 	# set movement state on server
 	if not $mpsynchronizer.is_multiplayer_authority():
 		return
@@ -242,10 +240,16 @@ func handle_movement(delta: float) -> void:
 	else:
 		if not is_moving:
 			is_moving = true
+		# set orientation of player
+		set_orientation(direction)
 
 
 func set_orientation(direction: Vector3) -> void:
+	var offset = direction
 	if is_strafing_left:
-		pass
+		offset = Vector3(-direction.z,direction.y,direction.x)
 	if is_strafing_right:
-		pass
+		offset = Vector3(direction.z,direction.y,-direction.x)
+	if is_backpedaling:
+		offset = Vector3(-direction.x,direction.y,-direction.z)
+	$pivot.look_at(global_position + offset)

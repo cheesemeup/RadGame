@@ -27,10 +27,21 @@ func _unhandled_input(event):
 # MOVEMENT
 @rpc("any_peer","call_local")
 func set_strafing(strafing_left: bool, strafing_right: bool) -> void:
+	# do not allow strafing if player is dead
+	if get_parent().is_dead:
+		return
 	if not get_parent().is_strafing_left == strafing_left:
 		get_parent().is_strafing_left = strafing_left
 	if not get_parent().is_strafing_right == strafing_right:
 		get_parent().is_strafing_right = strafing_right
+
+
+@rpc("any_peer","call_local")
+func set_backpedaling(backwards: bool) -> void:
+	if get_parent().is_dead:
+		return
+	if not get_parent().is_backpedaling == backwards:
+		get_parent().is_backpedaling = backwards
 
 
 @rpc("call_local")
@@ -49,6 +60,11 @@ func movement_direction():
 	if direction_ur.x > 0:
 		strafing_right = true
 	rpc_id(1,"set_strafing",strafing_left,strafing_right)
+	# set backpedaling
+	var backwards = false
+	if direction_ur.y > 0:
+		backwards = true
+	rpc_id(1,"set_backpedaling",backwards)
 	# rotate input according to camera orientation
 	direction = Vector2(cos(-$"../camera_rotation".rotation.y)*direction_ur.x -\
 						sin(-$"../camera_rotation".rotation.y)*direction_ur.y, \
