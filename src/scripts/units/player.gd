@@ -48,7 +48,7 @@ func _enter_tree() -> void:
 func pre_ready(peer_id: int) -> void:
 	name = str(peer_id)
 	# initialize stats for all peers
-	initialize_base_unit("player","0")
+	initialize_base_unit("player","3")
 
 
 func _ready():
