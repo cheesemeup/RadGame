@@ -5,9 +5,8 @@ func _ready():
 	initialize_base_spell("10")
 
 func trigger() -> int:
-	# get source and target nodes
-	var source = get_parent().get_parent()
-	var target = get_spell_target(source)
+	# get target node
+	var target = get_spell_target()
 	# set target to self if there is no target
 	if target == null:
 		target = source
@@ -41,4 +40,6 @@ func trigger() -> int:
 		get_parent().send_gcd()
 	# send event to combat script
 	Combat.combat_event_entrypoint(spell_current,source,target)
+	# end cast
+	finish_cast()
 	return 0

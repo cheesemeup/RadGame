@@ -2,6 +2,7 @@
   "0":{
 	"unit_name":"Signpost Damage Defunct",
 	"unit_class":"Test Interactable",
+	"model":"",
 	"size":0.6,
 	"spell_list":[],
 	"speed":10,
@@ -26,6 +27,7 @@
   "1":{
 	"unit_name":"Signpost Heal Defunct",
 	"unit_class":"Test Interactable",
+	"model":"",
 	"size":0.6,
 	"spell_list":[],
 	"speed":10,
@@ -50,6 +52,7 @@
 "2":{
 	"unit_name":"Test NPC Hostile",
 	"unit_class":"Test NPC",
+	"model":"",
 	"size":0.6,
 	"spell_list":[2],
 	"speed":10,
@@ -74,6 +77,7 @@
 "3":{
 	"unit_name":"Test NPC Friendly",
 	"unit_class":"Test NPC",
+	"model":"",
 	"size":0.6,
 	"spell_list":[4],
 	"speed":10,
@@ -98,6 +102,7 @@
 "4":{
 	"unit_name":"Targetdummy DPS",
 	"unit_class":"Dummy",
+	"model":"",
 	"size":0.6,
 	"spell_list":[2],
 	"speed":0,
@@ -122,6 +127,7 @@
 "5":{
 	"unit_name":"Targetdummy Heal",
 	"unit_class":"Dummy",
+	"model":"",
 	"size":0.6,
 	"spell_list":[4],
 	"speed":0,
@@ -146,6 +152,7 @@
 "6":{
 	"unit_name":"Targetdummy Tank",
 	"unit_class":"Dummy",
+	"model":"",
 	"size":0.6,
 	"spell_list":[2],
 	"speed":0,

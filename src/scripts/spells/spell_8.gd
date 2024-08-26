@@ -9,9 +9,9 @@ func _ready():
 	spell_heal["can_crit"] = 0
 
 func trigger():
-	# get source and target nodes
-	var source = get_parent().get_parent()
-	var target = get_spell_target(source)
+	## get source and target nodes
+	#var source = get_parent().get_parent()
+	var target = get_spell_target()
 	# set target to self if there is no target
 	if target == null:
 		target = source

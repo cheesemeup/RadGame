@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dempeiar8tjic"]
+[gd_scene load_steps=7 format=3 uid="uid://dempeiar8tjic"]
 
 [ext_resource type="Script" path="res://scripts/units/player.gd" id="1_8gonl"]
 [ext_resource type="Script" path="res://scripts/functionalities/cd_timer_container.gd" id="3_ise05"]
@@ -6,8 +6,6 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_16yd3"]
 radius = 0.6
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ha78t"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rfg56"]
 properties/0/path = NodePath(".:position")
@@ -22,6 +20,9 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath(".:selected_target")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath(".:model")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kjxoy"]
 properties/0/path = NodePath("player_input:direction")
@@ -34,16 +35,9 @@ script = ExtResource("1_8gonl")
 
 [node name="pivot" type="Node3D" parent="."]
 
-[node name="mpspawner" type="MultiplayerSpawner" parent="pivot"]
-spawn_path = NodePath("..")
-
 [node name="player_collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_16yd3")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_ha78t")
 
 [node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
