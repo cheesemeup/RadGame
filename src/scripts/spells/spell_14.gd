@@ -5,8 +5,6 @@ func _ready():
 	initialize_base_spell("14")
 
 func trigger():
-	# get source and target nodes
-	var source = get_parent().get_parent()
 	# check for cooldown
 	if is_on_cd():
 		return 2
@@ -29,4 +27,6 @@ func trigger():
 	trigger_cd(spell_current["cooldown"])
 	# send event to combat script
 	Combat.combat_event_aura_entrypoint(spell_current,source,source)
+	# end cast
+	finish_cast()
 	return 0

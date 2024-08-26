@@ -104,6 +104,9 @@ func combat_event_damage(
 		crit,
 		overkill
 	)
+	# check if target died
+	if overkill >= 0:
+		target.is_dead = true
 
 func combat_event_heal(
 	spell: Dictionary,
@@ -439,3 +442,6 @@ func log_avoid(spell_name: String, source_name: String , target_name: String) ->
 
 func log_interact(source_name: String, target_name: String) -> void:
 	print("%s interacts with %s"%[source_name, target_name])
+
+func log_death(source_name: String) -> void:
+	print("%s has died"%source_name)
