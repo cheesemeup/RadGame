@@ -183,4 +183,4 @@ func determine_movement_animation():
 		is_casting = new_value
 		if new_value:
 			# possibly add log message for very detailed logging
-			play_animation("Casting")
+			play_animation("Spellcasting")

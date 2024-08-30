@@ -100,6 +100,15 @@ func update_resource(cost: int, current_resource: int, current_resource_max: int
 	return clamp(current_resource-cost, 0, current_resource_max)
 
 
+func start_cast(cast_success: Callable):
+	# set casting state
+	source.is_casting = true
+	# start castbar
+	source.get_node("casttimer").waittime = spell_current["casttime"]
+	source.get_node("casttimer").connect("timeout",cast_success)
+	source.get_node("casttimer").start()
+
+
 func finish_cast() -> void:
 	# play cast end animation
 	source.play_animation("Spellcast_Shoot")
