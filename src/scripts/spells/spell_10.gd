@@ -3,11 +3,13 @@ extends BaseSpell
 
 
 func _ready():
-	initialize_base_spell("10")
+	ID = "10"
+	initialize_base_spell(ID)
 
 func trigger() -> int:
 	# do not allow casting if already casting
 	if source.is_casting:
+		check_queue()
 		return 6
 	# get target node
 	target = get_spell_target()
@@ -16,6 +18,7 @@ func trigger() -> int:
 		return 1
 	# check for cooldown
 	if is_on_cd():
+		check_queue()
 		return 2
 	# check resource availability
 	if insufficient_resource(

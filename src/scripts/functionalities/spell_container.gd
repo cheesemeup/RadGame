@@ -3,6 +3,7 @@ extends Node
 var player = get_parent()
 var gcd_timer: float = 1.5
 var result: int
+var queue: String = ""
 signal signal_gcd(duration)
 
 ################################################################################
@@ -17,14 +18,6 @@ func spell_entrypoint(spell_id: String) -> int:
 	# trigger spell
 	print("triggering ",spell_id)
 	result = spell_node.trigger()
-	## player specific section
-	#if not player.is_in_group("player"):
-		#return result
-	#if result == 0:
-		## trigger cd in cd timer of player
-		#player.get_node("cd_timers").start_cd_timer(
-			#spell_id,spell_node.spell_current["cooldown"],spell_node.cd_timer.wait_time
-			#)
 	return result
 
 # apply role swap changes
