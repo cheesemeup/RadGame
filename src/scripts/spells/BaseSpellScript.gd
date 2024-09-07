@@ -37,7 +37,7 @@ func get_spell_target() -> CharacterBody3D:
 
 ####################################################################################################
 # CHECKS
-func is_illegal_target(valid_group: String, target: CharacterBody3D) -> bool:
+func is_illegal_target(valid_group: String) -> bool:
 	# check if the target is in a valid target group for the spell
 	if target.is_in_group(valid_group):
 		return false
@@ -105,9 +105,10 @@ func start_cast(cast_success: Callable):
 	# set casting state
 	source.is_casting = true
 	# start castbar
-	source.get_node("casttimer").wait_time = spell_current["casttime"]
 	source.get_node("casttimer").connect("timeout",cast_success)
-	source.get_node("casttimer").start()
+	source.send_start_casttimer(spell_current["casttime"])
+	#source.get_node("casttimer").wait_time = spell_current["casttime"]
+	#source.get_node("casttimer").start()
 	# send gcd
 	if spell_current["on_gcd"] == 1:
 		get_parent().send_gcd()

@@ -11,7 +11,7 @@ func trigger():
 	if target == null:
 		target = source
 	# check target legality
-	if is_illegal_target(spell_current["targetgroup"], target):
+	if is_illegal_target(spell_current["targetgroup"]):
 		target = source
 	# check for cooldown
 	if is_on_cd():

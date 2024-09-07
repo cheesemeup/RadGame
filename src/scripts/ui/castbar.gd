@@ -13,5 +13,4 @@ func _process(_delta) -> void:
 	# this function is only enabled when is_casting is true on the player
 	# set value to normalized cast progress
 	value = (casttimer.wait_time - casttimer.time_left) / casttimer.wait_time
-	#value = 0.65
 	time_left_text.text = "%.1f"%casttimer.time_left

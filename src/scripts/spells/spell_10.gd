@@ -12,7 +12,7 @@ func trigger() -> int:
 	# get target node
 	target = get_spell_target()
 	# check target legality
-	if is_illegal_target(spell_current["targetgroup"], target):
+	if is_illegal_target(spell_current["targetgroup"]):
 		return 1
 	# check for cooldown
 	if is_on_cd():

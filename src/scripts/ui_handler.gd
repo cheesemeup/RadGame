@@ -132,3 +132,8 @@ func init_castbars() -> void:
 	castbar_player.position = Vector2(castbar_player_x,castbar_player_y)
 	castbar_player.size = Vector2(castbar_player_width,castbar_player_height)
 	References.player_ui_main_reference.add_child(castbar_player)
+
+
+func toggle_castbar(visibility: bool):
+	castbar_player.visible = visibility
+	castbar_player.set_process(visibility)

@@ -21,6 +21,9 @@ var mouseover_target = null  # for targeting with spells
 @export var model: String
 
 
+####################################################################################################
+# INITIALIZATION
+
 func initialize_base_unit(unittype: String, unit_id: String) -> void:
 	# stats
 	stat_init(unittype,unit_id)
@@ -99,6 +102,18 @@ func cd_timers_init() -> void:
 		get_node("cd_timers").add_child(timer)
 
 
+####################################################################################################
+# CAST TIMER
+func send_start_casttimer(cast_time: float):
+	rpc("start_casttimer",cast_time)
+
+
+@rpc("authority","call_local")
+func start_casttimer(cast_time: float):
+	get_node("casttimer").wait_time = cast_time
+	get_node("casttimer").start()
+
+
 ################################################################################
 # MODELS AND ANIMATIONS
 func set_model(model_name: String) -> void:
@@ -119,7 +134,7 @@ func queue_animation(animation_name: String) -> void:
 	$pivot.get_child(0).get_node("AnimationPlayer").queue(animation_name)
 
 
-func determine_movement_animation():
+func determine_movement_animation() -> void:
 	# only play movement animation if on ground, jump idle is already queued when jumping
 	if not is_on_floor():
 		return
@@ -181,11 +196,11 @@ func determine_movement_animation():
 @export var is_casting: bool = false:
 	set(new_value):
 		is_casting = new_value
+		# toggle castbar
+		rpc_id(name.to_int(),"send_toggle_castbar",new_value)
 		if new_value:
 			# possibly add log message for very detailed logging
 			play_animation("Spellcasting")
-			References.player_ui_main_reference.get_node("castbar").visible = true
-			References.player_ui_main_reference.get_node("castbar").set_process(true)
-		else:
-			References.player_ui_main_reference.get_node("castbar").visible = false
-			References.player_ui_main_reference.get_node("castbar").set_process(false)
+@rpc("authority","call_local")
+func send_toggle_castbar(visibility: bool):
+	UIHandler.toggle_castbar(visibility)
