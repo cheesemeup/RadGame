@@ -40,7 +40,6 @@ func get_spell_target() -> CharacterBody3D:
 # CHECKS
 func check_queue() -> void:
 	# check if cd or cast timer are sufficiently progressed to add attempted cast to queue
-	print("cd: %s, cast: %s"%[cd_timer.time_left,source.get_node("casttimer").time_left])
 	if cd_timer.time_left < 0.5 and source.get_node("casttimer").time_left < 0.5:
 		get_parent().queue = ID
 

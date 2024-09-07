@@ -204,6 +204,7 @@
 	"targetgroup":"friendly",
 	"resource_cost":20,
 	"max_range":40,
+	"casttime":2,
 	"cooldown":0,
 	"on_gcd":1,
 	"spelltype":"heal",
