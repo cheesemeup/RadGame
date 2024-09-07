@@ -28,5 +28,5 @@ func trigger():
 	# send event to combat script
 	Combat.combat_event_aura_entrypoint(spell_current,source,source)
 	# end cast
-	finish_cast()
+	#finish_cast()
 	return 0
