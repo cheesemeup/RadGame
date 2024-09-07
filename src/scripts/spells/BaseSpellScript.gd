@@ -2,6 +2,7 @@ extends Node
 
 class_name BaseSpell
 
+var ID: String
 var source: CharacterBody3D = null
 var target: CharacterBody3D = null
 var spell_base: Dictionary
@@ -37,7 +38,16 @@ func get_spell_target() -> CharacterBody3D:
 
 ####################################################################################################
 # CHECKS
+func check_queue() -> void:
+	# check if cd or cast timer are sufficiently progressed to add attempted cast to queue
+	print("cd: %s, cast: %s"%[cd_timer.time_left,source.get_node("casttimer").time_left])
+	if cd_timer.time_left < 0.5 and source.get_node("casttimer").time_left < 0.5:
+		get_parent().queue = ID
+
+
 func is_illegal_target(valid_group: String) -> bool:
+	if target == null:
+		return true
 	# check if the target is in a valid target group for the spell
 	if target.is_in_group(valid_group):
 		return false
@@ -122,3 +132,7 @@ func finish_cast(cast_success: Callable) -> void:
 	# set casting state
 	if source.is_casting:
 		source.is_casting = false
+	# trigger queued spell if it exists
+	if not get_parent().queue == "":
+		get_parent().spell_entrypoint(get_parent().queue)
+		get_parent().queue = ""
