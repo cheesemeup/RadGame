@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cplyj6e0emhki"]
+
+[node name="Castbar" type="ProgressBar"]
+offset_right = 120.0
+offset_bottom = 27.0
+show_percentage = false

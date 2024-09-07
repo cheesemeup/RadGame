@@ -7,10 +7,10 @@ var playerframe_hp_x = 1130  # x position
 var playerframe_hp_y = 735  # y position
 var playerframe_hp_w = 220  # width
 var playerframe_hp_h = 70  # height
-var playerframe_res_x = 840  # x position
+var playerframe_res_x = 790  # x position
 var playerframe_res_y = 735  # y position
-var playerframe_res_w = 240  # width
-var playerframe_res_h = 40  # height
+var playerframe_res_w = 300  # width
+var playerframe_res_h = 25  # height
 
 # targetframe
 var targetframe
@@ -26,6 +26,12 @@ var targetframe_res_h = 25  # height
 # actionbars
 var actionbars
 
+# castbars
+var castbar_player: ProgressBar
+var castbar_player_x = 790
+var castbar_player_y = 760
+var castbar_player_width = 300
+var castbar_player_height = 25
 
 ####################################################################################################
 # INIT
@@ -33,6 +39,7 @@ func init_ui():
 	References.player_ui_main_reference = $/root/main/ui
 	init_unitframes()
 	init_actionbars()
+	init_castbars()
 
 ####################################################################################################
 # MENUS
@@ -116,3 +123,12 @@ func init_actionbars():
 	actionbars = preload("res://scenes/ui/actionbars.tscn").instantiate()
 	actionbars.initialize()
 	References.player_ui_main_reference.add_child(actionbars)
+
+
+####################################################################################################
+# CASTBARS
+func init_castbars() -> void:
+	castbar_player = preload("res://scenes/ui/castbar.tscn").instantiate()
+	castbar_player.position = Vector2(castbar_player_x,castbar_player_y)
+	castbar_player.size = Vector2(castbar_player_width,castbar_player_height)
+	References.player_ui_main_reference.add_child(castbar_player)
