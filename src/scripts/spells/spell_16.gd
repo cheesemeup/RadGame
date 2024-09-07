@@ -33,4 +33,4 @@ func cast_success():
 	# send event to combat script
 	Combat.combat_event_entrypoint(spell_current,source,source)
 	# end cast
-	finish_cast()
+	#finish_cast()

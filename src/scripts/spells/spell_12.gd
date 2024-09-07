@@ -40,5 +40,5 @@ func trigger():
 	# send event to combat script
 	Combat.combat_event_entrypoint(spell_current,source,target)
 	# end cast
-	finish_cast()
+	#finish_cast()
 	return 0

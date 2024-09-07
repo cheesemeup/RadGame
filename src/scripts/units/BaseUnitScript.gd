@@ -184,3 +184,8 @@ func determine_movement_animation():
 		if new_value:
 			# possibly add log message for very detailed logging
 			play_animation("Spellcasting")
+			References.player_ui_main_reference.get_node("castbar").visible = true
+			References.player_ui_main_reference.get_node("castbar").set_process(true)
+		else:
+			References.player_ui_main_reference.get_node("castbar").visible = false
+			References.player_ui_main_reference.get_node("castbar").set_process(false)

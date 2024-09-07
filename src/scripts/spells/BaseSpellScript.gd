@@ -3,6 +3,7 @@ extends Node
 class_name BaseSpell
 
 var source: CharacterBody3D = null
+var target: CharacterBody3D = null
 var spell_base: Dictionary
 var spell_current: Dictionary
 var cd_timer = Timer.new()
@@ -104,14 +105,19 @@ func start_cast(cast_success: Callable):
 	# set casting state
 	source.is_casting = true
 	# start castbar
-	source.get_node("casttimer").waittime = spell_current["casttime"]
+	source.get_node("casttimer").wait_time = spell_current["casttime"]
 	source.get_node("casttimer").connect("timeout",cast_success)
 	source.get_node("casttimer").start()
+	# send gcd
+	if spell_current["on_gcd"] == 1:
+		get_parent().send_gcd()
 
 
-func finish_cast() -> void:
+func finish_cast(cast_success: Callable) -> void:
 	# play cast end animation
 	source.play_animation("Spellcast_Shoot")
+	# disconnect casttimer from spell
+	source.get_node("casttimer").disconnect("timeout",cast_success)
 	# set casting state
 	if source.is_casting:
 		source.is_casting = false
