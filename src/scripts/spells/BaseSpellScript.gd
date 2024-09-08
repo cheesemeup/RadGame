@@ -40,8 +40,15 @@ func get_spell_target() -> CharacterBody3D:
 # CHECKS
 func check_queue() -> void:
 	# check if cd or cast timer are sufficiently progressed to add attempted cast to queue
-	if cd_timer.time_left < 0.5 and source.get_node("casttimer").time_left < 0.5:
+	if not (cd_timer.time_left < 0.5 and source.get_node("casttimer").time_left < 0.5):
+		return
+	# if spell with casttime, set as queued spell
+	if spell_current.has("casttime"):
 		get_parent().queue = ID
+		return
+	# if instant cast spell, add to instant queue if not already present
+	if not get_parent().queue_instant.has(ID):
+		get_parent().queue_instant.append(ID)
 
 
 func is_illegal_target(valid_group: String) -> bool:
@@ -123,15 +130,26 @@ func start_cast(cast_success: Callable):
 		get_parent().send_gcd()
 
 
+func cast_success():
+	# dummy that is overridden for spells with a cast time
+	pass
+
+
 func finish_cast(cast_success: Callable) -> void:
 	# play cast end animation
 	source.play_animation("Spellcast_Shoot")
-	# disconnect casttimer from spell
-	source.get_node("casttimer").disconnect("timeout",cast_success)
+	# disconnect casttimer from spell if connected
+	if source.get_node("casttimer").is_connected("timeout",cast_success):
+		source.get_node("casttimer").disconnect("timeout",cast_success)
 	# set casting state
 	if source.is_casting:
 		source.is_casting = false
-	# trigger queued spell if it exists
+	# trigger queued spell if it exists, prioritizing instant casts
+	if not get_parent().queue_instant == []:
+		var new_id = get_parent().queue_instant.pop_front()
+		get_parent().spell_entrypoint(new_id)
+		return
 	if not get_parent().queue == "":
-		get_parent().spell_entrypoint(get_parent().queue)
+		var new_id = get_parent().queue
 		get_parent().queue = ""
+		get_parent().spell_entrypoint(new_id)

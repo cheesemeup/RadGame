@@ -4,6 +4,7 @@ var player = get_parent()
 var gcd_timer: float = 1.5
 var result: int
 var queue: String = ""
+var queue_instant: Array = []
 signal signal_gcd(duration)
 
 ################################################################################
@@ -15,8 +16,6 @@ func spell_entrypoint(spell_id: String) -> int:
 	if spell_node == null:
 		print("spell %s not known"%spell_id)
 		return 1  # spell not known
-	# trigger spell
-	print("triggering ",spell_id)
 	result = spell_node.trigger()
 	return result
 

@@ -36,7 +36,8 @@ func trigger() -> int:
 	# after passing all checks, start cast
 	var return_value = start_cast(cast_success)
 	return 0
-	
+
+
 func cast_success() -> void:
 	# apply resource cost 
 	source.stats_current["resource_current"] = update_resource(
