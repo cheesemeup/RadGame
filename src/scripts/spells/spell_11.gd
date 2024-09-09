@@ -2,7 +2,8 @@
 extends BaseSpell
 
 func _ready():
-	initialize_base_spell("11")
+	ID = "11"
+	initialize_base_spell(ID)
 
 func trigger():
 	# do not allow casting if already casting

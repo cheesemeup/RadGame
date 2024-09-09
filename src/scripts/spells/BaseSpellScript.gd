@@ -40,7 +40,7 @@ func get_spell_target() -> CharacterBody3D:
 # CHECKS
 func check_queue() -> void:
 	# check if cd or cast timer are sufficiently progressed to add attempted cast to queue
-	if not (cd_timer.time_left < 0.5 and source.get_node("casttimer").time_left < 0.5):
+	if not (cd_timer.time_left < 5 and source.get_node("casttimer").time_left < 5):
 		return
 	# if spell with casttime, set as queued spell
 	if spell_current.has("casttime"):
@@ -52,6 +52,7 @@ func check_queue() -> void:
 
 
 func is_illegal_target(valid_group: String) -> bool:
+	# not having a target is always illegal
 	if target == null:
 		return true
 	# check if the target is in a valid target group for the spell
@@ -123,8 +124,6 @@ func start_cast(cast_success: Callable):
 	# start castbar
 	source.get_node("casttimer").connect("timeout",cast_success)
 	source.send_start_casttimer(spell_current["casttime"])
-	#source.get_node("casttimer").wait_time = spell_current["casttime"]
-	#source.get_node("casttimer").start()
 	# send gcd
 	if spell_current["on_gcd"] == 1:
 		get_parent().send_gcd()
