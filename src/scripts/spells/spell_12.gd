@@ -2,19 +2,25 @@
 extends BaseSpell
 
 func _ready():
-	initialize_base_spell("12")
+	ID = "12"
+	initialize_base_spell(ID)
 
 func trigger():
+	# do not allow casting if already casting
+	if source.is_casting:
+		check_queue()
+		return 6
 	# get target node
-	var target = get_spell_target()
+	target = get_spell_target()
 	# set target to self if there is no target
 	if target == null:
 		target = source
 	# check target legality
-	if is_illegal_target(spell_current["targetgroup"], target):
+	if is_illegal_target(spell_current["targetgroup"]):
 		target = source
 	# check for cooldown
 	if is_on_cd():
+		check_queue()
 		return 2
 	# check resource availability
 	if insufficient_resource(
@@ -28,17 +34,19 @@ func trigger():
 	# check line of sight, NOT FUNCTIONAL
 	#if is_not_in_line_of_sight(source,target.position):
 		#return 5
+	# after passing all checks, start cast
+	var return_value = start_cast(cast_success)
+	return 0
+
+
+func cast_success() -> void:
 	# apply resource cost 
 	source.stats_current["resource_current"] = update_resource(
 		spell_current["resource_cost"],
 		source.stats_current["resource_current"],
 		source.stats_current["resource_max"]
 	)
-	# send gcd
-	if spell_current["on_gcd"] == 1:
-		get_parent().send_gcd()
 	# send event to combat script
 	Combat.combat_event_entrypoint(spell_current,source,target)
 	# end cast
-	finish_cast()
-	return 0
+	finish_cast(cast_success)
