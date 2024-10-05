@@ -1,0 +1,3 @@
+[lfs]
+  url = git@forge.shiny.space:miejs/RadGameLFS.git
+  locksverify = false
