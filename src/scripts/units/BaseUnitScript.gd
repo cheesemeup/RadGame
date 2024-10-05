@@ -21,6 +21,9 @@ var mouseover_target = null  # for targeting with spells
 @export var model: String
 
 
+####################################################################################################
+# INITIALIZATION
+
 func initialize_base_unit(unittype: String, unit_id: String) -> void:
 	# stats
 	stat_init(unittype,unit_id)
@@ -84,8 +87,11 @@ func spell_container_init(spell_list: Array) -> void:
 		spell.queue_free()
 	# add spells to spell container
 	for spell in spell_list:
-		var spell_scene = load("res://scenes/spells/spell_%s.tscn" % spell)
+		var spell_scene = load("res://scenes/functionalities/spell_base.tscn")
+		var spell_script = load("res://scripts/spells/spell_%s.gd"%spell)
 		spell_scene = spell_scene.instantiate()
+		spell_scene.name = "spell_%s"%spell
+		spell_scene.set_script(spell_script)
 		$spell_container.add_child(spell_scene)
 
 
@@ -97,6 +103,18 @@ func cd_timers_init() -> void:
 		timer.name = "cd_timer_%s"%spell.name
 		timer.one_shot = false
 		get_node("cd_timers").add_child(timer)
+
+
+####################################################################################################
+# CAST TIMER
+func send_start_casttimer(cast_time: float):
+	rpc("start_casttimer",cast_time)
+
+
+@rpc("authority","call_local")
+func start_casttimer(cast_time: float):
+	get_node("casttimer").wait_time = cast_time
+	get_node("casttimer").start()
 
 
 ################################################################################
@@ -119,7 +137,7 @@ func queue_animation(animation_name: String) -> void:
 	$pivot.get_child(0).get_node("AnimationPlayer").queue(animation_name)
 
 
-func determine_movement_animation():
+func determine_movement_animation() -> void:
 	# only play movement animation if on ground, jump idle is already queued when jumping
 	if not is_on_floor():
 		return
@@ -181,6 +199,11 @@ func determine_movement_animation():
 @export var is_casting: bool = false:
 	set(new_value):
 		is_casting = new_value
+		# toggle castbar
+		rpc_id(name.to_int(),"send_toggle_castbar",new_value)
 		if new_value:
 			# possibly add log message for very detailed logging
-			play_animation("Casting")
+			play_animation("Spellcasting")
+@rpc("authority","call_local")
+func send_toggle_castbar(visibility: bool):
+	UIHandler.toggle_castbar(visibility)

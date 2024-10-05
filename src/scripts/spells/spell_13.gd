@@ -2,11 +2,17 @@
 extends BaseSpell
 
 func _ready():
-	initialize_base_spell("13")
+	ID = "13"
+	initialize_base_spell(ID)
 
 func trigger():
+	# do not allow casting if already casting
+	if source.is_casting:
+		check_queue()
+		return 6
 	# check for cooldown
 	if is_on_cd():
+		check_queue()
 		return 2
 	# check resource availability
 	if insufficient_resource(
@@ -28,5 +34,5 @@ func trigger():
 	# send event to combat script
 	Combat.combat_event_aura_entrypoint(spell_current,source,source)
 	# end cast
-	finish_cast()
+	finish_cast(cast_success)
 	return 0

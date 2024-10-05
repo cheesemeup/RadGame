@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cplyj6e0emhki"]
+
+[ext_resource type="Script" path="res://scripts/ui/castbar.gd" id="1_l013n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loe1o"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iboxd"]
+bg_color = Color(0.498039, 0, 0, 1)
+
+[node name="castbar" type="ProgressBar"]
+visible = false
+offset_right = 120.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_loe1o")
+theme_override_styles/fill = SubResource("StyleBoxFlat_iboxd")
+max_value = 1.0
+show_percentage = false
+script = ExtResource("1_l013n")
+
+[node name="time_left_text" type="Label" parent="."]
+layout_mode = 0
+offset_left = 250.0
+offset_right = 290.0
+offset_bottom = 25.0
+text = "0.23"
+horizontal_alignment = 2
+vertical_alignment = 1

@@ -2,7 +2,9 @@ extends Node
 
 class_name BaseSpell
 
+var ID: String
 var source: CharacterBody3D = null
+var target: CharacterBody3D = null
 var spell_base: Dictionary
 var spell_current: Dictionary
 var cd_timer = Timer.new()
@@ -36,7 +38,23 @@ func get_spell_target() -> CharacterBody3D:
 
 ####################################################################################################
 # CHECKS
-func is_illegal_target(valid_group: String, target: CharacterBody3D) -> bool:
+func check_queue() -> void:
+	# check if cd or cast timer are sufficiently progressed to add attempted cast to queue
+	if not (cd_timer.time_left < 5 and source.get_node("casttimer").time_left < 5):
+		return
+	# if spell with casttime or triggering gcd, set as queued spell
+	if spell_current["casttime"] > 0  or spell_current["on_gcd"] == 1:
+		get_parent().queue = ID
+		return
+	# if instant cast spell, add to instant queue if not already present
+	if not get_parent().queue_instant.has(ID):
+		get_parent().queue_instant.append(ID)
+
+
+func is_illegal_target(valid_group: String) -> bool:
+	# not having a target is always illegal
+	if target == null:
+		return true
 	# check if the target is in a valid target group for the spell
 	if target.is_in_group(valid_group):
 		return false
@@ -93,6 +111,11 @@ func trigger_cd(duration: float, is_gcd: bool = false) -> void:
 		relay_cd_timer(spell_id_string,full_duration,duration)
 
 
+func trigger_gcd() -> void:
+	# send gcd
+	if spell_current["on_gcd"] == 1:
+		get_parent().send_gcd()
+
 ####################################################################################################
 # FUNCTIONALITIES
 func update_resource(cost: int, current_resource: int, current_resource_max: int) -> int:
@@ -100,9 +123,39 @@ func update_resource(cost: int, current_resource: int, current_resource_max: int
 	return clamp(current_resource-cost, 0, current_resource_max)
 
 
-func finish_cast() -> void:
+func start_cast(cast_success: Callable):
+	# set casting state
+	source.is_casting = true
+	# start castbar
+	source.get_node("casttimer").connect("timeout",cast_success)
+	source.send_start_casttimer(spell_current["casttime"])
+	trigger_gcd()
+
+
+func cast_success():
+	# dummy that is overridden for spells with a cast time
+	pass
+
+
+func finish_cast(cast_success: Callable) -> void:
 	# play cast end animation
 	source.play_animation("Spellcast_Shoot")
+	# disconnect casttimer from spell if connected
+	if source.get_node("casttimer").is_connected("timeout",cast_success):
+		source.get_node("casttimer").disconnect("timeout",cast_success)
+	# trigger cd if applicable
+	if spell_current["cooldown"] > 0:
+		trigger_cd(spell_current["cooldown"])
 	# set casting state
 	if source.is_casting:
 		source.is_casting = false
+	# trigger queued spell if it exists, prioritizing instant casts
+	print("queue: %s"%get_parent().queue)
+	if not get_parent().queue_instant == []:
+		var new_id = get_parent().queue_instant.pop_front()
+		get_parent().spell_entrypoint(new_id)
+		return
+	if not get_parent().queue == "":
+		var new_id = get_parent().queue
+		get_parent().queue = ""
+		get_parent().spell_entrypoint(new_id)
