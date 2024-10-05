@@ -44,7 +44,7 @@ func check_queue() -> void:
 		return
 	# if spell with casttime or triggering gcd, set as queued spell
 	if spell_current["casttime"] > 0  or spell_current["on_gcd"] == 1:
-		get_parent().queue = ID
+		get_parent().set_queue(ID)
 		return
 	# if instant cast spell, add to instant queue if not already present
 	if not get_parent().queue_instant.has(ID):
@@ -150,17 +150,7 @@ func finish_cast(cast_success: Callable) -> void:
 	# set casting state
 	if source.is_casting:
 		source.is_casting = false
-	cast_queued()
+	get_parent().cast_queued()
 
 
-func cast_queued() -> void:
-	# trigger queued spell if it exists, prioritizing instant casts
-	print("queue: %s"%get_parent().queue)
-	if not get_parent().queue_instant == []:
-		var new_id = get_parent().queue_instant.pop_front()
-		get_parent().spell_entrypoint(new_id)
-		return
-	if not get_parent().queue == "":
-		var new_id = get_parent().queue
-		get_parent().queue = ""
-		get_parent().spell_entrypoint(new_id)
+#func cast_queudpell_entrypoint(new_id)
