@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b7srxhl22vetr"]
 
-[ext_resource type="Script" path="res://main_menu/back_button.gd" id="1_t3aix"]
+[ext_resource type="Script" path="res://main_menu/components/back_button.gd" id="1_t3aix"]
 
 [node name="BackButton" type="Button"]
 anchors_preset = 14

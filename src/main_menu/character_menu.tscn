@@ -1,4 +1,9 @@
-[gd_scene format=3 uid="uid://bltiropmoiif5"]
+[gd_scene load_steps=3 format=3 uid="uid://bltiropmoiif5"]
+
+[ext_resource type="Theme" uid="uid://bilm420i6mgm1" path="res://themes/main_menu.tres" id="1_st52x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gu2wk"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 0.6)
 
 [node name="CharacterMenu" type="PanelContainer"]
 anchors_preset = 15
@@ -6,6 +11,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_st52x")
+theme_override_styles/panel = SubResource("StyleBoxFlat_gu2wk")
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(0, 200)

@@ -4,7 +4,7 @@ class_name SubMenu
 @export var title: String
 @export var sub_menu_scene: PackedScene
 
-const BACK_BUTTON = preload("res://main_menu/back_button.tscn")
+const BACK_BUTTON = preload("res://main_menu/components/back_button.tscn")
 
 func get_sub_menu_title() -> Label:
 	var titleLabel = Label.new()

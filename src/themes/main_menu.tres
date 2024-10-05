@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bilm420i6mgm1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cuoo7"]
+
+[resource]
+HeaderLarge/base_type = &"Label"
+HeaderLarge/font_sizes/font_size = 48
+HeaderMedium/font_sizes/font_size = 32
+HeaderSmall/base_type = &"Label"
+HeaderSmall/font_sizes/font_size = 22
+Label/font_sizes/font_size = 18
+MainMenuButton/base_type = &"Button"
+MainMenuButton/font_sizes/font_size = 48
+PanelContainer/styles/panel = SubResource("StyleBoxEmpty_cuoo7")
+VBoxContainer/constants/separation = 10

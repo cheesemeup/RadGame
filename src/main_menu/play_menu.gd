@@ -3,8 +3,8 @@ extends PanelContainer
 signal start_join
 signal start_host
 
-@onready var address_entry: LineEdit = $VBoxContainer/MarginContainer/HBoxContainer/address_entry
-@onready var port_entry: LineEdit = $VBoxContainer/MarginContainer/HBoxContainer/port_entry
+@onready var address_entry: LineEdit = %address_entry
+@onready var port_entry: LineEdit = %port_entry
 
 func _on_host_button_pressed():
 	print("starting host")

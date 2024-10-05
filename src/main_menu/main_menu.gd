@@ -2,9 +2,9 @@ extends CanvasLayer
 
 @export var SUB_MENUS: Array[SubMenu]
 
-const BACK_BUTTON = preload("res://main_menu/back_button.tscn")
+const BACK_BUTTON = preload("res://main_menu/components/back_button.tscn")
 
-@onready var main_menu: VBoxContainer = $CenterContainer/MarginContainer/VBoxContainer/MainMenu
+@onready var main_menu: VBoxContainer = %MainMenu
 @onready var sub_menu_buttons: VBoxContainer = %SubMenuButtons
 @onready var sub_menus: Control = %SubMenus
 

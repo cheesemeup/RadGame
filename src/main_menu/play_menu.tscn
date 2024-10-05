@@ -1,8 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://mk6uj7xoynfq"]
 
 [ext_resource type="Script" path="res://main_menu/play_menu.gd" id="1_bd2jh"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c6tei"]
+[ext_resource type="Theme" uid="uid://bilm420i6mgm1" path="res://themes/main_menu.tres" id="1_qvtjd"]
 
 [node name="PlayMenu" type="PanelContainer"]
 anchors_preset = 15
@@ -10,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_c6tei")
+theme = ExtResource("1_qvtjd")
 script = ExtResource("1_bd2jh")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -27,10 +26,10 @@ columns = 2
 
 [node name="label_address_entry" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
 text = "Server Address:"
 
 [node name="address_entry" type="LineEdit" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "127.0.0.1"
@@ -38,22 +37,22 @@ metadata/_edit_use_anchors_ = true
 
 [node name="label_port_entry" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
 text = "Server Port:"
 
 [node name="port_entry" type="LineEdit" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "4545"
 
 [node name="join_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
+theme_type_variation = &"MainMenuButton"
 text = "Join"
 
 [node name="host_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
+theme_type_variation = &"MainMenuButton"
 text = "Host"
 
 [connection signal="pressed" from="VBoxContainer/join_button" to="." method="_on_join_button_pressed"]

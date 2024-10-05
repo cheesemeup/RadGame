@@ -12,7 +12,7 @@ extends PanelContainer
 @onready var apply_confirm_button: Button = %ApplyConfirmButton
 @onready var apply_settings_timer: Timer = %ApplySettingsTimer
 
-const INPUT_REMAP_BUTTON = preload("res://main_menu/InputRemapButton.tscn")
+const INPUT_REMAP_BUTTON = preload("res://main_menu/components/InputRemapButton.tscn")
 
 func _ready() -> void:
 	SettingsManager.settings_changed.connect(_on_settings_changed)
@@ -108,6 +108,7 @@ func update_input_settings() -> void:
 	for action in SettingsManager.get_input_settings().get_game_actions():
 		var label = Label.new()
 		label.text = action
+		label.custom_minimum_size = Vector2(130, 0)
 		var button = INPUT_REMAP_BUTTON.instantiate()
 		button.action = action
 		button.input_event = SettingsManager.get_input_settings().get_input_event(action)
