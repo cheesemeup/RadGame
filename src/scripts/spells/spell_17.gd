@@ -23,7 +23,7 @@ func trigger():
 	if is_not_in_range(source.position,target.position,spell_current["max_range"]):
 		return 4
 	# after passing all checks, start cast
-	start_cast(cast_success)
+	var return_value = start_cast(cast_success)
 	return 0
 
 
