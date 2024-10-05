@@ -116,6 +116,7 @@ func trigger_gcd() -> void:
 	if spell_current["on_gcd"] == 1:
 		get_parent().send_gcd()
 
+
 ####################################################################################################
 # FUNCTIONALITIES
 func update_resource(cost: int, current_resource: int, current_resource_max: int) -> int:
@@ -149,6 +150,10 @@ func finish_cast(cast_success: Callable) -> void:
 	# set casting state
 	if source.is_casting:
 		source.is_casting = false
+	cast_queued()
+
+
+func cast_queued() -> void:
 	# trigger queued spell if it exists, prioritizing instant casts
 	print("queue: %s"%get_parent().queue)
 	if not get_parent().queue_instant == []:

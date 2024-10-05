@@ -1,7 +1,7 @@
 extends Node
 
 var player = get_parent()
-var gcd_timer: float = 1.5
+var gcd_timer: float = 1.49
 var result: int
 var queue: String = ""
 var queue_instant: Array = []

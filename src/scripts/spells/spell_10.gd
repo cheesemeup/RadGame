@@ -7,6 +7,7 @@ func _ready():
 	initialize_base_spell(ID)
 
 func trigger() -> int:
+	print("trigger")
 	# do not allow casting if already casting
 	if source.is_casting:
 		check_queue()
