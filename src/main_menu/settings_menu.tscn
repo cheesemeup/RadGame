@@ -1,8 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://056tu56xbrr"]
 
 [ext_resource type="Script" path="res://main_menu/settings_menu.gd" id="1_236yf"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cg484"]
+[ext_resource type="Theme" uid="uid://bilm420i6mgm1" path="res://themes/main_menu.tres" id="1_nm6d8"]
 
 [node name="SettingsMenu" type="PanelContainer"]
 anchors_preset = 15
@@ -10,16 +9,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_cg484")
+theme = ExtResource("1_nm6d8")
 script = ExtResource("1_236yf")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-
-[node name="title" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"HeaderLarge"
-text = "Settings"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 400)
@@ -44,9 +38,11 @@ text = "Video"
 
 [node name="VideoSettingsGridContainer" type="GridContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/h_separation = 32
 columns = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/VideoSettingsGridContainer"]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Resolution"
 
@@ -80,6 +76,7 @@ text = "Controls"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_constants/h_separation = 32
 columns = 2
 
 [node name="apply_settings_button" type="Button" parent="VBoxContainer"]
