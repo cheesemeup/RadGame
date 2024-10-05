@@ -28,7 +28,7 @@ func _ready():
 	# sort absorbs by increasing time remaining
 	sort_absorbs()
 
-func reinitialization(spell):
+func reinitialize(spell):
 	# stop timer
 	expiration_timer.stop()
 	# reset to new absorb amount
