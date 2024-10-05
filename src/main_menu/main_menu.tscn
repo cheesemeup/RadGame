@@ -24,7 +24,7 @@ sub_menu_scene = ExtResource("5_o2yub")
 
 [node name="mainmenu" type="CanvasLayer"]
 script = ExtResource("1_wj144")
-SUB_MENUS = [SubResource("Resource_qhswp"), SubResource("Resource_5ekyd"), SubResource("Resource_v7jto")]
+SUB_MENUS = Array[ExtResource("2_l8b54")]([SubResource("Resource_qhswp"), SubResource("Resource_5ekyd"), SubResource("Resource_v7jto")])
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15

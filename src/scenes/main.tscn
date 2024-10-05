@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://oqfu77ry4jv0"]
+[gd_scene load_steps=2 format=3 uid="uid://oqfu77ry4jv0"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_pi1ts"]
-[ext_resource type="Script" path="res://old/Scripts/UI/handle_ui.gd" id="2_2so51"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_pi1ts")
@@ -28,4 +27,3 @@ offset_right = -1920.0
 offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_2so51")
