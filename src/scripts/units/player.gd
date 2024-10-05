@@ -91,11 +91,15 @@ func load_spell_map() -> void:
 	# this is a temporary workaround, and spell_map should be made persistent in a file
 	# in the future, with every class/role combination having a separate map to make sure
 	# that swapping classes and roles is smooth
-	spell_map["10"] = ["fingersoffrost",["1_1","2_1"]]
-	spell_map["11"] = ["abyssalshell",["1_3","2_3"]]
-	spell_map["12"] = ["mendingwater",["1_2","2_2"]]
-	spell_map["13"] = ["deepcurrent",["1_4","2_4"]]
-	spell_map["14"] = ["succumb",["1_5","2_5"]]
+	spell_map["10"] = ["fingersoffrost",["1_1"]]
+	spell_map["11"] = ["abyssalshell",["1_3"]]
+	spell_map["12"] = ["mendingwater",["1_2"]]
+	spell_map["13"] = ["deepcurrent",["1_4"]]
+	spell_map["14"] = ["succumb",["1_5"]]
+	spell_map["16"] = ["fingersoffrost",["2_1"]]
+	spell_map["17"] = ["fingersoffrost",["2_2"]]
+	spell_map["18"] = ["fingersoffrost",["2_3"]]
+	spell_map["19"] = ["fingersoffrost",["2_4"]]
 
 
 func initialize_actionbar_slots() -> void:

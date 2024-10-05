@@ -42,8 +42,8 @@ func check_queue() -> void:
 	# check if cd or cast timer are sufficiently progressed to add attempted cast to queue
 	if not (cd_timer.time_left < 5 and source.get_node("casttimer").time_left < 5):
 		return
-	# if spell with casttime, set as queued spell
-	if spell_current.has("casttime"):
+	# if spell with casttime or triggering gcd, set as queued spell
+	if spell_current["casttime"] > 0  or spell_current["on_gcd"] == 1:
 		get_parent().queue = ID
 		return
 	# if instant cast spell, add to instant queue if not already present
@@ -111,6 +111,11 @@ func trigger_cd(duration: float, is_gcd: bool = false) -> void:
 		relay_cd_timer(spell_id_string,full_duration,duration)
 
 
+func trigger_gcd() -> void:
+	# send gcd
+	if spell_current["on_gcd"] == 1:
+		get_parent().send_gcd()
+
 ####################################################################################################
 # FUNCTIONALITIES
 func update_resource(cost: int, current_resource: int, current_resource_max: int) -> int:
@@ -124,9 +129,7 @@ func start_cast(cast_success: Callable):
 	# start castbar
 	source.get_node("casttimer").connect("timeout",cast_success)
 	source.send_start_casttimer(spell_current["casttime"])
-	# send gcd
-	if spell_current["on_gcd"] == 1:
-		get_parent().send_gcd()
+	trigger_gcd()
 
 
 func cast_success():
@@ -140,10 +143,14 @@ func finish_cast(cast_success: Callable) -> void:
 	# disconnect casttimer from spell if connected
 	if source.get_node("casttimer").is_connected("timeout",cast_success):
 		source.get_node("casttimer").disconnect("timeout",cast_success)
+	# trigger cd if applicable
+	if spell_current["cooldown"] > 0:
+		trigger_cd(spell_current["cooldown"])
 	# set casting state
 	if source.is_casting:
 		source.is_casting = false
 	# trigger queued spell if it exists, prioritizing instant casts
+	print("queue: %s"%get_parent().queue)
 	if not get_parent().queue_instant == []:
 		var new_id = get_parent().queue_instant.pop_front()
 		get_parent().spell_entrypoint(new_id)

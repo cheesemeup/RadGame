@@ -79,7 +79,7 @@
 	"unit_class":"Baromancer",
 	"model":"necromancer",
 	"size":0.6,
-	"spell_list":[10,11,12,13,14,16],
+	"spell_list":[10,11,12,13,14,16,17,18,19],
 	"speed":10,
 	"health_max":1500,
 	"health_current":1500,
