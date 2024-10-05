@@ -29,14 +29,6 @@ func _ready():
 	var instance = effect.instantiate()
 	$particles.add_child(instance, true)
 
-# reinitialization for overwriting before expiration
-func reinitialize(spell: Dictionary):
-	ground_spell = spell
-	tick_timer.stop()
-	nticks = 0
-	ticks = spell["ticks"]
-	tick_timer.wait_time = spell["tickrate"]
-	tick_timer.start()
 
 # event tick
 func tick():
