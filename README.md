@@ -10,6 +10,12 @@ Documentation of RadGame can be found on https://wiki.shiny.space/shelves/radgam
 
 Run `git lfs install` once inside the git repo. If it doesn't work, download the git extension here: [git-lfs.com](https://git-lfs.com/)
 
+LFS is hosted on `git@forge.shiny.space:miejs/RadGameLFS.git`.
+- Make an account there, add an ssh key, and load the key (like accessing any other git repo)
+- Ask for access to the above repo
+
+Then you should be able to `git pull` and the files in lfs will be downloaded.
+
 #### Godot
 
 describe godot installation and build template setup
