@@ -21,6 +21,8 @@ func _unhandled_input(event):
 	## this is a dumbcunt workaround for triggering spells from the actionbar for testing only
 	if event is InputEventKey and event.is_action_pressed("interact"):
 		rpc_id(1,"request_interaction")
+	if event is InputEventKey and event.is_action_pressed("escape"):
+		UIHandler.toggle_ingame_menu()
 
 
 ####################################################################################################

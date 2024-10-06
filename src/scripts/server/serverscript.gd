@@ -58,8 +58,8 @@ func map_swap(map_name: String):
 			player.current_interactable = null
 	
 	# load, instantiate, add and initialize new map
-	References.current_map_path = "res://scenes/maps/%s" % map_name
-	var map_instance = load(References.current_map_path).instantiate()
+	References.current_map_name = map_name
+	var map_instance = load("res://scenes/maps/%s" % References.current_map_name).instantiate()
 	map_instance.name = "active_map"
 	$/root/main/maps.add_child(map_instance,true)
 	map_instance.initialize()
