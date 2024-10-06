@@ -2,7 +2,8 @@ extends BaseMap
 
 func initialize():
 	print("initializing hub map")
-	current_spawn_position = Vector3(0,20,0)
+	initial_spawn_position = Vector3(0,20,0)
+	current_spawn_position = initial_spawn_position
 	init_npcs()
 	init_interactables()
 

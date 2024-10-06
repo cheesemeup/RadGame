@@ -10,12 +10,10 @@ var spell_current: Dictionary
 var cd_timer = Timer.new()
 var use_mouseover_target = false
 var full_duration: float  # full duration of the cooldown, not necessarily equal to timer wait_time
-var spell_id_string: String
 
 
 func initialize_base_spell(spell_id: String) -> void:
 	source = get_parent().get_parent()
-	spell_id_string = spell_id
 	# load spell data from data file
 	var json_dict = JSON.parse_string(FileAccess.get_file_as_string("res://data/db_spells.json"))
 	spell_base = json_dict[spell_id]
@@ -108,7 +106,7 @@ func trigger_cd(duration: float, is_gcd: bool = false) -> void:
 	else:
 		full_duration = spell_current["cooldown"]
 	source.get_node("cd_timer_container").\
-		relay_cd_timer(spell_id_string,full_duration,duration)
+		relay_cd_timer(ID,full_duration,duration)
 
 
 func trigger_gcd() -> void:
@@ -151,6 +149,3 @@ func finish_cast(cast_success: Callable) -> void:
 	if source.is_casting:
 		source.is_casting = false
 	get_parent().cast_queued()
-
-
-#func cast_queudpell_entrypoint(new_id)
