@@ -3,6 +3,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cuoo7"]
 
 [resource]
+GridContainer/constants/h_separation = 32
 HeaderLarge/base_type = &"Label"
 HeaderLarge/font_sizes/font_size = 48
 HeaderMedium/font_sizes/font_size = 32
