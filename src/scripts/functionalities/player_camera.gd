@@ -26,3 +26,7 @@ func _input(event):
 	if Input.is_action_just_released("rightclick"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		get_viewport().warp_mouse(mouse_position)
+
+
+func set_camera_rotation(new_rotation: Vector3) -> void:
+	rotation = new_rotation

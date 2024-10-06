@@ -60,8 +60,10 @@ func post_ready(peer_id: int) -> void:
 	# some things should be done after _ready is finished
 	rpc_id(peer_id,"peer_post_ready")
 	# set position to spawn position
-	global_position = $/root/main/maps.get_node("active_map").current_spawn_position
-	$pivot.rotation = $/root/main/maps.get_node("active_map").initial_spawn_rotation
+	set_position_and_rotation(
+		$/root/main/maps.get_node("active_map").current_spawn_position,
+		$/root/main/maps.get_node("active_map").current_spawn_rotation
+	)
 	print("player %s ready"%name)
 
 
@@ -258,3 +260,15 @@ func set_orientation(direction: Vector3) -> void:
 	if offset == Vector3(0,0,0):
 		return
 	$pivot.look_at(global_position + offset)
+
+
+func set_position_and_rotation(new_position: Vector3, new_rotation: Vector3) -> void:
+	# set position to spawn position
+	global_position = new_position
+	$pivot.rotation = new_rotation
+	rpc_id(name.to_int(),"set_camera_rotation",new_rotation)
+
+
+@rpc("authority","call_local")
+func set_camera_rotation(new_rotation: Vector3) -> void:
+	get_node("camera_rotation").set_camera_rotation(new_rotation)
