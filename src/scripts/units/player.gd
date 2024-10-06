@@ -59,6 +59,9 @@ func _ready():
 func post_ready(peer_id: int) -> void:
 	# some things should be done after _ready is finished
 	rpc_id(peer_id,"peer_post_ready")
+	# set position to spawn position
+	global_position = $/root/main/maps.get_node("active_map").current_spawn_position
+	$pivot.rotation = $/root/main/maps.get_node("active_map").initial_spawn_rotation
 	print("player %s ready"%name)
 
 
@@ -66,7 +69,7 @@ func post_ready(peer_id: int) -> void:
 func peer_post_ready():
 	References.player_reference = self
 	add_cd_timers()
-	load_ui_initial()
+	UIHandler.init_ui()
 	load_spell_map()
 	initialize_actionbar_slots()
 	add_player_camera()
@@ -81,10 +84,6 @@ func add_cd_timers() -> void:
 		timer.name = "cd_timer_spell_%s"%spell
 		timer.one_shot = true
 		get_node("cd_timer_container").add_child(timer,true)
-
-
-func load_ui_initial() -> void:
-	UIHandler.init_ui()
 
 
 func load_spell_map() -> void:
@@ -256,4 +255,6 @@ func set_orientation(direction: Vector3) -> void:
 		offset = Vector3(direction.z,direction.y,-direction.x)
 	if is_backpedaling:
 		offset = Vector3(-direction.x,direction.y,-direction.z)
+	if offset == Vector3(0,0,0):
+		return
 	$pivot.look_at(global_position + offset)

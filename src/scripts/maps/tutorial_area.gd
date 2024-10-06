@@ -6,15 +6,16 @@ var targetdummy_tank = preload("res://scenes/units/tutorial_area/targetdummy_tan
 
 func initialize() -> void:
 	print("initializing tutorial area")
-	initial_spawn_position = Vector3(0,-5,-30)
+	initial_spawn_position = Vector3(-15,-5,15)
 	current_spawn_position = initial_spawn_position
+	initial_spawn_rotation = Vector3(0,deg_to_rad(270),0)
+	current_spawn_rotation = initial_spawn_rotation
 	init_npcs()
 
 
 func init_npcs() -> void:
 	# npcs must be spawned via code to ensure forced readable names
 	# dps dummies
-	print("spawn dps dummies")
 	var spawn_position = [
 		Vector3(-8,-5,26),
 		Vector3(-31,-5,26),
@@ -25,7 +26,6 @@ func init_npcs() -> void:
 	]
 	spawn_dummygroup(targetdummy_dps,spawn_position)
 	# heal dummies
-	print("spawn heal dummies")
 	spawn_position = [
 		Vector3(-32,-5,12),
 		Vector3(-30,-5,-1),
@@ -36,7 +36,6 @@ func init_npcs() -> void:
 	]
 	spawn_dummygroup(targetdummy_heal,spawn_position)
 	# tank dummies
-	print("spawn tank dummies")
 	spawn_position = [
 		Vector3(-32,-5,-25),
 		Vector3(-30,-5,-38),

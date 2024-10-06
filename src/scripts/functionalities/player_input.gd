@@ -88,4 +88,6 @@ func enter_spell_container(spell_id: String):
 
 @rpc("authority","call_local")
 func request_interaction():
+	if get_parent().current_interactable == null:
+		return
 	get_parent().current_interactable.trigger(get_parent())

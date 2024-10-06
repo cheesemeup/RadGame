@@ -69,6 +69,7 @@ func map_swap(map_name: String):
 		if not player.is_in_group("player"):
 			continue
 		player.global_position = map_instance.initial_spawn_position
+		player.get_node("pivot").rotation = map_instance.initial_spawn_rotation
 		rpc("enable_player",player.name)
 
 
