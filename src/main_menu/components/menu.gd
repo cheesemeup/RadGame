@@ -23,6 +23,7 @@ func _ready() -> void:
 		children_views.add_child(sub_menu_wrapper)
 		
 		var sub_menu_button: Button = sub_menu.get_sub_menu_button()
+		sub_menu_button.theme_type_variation = "MainMenuButton"
 		sub_menu_button.pressed.connect(show_sub_menu.bind(sub_menu_wrapper))
 		children_buttons.add_child(sub_menu_button)
 	
