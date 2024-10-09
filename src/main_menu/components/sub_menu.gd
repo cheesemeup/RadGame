@@ -1,5 +1,4 @@
-extends Resource
-class_name SubMenu
+class_name SubMenu extends Resource
 
 @export var title: String
 @export var sub_menu_scene: PackedScene

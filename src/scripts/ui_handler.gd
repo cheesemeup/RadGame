@@ -43,14 +43,33 @@ func init_ui():
 
 ####################################################################################################
 # MENUS
+
+const main_menu_scene = preload("res://main_menu/main_menu.tscn")
+const ingame_menu_scene = preload("res://scenes/ui/ingame_menu.tscn")
+
 var main_menu: Node
+var ingame_menu: Node
+
 func load_main_menu() -> void:
-	var main_menu_scene = preload("res://main_menu/main_menu.tscn")
 	main_menu = main_menu_scene.instantiate()
 	add_child(main_menu)
 
 func hide_main_menu() -> void:
 	main_menu.hide()
+
+func load_ingame_menu() -> void:
+	ingame_menu = ingame_menu_scene.instantiate()
+	add_child(ingame_menu)
+
+func close_ingame_menu() -> void:
+	ingame_menu.queue_free()
+	ingame_menu = null
+
+func toggle_ingame_menu() -> void:
+	if ingame_menu:
+		close_ingame_menu()
+	else:
+		load_ingame_menu()
 
 
 ####################################################################################################

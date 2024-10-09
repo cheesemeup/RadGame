@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://crv63sp6gpyhs"]
+
+[ext_resource type="Script" path="res://scripts/ui/debug_menu.gd" id="1_4urs5"]
+
+[node name="DebugMenu" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4urs5")
+
+[node name="RestartMapButton" type="Button" parent="."]
+layout_mode = 2
+theme_type_variation = &"MainMenuButton"
+text = "Restart Map"
+
+[node name="ToggleCollisionShapesButton" type="Button" parent="."]
+layout_mode = 2
+theme_type_variation = &"MainMenuButton"
+text = "Visible Collision Shapes"
+
+[connection signal="pressed" from="RestartMapButton" to="." method="_on_restart_map_button_pressed"]
+[connection signal="pressed" from="ToggleCollisionShapesButton" to="." method="_on_toggle_collision_shapes_button_pressed"]

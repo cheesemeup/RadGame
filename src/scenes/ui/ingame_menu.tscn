@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://drhrhhg4hip8s"]
+
+[ext_resource type="Script" path="res://scripts/ui/ingame_menu.gd" id="1_pg0ii"]
+[ext_resource type="PackedScene" uid="uid://dqgjcektrby7d" path="res://main_menu/components/menu.tscn" id="2_c2a2g"]
+[ext_resource type="PackedScene" uid="uid://056tu56xbrr" path="res://main_menu/settings_menu.tscn" id="2_ddaat"]
+[ext_resource type="Script" path="res://main_menu/components/sub_menu.gd" id="3_0cdae"]
+[ext_resource type="PackedScene" uid="uid://crv63sp6gpyhs" path="res://scenes/ui/debug_menu.tscn" id="4_epgrp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2y3v"]
+bg_color = Color(0.164706, 0.164706, 0.164706, 0.501961)
+
+[sub_resource type="Resource" id="Resource_a241n"]
+script = ExtResource("3_0cdae")
+title = "[DEBUG]"
+sub_menu_scene = ExtResource("4_epgrp")
+
+[sub_resource type="Resource" id="Resource_tdtki"]
+script = ExtResource("3_0cdae")
+title = "Settings"
+sub_menu_scene = ExtResource("2_ddaat")
+
+[node name="IngameMenu" type="CanvasLayer"]
+script = ExtResource("1_pg0ii")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h2y3v")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Menu" parent="CenterContainer/PanelContainer/MarginContainer" instance=ExtResource("2_c2a2g")]
+unique_name_in_owner = true
+layout_mode = 2
+SUB_MENUS = Array[ExtResource("3_0cdae")]([SubResource("Resource_a241n"), SubResource("Resource_tdtki")])
+CLOSE_BUTTON_TEXT = "Back to Game"

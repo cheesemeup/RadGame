@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dauewxdanhfah"]
+[gd_scene load_steps=11 format=3 uid="uid://dauewxdanhfah"]
 
 [ext_resource type="Script" path="res://main_menu/main_menu.gd" id="1_wj144"]
 [ext_resource type="Script" path="res://main_menu/components/sub_menu.gd" id="2_l8b54"]
@@ -6,25 +6,25 @@
 [ext_resource type="PackedScene" uid="uid://bltiropmoiif5" path="res://main_menu/character_menu.tscn" id="4_vadt4"]
 [ext_resource type="PackedScene" uid="uid://056tu56xbrr" path="res://main_menu/settings_menu.tscn" id="5_o2yub"]
 [ext_resource type="Theme" uid="uid://bilm420i6mgm1" path="res://themes/main_menu.tres" id="6_v3kup"]
+[ext_resource type="PackedScene" uid="uid://dqgjcektrby7d" path="res://main_menu/components/menu.tscn" id="7_0yp7e"]
 
-[sub_resource type="Resource" id="Resource_qhswp"]
+[sub_resource type="Resource" id="Resource_ijuhy"]
 script = ExtResource("2_l8b54")
 title = "Play"
 sub_menu_scene = ExtResource("3_uqno6")
 
-[sub_resource type="Resource" id="Resource_5ekyd"]
+[sub_resource type="Resource" id="Resource_dmp6y"]
 script = ExtResource("2_l8b54")
 title = "Character"
 sub_menu_scene = ExtResource("4_vadt4")
 
-[sub_resource type="Resource" id="Resource_v7jto"]
+[sub_resource type="Resource" id="Resource_00j1w"]
 script = ExtResource("2_l8b54")
 title = "Settings"
 sub_menu_scene = ExtResource("5_o2yub")
 
 [node name="mainmenu" type="CanvasLayer"]
 script = ExtResource("1_wj144")
-SUB_MENUS = [SubResource("Resource_qhswp"), SubResource("Resource_5ekyd"), SubResource("Resource_v7jto")]
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
@@ -35,7 +35,7 @@ grow_vertical = 2
 theme = ExtResource("6_v3kup")
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
-custom_minimum_size = Vector2(600, 0)
+custom_minimum_size = Vector2(664, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
@@ -45,20 +45,8 @@ theme_override_constants/margin_bottom = 32
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="MainMenu" type="VBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
+[node name="Menu" parent="CenterContainer/MarginContainer/VBoxContainer" instance=ExtResource("7_0yp7e")]
 unique_name_in_owner = true
 layout_mode = 2
-
-[node name="SubMenuButtons" type="VBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer/MainMenu"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="quit_button" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer/MainMenu"]
-layout_mode = 2
-text = "Quit"
-
-[node name="SubMenus" type="VBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/MainMenu/quit_button" to="." method="_on_quit_button_pressed"]
+SUB_MENUS = Array[ExtResource("2_l8b54")]([SubResource("Resource_ijuhy"), SubResource("Resource_dmp6y"), SubResource("Resource_00j1w")])
+CLOSE_BUTTON_TEXT = "Quit"
