@@ -2,6 +2,7 @@ extends Button
 
 var slot_spell_id: String = ""
 var spell_cd_timer: Timer
+var swipe_enabled = false
 
 
 func _process(_delta: float) -> void:
@@ -39,6 +40,10 @@ func _on_pressed() -> void:
 
 
 func cooldown_swipe() -> void:
+	# only continue if the cooldown swipe is enabled. It can be disabled 
+	# and re-enabled when the slot_spell_id is changed
+	if not swipe_enabled:
+		return
 	if spell_cd_timer.is_stopped():
 		return
 	$cooldown_swipe.value = spell_cd_timer.time_left / spell_cd_timer.cd_full_duration

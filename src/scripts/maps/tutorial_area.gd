@@ -11,6 +11,7 @@ func initialize() -> void:
 	initial_spawn_rotation = Vector3(0,deg_to_rad(270),0)
 	current_spawn_rotation = initial_spawn_rotation
 	init_npcs()
+	init_interactables()
 
 
 func init_npcs() -> void:
@@ -45,6 +46,12 @@ func init_npcs() -> void:
 		Vector3(-34,-5,-42),
 	]
 	spawn_dummygroup(targetdummy_tank,spawn_position)
+
+
+func init_interactables():
+	var swap_crusader_tank = preload("res://scenes/testing/interact_swap_crusader_tank.tscn").instantiate()
+	swap_crusader_tank.position = Vector3(-10,-5,-42)
+	$interactables.add_child(swap_crusader_tank,true)
 
 
 func spawn_dummygroup(dummy_preload: PackedScene, spawn_position: Array):
