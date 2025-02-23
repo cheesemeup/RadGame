@@ -95,16 +95,6 @@ func spell_container_init(spell_list: Array) -> void:
 		$spell_container.add_child(spell_scene)
 
 
-func cd_timers_init() -> void:
-	var cd_timer_scene = preload("res://scenes/functionalities/cd_timer.tscn")
-	var timer: Timer
-	for spell in get_node("spell_container").get_children():
-		timer = cd_timer_scene.instantiate()
-		timer.name = "cd_timer_%s"%spell.name
-		timer.one_shot = false
-		get_node("cd_timers").add_child(timer)
-
-
 ####################################################################################################
 # CAST TIMER
 func send_start_casttimer(cast_time: float):
@@ -121,20 +111,23 @@ func start_casttimer(cast_time: float):
 # MODELS AND ANIMATIONS
 func set_model(model_name: String) -> void:
 	# unload previous model if it exists
-	for node in $pivot.get_children():
-		node.free()
+	if $pivot.get_node_or_null("active_model"):
+		$pivot/active_model.free()
 	# load new model
 	var model_scene = load("res://scenes/models/%s.tscn"%model_name).instantiate()
-	$pivot.add_child(model_scene)
+	model_scene.name = "active_model"
+	$pivot.add_child(model_scene, true)
 	play_animation("Idle")
 
 
 func play_animation(animation_name: String) -> void:
-	$pivot.get_child(0).get_node("AnimationPlayer").play(animation_name)
+	if $pivot.get_node_or_null("active_model"):
+		$pivot.get_node("active_model").get_node("AnimationPlayer").play(animation_name)
 
 
 func queue_animation(animation_name: String) -> void:
-	$pivot.get_child(0).get_node("AnimationPlayer").queue(animation_name)
+	if $pivot.get_node_or_null("active_model"):
+		$pivot.get_node("active_model").get_node("AnimationPlayer").queue(animation_name)
 
 
 func determine_movement_animation() -> void:

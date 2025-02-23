@@ -52,8 +52,9 @@ func pre_ready(peer_id: int) -> void:
 
 
 func _ready():
-	# load model
-	set_model(model)
+	# server only
+	if $mpsynchronizer.is_multiplayer_authority():
+		set_model(model)
 
 
 func post_ready(peer_id: int) -> void:
@@ -79,6 +80,10 @@ func peer_post_ready():
 
 
 func add_cd_timers() -> void:
+	# clear already present cd timers
+	for timer in $cd_timer_container.get_children():
+		timer.queue_free()
+	# add timer for every spell in spell list
 	var cd_timer_scene = preload("res://scenes/functionalities/cd_timer.tscn")
 	var timer: Timer
 	for spell in stats_current["spell_list"]:
@@ -272,3 +277,22 @@ func set_position_and_rotation(new_position: Vector3, new_rotation: Vector3) -> 
 @rpc("authority","call_local")
 func set_camera_rotation(new_rotation: Vector3) -> void:
 	get_node("camera_rotation").set_camera_rotation(new_rotation)
+
+
+################################################################################
+# CLASS SWAP
+func class_swap(class_id: String):
+	# reinitialize stats
+	stat_init("player", class_id)
+	# reinitialize spell container
+	spell_container_init(self.stats_current.spell_list)
+	# change model
+	set_model(model)
+	# reinitialize cd timers for client
+	rpc_id(self.name.to_int(),"class_swap_client")
+
+@rpc("authority","call_local")
+func class_swap_client():
+	# disable cd timers ona ctionbars first, as they will all be relinked
+	$/root/main/ui/actionbars.toggle_cd_swipes(false)
+	add_cd_timers()

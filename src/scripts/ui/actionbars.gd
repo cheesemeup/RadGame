@@ -57,3 +57,9 @@ func gen_text(text: String) -> String:
 		else:
 			returntext = "%s%s"%[returntext,substring]
 	return returntext
+
+
+func toggle_cd_swipes(enabled: bool):
+	for container in get_children():
+		for slot in container.get_children():
+			slot.swipe_enabled = enabled

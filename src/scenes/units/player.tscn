@@ -35,6 +35,10 @@ script = ExtResource("1_8gonl")
 
 [node name="pivot" type="Node3D" parent="."]
 
+[node name="mpspawner_model" type="MultiplayerSpawner" parent="pivot"]
+_spawnable_scenes = PackedStringArray("res://scenes/models/necromancer.tscn", "res://scenes/models/skeleton_warrior.tscn")
+spawn_path = NodePath("..")
+
 [node name="player_collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_16yd3")
