@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cbi12xdclhg1l"]
 
-[ext_resource type="Script" path="res://scripts/testing/interact_swap_crusader_tank.gd" id="1_3251a"]
+[ext_resource type="Script" uid="uid://c0vrwot785sb0" path="res://scripts/testing/interact_swap_crusader_tank.gd" id="1_3251a"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_goaoj"]
 top_radius = 0.15

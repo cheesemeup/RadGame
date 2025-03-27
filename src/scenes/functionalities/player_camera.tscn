@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://8ep2aeafxtxg"]
 
-[ext_resource type="Script" path="res://scripts/functionalities/player_camera.gd" id="1_5p8fv"]
+[ext_resource type="Script" uid="uid://c77wimc8lgx6x" path="res://scripts/functionalities/player_camera.gd" id="1_5p8fv"]
 
 [node name="camera_rotation" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)

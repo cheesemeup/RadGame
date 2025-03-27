@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://o2teonckm3yt"]
 
-[ext_resource type="Script" path="res://scripts/units/tutorial_area/targetdummy_dps.gd" id="1_rdr8k"]
+[ext_resource type="Script" uid="uid://bhoo7ivadnvkv" path="res://scripts/units/tutorial_area/targetdummy_dps.gd" id="1_rdr8k"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ejv2q"]
 radius = 0.6

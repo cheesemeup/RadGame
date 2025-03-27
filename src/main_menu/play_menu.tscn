@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://mk6uj7xoynfq"]
 
-[ext_resource type="Script" path="res://main_menu/play_menu.gd" id="1_bd2jh"]
+[ext_resource type="Script" uid="uid://lxj4bvf1cllx" path="res://main_menu/play_menu.gd" id="1_bd2jh"]
 [ext_resource type="Theme" uid="uid://bilm420i6mgm1" path="res://themes/main_menu.tres" id="1_qvtjd"]
 
 [node name="PlayMenu" type="PanelContainer"]

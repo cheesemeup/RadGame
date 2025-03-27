@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dempeiar8tjic"]
 
-[ext_resource type="Script" path="res://scripts/units/player.gd" id="1_8gonl"]
-[ext_resource type="Script" path="res://scripts/functionalities/cd_timer_container.gd" id="3_ise05"]
-[ext_resource type="Script" path="res://scripts/functionalities/player_input.gd" id="4_lp8kc"]
+[ext_resource type="Script" uid="uid://c7ppbr1jci0me" path="res://scripts/units/player.gd" id="1_8gonl"]
+[ext_resource type="Script" uid="uid://bf2g67th0rr7p" path="res://scripts/functionalities/cd_timer_container.gd" id="3_ise05"]
+[ext_resource type="Script" uid="uid://cxf43e0uderde" path="res://scripts/functionalities/player_input.gd" id="4_lp8kc"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_16yd3"]
 radius = 0.6
