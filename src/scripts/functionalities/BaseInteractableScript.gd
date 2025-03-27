@@ -15,7 +15,7 @@ func initialize_base_interactable(unit_id: String):
 	add_child(spell_container)
 	# add spells to container
 	for spell in stats_current["spell_list"]:
-		var spell_scene = load("res://scenes/spells/spell_%s.tscn" % spell)
+		var spell_scene = load("res://scenes/spells/spell_%d.tscn" % spell)
 		spell_scene = spell_scene.instantiate()
 		$spell_container.add_child(spell_scene)
 	# connect enter and exit signals

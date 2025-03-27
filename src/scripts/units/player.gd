@@ -88,7 +88,7 @@ func add_cd_timers() -> void:
 	var timer: Timer
 	for spell in stats_current["spell_list"]:
 		timer = cd_timer_scene.instantiate()
-		timer.name = "cd_timer_spell_%s"%spell
+		timer.name = "cd_timer_spell_%d"%spell
 		timer.one_shot = true
 		get_node("cd_timer_container").add_child(timer,true)
 

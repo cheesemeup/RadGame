@@ -88,9 +88,9 @@ func spell_container_init(spell_list: Array) -> void:
 	# add spells to spell container
 	for spell in spell_list:
 		var spell_scene = load("res://scenes/functionalities/spell_base.tscn")
-		var spell_script = load("res://scripts/spells/spell_%s.gd"%spell)
+		var spell_script = load("res://scripts/spells/spell_%d.gd"%spell)
 		spell_scene = spell_scene.instantiate()
-		spell_scene.name = "spell_%s"%spell
+		spell_scene.name = "spell_%d"%spell
 		spell_scene.set_script(spell_script)
 		$spell_container.add_child(spell_scene)
 

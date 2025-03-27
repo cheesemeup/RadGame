@@ -379,9 +379,9 @@ func log_damage(
 		crit_suffix = " (critical)"
 	var overkill_suffix = ""
 	if overkill > 0:
-		overkill_suffix = " (%s overkill)" % overkill
+		overkill_suffix = " (%d overkill)" % overkill
 	print(
-		"%s hits %s with %s for %s%s%s."%
+		"%s hits %s with %s for %d%s%s."%
 		[source_name, target_name, spell_name, value, crit_suffix, overkill_suffix]
 	)
 
@@ -394,11 +394,12 @@ func log_absorb(
 	absorb_source: String
 ) -> void:
 	var source_name_poss: String
+	# possessive form for words ending in s
 	if source_name[-1] == "s":
 		source_name_poss = "%s'"%source_name
 	else:
 		source_name_poss = "%s's"%source_name
-	print("%s absorbs %s damage of %s %s with %s of %s"%[
+	print("%s absorbs %d damage of %s %s with %s of %s"%[
 		target_name,
 		absorb_value,
 		source_name_poss,
@@ -420,9 +421,9 @@ func log_heal(
 		crit_suffix = " (critical)"
 	var overheal_suffix = ""
 	if overheal > 0:
-		overheal_suffix = " (%s overheal)" % overheal
+		overheal_suffix = " (%d overheal)" % overheal
 	print(
-		"%s heals %s with %s for %s%s%s."%
+		"%s heals %s with %s for %d%s%s."%
 		[source_name, target_name, spell_name, value, crit_suffix, overheal_suffix]
 	)
 

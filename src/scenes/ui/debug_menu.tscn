@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://crv63sp6gpyhs"]
 
-[ext_resource type="Script" path="res://scripts/ui/debug_menu.gd" id="1_4urs5"]
+[ext_resource type="Script" uid="uid://cqkrma3kdje5" path="res://scripts/ui/debug_menu.gd" id="1_4urs5"]
 
 [node name="DebugMenu" type="VBoxContainer"]
 anchors_preset = 15

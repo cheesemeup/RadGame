@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dauewxdanhfah"]
 
-[ext_resource type="Script" path="res://main_menu/main_menu.gd" id="1_wj144"]
-[ext_resource type="Script" path="res://main_menu/components/sub_menu.gd" id="2_l8b54"]
+[ext_resource type="Script" uid="uid://b6w67x1ou45e6" path="res://main_menu/main_menu.gd" id="1_wj144"]
+[ext_resource type="Script" uid="uid://p5v66kngmc74" path="res://main_menu/components/sub_menu.gd" id="2_l8b54"]
 [ext_resource type="PackedScene" uid="uid://mk6uj7xoynfq" path="res://main_menu/play_menu.tscn" id="3_uqno6"]
 [ext_resource type="PackedScene" uid="uid://bltiropmoiif5" path="res://main_menu/character_menu.tscn" id="4_vadt4"]
 [ext_resource type="PackedScene" uid="uid://056tu56xbrr" path="res://main_menu/settings_menu.tscn" id="5_o2yub"]

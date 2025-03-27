@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqgjcektrby7d"]
 
-[ext_resource type="Script" path="res://main_menu/components/menu.gd" id="1_h4vpx"]
+[ext_resource type="Script" uid="uid://0vrgppkme7ux" path="res://main_menu/components/menu.gd" id="1_h4vpx"]
 [ext_resource type="Theme" uid="uid://bilm420i6mgm1" path="res://themes/main_menu.tres" id="6_dh5ia"]
 
 [node name="Menu" type="VBoxContainer"]

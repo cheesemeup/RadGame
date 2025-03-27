@@ -8,9 +8,9 @@ func initialize() -> void:
 	for i in range(1,3):
 		for j in range(1,13):
 			var slot = actionbar_slot.instantiate()
-			slot.name = "actionbar%s_%s"%[i,j]
+			slot.name = "actionbar%d_%d"%[i,j]
 			slot.set_process(false)
-			get_node("actionbar%s"%i).add_child(slot)
+			get_node("actionbar%d"%i).add_child(slot)
 	# get all actionbar InputMap actions and set text to primary event
 	actions = get_actionbar_actions()
 	set_text()

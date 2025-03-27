@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://drhrhhg4hip8s"]
 
-[ext_resource type="Script" path="res://scripts/ui/ingame_menu.gd" id="1_pg0ii"]
+[ext_resource type="Script" uid="uid://dyuhda4xgxetp" path="res://scripts/ui/ingame_menu.gd" id="1_pg0ii"]
 [ext_resource type="PackedScene" uid="uid://dqgjcektrby7d" path="res://main_menu/components/menu.tscn" id="2_c2a2g"]
 [ext_resource type="PackedScene" uid="uid://056tu56xbrr" path="res://main_menu/settings_menu.tscn" id="2_ddaat"]
-[ext_resource type="Script" path="res://main_menu/components/sub_menu.gd" id="3_0cdae"]
+[ext_resource type="Script" uid="uid://p5v66kngmc74" path="res://main_menu/components/sub_menu.gd" id="3_0cdae"]
 [ext_resource type="PackedScene" uid="uid://crv63sp6gpyhs" path="res://scenes/ui/debug_menu.tscn" id="4_epgrp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2y3v"]

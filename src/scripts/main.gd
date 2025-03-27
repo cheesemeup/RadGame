@@ -48,7 +48,7 @@ func spawn_player(peer_id: int):
 
 
 func remove_player(peer_id: int):
-	print("remove_player triggered for %s" % peer_id)
+	print("remove_player triggered for %d" % peer_id)
 	var player = get_node_or_null("players/"+str(peer_id))
 	if multiplayer.is_server() and player:
 		player.queue_free()

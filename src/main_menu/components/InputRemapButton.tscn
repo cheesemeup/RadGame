@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d1qtpnwnamepe"]
 
-[ext_resource type="Script" path="res://main_menu/components/input_remap_button.gd" id="1_5ybjq"]
+[ext_resource type="Script" uid="uid://bdvachobev27h" path="res://main_menu/components/input_remap_button.gd" id="1_5ybjq"]
 
 [node name="InputRemapButton" type="Button"]
 offset_right = 8.0

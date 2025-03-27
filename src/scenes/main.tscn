@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://oqfu77ry4jv0"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_pi1ts"]
+[ext_resource type="Script" uid="uid://cmkjvbskpsjpy" path="res://scripts/main.gd" id="1_pi1ts"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_pi1ts")
@@ -8,13 +8,13 @@ script = ExtResource("1_pi1ts")
 [node name="players" type="Node" parent="."]
 
 [node name="mpspawner_player" type="MultiplayerSpawner" parent="players"]
-_spawnable_scenes = PackedStringArray("res://scenes/units/player.tscn")
+_spawnable_scenes = PackedStringArray("uid://dempeiar8tjic")
 spawn_path = NodePath("..")
 
 [node name="maps" type="Node" parent="."]
 
 [node name="mpspawner_maps" type="MultiplayerSpawner" parent="maps"]
-_spawnable_scenes = PackedStringArray("res://scenes/maps/hub.tscn", "res://scenes/maps/tutorial_area.tscn")
+_spawnable_scenes = PackedStringArray("uid://bjr7k3cxd6jyj", "uid://c2qwhx3ctwu1k")
 spawn_path = NodePath("..")
 spawn_limit = 1
 

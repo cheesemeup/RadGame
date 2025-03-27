@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b2qbgs1l02rld"]
 
-[ext_resource type="Script" path="res://scripts/spells/spell_5.gd" id="1_c73nm"]
+[ext_resource type="Script" uid="uid://d2e2ei5x2cyly" path="res://scripts/spells/spell_5.gd" id="1_c73nm"]
 
 [node name="spell_5" type="Node"]
 script = ExtResource("1_c73nm")

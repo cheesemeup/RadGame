@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Settings" load_steps=8 format=3 uid="uid://dmgst53vva0fl"]
 
-[ext_resource type="Script" path="res://settings/gameplay_settings.gd" id="1_32n6d"]
-[ext_resource type="Script" path="res://settings/settings.gd" id="1_ct4yt"]
-[ext_resource type="Script" path="res://settings/input_settings.gd" id="2_i818s"]
-[ext_resource type="Script" path="res://settings/video_settings.gd" id="2_jmurn"]
+[ext_resource type="Script" uid="uid://d0t6l1hvsgi3b" path="res://settings/gameplay_settings.gd" id="1_32n6d"]
+[ext_resource type="Script" uid="uid://2ocaxekrmbtp" path="res://settings/settings.gd" id="1_ct4yt"]
+[ext_resource type="Script" uid="uid://c1evw2i2pgma5" path="res://settings/input_settings.gd" id="2_i818s"]
+[ext_resource type="Script" uid="uid://cneshj7ifl8xn" path="res://settings/video_settings.gd" id="2_jmurn"]
 
 [sub_resource type="Resource" id="Resource_wf3b3"]
 script = ExtResource("1_32n6d")
