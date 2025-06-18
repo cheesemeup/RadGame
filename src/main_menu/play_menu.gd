@@ -1,7 +1,7 @@
 extends PanelContainer
 
-signal start_join
-signal start_host
+#signal start_join
+#signal start_host
 
 @onready var address_entry: LineEdit = %address_entry
 @onready var port_entry: LineEdit = %port_entry
