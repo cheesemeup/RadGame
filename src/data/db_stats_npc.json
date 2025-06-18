@@ -173,5 +173,30 @@
 	"defense_modifier_magic":1,
 	"heal_taken_modifier_physical":1,
 	"heal_taken_modifier_magic":1
+},
+"7":{
+	"unit_name":"Tutorialboss Tank",
+	"unit_class":"Boss",
+	"model":"",
+	"size":1,
+	"spell_list":[],
+	"speed":0,
+	"health_max":100000,
+	"health_current":100000,
+	"resource_type":"Energy",
+	"resource_max":100,
+	"resource_current":0,
+	"resource_regen":0,
+	"primary":100,
+	"avoidance":0,
+	"crit_chance":0,
+	"damage_modifier_physical":1,
+	"damage_modifier_magic":1,
+	"heal_modifier_physical":1,
+	"heal_modifier_magic":1,
+	"defense_modifier_physical":1,
+	"defense_modifier_magic":1,
+	"heal_taken_modifier_physical":1,
+	"heal_taken_modifier_magic":1
 }
 }

@@ -148,6 +148,13 @@ func determine_movement_animation() -> void:
 
 
 ################################################################################
+# Utilities
+func set_position_and_rotation(new_position: Vector3, new_rotation: Vector3) -> void:
+	# set position to spawn position
+	global_position = new_position
+	$pivot.rotation = new_rotation
+
+################################################################################
 # STATES
 @export var is_moving: bool = false:
 	set(new_value):
@@ -200,3 +207,5 @@ func determine_movement_animation() -> void:
 @rpc("authority","call_local")
 func send_toggle_castbar(visibility: bool):
 	UIHandler.toggle_castbar(visibility)
+
+@export var is_in_combat: bool = false
