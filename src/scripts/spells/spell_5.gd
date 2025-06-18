@@ -12,7 +12,7 @@ func trigger():
 	if target == null:
 		target = source
 	# check target legality
-	if is_illegal_target(spell_current["targetgroup"], target):
+	if is_illegal_target(spell_current["targetgroup"]):
 		return 1
 	# check for cooldown
 	if is_on_cd():
@@ -21,8 +21,8 @@ func trigger():
 	if is_not_in_range(source.position,target.position,spell_current["max_range"]):
 		return 4
 	# check line of sight, NOT FUNCTIONAL
-	if is_not_in_line_of_sight(source,target.position):
-		return 5
+	#if is_not_in_line_of_sight(source,target.position):
+		#return 5
 	# send gcd
 	if spell_current["on_gcd"] == 1:
 		get_parent().send_gcd()

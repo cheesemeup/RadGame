@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dsoymrg5g8hdp"
-valid=false
+path="res://.godot/imported/Necromancer.glb-8218c418638d1446fc388c257e5c6bfb.scn"
 
 [deps]
 
 source_file="res://assets/playermodels/Necromancer.glb"
+dest_files=["res://.godot/imported/Necromancer.glb-8218c418638d1446fc388c257e5c6bfb.scn"]
 
 [params]
 
