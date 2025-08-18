@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdmrlyjgpeytb"]
+[gd_scene load_steps=4 format=3 uid="uid://dam0yrpwlwoft"]
 
 [ext_resource type="Script" uid="uid://dqfrvkpio5hqe" path="res://scripts/units/tutorial_area/targetdummy_tank.gd" id="1_cqky3"]
 
@@ -29,7 +29,6 @@ script = ExtResource("1_cqky3")
 [node name="pivot" type="Node3D" parent="."]
 
 [node name="mpspawner_model" type="MultiplayerSpawner" parent="pivot"]
-_spawnable_scenes = PackedStringArray("uid://de3swgbb2f527")
 spawn_path = NodePath("..")
 
 [node name="unit_collision" type="CollisionShape3D" parent="."]

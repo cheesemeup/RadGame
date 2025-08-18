@@ -2,8 +2,10 @@
   "0":{
 	"unit_name":"Signpost Damage",
 	"unit_class":"Test Interactable",
-	"spell_list":[0],
-	"primary":100,
+	"model":"signpost",
+	"prompt_offset":3,
+	"spell":0,
+	"primary":1,
 	"damage_modifier_physical":1,
 	"damage_modifier_magic":1,
 	"heal_modifier_physical":1,
@@ -13,8 +15,10 @@
   "1":{
 	"unit_name":"Signpost Heal",
 	"unit_class":"Test Interactable",
-	"spell_list":[1],
-	"primary":100,
+	"model":"signpost",
+	"prompt_offset":3,
+	"spell":1,
+	"primary":1,
 	"damage_modifier_physical":1,
 	"damage_modifier_magic":1,
 	"heal_modifier_physical":1,
@@ -23,9 +27,11 @@
 },
   "2":{
 	"unit_name":"Signpost Absorb",
-	"unit_class":"Test Interactable",
-	"spell_list":[15],
-	"primary":100,
+	"unit_class":"Interactable",
+	"model":"signpost",
+	"prompt_offset":3,
+	"spell":15,
+	"primary":1,
 	"damage_modifier_physical":1,
 	"damage_modifier_magic":1,
 	"heal_modifier_physical":1,
@@ -34,6 +40,16 @@
 },
   "3":{
 	"unit_name":"Signpost Tutorial Teleport",
-	"unit_class":"Test Interactable",
+	"unit_class":"Teleporter",
+	"model":"signpost",
+	"prompt_offset":3,
+	"interact_range":3
+},
+  "4":{
+	"unit_name":"Specswap Crusader Tank",
+	"unit_class":"Interactable",
+	"model":"signpost",
+	"prompt_offset":3,
+	"interact_range":3
 },
 }

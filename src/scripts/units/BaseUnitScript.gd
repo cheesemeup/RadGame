@@ -17,7 +17,6 @@ var selected_target = null  # for targeting with spells
 var mouseover_target = null  # for targeting with spells
 
 
-# model
 @export var model: String
 
 
