@@ -2,7 +2,7 @@ extends BaseInteractable
 
 
 func custom_post_ready():
-	$pivot/active_model/sign_text.text = "Tutorialmap"
+	$pivot/active_model/sign_text.text = "C Tank"
 
 
 func custom_trigger(interactor):

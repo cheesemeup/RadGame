@@ -47,8 +47,9 @@ func stat_init(unit_type: String, unit_id: String) -> void:
 	stats_current = stats_base.duplicate(true)
 	stats_mult = initialize_statmult()
 	stats_add = initialize_statadd()
-	# set speed
+	# set speed and scale
 	speed = stats_current["speed"]
+	scale = Vector3(stats_current["scale"],stats_current["scale"],stats_current["scale"])
 
 
 func initialize_statmult() -> Dictionary:
@@ -149,8 +150,16 @@ func determine_movement_animation() -> void:
 ################################################################################
 # Utilities
 func set_position_and_rotation(new_position: Vector3, new_rotation: Vector3) -> void:
-	# set position to spawn position
+	# use this when scene is already in the tree
+	# otherwise, use set_spawn_position_and_rotation
 	global_position = new_position
+	$pivot.rotation = new_rotation
+
+
+func set_spawn_position_and_rotation(new_position: Vector3, new_rotation: Vector3) -> void:
+	# when spawning, global_position cannot be used before the escene enters the tree
+	# therefore, position is used here instead of global_position
+	position = new_position
 	$pivot.rotation = new_rotation
 
 ################################################################################

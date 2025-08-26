@@ -8,12 +8,27 @@ func pre_ready(unit_id: int) -> void:
 	$mpsynchronizer.set_multiplayer_authority(1)
 	# initialize stats
 	initialize_base_unit("npc", str(unit_id))
+	custom_pre_ready()
 
 
 func _ready():
 	# server only
 	if $mpsynchronizer.is_multiplayer_authority():
 		set_model(model)
+
+
+func post_ready():
+	custom_post_ready()
+
+
+func custom_pre_ready():
+	# override this function to enable custom pre_ready functionality
+	pass
+
+
+func custom_post_ready():
+	# override this function to enable custom post_ready functionality
+	pass
 
 
 ################################################################################
@@ -79,7 +94,7 @@ func move_to_aggro():
 	# return if aggro table is empty
 	if aggro_table == {}:
 		return
-		
+	
 	# move towards the target that currently holds aggro
 	var current_aggro = get_current_aggro()
 	var direction = Vector3(

@@ -22,7 +22,7 @@ func init_npcs():
 
 func init_interactables():
 	interactable_despawn_position = Vector3(0,-10,0)
-	spawn_interactable(0, "hub/interact_damage", Vector3(0,0,-6), Vector3(0,0,0))
-	spawn_interactable(1, "hub/interact_heal", Vector3(3,0,-6), Vector3(0,0,0))
-	spawn_interactable(2, "hub/interact_absorb", Vector3(6,0,-6), Vector3(0,0,0))
-	spawn_interactable(3, "hub/interact_tp_to_tutorialmap", Vector3(9,0,-6), Vector3(0,0,0))
+	Serverscript.spawn_interactable(0, "hub/interact_damage", Vector3(0,0,-6), Vector3(0,0,0))
+	Serverscript.spawn_interactable(1, "hub/interact_heal", Vector3(3,0,-6), Vector3(0,0,0))
+	Serverscript.spawn_interactable(2, "hub/interact_absorb", Vector3(6,0,-6), Vector3(0,0,0))
+	Serverscript.spawn_interactable(3, "hub/interact_tp_to_tutorialmap", Vector3(9,0,-6), Vector3(0,0,0))

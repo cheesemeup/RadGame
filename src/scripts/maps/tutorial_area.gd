@@ -50,7 +50,8 @@ func init_npcs() -> void:
 
 func init_interactables():
 	interactable_despawn_position = Vector3(0,-10,0)
-	spawn_interactable(4, "tutorial_area/interact_swap_crusader_tank", Vector3(-10,-5,-42), Vector3(0,0,0))
+	Serverscript.spawn_interactable(4, "tutorial_area/interact_swap_crusader_tank", Vector3(-10,-5,-42), Vector3(0,0,0))
+	Serverscript.spawn_interactable(5, "tutorial_area/interact_boss_spawner", Vector3(-6,-5,19), Vector3(0,deg_to_rad(270),0))
 
 
 func spawn_dummygroup(dummy_preload: PackedScene, spawn_position: Array):

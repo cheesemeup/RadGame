@@ -52,4 +52,11 @@
 	"prompt_offset":3,
 	"interact_range":3
 },
+  "5":{
+	"unit_name":"Boss Spawner",
+	"unit_class":"Spawner",
+	"model":"signpost",
+	"prompt_offset":3,
+	"interact_range":3
+}
 }
