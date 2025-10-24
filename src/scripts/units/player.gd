@@ -255,6 +255,8 @@ func handle_movement(delta: float) -> void:
 
 
 func set_orientation(direction: Vector3) -> void:
+	# the offset is the rotation that has to be taken into account when
+	# not moving directly forwards
 	var offset = direction
 	if is_strafing_left:
 		offset = Vector3(-direction.z,direction.y,direction.x)

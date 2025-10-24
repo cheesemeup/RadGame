@@ -13,4 +13,4 @@ func custom_trigger(_interactor):
 		boss.free()
 		return
 	# spawn boss
-	Serverscript.spawn_npc_hostile(7, "tutorial_area/tutorial_boss_tank", Vector3(15,-5,-4), Vector3(0,deg_to_rad(90),0))
+	Serverscript.spawn_npc_hostile(7, "tutorial_area/tutorial_boss_tank", Vector3(15,-5,-4), Vector3(0,PI/2,0))

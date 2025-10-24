@@ -33,10 +33,15 @@ func custom_post_ready():
 
 ################################################################################
 ### frame
-
 func _process(delta):
 	if is_in_combat:
 		process_combat()
+
+
+func _physics_process(delta) -> void:
+	# movement
+	if not is_dead:
+		move_to_aggro(delta)
 
 
 func process_combat():
@@ -70,7 +75,6 @@ func get_current_aggro() -> CharacterBody3D:
 
 ################################################################################
 ### reset
-
 func reset():
 	# called from the map script, when an NPC has to be reset (e.g., because of a wipe)
 	# disable combat processing
@@ -84,19 +88,26 @@ func reset():
 	# resets the NPC to initial state
 	aggro_table = {}
 	# move to spawn position and rotation
-	# 
+	set_position_and_rotation(spawn_position, spawn_rotation)
 
 
 ################################################################################
 ### movement
-
-func move_to_aggro():
-	# return if aggro table is empty
+func move_to_aggro(delta):
 	if aggro_table == {}:
 		return
 	
-	# move towards the target that currently holds aggro
 	var current_aggro = get_current_aggro()
+	
+	# check if within melee range, and only change orientation if so
+	if position.distance_to(current_aggro.position) <= \
+	(stats_current["melee_hitbox_size"] + current_aggro.stats_current["melee_hitbox_size"]):
+		$pivot.look_at(global_position + position.direction_to(current_aggro.position))
+		if is_moving:
+			is_moving = false
+		return
+	
+	# move towards the target that currently holds aggro if not within melee range
 	var direction = Vector3(
 		current_aggro.position.x - self.position.x,
 		0,
@@ -105,6 +116,7 @@ func move_to_aggro():
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
+		$pivot.look_at(global_position + direction)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)

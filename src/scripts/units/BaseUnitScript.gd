@@ -2,6 +2,10 @@ extends CharacterBody3D
 
 class_name BaseUnit
 
+# spawn
+var spawn_position: Vector3
+var spawn_rotation: Vector3
+
 # combat
 var speed: float 
 @export var stats_current: Dictionary
@@ -86,6 +90,8 @@ func spell_container_init(spell_list: Array) -> void:
 	for spell in $spell_container.get_children():
 		spell.queue_free()
 	# add spells to spell container
+	# add autoattack for every unit, thus not from spell list
+	
 	for spell in spell_list:
 		var spell_scene = load("res://scenes/functionalities/spell_base.tscn")
 		var spell_script = load("res://scripts/spells/spell_%d.gd"%spell)
@@ -159,6 +165,8 @@ func set_position_and_rotation(new_position: Vector3, new_rotation: Vector3) -> 
 func set_spawn_position_and_rotation(new_position: Vector3, new_rotation: Vector3) -> void:
 	# when spawning, global_position cannot be used before the escene enters the tree
 	# therefore, position is used here instead of global_position
+	spawn_position = new_position
+	spawn_rotation = new_rotation
 	position = new_position
 	$pivot.rotation = new_rotation
 

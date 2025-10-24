@@ -225,7 +225,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 99.
 [node name="interactables" type="Node" parent="."]
 
 [node name="mpspawner_interactable" type="MultiplayerSpawner" parent="interactables"]
-_spawnable_scenes = PackedStringArray("res://scenes/testing/interact_swap_crusader_tank.tscn")
 spawn_path = NodePath("..")
 
 [node name="collisionwalls" type="Node3D" parent="."]
