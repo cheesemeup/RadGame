@@ -3,6 +3,8 @@ extends Node
 var SERVER_PORT_ENV = OS.get_environment("SERVER_PORT")
 var PORT = SERVER_PORT_ENV.to_int() if SERVER_PORT_ENV.is_valid_int() and not SERVER_PORT_ENV.is_empty() else 4545
 
+var hostile_preload = preload("res://scenes/units/base_hostile.tscn")
+var interactable_preload = preload("res://scenes/units/base_interactable.tscn")
 
 # run this script if server
 func start_serverscript():
@@ -99,3 +101,28 @@ func enable_player(player: String):
 	if not player_node.get_node("player_input").is_multiplayer_authority():
 		return
 	player_node.get_node("player_input").set_process(true)
+
+
+###############################################################
+### SPAWNING
+###############################################################
+func spawn_npc_hostile(unit_id: int, script_path: String, position: Vector3, rotation: Vector3):
+	var hostile = hostile_preload.instantiate()
+	print("spawning npc hostile using script res://scripts/units/%s.gd"%script_path)
+	var hostile_script = load("res://scripts/units/%s.gd"%script_path)
+	hostile.set_script(hostile_script)
+	hostile.set_spawn_position_and_rotation(position, rotation)
+	hostile.pre_ready(unit_id)
+	$/root/main/maps/active_map/npcs.add_child(hostile, true)
+	hostile.post_ready()
+
+
+func spawn_interactable(unit_id: int, script_path: String, position: Vector3, rotation: Vector3):
+	var interactable = interactable_preload.instantiate()
+	var interactable_script = load("res://scripts/units/%s.gd"%script_path)
+	interactable.set_script(interactable_script)
+	interactable.position = position
+	interactable.rotation = rotation
+	interactable.pre_ready(unit_id)
+	$/root/main/maps/active_map/interactables.add_child(interactable, true)
+	interactable.post_ready()

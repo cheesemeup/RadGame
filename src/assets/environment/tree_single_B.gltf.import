@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://s8wile5cm3jk"
-path="res://.godot/imported/tree_single_B.gltf-84457542b741edd9003b719fb9584109.scn"
+valid=false
 
 [deps]
 
 source_file="res://assets/environment/tree_single_B.gltf"
-dest_files=["res://.godot/imported/tree_single_B.gltf-84457542b741edd9003b719fb9584109.scn"]
 
 [params]
 

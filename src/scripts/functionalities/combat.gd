@@ -77,6 +77,9 @@ func combat_event_damage(
 	if spell["can_crit"] == 1:
 		crit = is_critical(spell["crit_chance_modifier"], source.stats_current["crit_chance"])
 		value = value * (1 + crit * spell["crit_magnitude_modifier"])
+	# update aggro on target if hostile
+	if target.is_in_group("hostile"):
+		target.update_aggro(source, value)
 	# go through absorbs
 	if not target.get_node("aura_container").get_node("absorb_container").get_children() == []:
 		value = apply_absorb(
@@ -89,7 +92,7 @@ func combat_event_damage(
 	# return if damage is fully absorbed
 	if value == 0:
 		return
-	# apply remaining damage
+	# apply remaining damage, return overkill value in case of killing blow
 	var overkill = apply_damage(value,target)
 	# show floating combat test for source via rpc, if source is player
 	if source.is_in_group("player"):

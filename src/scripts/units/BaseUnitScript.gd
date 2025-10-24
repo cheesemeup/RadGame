@@ -2,6 +2,10 @@ extends CharacterBody3D
 
 class_name BaseUnit
 
+# spawn
+var spawn_position: Vector3
+var spawn_rotation: Vector3
+
 # combat
 var speed: float 
 @export var stats_current: Dictionary
@@ -17,7 +21,6 @@ var selected_target = null  # for targeting with spells
 var mouseover_target = null  # for targeting with spells
 
 
-# model
 @export var model: String
 
 
@@ -48,8 +51,9 @@ func stat_init(unit_type: String, unit_id: String) -> void:
 	stats_current = stats_base.duplicate(true)
 	stats_mult = initialize_statmult()
 	stats_add = initialize_statadd()
-	# set speed
+	# set speed and scale
 	speed = stats_current["speed"]
+	scale = Vector3(stats_current["scale"],stats_current["scale"],stats_current["scale"])
 
 
 func initialize_statmult() -> Dictionary:
@@ -86,6 +90,8 @@ func spell_container_init(spell_list: Array) -> void:
 	for spell in $spell_container.get_children():
 		spell.queue_free()
 	# add spells to spell container
+	# add autoattack for every unit, thus not from spell list
+	
 	for spell in spell_list:
 		var spell_scene = load("res://scenes/functionalities/spell_base.tscn")
 		var spell_script = load("res://scripts/spells/spell_%d.gd"%spell)
@@ -148,6 +154,23 @@ func determine_movement_animation() -> void:
 
 
 ################################################################################
+# Utilities
+func set_position_and_rotation(new_position: Vector3, new_rotation: Vector3) -> void:
+	# use this when scene is already in the tree
+	# otherwise, use set_spawn_position_and_rotation
+	global_position = new_position
+	$pivot.rotation = new_rotation
+
+
+func set_spawn_position_and_rotation(new_position: Vector3, new_rotation: Vector3) -> void:
+	# when spawning, global_position cannot be used before the escene enters the tree
+	# therefore, position is used here instead of global_position
+	spawn_position = new_position
+	spawn_rotation = new_rotation
+	position = new_position
+	$pivot.rotation = new_rotation
+
+################################################################################
 # STATES
 @export var is_moving: bool = false:
 	set(new_value):
@@ -200,3 +223,5 @@ func determine_movement_animation() -> void:
 @rpc("authority","call_local")
 func send_toggle_castbar(visibility: bool):
 	UIHandler.toggle_castbar(visibility)
+
+@export var is_in_combat: bool = false

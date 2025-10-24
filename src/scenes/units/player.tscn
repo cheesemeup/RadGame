@@ -36,7 +36,7 @@ script = ExtResource("1_8gonl")
 [node name="pivot" type="Node3D" parent="."]
 
 [node name="mpspawner_model" type="MultiplayerSpawner" parent="pivot"]
-_spawnable_scenes = PackedStringArray("res://scenes/models/necromancer.tscn", "res://scenes/models/skeleton_warrior.tscn")
+_spawnable_scenes = PackedStringArray("uid://j47o3s4d5ww4", "uid://dyggiiypgg2d6")
 spawn_path = NodePath("..")
 
 [node name="player_collision" type="CollisionShape3D" parent="."]

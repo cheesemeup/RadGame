@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://dam0yrpwlwoft"]
+
+[ext_resource type="Script" uid="uid://dqfrvkpio5hqe" path="res://scripts/units/tutorial_area/targetdummy_tank.gd" id="1_cqky3"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ejv2q"]
+radius = 0.6
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rmxe8"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("pivot:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:stats_current")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:selected_target")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:model")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+
+[node name="base_hostile" type="CharacterBody3D" groups=["hostile", "npc"]]
+collision_layer = 2
+script = ExtResource("1_cqky3")
+
+[node name="pivot" type="Node3D" parent="."]
+
+[node name="mpspawner_model" type="MultiplayerSpawner" parent="pivot"]
+spawn_path = NodePath("..")
+
+[node name="unit_collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_ejv2q")
+
+[node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_rmxe8")
