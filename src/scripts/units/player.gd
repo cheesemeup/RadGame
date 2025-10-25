@@ -280,11 +280,11 @@ func set_position_and_rotation(new_position: Vector3, new_rotation: Vector3) -> 
 func set_camera_rotation(new_rotation: Vector3) -> void:
 	get_node("camera_rotation").set_camera_rotation(new_rotation)
 
+
 @rpc("any_peer","call_local")
 func request_unstuck():
-	var spawn_point = References.main_reference.get_node("maps").get_node("active_map").current_spawn_position
-	var spawn_rotation = References.main_reference.get_node("maps").get_node("active_map").current_spawn_rotation
-	References.player_reference.set_position_and_rotation(spawn_point, spawn_rotation)
+	var mapref = References.main_reference.get_node("maps").get_node("active_map")
+	set_position_and_rotation(mapref.current_spawn_position, mapref.current_spawn_rotation)
 
 
 ################################################################################

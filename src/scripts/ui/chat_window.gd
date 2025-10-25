@@ -22,7 +22,7 @@ func _on_text_edit_text_submitted(new_text: String) -> void:
 	write_message.rpc(messageFormatted)
 	%chat_input.clear()
 
-@rpc("any_peer", "call_local", "reliable")
+@rpc("any_peer", "call_local")
 func write_message(message: String) -> void:
 	var newmsg = Label.new()
 	newmsg.text = message
@@ -32,4 +32,4 @@ func write_message(message: String) -> void:
 
 func handle_chat_command(command: String) -> void:
 	print("HACKED ", command)
-	References.player_reference.rpc_id(1, "request_unstuck")
+	References.player_reference.request_unstuck.rpc()
