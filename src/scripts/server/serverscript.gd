@@ -21,7 +21,7 @@ func start_serverscript():
 	print("server started on port %d" % PORT)
 	
 	# load hub map scene
-	map_swap("hub.tscn")
+	map_swap("level01_crypt.tscn")
 	print("hub map ready")
 	
 	# connect join and leave signals
