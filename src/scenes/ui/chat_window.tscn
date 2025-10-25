@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf7p81i76ysqe"]
+
+[ext_resource type="Script" uid="uid://cac0n0thue7jh" path="res://scripts/ui/chat_window.gd" id="1_aspr6"]
+
+[node name="ChatWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aspr6")
+
+[node name="FoldableContainer" type="FoldableContainer" parent="."]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 672.0
+offset_right = 409.0
+offset_bottom = 832.0
+title = "Chat"
+title_position = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FoldableContainer"]
+layout_mode = 2
+
+[node name="hbox_messages" type="HBoxContainer" parent="FoldableContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FoldableContainer/VBoxContainer/hbox_messages"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 4
+
+[node name="MessageContainer" type="VBoxContainer" parent="FoldableContainer/VBoxContainer/hbox_messages/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="test-message-1" type="Label" parent="FoldableContainer/VBoxContainer/hbox_messages/ScrollContainer/MessageContainer"]
+layout_mode = 2
+text = "testmessag1"
+
+[node name="test-message-2" type="Label" parent="FoldableContainer/VBoxContainer/hbox_messages/ScrollContainer/MessageContainer"]
+layout_mode = 2
+text = "testmesg2"
+
+[node name="hbox_chatbar" type="HBoxContainer" parent="FoldableContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="label-chat" type="Label" parent="FoldableContainer/VBoxContainer/hbox_chatbar"]
+layout_mode = 2
+text = "chat:"
+
+[node name="chat_input" type="LineEdit" parent="FoldableContainer/VBoxContainer/hbox_chatbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="text_submitted" from="FoldableContainer/VBoxContainer/hbox_chatbar/chat_input" to="." method="_on_text_edit_text_submitted"]

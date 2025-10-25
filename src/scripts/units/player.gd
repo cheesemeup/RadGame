@@ -281,6 +281,12 @@ func set_camera_rotation(new_rotation: Vector3) -> void:
 	get_node("camera_rotation").set_camera_rotation(new_rotation)
 
 
+@rpc("any_peer","call_local")
+func request_unstuck():
+	var mapref = References.main_reference.get_node("maps").get_node("active_map")
+	set_position_and_rotation(mapref.current_spawn_position, mapref.current_spawn_rotation)
+
+
 ################################################################################
 # CLASS SWAP
 func class_swap(class_id: String):
