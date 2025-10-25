@@ -33,6 +33,9 @@ var castbar_player_y = 760
 var castbar_player_width = 300
 var castbar_player_height = 25
 
+# chatwindow
+var chatwindow_player: Control
+
 ####################################################################################################
 # INIT
 func init_ui():
@@ -40,6 +43,7 @@ func init_ui():
 	init_unitframes()
 	init_actionbars()
 	init_castbars()
+	init_chatwindow()
 
 ####################################################################################################
 # MENUS
@@ -156,3 +160,9 @@ func init_castbars() -> void:
 func toggle_castbar(visibility: bool):
 	castbar_player.visible = visibility
 	castbar_player.set_process(visibility)
+
+####################################################################################################
+# CHAT WINDOW
+func init_chatwindow() -> void:
+	chatwindow_player = preload("res://scenes/ui/chat_window.tscn").instantiate()
+	References.player_ui_main_reference.add_child(chatwindow_player)
