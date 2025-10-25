@@ -1,5 +1,13 @@
 extends Control
 
+var scroll_container: ScrollContainer
+var scroll_bar: VScrollBar
+
+func _ready() -> void:
+	scroll_bar = $FoldableContainer/VBoxContainer/hbox_messages/ScrollContainer.get_v_scroll_bar()
+	scroll_container = $FoldableContainer/VBoxContainer/hbox_messages/ScrollContainer
+	scroll_bar.value = scroll_bar.max_value
+	
 
 func _on_text_edit_text_submitted(new_text: String) -> void:
 	if new_text.begins_with("/"):
@@ -17,8 +25,9 @@ func write_message(message: String) -> void:
 	var newmsg = Label.new()
 	newmsg.text = message
 	$FoldableContainer/VBoxContainer/hbox_messages/ScrollContainer/MessageContainer.add_child(newmsg)
-	call_deferred("scroll_to_bottom")
-	
+	var should_auto_scroll = ((scroll_bar.max_value - scroll_container.size.y) - scroll_bar.value) <= 0
+	if should_auto_scroll:
+		call_deferred("scroll_to_bottom")
 
 
 func handle_chat_command(_command: String) -> void:
@@ -26,5 +35,4 @@ func handle_chat_command(_command: String) -> void:
 
 
 func scroll_to_bottom() -> void:
-	var verticalscrollbar: VScrollBar = $FoldableContainer/VBoxContainer/hbox_messages/ScrollContainer.get_v_scroll_bar()
-	verticalscrollbar.set_deferred("value", verticalscrollbar.max_value)
+	scroll_bar.set_deferred("value", scroll_bar.max_value)
