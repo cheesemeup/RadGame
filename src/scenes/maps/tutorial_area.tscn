@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://lyh2rf3i1pvc" path="res://scripts/maps/tutorial_area.gd" id="1_k2wyx"]
 [ext_resource type="Shader" uid="uid://dnn8eo6lydsq8" path="res://terrain/terrain_RGB.gdshader" id="2_hfoof"]
-[ext_resource type="Texture2D" uid="uid://bo08rat0eip7u" path="res://assets/textures/Texture_7_Diffuse.png" id="3_u8vna"]
-[ext_resource type="Texture2D" uid="uid://b83hfsd8k4prf" path="res://assets/textures/Texture_13_Diffuse.png" id="4_63wux"]
-[ext_resource type="Texture2D" uid="uid://b3252w2t03oro" path="res://assets/textures/Texture_15_Diffuse.png" id="5_pwmdo"]
-[ext_resource type="Texture2D" uid="uid://bmyoc3wd6433o" path="res://terrain/tutorial_area_tutorial_area_RGBmask.png" id="6_0s6y4"]
-[ext_resource type="Texture2D" uid="uid://cqamnnwm3hlhj" path="res://assets/textures/Texture_8_Diffuse.png" id="7_gw78f"]
-[ext_resource type="Texture2D" uid="uid://2g3ix37vy2qk" path="res://assets/textures/walls/lynocs_stonewall_5/5_diffuseOriginal.bmp" id="9_cb8gf"]
-[ext_resource type="Texture2D" uid="uid://gnvaidevc6y8" path="res://assets/textures/walls/lynocs_stonewall_5/5_height.bmp" id="10_nd174"]
-[ext_resource type="Texture2D" uid="uid://c3spn50saro4v" path="res://assets/textures/walls/lynocs_stonewall_5/5_normal.bmp" id="12_y3ovg"]
+[ext_resource type="Texture2D" uid="uid://bdnev5eqljpet" path="res://assets/textures/Texture_7_Diffuse.png" id="3_u8vna"]
+[ext_resource type="Texture2D" uid="uid://7og8ospf1dpa" path="res://assets/textures/Texture_13_Diffuse.png" id="4_63wux"]
+[ext_resource type="Texture2D" uid="uid://b3b2coi5yoyju" path="res://assets/textures/Texture_15_Diffuse.png" id="5_pwmdo"]
+[ext_resource type="Texture2D" uid="uid://b7uj7ufvpcpbq" path="res://terrain/tutorial_area_tutorial_area_RGBmask.png" id="6_0s6y4"]
+[ext_resource type="Texture2D" uid="uid://cou1m11pfter2" path="res://assets/textures/Texture_8_Diffuse.png" id="7_gw78f"]
+[ext_resource type="Texture2D" uid="uid://cl4y2f7enh0yl" path="res://assets/textures/walls/lynocs_stonewall_5/5_diffuseOriginal.bmp" id="9_cb8gf"]
+[ext_resource type="Texture2D" uid="uid://buv84bs17l0au" path="res://assets/textures/walls/lynocs_stonewall_5/5_height.bmp" id="10_nd174"]
+[ext_resource type="Texture2D" uid="uid://d2x7073wwcp24" path="res://assets/textures/walls/lynocs_stonewall_5/5_normal.bmp" id="12_y3ovg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o3obn"]
 size = Vector3(1, 4, 14)
@@ -180,14 +180,14 @@ void fragment() {
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_80idn"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uofg8"]
+noise = SubResource("FastNoiseLite_80idn")
 seamless = true
 as_normal_map = true
-noise = SubResource("FastNoiseLite_80idn")
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bvpr4"]
+noise = SubResource("FastNoiseLite_80idn")
 seamless = true
 as_normal_map = true
-noise = SubResource("FastNoiseLite_80idn")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l46jd"]
 render_priority = 0
@@ -225,6 +225,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 99.
 [node name="interactables" type="Node" parent="."]
 
 [node name="mpspawner_interactable" type="MultiplayerSpawner" parent="interactables"]
+_spawnable_scenes = PackedStringArray("uid://dwa5t1mmt0ks2")
 spawn_path = NodePath("..")
 
 [node name="collisionwalls" type="Node3D" parent="."]
@@ -800,7 +801,7 @@ mesh = SubResource("BoxMesh_r14ld")
 [node name="npcs" type="Node" parent="."]
 
 [node name="mpspawner_npc" type="MultiplayerSpawner" parent="npcs"]
-_spawnable_scenes = PackedStringArray("uid://o2teonckm3yt", "uid://dpyjdmdh07anq", "uid://cfsil3otxdl0x")
+_spawnable_scenes = PackedStringArray("uid://dam0yrpwlwoft")
 spawn_path = NodePath("..")
 
 [node name="water" type="MeshInstance3D" parent="."]

@@ -28,13 +28,10 @@ var mouseover_target = null  # for targeting with spells
 # INITIALIZATION
 
 func initialize_base_unit(unittype: String, unit_id: String) -> void:
-	# stats
 	stat_init(unittype,unit_id)
-	# spells
 	var spell_container = preload("res://scenes/functionalities/spell_container.tscn").instantiate()
 	add_child(spell_container)
 	spell_container_init(self.stats_current.spell_list)
-	# auras
 	var aura_container = preload("res://scenes/functionalities/aura_container.tscn").instantiate()
 	add_child(aura_container)
 
@@ -176,8 +173,6 @@ func set_spawn_position_and_rotation(new_position: Vector3, new_rotation: Vector
 	set(new_value):
 		is_moving = new_value
 		determine_movement_animation()
-
-
 @export var is_strafing_left: bool = false:
 	set(new_value):
 		is_strafing_left = new_value
@@ -201,15 +196,20 @@ func set_spawn_position_and_rotation(new_position: Vector3, new_rotation: Vector
 @export var is_dead: bool = false:
 	set(new_value):
 		is_dead = new_value
-		if new_value:
-			# combat log message
-			Combat.log_death(self.name)
-			is_moving = false
-			is_casting = false
-			is_strafing_left = false
-			is_strafing_right = false
-			target = null
-			play_animation("Death_A")
+		if not new_value:
+			return
+		Combat.log_death(self.name)
+		is_moving = false
+		is_casting = false
+		is_strafing_left = false
+		is_strafing_right = false
+		target = null
+		play_animation("Death_A")
+		if not is_in_group("hostile"):
+			return
+		hostile_death()
+func hostile_death():
+	pass
 
 
 @export var is_casting: bool = false:
@@ -223,5 +223,3 @@ func set_spawn_position_and_rotation(new_position: Vector3, new_rotation: Vector
 @rpc("authority","call_local")
 func send_toggle_castbar(visibility: bool):
 	UIHandler.toggle_castbar(visibility)
-
-@export var is_in_combat: bool = false

@@ -345,4 +345,14 @@
 	"tickrate":2,
 	"unique":0,
   },
+"20":{
+	"name":"Diminish Soul",
+	"casttime":3,
+	"spelltype":"damage",
+	"effecttype":"magic",
+	"value_base":"primary",
+	"value_modifier":100,
+	"avoidable":0,
+	"can_crit":0
+  }
 }

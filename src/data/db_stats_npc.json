@@ -206,5 +206,31 @@
 	"defense_modifier_magic":1,
 	"heal_taken_modifier_physical":1,
 	"heal_taken_modifier_magic":1
+},
+"8":{
+	"unit_name":"Crypt Fiend",
+	"unit_class":"Boss",
+	"model":"tutorial_boss",
+	"scale":3,
+	"melee_hitbox_size":1,
+	"spell_list":[],
+	"speed":10,
+	"health_max":100,
+	"health_current":100,
+	"resource_type":"Energy",
+	"resource_max":100,
+	"resource_current":0,
+	"resource_regen":10,
+	"primary":100,
+	"avoidance":0,
+	"crit_chance":0,
+	"damage_modifier_physical":1,
+	"damage_modifier_magic":1,
+	"heal_modifier_physical":1,
+	"heal_modifier_magic":1,
+	"defense_modifier_physical":1,
+	"defense_modifier_magic":1,
+	"heal_taken_modifier_physical":1,
+	"heal_taken_modifier_magic":1
 }
 }
