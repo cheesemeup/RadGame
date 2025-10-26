@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dm13v2ngcc34p"]
+
+[resource]
+resource_name = "Material_Rock"
+cull_mode = 2
+albedo_color = Color(0.31743675, 0.31743675, 0.31743675, 1)
+metallic = 0.29545456
+roughness = 0.8863637
