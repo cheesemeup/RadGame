@@ -4,3 +4,4 @@
 # *.import # KEEP .import FILES
 
 build
+.vscode
