@@ -15,37 +15,38 @@ func initialize() -> void:
 
 
 func init_npcs() -> void:
+	pass
 	# npcs must be spawned via code to ensure forced readable names
 	# dps dummies
-	var spawn_position = [
-		Vector3(-8,-5,26),
-		Vector3(-31,-5,26),
-		Vector3(-33,-5,28),
-		Vector3(-29,-5,28),
-		Vector3(-33,-5,24),
-		Vector3(-29,-5,24)
-	]
-	spawn_dummygroup(targetdummy_dps,spawn_position)
-	# heal dummies
-	spawn_position = [
-		Vector3(-32,-5,12),
-		Vector3(-30,-5,-1),
-		Vector3(-34,-5,-1),
-		Vector3(-32,-5,-3),
-		Vector3(-30,-5,-5),
-		Vector3(-34,-5,-5),
-	]
-	spawn_dummygroup(targetdummy_heal,spawn_position)
-	# tank dummies
-	spawn_position = [
-		Vector3(-32,-5,-25),
-		Vector3(-30,-5,-38),
-		Vector3(-34,-5,-38),
-		Vector3(-32,-5,-40),
-		Vector3(-30,-5,-42),
-		Vector3(-34,-5,-42),
-	]
-	spawn_dummygroup(targetdummy_tank,spawn_position)
+	#var spawn_position = [
+		#Vector3(-8,-5,26),
+		#Vector3(-31,-5,26),
+		#Vector3(-33,-5,28),
+		#Vector3(-29,-5,28),
+		#Vector3(-33,-5,24),
+		#Vector3(-29,-5,24)
+	#]
+	#spawn_dummygroup(targetdummy_dps,spawn_position)
+	## heal dummies
+	#spawn_position = [
+		#Vector3(-32,-5,12),
+		#Vector3(-30,-5,-1),
+		#Vector3(-34,-5,-1),
+		#Vector3(-32,-5,-3),
+		#Vector3(-30,-5,-5),
+		#Vector3(-34,-5,-5),
+	#]
+	#spawn_dummygroup(targetdummy_heal,spawn_position)
+	## tank dummies
+	#spawn_position = [
+		#Vector3(-32,-5,-25),
+		#Vector3(-30,-5,-38),
+		#Vector3(-34,-5,-38),
+		#Vector3(-32,-5,-40),
+		#Vector3(-30,-5,-42),
+		#Vector3(-34,-5,-42),
+	#]
+	#spawn_dummygroup(targetdummy_tank,spawn_position)
 
 
 func init_interactables():
