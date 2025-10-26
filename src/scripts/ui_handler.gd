@@ -36,6 +36,9 @@ var castbar_player_height = 25
 # chatwindow
 var chatwindow_player: Control
 
+# map vote popup
+var map_vote_popup: Node
+
 ####################################################################################################
 # INIT
 func init_ui():
@@ -167,3 +170,29 @@ func toggle_castbar(visibility: bool):
 func init_chatwindow() -> void:
 	chatwindow_player = preload("res://scenes/ui/chat_window.tscn").instantiate()
 	References.player_ui_main_reference.add_child(chatwindow_player)
+
+
+####################################################################################################
+# MAP VOTE UI
+@rpc("authority", "call_local", "reliable")
+func request_map_vote(player_name: String, map_name: String, results: Dictionary):
+	print("request map vote ", map_name)
+	map_vote_popup = preload("res://scenes/ui/map_vote_popup.tscn").instantiate()
+	References.player_ui_main_reference.add_child(map_vote_popup)
+	map_vote_popup.initialize(player_name, map_name)
+	map_vote_popup.update_vote_result(results)
+	var vote_response = await map_vote_popup.map_vote_response # [accept: bool, timeout: bool]
+	if vote_response[0]:
+		print("player %s accepting map vote!" % References.player_reference.name)
+	else:
+		print("player %s rejecting map vote!" % References.player_reference.name)
+	
+	Serverscript.vote_map_swap.rpc_id(1, vote_response[0], vote_response[1])
+
+@rpc("authority", "call_local", "reliable")
+func inform_map_vote(results: Dictionary):
+	map_vote_popup.update_vote_result(results)
+
+@rpc("authority", "call_local", "reliable")
+func final_map_vote_result(accepted: bool):
+	map_vote_popup.final_vote_result(accepted)

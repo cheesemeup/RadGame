@@ -6,6 +6,10 @@ var PORT = SERVER_PORT_ENV.to_int() if SERVER_PORT_ENV.is_valid_int() and not SE
 var hostile_preload = preload("res://scenes/units/base_hostile.tscn")
 var interactable_preload = preload("res://scenes/units/base_interactable.tscn")
 
+# map voting, {name: String, accepted: bool, voted: bool, timeout: bool}
+var player_map_vote = {}
+var requested_map_name: String = ""
+
 # run this script if server
 func start_serverscript():
 	print("serverscript started")
@@ -32,13 +36,63 @@ func start_serverscript():
 ### MAP SWAPPING
 ###############################################################
 func request_map_swap(map_name: String):
-	# ask player readiness, to be implemented with UI elements
-	# perform map swap if all players are ready
-	map_swap(map_name)
+	if requested_map_name:
+		print("map swap to %s already in progress, ignoring new request to %s" % [requested_map_name, map_name])
+		return
+	
+	requested_map_name = map_name
+	var requester_player_name = str(multiplayer.get_remote_sender_id())
+	player_map_vote.clear()
+	for player in $/root/main/players.get_children():
+		if not player.is_in_group("player"):
+			continue
+		player_map_vote[player.name] = {
+			"name": player.stats_base.unit_name,
+			"accepted": requester_player_name == player.name,
+			"voted": requester_player_name == player.name,
+			"timeout": false,
+		}
 
+	# ask player readiness
+	UIHandler.request_map_vote.rpc(requester_player_name, map_name, player_map_vote)
+	map_vote_update()
+
+
+@rpc("any_peer", "call_local", "reliable")
+func vote_map_swap(accept: bool, timeout: bool):
+	print("received map vote from player %d: accept=%s, timeout=%s" % [multiplayer.get_remote_sender_id(), str(accept), str(timeout)])
+	# accept an rpc call from each player to vote yes or no for the requested map swap
+	player_map_vote[str(multiplayer.get_remote_sender_id())].accepted = accept
+	player_map_vote[str(multiplayer.get_remote_sender_id())].voted = not timeout
+	player_map_vote[str(multiplayer.get_remote_sender_id())].timeout = timeout
+
+	# TODO: timeout on server side
+
+	# inform all players about current vote status
+	UIHandler.inform_map_vote.rpc(player_map_vote)
+
+	map_vote_update()
+	
+func map_vote_update():
+	print(JSON.stringify(player_map_vote))
+
+	if player_map_vote.values().any(func(vote): return (vote.voted or vote.timeout) and not vote.accepted):
+		print("map swap to %s cancelled, a player voted no"%requested_map_name)
+		UIHandler.final_map_vote_result.rpc(false)
+		requested_map_name = ""
+		return
+	
+	# perform map swap if all players are ready
+	if player_map_vote.values().all(func(vote): return vote.voted and vote.accepted):
+		print("all players voted yes for map swap to %s"%requested_map_name)
+		UIHandler.final_map_vote_result.rpc(true)
+		await get_tree().create_timer(5).timeout
+		map_swap(requested_map_name)
 
 func map_swap(map_name: String):
 	print("changing map to %s"%map_name)
+	requested_map_name = ""
+	
 	# disable physics and control for players
 	for player in $/root/main/players.get_children():
 		if not player.is_in_group("player"):
