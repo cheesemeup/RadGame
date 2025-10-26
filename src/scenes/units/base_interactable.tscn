@@ -22,6 +22,7 @@ properties/2/replication_mode = 1
 [node name="pivot" type="Node3D" parent="."]
 
 [node name="mpspawner_model" type="MultiplayerSpawner" parent="pivot"]
+_spawnable_scenes = PackedStringArray("uid://de0ma26v5k3lp")
 spawn_path = NodePath("..")
 
 [node name="unit_collision" type="CollisionShape3D" parent="."]

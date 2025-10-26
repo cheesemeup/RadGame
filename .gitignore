@@ -1,6 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 *.tmp
-*.import
+# *.import # KEEP .import FILES
 
 build
+.vscode

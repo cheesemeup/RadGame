@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c1voud6762y6v"
+uid="uid://cstx0b1rqor2j"
 path="res://.godot/imported/tutorial_area.glb-bd60b6153cf1a0218291ad8edc345e53.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1
