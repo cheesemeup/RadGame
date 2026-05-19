@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dempeiar8tjic"]
+[gd_scene format=3 uid="uid://dempeiar8tjic"]
 
 [ext_resource type="Script" uid="uid://c7ppbr1jci0me" path="res://scripts/units/player.gd" id="1_8gonl"]
 [ext_resource type="Script" uid="uid://bf2g67th0rr7p" path="res://scripts/functionalities/cd_timer_container.gd" id="3_ise05"]
@@ -20,39 +20,36 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath(".:selected_target")
 properties/3/spawn = true
 properties/3/replication_mode = 1
-properties/4/path = NodePath(".:model")
-properties/4/spawn = true
-properties/4/replication_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kjxoy"]
 properties/0/path = NodePath("player_input:direction")
 properties/0/spawn = false
 properties/0/replication_mode = 1
 
-[node name="player" type="CharacterBody3D" groups=["friendly", "player"]]
+[node name="player" type="CharacterBody3D" unique_id=1165466188 groups=["friendly", "player"]]
 collision_layer = 2
 script = ExtResource("1_8gonl")
 
-[node name="pivot" type="Node3D" parent="."]
+[node name="pivot" type="Node3D" parent="." unique_id=1528601051]
 
-[node name="mpspawner_model" type="MultiplayerSpawner" parent="pivot"]
+[node name="mpspawner_model" type="MultiplayerSpawner" parent="pivot" unique_id=1655527626]
 _spawnable_scenes = PackedStringArray("uid://j47o3s4d5ww4", "uid://dyggiiypgg2d6")
 spawn_path = NodePath("..")
 
-[node name="player_collision" type="CollisionShape3D" parent="."]
+[node name="player_collision" type="CollisionShape3D" parent="." unique_id=2133886942]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_16yd3")
 
-[node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=703779292]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_rfg56")
 
-[node name="player_input" type="MultiplayerSynchronizer" parent="."]
+[node name="player_input" type="MultiplayerSynchronizer" parent="." unique_id=1702013516]
 replication_config = SubResource("SceneReplicationConfig_kjxoy")
 script = ExtResource("4_lp8kc")
 
-[node name="cd_timer_container" type="Node" parent="."]
+[node name="cd_timer_container" type="Node" parent="." unique_id=294593593]
 script = ExtResource("3_ise05")
 
-[node name="casttimer" type="Timer" parent="."]
+[node name="casttimer" type="Timer" parent="." unique_id=1769978614]
 one_shot = true

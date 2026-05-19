@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwa5t1mmt0ks2"]
+[gd_scene format=3 uid="uid://dwa5t1mmt0ks2"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0j2ge"]
 radius = 0.6
@@ -17,29 +17,29 @@ properties/2/path = NodePath(".:model")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="base_interactable" type="CharacterBody3D"]
+[node name="base_interactable" type="CharacterBody3D" unique_id=321456255]
 
-[node name="pivot" type="Node3D" parent="."]
+[node name="pivot" type="Node3D" parent="." unique_id=412197127]
 
-[node name="mpspawner_model" type="MultiplayerSpawner" parent="pivot"]
+[node name="mpspawner_model" type="MultiplayerSpawner" parent="pivot" unique_id=1928343742]
 _spawnable_scenes = PackedStringArray("uid://de0ma26v5k3lp")
 spawn_path = NodePath("..")
 
-[node name="unit_collision" type="CollisionShape3D" parent="."]
+[node name="unit_collision" type="CollisionShape3D" parent="." unique_id=40661761]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_0j2ge")
 
-[node name="range" type="Area3D" parent="."]
+[node name="range" type="Area3D" parent="." unique_id=1744505604]
 collision_layer = 0
 collision_mask = 2
 
-[node name="range_shape" type="CollisionShape3D" parent="range"]
+[node name="range_shape" type="CollisionShape3D" parent="range" unique_id=157514739]
 shape = SubResource("SphereShape3D_0j2ge")
 
-[node name="interact_prompt" type="Label3D" parent="."]
+[node name="interact_prompt" type="Label3D" parent="." unique_id=1594662201]
 visible = false
 pixel_size = 0.01
 text = "Interact [E]"
 
-[node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="mpsynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=928548876]
 replication_config = SubResource("SceneReplicationConfig_j7mcx")

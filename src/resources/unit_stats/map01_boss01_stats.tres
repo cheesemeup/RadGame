@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="UnitStats" format=3 uid="uid://bnj5yj5d5t64n"]
+
+[ext_resource type="Script" uid="uid://drdp1rslkxss7" path="res://resources/unit_stats/UnitStats.gd" id="1_d433m"]
+
+[resource]
+script = ExtResource("1_d433m")
+unit_name = "The Pontifex"
+unit_class = "Boss"
+model = "tutorial_boss"
+size = 3
+melee_hitbox_size = 1
+movement_speed = 10.0
+health_max = 37500
+resource_type = "Energy"
+resource_max = 100.0
+resource_regen = 1.0
+primary = 100
+crit_magnitude = 2.0
+damage_modifier_physical = 1.0
+damage_modifier_magic = 1.0
+heal_modifier_physical = 1.0
+heal_modifier_magic = 1.0
+defense_modifier_physical = 1.0
+defense_modifier_magic = 1.0
+heal_taken_modifier_physical = 1.0
+heal_taken_modifier_magic = 1.0
+metadata/_custom_type_script = "uid://drdp1rslkxss7"

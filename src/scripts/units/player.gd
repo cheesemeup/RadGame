@@ -5,9 +5,7 @@ extends BaseUnit
 
 var playermodel_reference = null
 
-# speed cannot be read from stats directly, so the speed var needs to be updated
-# when speed changes
-#var speed: float = 10.0
+
 const jump_velocity: float = 4.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -47,14 +45,14 @@ func _enter_tree() -> void:
 
 func pre_ready(peer_id: int) -> void:
 	name = str(peer_id)
-	# initialize stats for all peers
-	initialize_base_unit("player","3")
+	stats_base = preload("res://resources/hostile_stats/baromancer_stats.tres")
+	init_base_unit()
 
 
 func _ready():
 	# server only
 	if $mpsynchronizer.is_multiplayer_authority():
-		set_model(model)
+		set_model()
 
 
 func post_ready(peer_id: int) -> void:
@@ -235,11 +233,15 @@ func handle_movement(delta: float) -> void:
 	input.jumping = false
 	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
 	if direction:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+		if is_backpedaling:
+			speed_factor = 0.5
+		else:
+			speed_factor = 1
+		velocity.x = direction.x * stats_current["movement_speed"] * speed_factor
+		velocity.z = direction.z * stats_current["movement_speed"] * speed_factor
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
+		velocity.x = move_toward(velocity.x, 0, stats_current["movement_speed"])
+		velocity.z = move_toward(velocity.z, 0, stats_current["movement_speed"])
 	move_and_slide()
 	# set movement state on server
 	if not $mpsynchronizer.is_multiplayer_authority():
@@ -256,7 +258,7 @@ func handle_movement(delta: float) -> void:
 
 func set_orientation(direction: Vector3) -> void:
 	# the offset is the rotation that has to be taken into account when
-	# not moving directly forwards
+	# not moving directly forwards (strafing, backpedaling)
 	var offset = direction
 	if is_strafing_left:
 		offset = Vector3(-direction.z,direction.y,direction.x)
@@ -273,7 +275,7 @@ func set_position_and_rotation(new_position: Vector3, new_rotation: Vector3) -> 
 	# set position to spawn position
 	global_position = new_position
 	$pivot.rotation = new_rotation
-	rpc_id(name.to_int(),"set_camera_rotation",new_rotation)
+	set_camera_rotation.rpc_id(name.to_int(),new_rotation)
 
 
 @rpc("authority","call_local")
@@ -289,15 +291,15 @@ func request_unstuck():
 
 ################################################################################
 # CLASS SWAP
-func class_swap(class_id: String):
-	# reinitialize stats
-	stat_init("player", class_id)
-	# reinitialize spell container
-	spell_container_init(self.stats_current.spell_list)
-	# change model
-	set_model(model)
-	# reinitialize cd timers for client
-	rpc_id(self.name.to_int(),"class_swap_client")
+#func class_swap(class_id: String):
+	## reinitialize stats
+	#stat_init("player", class_id)
+	## reinitialize spell container
+	#spell_container_init(self.stats_current.spell_list)
+	## change model
+	#set_model(model)
+	## reinitialize cd timers for client
+	#rpc_id(self.name.to_int(),"class_swap_client")
 
 @rpc("authority","call_local")
 func class_swap_client():

@@ -1,6 +1,6 @@
+class_name BaseInteractable
 extends Node
 
-class_name BaseInteractable
 
 var stats_current
 

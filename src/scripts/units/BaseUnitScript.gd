@@ -1,17 +1,16 @@
-extends CharacterBody3D
-
 class_name BaseUnit
+extends CharacterBody3D
 
 # spawn
 var spawn_position: Vector3
 var spawn_rotation: Vector3
 
-# combat
-var speed: float 
+# combat and stats
+var speed_factor = 1
 @export var stats_current: Dictionary
-var stats_base: Dictionary
-var stats_mult: Dictionary
-var stats_add: Dictionary
+var stats_base: UnitStats
+var stat_mult: Dictionary
+var stat_add: Dictionary
 var aura_list: Array = []
 var absorb_array: Array = []
 
@@ -21,77 +20,29 @@ var selected_target = null  # for targeting with spells
 var mouseover_target = null  # for targeting with spells
 
 
-@export var model: String
-
-
 ####################################################################################################
 # INITIALIZATION
-
-func initialize_base_unit(unittype: String, unit_id: String) -> void:
-	# stats
-	stat_init(unittype,unit_id)
-	# spells
+func init_base_unit() -> void:
+	stat_init()
 	var spell_container = preload("res://scenes/functionalities/spell_container.tscn").instantiate()
 	add_child(spell_container)
-	spell_container_init(self.stats_current.spell_list)
-	# auras
+	spell_container_init(stats_current.spell_list)
 	var aura_container = preload("res://scenes/functionalities/aura_container.tscn").instantiate()
 	add_child(aura_container)
 
 
-func stat_init(unit_type: String, unit_id: String) -> void:
-	# read stats dict from file
-	var file = "res://data/db_stats_"+unit_type+".json"
-	var json_dict = JSON.parse_string(FileAccess.get_file_as_string(file))
-	stats_base = json_dict[unit_id]
-	# extract base model information
-	model = stats_base["model"]
-	stats_base.erase("model")
-	# create duplicate for current stats
-	stats_current = stats_base.duplicate(true)
-	stats_mult = initialize_statmult()
-	stats_add = initialize_statadd()
-	# set speed and scale
-	speed = stats_current["speed"]
-	scale = Vector3(stats_current["scale"],stats_current["scale"],stats_current["scale"])
-
-
-func initialize_statmult() -> Dictionary:
-	var stat_mult = {}
-	stat_mult["size"] = {}
-	stat_mult["speed"] = {}
-	stat_mult["size"] = {}
-	stat_mult["health_max"] = {}
-	stat_mult["resource_max"] = {}
-	stat_mult["primary"] = {}
-	stat_mult["damage_modifier_physical"] = {}
-	stat_mult["damage_modifier_magic"] = {}
-	stat_mult["heal_modifier_physical"] = {}
-	stat_mult["heal_modifier_magic"] = {}
-	stat_mult["defense_modifier_physical"] = {}
-	stat_mult["defense_modifier_magic"] = {}
-	stat_mult["heal_taken_modifier_physical"] = {}
-	stat_mult["heal_taken_modifier_magic"] = {}
-	return stat_mult
-
-
-func initialize_statadd() -> Dictionary:
-	var stat_add = {}
-	stat_add["health_max"] = {}
-	stat_add["resource_max"] = {}
-	stat_add["primary"] = {}
-	stat_add["avoidance"] = {}
-	stat_add["crit_chance"] = {}
-	return stat_add
+func stat_init() -> void:
+	stats_current = self.stats_base.init_stats_current()
+	stat_mult = self.stats_base.init_statmult()
+	stat_add = self.stats_base.init_statadd()
+	#speed = stats_current["movement_speed"]
+	scale = Vector3(stats_base.size,stats_base.size,stats_base.size)
 
 
 func spell_container_init(spell_list: Array) -> void:
-	# remove previous spells
+	# remove any previous spells before adding new ones
 	for spell in $spell_container.get_children():
 		spell.queue_free()
-	# add spells to spell container
-	# add autoattack for every unit, thus not from spell list
-	
 	for spell in spell_list:
 		var spell_scene = load("res://scenes/functionalities/spell_base.tscn")
 		var spell_script = load("res://scripts/spells/spell_%d.gd"%spell)
@@ -103,24 +54,24 @@ func spell_container_init(spell_list: Array) -> void:
 
 ####################################################################################################
 # CAST TIMER
-func send_start_casttimer(cast_time: float):
+func send_start_casttimer(cast_time: float) -> void:
 	rpc("start_casttimer",cast_time)
 
 
 @rpc("authority","call_local")
-func start_casttimer(cast_time: float):
+func start_casttimer(cast_time: float) -> void:
 	get_node("casttimer").wait_time = cast_time
 	get_node("casttimer").start()
 
 
 ################################################################################
 # MODELS AND ANIMATIONS
-func set_model(model_name: String) -> void:
+func set_model() -> void:
 	# unload previous model if it exists
 	if $pivot.get_node_or_null("active_model"):
 		$pivot/active_model.free()
 	# load new model
-	var model_scene = load("res://scenes/models/%s.tscn"%model_name).instantiate()
+	var model_scene = load("res://scenes/models/%s.tscn"%stats_current["model"]).instantiate()
 	model_scene.name = "active_model"
 	$pivot.add_child(model_scene, true)
 	play_animation("Idle")
@@ -137,8 +88,8 @@ func queue_animation(animation_name: String) -> void:
 
 
 func determine_movement_animation() -> void:
-	# only play movement animation if on ground, jump idle is already queued when jumping
 	if not is_on_floor():
+		play_animation("Jump_Idle")
 		return
 	if not is_moving:
 		play_animation("Idle")
@@ -157,18 +108,22 @@ func determine_movement_animation() -> void:
 # Utilities
 func set_position_and_rotation(new_position: Vector3, new_rotation: Vector3) -> void:
 	# use this when scene is already in the tree
-	# otherwise, use set_spawn_position_and_rotation
+	# otherwise, use spawn_and_rotate
 	global_position = new_position
 	$pivot.rotation = new_rotation
 
 
 func set_spawn_position_and_rotation(new_position: Vector3, new_rotation: Vector3) -> void:
-	# when spawning, global_position cannot be used before the escene enters the tree
-	# therefore, position is used here instead of global_position
 	spawn_position = new_position
 	spawn_rotation = new_rotation
-	position = new_position
-	$pivot.rotation = new_rotation
+
+
+func spawn_and_rotate() -> void:
+	# when spawning, global_position cannot be used before the scene enters the tree
+	# therefore, position is used here instead of global_position
+	position = spawn_position
+	$pivot.rotation = spawn_rotation
+
 
 ################################################################################
 # STATES
@@ -190,12 +145,6 @@ func set_spawn_position_and_rotation(new_position: Vector3, new_rotation: Vector
 	set(new_value):
 		is_backpedaling = new_value
 		determine_movement_animation()
-		if new_value:
-			# reduce movement speed
-			speed = stats_current["speed"] / 2
-		else:
-			# restore movement speed
-			speed = stats_current["speed"]
 
 
 @export var is_dead: bool = false:
@@ -216,7 +165,7 @@ func set_spawn_position_and_rotation(new_position: Vector3, new_rotation: Vector
 	set(new_value):
 		is_casting = new_value
 		# toggle castbar
-		rpc_id(name.to_int(),"send_toggle_castbar",new_value)
+		send_toggle_castbar.rpc_id(name.to_int(),new_value)
 		if new_value:
 			# possibly add log message for very detailed logging
 			play_animation("Spellcasting")

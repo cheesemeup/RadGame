@@ -194,7 +194,7 @@ func combat_event_aura_remove(
 ####################################################################################################
 # CHECKS
 func is_critical(crit_modifier: float, crit_base: float) -> int:
-	# get random number
+	# return 1 or 0, as this is used in an arithmetic calculation
 	var random = RandomNumberGenerator.new()
 	random.randomize()
 	var p: float = randf()
@@ -274,11 +274,14 @@ func apply_buff(spell: Dictionary, source_name: String, target: CharacterBody3D)
 		buffname = "%s %s"%[buffname,source_name]
 	for i in range(spell["modifies"].size()):
 		if spell["modify_type"][i] == "add":
-			target.stats_add[spell["modifies"][i]][buffname] = spell["modify_value"][i]
+			target.stat_add[spell["modifies"][i]][buffname] = spell["modify_value"][i]
 		elif spell["modify_type"][i] == "mult":
-			target.stats_mult[spell["modifies"][i]][buffname] = spell["modify_value"][i]
+			target.stat_mult[spell["modifies"][i]][buffname] = spell["modify_value"][i]
 	# calculate new current stats from base stats
-	calc_current_from_base_partial(target,spell["modifies"])
+	#calc_current_from_base_partial(target,spell["modifies"])
+	target.stats_base.calc_current_partial(
+		target.stats_current,target.stat_mult,target.stat_add,spell["modifies"]
+		)
 
 func remove_buff(spell: Dictionary, source_name: String, target: CharacterBody3D) -> void:
 	# remove buff in appropriate stat dicts
@@ -287,11 +290,14 @@ func remove_buff(spell: Dictionary, source_name: String, target: CharacterBody3D
 		buffname = "%s %s"%[buffname,source_name]
 	for i in range(spell["modifies"].size()):
 		if spell["modify_type"][i] == "add":
-			target.stats_add[spell["modifies"][i]].erase(buffname)
+			target.stat_add[spell["modifies"][i]].erase(buffname)
 		elif spell["modify_type"][i] == "mult":
-			target.stats_mult[spell["modifies"][i]].erase(buffname)
+			target.stat_mult[spell["modifies"][i]].erase(buffname)
 	# calculate new current stats from base stats
-	calc_current_from_base_partial(target,spell["modifies"])
+	#calc_current_from_base_partial(target,spell["modifies"])
+	target.stats_base.calc_current_partial(
+		target.stats_current,target.stat_mult,target.stat_add,spell["modifies"]
+		)
 
 ####################################################################################################
 # STAT CALCULATIONS
@@ -304,11 +310,11 @@ func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array) -
 		# get total additive and multiplicative modifiers
 		stat_add = 0
 		stat_mult = 1
-		if target.stats_add.has(str(stat)):
-			for value in target.stats_add[stat].values():
+		if target.stat_add.has(str(stat)):
+			for value in target.stat_add[stat].values():
 				stat_add = stat_add + value
-		if target.stats_mult.has(stat):
-			for value in target.stats_mult[stat].values():
+		if target.stat_mult.has(stat):
+			for value in target.stat_mult[stat].values():
 				stat_mult = stat_mult + value
 		# if stat is health_max or resource_max, get difference to previous value
 		if stat == "health_max" or stat == "resource_max":
@@ -340,10 +346,10 @@ func calc_current_from_base_full(target: CharacterBody3D) -> void:
 		# get total additive and multiplicative modifiers
 		stat_add = 0
 		stat_mult = 1
-		if target.stats_add.has(stat):
+		if target.stat_add.has(stat):
 			for value in target.stat_add[stat].values():
 				stat_add = stat_add + value
-		if target.stats_mult.has(stat):
+		if target.stat_mult.has(stat):
 			for value in target.stat_mult[stat].values():
 				stat_mult = stat_mult + value
 		# if stat is health_max or resource_max, get difference to previous value
