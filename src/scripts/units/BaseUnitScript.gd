@@ -173,4 +173,11 @@ func spawn_and_rotate() -> void:
 func send_toggle_castbar(visibility: bool):
 	UIHandler.toggle_castbar(visibility)
 
-@export var is_in_combat: bool = false
+@export var is_in_combat: bool = false:
+	set(new_value):
+		is_in_combat = new_value
+		if new_value:
+			custom_enter_combat()
+func custom_enter_combat():
+	# override in unit script
+	pass

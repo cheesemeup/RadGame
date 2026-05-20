@@ -33,9 +33,9 @@ func custom_post_ready() -> void:
 
 ################################################################################
 ### frame
-func _process(_delta) -> void:
+func _process(delta) -> void:
 	if is_in_combat:
-		process_combat()
+		process_combat(delta)
 
 
 func _physics_process(delta) -> void:
@@ -44,7 +44,7 @@ func _physics_process(delta) -> void:
 		move_to_aggro(delta)
 
 
-func process_combat() -> void:
+func process_combat(_delta) -> void:
 	# override this function in the individual NPC scripts
 	pass
 

@@ -45,7 +45,7 @@ func _enter_tree() -> void:
 
 func pre_ready(peer_id: int) -> void:
 	name = str(peer_id)
-	stats_base = preload("res://resources/hostile_stats/baromancer_stats.tres")
+	stats_base = preload("res://resources/unit_stats/voidgirl_baromancer_stats.tres")
 	init_base_unit()
 
 

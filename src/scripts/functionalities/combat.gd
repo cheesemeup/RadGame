@@ -16,6 +16,8 @@ func combat_event_entrypoint(
 ) -> void:
 	# determine type of event and call appropriate function
 	if spell["spelltype"] == "damage":
+		if not target.is_in_combat:
+			target.is_in_combat = true
 		combat_event_damage(spell,source,target,value)
 	if spell["spelltype"] == "heal":
 		combat_event_heal(spell,source,target,value)
@@ -30,6 +32,8 @@ func combat_event_aura_entrypoint(
 	if remove:
 		combat_event_aura_remove(spell,source,target)
 		return
+	if (spell["auratype"] == "dot" or spell["auratype"] == "debuff") and not target.is_in_combat:
+		target.is_in_combat = true
 	combat_event_aura(spell,source,target)
 
 func buff_application(
@@ -277,8 +281,6 @@ func apply_buff(spell: Dictionary, source_name: String, target: CharacterBody3D)
 			target.stat_add[spell["modifies"][i]][buffname] = spell["modify_value"][i]
 		elif spell["modify_type"][i] == "mult":
 			target.stat_mult[spell["modifies"][i]][buffname] = spell["modify_value"][i]
-	# calculate new current stats from base stats
-	#calc_current_from_base_partial(target,spell["modifies"])
 	target.stats_base.calc_current_partial(
 		target.stats_current,target.stat_mult,target.stat_add,spell["modifies"]
 		)
@@ -293,85 +295,10 @@ func remove_buff(spell: Dictionary, source_name: String, target: CharacterBody3D
 			target.stat_add[spell["modifies"][i]].erase(buffname)
 		elif spell["modify_type"][i] == "mult":
 			target.stat_mult[spell["modifies"][i]].erase(buffname)
-	# calculate new current stats from base stats
-	#calc_current_from_base_partial(target,spell["modifies"])
 	target.stats_base.calc_current_partial(
 		target.stats_current,target.stat_mult,target.stat_add,spell["modifies"]
 		)
 
-####################################################################################################
-# STAT CALCULATIONS
-func calc_current_from_base_partial(target: CharacterBody3D, stat_list: Array) -> void:
-	# calculate the listed stats from base values and add and mult modifiers
-	var stat_add: int
-	var stat_mult: float
-	var diff: int = 0
-	for stat in stat_list:
-		# get total additive and multiplicative modifiers
-		stat_add = 0
-		stat_mult = 1
-		if target.stat_add.has(str(stat)):
-			for value in target.stat_add[stat].values():
-				stat_add = stat_add + value
-		if target.stat_mult.has(stat):
-			for value in target.stat_mult[stat].values():
-				stat_mult = stat_mult + value
-		# if stat is health_max or resource_max, get difference to previous value
-		if stat == "health_max" or stat == "resource_max":
-			diff = target.stats_current[stat]
-		# calculate final stat
-		target.stats_current[stat] = (target.stats_base[stat] + stat_add) * stat_mult
-		# calculate difference for health_max and resource_max
-		if stat == "health_max" or stat == "resource_max":
-			diff = target.stats_current[stat] - diff
-		# for decrease, set current to either itself or new maximum, to not overcap
-		if diff < 0:
-			if stat == "health_max":
-				target.stats_current["health_current"] = min(
-				target.stats_current["health_current"],
-				target.stats_current["health_max"]
-			)
-			if stat == "resource_max":
-				target.stats_current["resource_current"] = min(
-				target.stats_current["resource_current"],
-				target.stats_current["resource_max"]
-			)
-
-func calc_current_from_base_full(target: CharacterBody3D) -> void:
-	# calculate all stats from base values and add and mult modifiers
-	var stat_add: int
-	var stat_mult: float
-	var diff: int = 0
-	for stat in target.stats_current.keys():
-		# get total additive and multiplicative modifiers
-		stat_add = 0
-		stat_mult = 1
-		if target.stat_add.has(stat):
-			for value in target.stat_add[stat].values():
-				stat_add = stat_add + value
-		if target.stat_mult.has(stat):
-			for value in target.stat_mult[stat].values():
-				stat_mult = stat_mult + value
-		# if stat is health_max or resource_max, get difference to previous value
-		if stat == "health_max" or stat == "resource_max":
-			diff = target.stats_current[stat]
-		# calculate final stat
-		target.stats_current[stat] = (target.stats_base[stat] + stat_add) * stat_mult
-		# calculate difference for health_max and resource_max
-		if stat == "health_max" or stat == "resource_max":
-			diff = target.stats_current[stat] - diff
-		# for decrease, set current to either itself or new maximum, to not overcap
-		if diff < 0:
-			if stat == "health_max":
-				target.stats_current["health_current"] = min(
-				target.stats_current["health_current"],
-				target.stats_current["health_max"]
-			)
-			if stat == "resource_max":
-				target.stats_current["resource_current"] = min(
-				target.stats_current["resource_current"],
-				target.stats_current["resource_max"]
-			)
 
 ####################################################################################################
 # LOG MESSAGES
