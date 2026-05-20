@@ -236,7 +236,7 @@
 	"cooldown":30,
 	"on_gcd":0,
 	"auratype":"buff",
-	"modifies":["speed"],
+	"modifies":["movement_speed"],
 	"modify_type":["mult"],
 	"modify_value":[0.5],
 	"duration":5,

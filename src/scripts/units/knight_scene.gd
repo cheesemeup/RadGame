@@ -8,5 +8,5 @@ func _enter_tree() -> void:
 
 func _ready():
 	if synchronizer.is_multiplayer_authority():
-		Autoload.playermodel_reference = self
+		References.playermodel_reference = self
 	

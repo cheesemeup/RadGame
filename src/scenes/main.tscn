@@ -1,24 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://oqfu77ry4jv0"]
+[gd_scene format=3 uid="uid://oqfu77ry4jv0"]
 
 [ext_resource type="Script" uid="uid://cmkjvbskpsjpy" path="res://scripts/main.gd" id="1_pi1ts"]
 
-[node name="main" type="Node"]
+[node name="main" type="Node" unique_id=1577066911]
 script = ExtResource("1_pi1ts")
 
-[node name="players" type="Node" parent="."]
+[node name="players" type="Node" parent="." unique_id=133596860]
 
-[node name="mpspawner_player" type="MultiplayerSpawner" parent="players"]
+[node name="mpspawner_player" type="MultiplayerSpawner" parent="players" unique_id=1328958012]
 _spawnable_scenes = PackedStringArray("uid://dempeiar8tjic")
 spawn_path = NodePath("..")
 
-[node name="maps" type="Node" parent="."]
+[node name="maps" type="Node" parent="." unique_id=2034725016]
 
-[node name="mpspawner_maps" type="MultiplayerSpawner" parent="maps"]
+[node name="mpspawner_maps" type="MultiplayerSpawner" parent="maps" unique_id=643218799]
 _spawnable_scenes = PackedStringArray("uid://bjr7k3cxd6jyj", "uid://c2qwhx3ctwu1k")
 spawn_path = NodePath("..")
 spawn_limit = 1
 
-[node name="ui" type="Control" parent="."]
+[node name="ui" type="Control" parent="." unique_id=1147684568]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

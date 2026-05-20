@@ -160,13 +160,14 @@ func enable_player(player: String):
 ###############################################################
 ### SPAWNING
 ###############################################################
-func spawn_npc_hostile(unit_id: int, script_path: String, position: Vector3, rotation: Vector3):
+func spawn_npc_hostile(script_name: String, position: Vector3, rotation: Vector3):
+	print("spawning hostile npc using script res://scripts/units/%s.gd"%script_name)
+	var hostile_script = load("res://scripts/units/%s.gd"%script_name)
 	var hostile = hostile_preload.instantiate()
-	print("spawning npc hostile using script res://scripts/units/%s.gd"%script_path)
-	var hostile_script = load("res://scripts/units/%s.gd"%script_path)
 	hostile.set_script(hostile_script)
 	hostile.set_spawn_position_and_rotation(position, rotation)
-	hostile.pre_ready(unit_id)
+	hostile.spawn_and_rotate()
+	hostile.pre_ready()
 	$/root/main/maps/active_map/npcs.add_child(hostile, true)
 	hostile.post_ready()
 

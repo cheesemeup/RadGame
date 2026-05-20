@@ -1,41 +1,41 @@
+class_name BaseHostile
 extends BaseUnit
 
-class_name BaseHostile
 
 ################################################################################
 ### spawning
-func pre_ready(unit_id: int) -> void:
+func pre_ready() -> void:
 	$mpsynchronizer.set_multiplayer_authority(1)
-	# initialize stats
-	initialize_base_unit("npc", str(unit_id))
+	# stats are loaded in custom_pre_ready, therefore must be before init_base_unit
 	custom_pre_ready()
+	init_base_unit()
 
 
-func _ready():
+func _ready() -> void:
 	# server only
 	if $mpsynchronizer.is_multiplayer_authority():
-		set_model(model)
+		set_model()
 
 
-func post_ready():
+func post_ready() -> void:
 	custom_post_ready()
 
 
-func custom_pre_ready():
+func custom_pre_ready() -> void:
 	# override this function to enable custom pre_ready functionality
 	pass
 
 
-func custom_post_ready():
+func custom_post_ready() -> void:
 	# override this function to enable custom post_ready functionality
 	pass
 
 
 ################################################################################
 ### frame
-func _process(delta):
+func _process(delta) -> void:
 	if is_in_combat:
-		process_combat()
+		process_combat(delta)
 
 
 func _physics_process(delta) -> void:
@@ -44,7 +44,7 @@ func _physics_process(delta) -> void:
 		move_to_aggro(delta)
 
 
-func process_combat():
+func process_combat(_delta) -> void:
 	# override this function in the individual NPC scripts
 	pass
 
@@ -52,7 +52,7 @@ func process_combat():
 ################################################################################
 ### aggro table
 var aggro_table: Dictionary = {}
-func update_aggro(source: CharacterBody3D, value: int):
+func update_aggro(source: CharacterBody3D, value: int) -> void:
 	# Update the aggro table when unit is hit, or healing is being done
 	if source in aggro_table.keys():
 		aggro_table[source] = aggro_table[source] + value
@@ -75,15 +75,14 @@ func get_current_aggro() -> CharacterBody3D:
 
 ################################################################################
 ### reset
-func reset():
+func reset() -> void:
 	# called from the map script, when an NPC has to be reset (e.g., because of a wipe)
 	# disable combat processing
 	is_in_combat = false
 	# reset hp and resource
-	stats_current["health_max"] = stats_base["health_max"]
-	stats_current["health_current"] = stats_base["health_current"]
-	stats_current["resource_max"] = stats_base["resource_max"]
-	stats_current["resource_current"] = stats_base["resource_current"]
+	self.stats_base.init_stats_current()
+	self.stats_base.init_statmult()
+	self.stats_base.init_statadd()
 	# reset all timers
 	# resets the NPC to initial state
 	aggro_table = {}
@@ -93,7 +92,7 @@ func reset():
 
 ################################################################################
 ### movement
-func move_to_aggro(delta):
+func move_to_aggro(_delta) -> void:
 	if aggro_table == {}:
 		return
 	
@@ -114,12 +113,12 @@ func move_to_aggro(delta):
 		current_aggro.position.z - self.position.z
 	).normalized()
 	if direction:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+		velocity.x = direction.x * stats_current["movement_speed"]
+		velocity.z = direction.z * stats_current["movement_speed"]
 		$pivot.look_at(global_position + direction)
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
+		velocity.x = move_toward(velocity.x, 0, stats_current["movement_speed"])
+		velocity.z = move_toward(velocity.z, 0, stats_current["movement_speed"])
 	move_and_slide()
 	# set movement state on server
 	if not $mpsynchronizer.is_multiplayer_authority():
